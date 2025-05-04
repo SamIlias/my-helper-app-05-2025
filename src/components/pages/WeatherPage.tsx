@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { CitySearchForm } from '../CitySearchForm.tsx';
+import { SearchForm } from '../common/SearchForm.tsx';
 import { useEffect, useState } from 'react';
 import { fetchWeather, WeatherDataType } from '../../api/weatherAPI/wheatherApi.ts';
 import { weatherCodes, WeatherCodesType } from '../../api/weatherAPI/weatherCodes.ts';
 
 const INITIAL_CITY = import.meta.env.VITE_CURRENT_CITY;
 
-const WeatherCard: React.FC = () => {
+const WeatherPage: React.FC = () => {
   const [weatherData, setWeatherData] = useState<WeatherDataType>();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -28,7 +28,7 @@ const WeatherCard: React.FC = () => {
     loadWeatherData(INITIAL_CITY);
   }, []);
 
-  const onSubmit = async (cityName: string) => {
+  const onSubmit = (cityName: string) => {
     loadWeatherData(cityName);
   };
 
@@ -44,11 +44,11 @@ const WeatherCard: React.FC = () => {
         </div>
       )}
 
-      <CitySearchForm onSubmit={onSubmit} />
+      <SearchForm onSubmit={onSubmit} placeholder={'Search city...'} />
 
       {errorMessage && <p className={'text-red-700'}>{errorMessage}</p>}
     </>
   );
 };
 
-export default WeatherCard;
+export default WeatherPage;

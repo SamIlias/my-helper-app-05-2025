@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export async function getCoordinates(city: string) {
+export async function getCoordinatesApi(city: string) {
   const res = await axios.get(`https://geocoding-api.open-meteo.com/v1/search?name=${city}`);
   const data = await res.data;
 
