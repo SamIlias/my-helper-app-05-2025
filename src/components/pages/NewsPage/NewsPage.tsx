@@ -4,6 +4,7 @@ import { fetchNews, NewsItemType } from '../../../api/newsApi.ts';
 import { SearchForm } from '../../common/SearchForm.tsx';
 import Pagination from '../../common/Pagination.tsx';
 import { NewsItemCard } from './NewsItemCard.tsx';
+import { Character } from '../../common/Character.tsx';
 
 const NEWS_PORTION_SIZE = 3;
 
@@ -32,21 +33,26 @@ const NewsPage: React.FC = () => {
   };
 
   return (
-    <div className="card">
-      <Pagination
-        totalItemsCount={newsData.length}
-        currentPage={currentPage}
-        onChangePageNumber={onChangePageNumber}
-        pageSize={NEWS_PORTION_SIZE}
-      />
+    <div className="">
+      <div className="">
+        <Pagination
+          totalItemsCount={newsData.length}
+          currentPage={currentPage}
+          onChangePageNumber={onChangePageNumber}
+          pageSize={NEWS_PORTION_SIZE}
+        />
 
-      {newsData
-        .filter((_, index) => firstPortionItem <= index && index < lastPortionItem)
-        .map((n: NewsItemType) => (
-          <NewsItemCard key={n.id} {...n} />
-        ))}
+        {newsData
+          .filter((_, index) => firstPortionItem <= index && index < lastPortionItem)
+          .map((n: NewsItemType) => (
+            <NewsItemCard key={n.id} {...n} />
+          ))}
 
-      <SearchForm onSubmit={onSubmit} placeholder={'Search for News...'} />
+        <SearchForm onSubmit={onSubmit} placeholder={'Search for News...'} />
+      </div>
+      <div className="w-1/12">
+        <Character />
+      </div>
     </div>
   );
 };
