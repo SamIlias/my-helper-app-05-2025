@@ -33,25 +33,38 @@ const Pagination: React.FC<PropsType> = ({
   return (
     <div>
       {portionNumber > 1 && (
-        <button onClick={() => setPortionNumber(portionNumber - 1)}>Prev</button>
+        <button
+          className="px-1 font-bold text-yellow-300 hover:bg-yellow-600 mx-1 border rounded-md"
+          onClick={() => setPortionNumber(portionNumber - 1)}
+        >
+          Prev
+        </button>
       )}
       {pages
         .filter((p) => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
         .map((p) => {
           return (
-            <span
+            <button
               key={p}
-              className={currentPage === p ? 'text-amber-600' : 'text-blue-600'}
+              className={
+                (currentPage === p ? 'text-yellow-400 border rounded-md font-bold' : 'text-white') +
+                ' px-1 hover:text-yellow-400'
+              }
               onClick={() => {
                 onChangePageNumber(p);
               }}
             >
               {p}
-            </span>
+            </button>
           );
         })}
       {portionNumber < portionsCount && (
-        <button onClick={() => setPortionNumber(portionNumber + 1)}>Next</button>
+        <button
+          className="px-1 font-bold text-yellow-300 hover:bg-yellow-600 mx-1 border rounded-md"
+          onClick={() => setPortionNumber(portionNumber + 1)}
+        >
+          Next
+        </button>
       )}
     </div>
   );

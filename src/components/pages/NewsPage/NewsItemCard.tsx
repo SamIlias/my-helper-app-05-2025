@@ -10,26 +10,26 @@ export const NewsItemCard: React.FC<NewsItemType> = ({ title, link, summary, pub
   };
 
   return (
-    <div className="border border-solid rounded-lg m-2 p-1 border-green-800">
-      <p className="text-amber-900">{title}</p>
+    <div className="text-md border border-solid rounded-lg m-2 p-1 border-green-800">
+      <p className="text-white">{title}</p>
       {!isShow && (
-        <button
-          className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-1.5 text-center me-2 mb-2"
-          onClick={onClick}
-        >
+        <button className="text-yellow-400 hover:text-amber-700" onClick={onClick}>
           Show more
         </button>
       )}
       {isShow && (
-        <div>
-          <button className="btn btn-primary" onClick={onClick}>
-            Show less
+        <div className="absolute top-0 right-0 h-full w-full bg-yellow-900/80 backdrop-blur-3xl z-10 content-center">
+          <button
+            className="absolute top-1 right-3 border rounded-sm px-1 text-yellow-400 hover:bg-orange-800"
+            onClick={onClick}
+          >
+            Close
           </button>
-          <p className="text-justify text-cyan-950">{summary}</p>
-          <a href={link} target={'_blank'} className="text-blue-600">
+          <p className="p-10 text-xl text-green-100">{summary}</p>
+          <a href={link} target={'_blank'} className="text-cyan-600">
             {link}
           </a>
-          <p className="text-xs  text-gray-700">{published}</p>
+          <p className="text-xs  text-yellow-300">{published}</p>
         </div>
       )}
     </div>

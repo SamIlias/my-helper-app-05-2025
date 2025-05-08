@@ -5,7 +5,7 @@ export const HomeButton: React.FC = () => {
   return (
     <Link
       to="/"
-      className="text-amber-400 border rounded-md p-1 border-solid border-amber-700 bg-gray-700/50"
+      className="text-amber-400 border rounded-md p-1 border-solid border-amber-700  bg-gray-700/50 hover:bg-yellow-400 hover:text-amber-900 "
     >
       Home
     </Link>

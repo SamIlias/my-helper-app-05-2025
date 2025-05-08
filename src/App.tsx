@@ -16,22 +16,22 @@ function App() {
     weather: 'weather',
   };
 
-  const navList: string[] = [pages.todo, pages.news, pages.weather];
+  const navList: string[] = [pages.news, pages.weather, pages.todo];
 
   return (
-    <div className="max-h-screen grid grid-cols-24 grid-rows-14 content-start bg-orange-950">
+    <div className="relative max-h-screen grid grid-cols-24 grid-rows-14 content-start bg-linear-to-r from-green-700 to-yellow-300">
       <div className="col-span-2 col-start-3 row-span-1 row-start-1 content-end">
         <HomeButton />
       </div>
 
-      <div className="col-span-5 col-start-17 row-span-5 row-start-9 z-10 ">
+      <div className="col-span-5 col-start-18 row-span-5 row-start-9 z-10 ">
         <Character />
       </div>
 
       <div className="col-span-10 col-start-8 row-span-1 row-start-2">
         <MainNav list={navList} />
       </div>
-      <div className="col-span-14 col-start-6 row-span-7 row-start-4 bg-gray-700/50 border rounded-xs border-gray-700">
+      <div className="col-span-14 col-start-6 row-span-7 row-start-4 bg-gray-700/50 border rounded-md border-gray-700  backdrop-blur-sm ">
         <Routes>
           <Route path={`/`} element={<HomePage />} />
           <Route path={`/${pages.todo}`} element={<TodoPage />} />
@@ -40,7 +40,7 @@ function App() {
         </Routes>
       </div>
 
-      <div className="text-amber-500 col-span-4 col-start-11 row-span-1 row-start-12 bg-gray-700/50">
+      <div className=" text-3xl text-yellow-950 font-bold col-span-4 col-start-11 row-span-1 row-start-12 text-center">
         <Clock />
       </div>
     </div>

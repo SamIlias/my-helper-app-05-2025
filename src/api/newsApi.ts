@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const baseUrl = 'https://api.first.org/data/v1/news';
-const LIMIT = 100;
+const LIMIT = 200;
 
 export const fetchNews = async (term: string = '', limit: number = LIMIT) => {
   // term - query for search

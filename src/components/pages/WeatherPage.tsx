@@ -3,6 +3,7 @@ import { SearchForm } from '../common/SearchForm.tsx';
 import { useEffect, useState } from 'react';
 import { fetchWeather, WeatherDataType } from '../../api/weatherAPI/wheatherApi.ts';
 import { weatherCodes, WeatherCodesType } from '../../api/weatherAPI/weatherCodes.ts';
+import { Preloader } from '../common/Preloader.tsx';
 
 const INITIAL_CITY = import.meta.env.VITE_CURRENT_CITY;
 
@@ -33,21 +34,34 @@ const WeatherPage: React.FC = () => {
   };
 
   return (
-    <>
-      {weatherData && (
-        <div>
-          <p>Country: {weatherData.country}</p>
-          <p>Current city: {weatherData.cityName}</p>
-          <p>Temperature: {weatherData.current.temperature}</p>
-          <p>Wind Speed: {weatherData.current.windSpeed}</p>
-          <img src={weatherCodes[weatherCode].day.image} alt={weatherCode} />
+    <div className="grid grid-cols-14 grid-rows-7 text-center h-full">
+      {weatherData ? (
+        <>
+          <h1 className="col-start-2 col-span-12 row-start-2 content-start text-amber-400 text-3xl">
+            The weather for today!
+          </h1>
+          <div className="col-span-6 col-start-2 row-start-3 justify-items-end">
+            <p>Country: {weatherData.country}</p>
+            <p>Current city: {weatherData.cityName}</p>
+            <p>Temperature: {weatherData.current.temperature}</p>
+            <p>Wind Speed: {weatherData.current.windSpeed}</p>
+          </div>
+          <div className="col-span-6 col-start-8 row-start-3">
+            <img src={weatherCodes[weatherCode].day.image} alt={weatherCode} />
+          </div>
+        </>
+      ) : (
+        <div className="col-span-12 col-start-2 row-start-2 justify-items-center">
+          <Preloader />
         </div>
       )}
 
-      <SearchForm onSubmit={onSubmit} placeholder={'Search city...'} />
+      <div className="col-span-6 col-start-5 row-start-6">
+        <SearchForm onSubmit={onSubmit} placeholder={'Search city...'} />
+      </div>
 
       {errorMessage && <p className={'text-red-700'}>{errorMessage}</p>}
-    </>
+    </div>
   );
 };
 

@@ -30,16 +30,19 @@ export const HomePage: React.FC = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-14 grid-rows-7 border h-full">
-      <h1 className="col-span-14 col-start-1 row-span-2 row-start-1 content-center text-orange-600 p-1 text-center">
-        Hello, my friend! How can I help you?
+    <div className="grid grid-cols-14 grid-rows-7  h-full">
+      <h1 className="text-shadow-md text-3xl col-span-14 col-start-1 row-span-2 row-start-1 text-amber-400 p-1 content-center text-center">
+        Hello, my friend! how can I help you?
       </h1>
 
-      <div className="col-span-12 col-start-2 row-span-3 row-start-3 border border-gray-300">
-        <p className="text-center">{quote || 'loading...'}</p>
+      <div className="col-span-12 col-start-2 row-span-3 row-start-3 content-center">
+        <p className="text-center text-xl italic">{quote || 'loading...'}</p>
       </div>
 
-      <button className="col-span-4 col-start-2 row-span-2 row-start-6" onClick={loadQuote}>
+      <button
+        className="col-span-2 col-start-7 row-span-1 row-start-6  hover:text-yellow-400 m-2"
+        onClick={loadQuote}
+      >
         Refresh
       </button>
     </div>
