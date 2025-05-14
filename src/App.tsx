@@ -1,5 +1,5 @@
 import './App.css';
-import TodoPage from './components/pages/TodoPage.tsx';
+import TodoPage from './components/pages/TodoPage/TodoPage.tsx';
 import { Route, Routes } from 'react-router-dom';
 import NewsPage from './components/pages/NewsPage/NewsPage.tsx';
 import WeatherPage from './components/pages/WeatherPage.tsx';
@@ -19,7 +19,7 @@ function App() {
   const navList: string[] = [pages.news, pages.weather, pages.todo];
 
   return (
-    <div className="relative max-h-screen grid grid-cols-24 grid-rows-14 content-start bg-linear-to-r from-green-700 to-yellow-300">
+    <div className="max-h-screen min-h-screen grid grid-cols-24 grid-rows-14 content-start bg-linear-to-r from-green-700 to-yellow-300">
       <div className="col-span-2 col-start-3 row-span-1 row-start-1 content-end">
         <HomeButton />
       </div>

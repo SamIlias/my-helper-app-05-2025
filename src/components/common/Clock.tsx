@@ -7,7 +7,6 @@ export const Clock: React.FC = () => {
   useEffect(() => {
     const internalId = setInterval(() => {
       const newCurrentTime = new Date().toLocaleTimeString();
-      console.log(newCurrentTime);
       setCurrentTime(newCurrentTime);
     }, 1000);
 

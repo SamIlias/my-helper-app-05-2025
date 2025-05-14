@@ -4,6 +4,8 @@ import { fetchNews, NewsItemType } from '../../../api/newsApi.ts';
 import { SearchForm } from '../../common/SearchForm.tsx';
 import Pagination from '../../common/Pagination.tsx';
 import { NewsItemCard } from './NewsItemCard.tsx';
+import { Preloader } from '../../common/Preloader.tsx';
+import preloader from '../../../assets/preloaderNews.svg';
 
 const NEWS_PORTION_SIZE = 10;
 
@@ -33,26 +35,34 @@ const NewsPage: React.FC = () => {
 
   return (
     <div className="grid grid-cols-14 grid-rows-7 text-center content-center h-full">
-      <div className="col-span-14 col-start-1 row-span-1 row-start-1 content-center">
-        <h1 className="text-shadow-md text-xl text-amber-400 p-1">News</h1>
-        <Pagination
-          totalItemsCount={newsData.length}
-          currentPage={currentPage}
-          onChangePageNumber={onChangePageNumber}
-          pageSize={NEWS_PORTION_SIZE}
-        />
-      </div>
+      {!newsData.length ? (
+        <div className="col-span-14 col-start-1 row-span-7 row-start-1 justify-items-center content-center">
+          <Preloader preloader={preloader} />
+        </div>
+      ) : (
+        <>
+          <div className="col-span-14 col-start-1 row-span-1 row-start-1 content-center">
+            <h1 className="text-shadow-md text-xl text-amber-400 p-1">News</h1>
+            <Pagination
+              totalItemsCount={newsData.length}
+              currentPage={currentPage}
+              onChangePageNumber={onChangePageNumber}
+              pageSize={NEWS_PORTION_SIZE}
+            />
+          </div>
 
-      <div className="overflow-auto col-span-14 col-start-1 row-span-5 row-start-2">
-        {newsData
-          .filter((_, index) => firstPortionItem <= index && index < lastPortionItem)
-          .map((n: NewsItemType) => (
-            <NewsItemCard key={n.id} {...n} />
-          ))}
-      </div>
-      <div className="col-span-12 col-start-2 row-span-1 row-start-7">
-        <SearchForm onSubmit={onSubmit} placeholder={'Search for news...'} />
-      </div>
+          <div className="overflow-auto col-span-14 col-start-1 row-span-5 row-start-2">
+            {newsData
+              .filter((_, index) => firstPortionItem <= index && index < lastPortionItem)
+              .map((n: NewsItemType) => (
+                <NewsItemCard key={n.id} {...n} />
+              ))}
+          </div>
+          <div className="col-span-12 col-start-2 row-span-1 row-start-7">
+            <SearchForm onSubmit={onSubmit} placeholder={'Find news...'} />
+          </div>
+        </>
+      )}
     </div>
   );
 };

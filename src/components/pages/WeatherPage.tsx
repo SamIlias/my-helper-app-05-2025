@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { fetchWeather, WeatherDataType } from '../../api/weatherAPI/wheatherApi.ts';
 import { weatherCodes, WeatherCodesType } from '../../api/weatherAPI/weatherCodes.ts';
 import { Preloader } from '../common/Preloader.tsx';
+import preloader from '../../assets/preloaderSun.svg';
 
 const INITIAL_CITY = import.meta.env.VITE_CURRENT_CITY;
 
@@ -52,7 +53,7 @@ const WeatherPage: React.FC = () => {
         </>
       ) : (
         <div className="col-span-12 col-start-2 row-start-2 justify-items-center">
-          <Preloader />
+          <Preloader preloader={preloader} />
         </div>
       )}
 

@@ -18,7 +18,7 @@ export const NewsItemCard: React.FC<NewsItemType> = ({ title, link, summary, pub
         </button>
       )}
       {isShow && (
-        <div className="absolute top-0 right-0 h-full w-full bg-yellow-900/80 backdrop-blur-3xl z-10 content-center">
+        <div className="absolute top-0 right-0 h-full w-full bg-lime-700/80 backdrop-blur-xl z-10 content-center overflow-auto">
           <button
             className="absolute top-1 right-3 border rounded-sm px-1 text-yellow-400 hover:bg-orange-800"
             onClick={onClick}
@@ -26,7 +26,7 @@ export const NewsItemCard: React.FC<NewsItemType> = ({ title, link, summary, pub
             Close
           </button>
           <p className="p-10 text-xl text-green-100">{summary}</p>
-          <a href={link} target={'_blank'} className="text-cyan-600">
+          <a href={link} target={'_blank'} className="text-amber-950">
             {link}
           </a>
           <p className="text-xs  text-yellow-300">{published}</p>
