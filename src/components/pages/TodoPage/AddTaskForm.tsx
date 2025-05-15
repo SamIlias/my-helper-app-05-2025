@@ -1,20 +1,20 @@
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import * as React from 'react';
+import { TaskType } from './TasksList.tsx';
 
 type PropsType = {
-  onCloseAddForm: () => void;
+  closeAddForm: () => void;
+  onSubmit: (data: AddTaskFormData) => void;
 };
 
-export const AddTaskForm: React.FC<PropsType> = ({ onCloseAddForm }) => {
+export type AddTaskFormData = Pick<TaskType, 'title' | 'deadline' | 'category' | 'description'>;
+
+export const AddTaskForm: React.FC<PropsType> = ({ closeAddForm, onSubmit }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
-
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log('onSubmit', data);
-  };
+  } = useForm<AddTaskFormData>();
 
   return (
     <div className="h-full grid grid-cols-2 grid-rows-7 gap-4 p-6 border rounded-lg shadow-md">
@@ -62,18 +62,18 @@ export const AddTaskForm: React.FC<PropsType> = ({ onCloseAddForm }) => {
         {/* Type */}
         <div>
           <label
-            htmlFor="type"
+            htmlFor="category"
             className="block text-sm font-medium text-gray-700 dark:text-gray-200"
           >
-            Task Type
+            Task category
           </label>
           <select
-            id="type"
-            {...register('type')}
+            id="category"
+            {...register('category')}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
           >
-            <option className="bg-lime-700/80" value="">
-              Select Task
+            <option className="bg-lime-700/80" value="default">
+              default
             </option>
             <option className="bg-lime-700/80" value="default">
               Default
@@ -108,7 +108,7 @@ export const AddTaskForm: React.FC<PropsType> = ({ onCloseAddForm }) => {
         <div className="col-span-2 flex justify-around mt-4">
           <button
             type="button"
-            onClick={onCloseAddForm}
+            onClick={closeAddForm}
             className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
           >
             Cancel

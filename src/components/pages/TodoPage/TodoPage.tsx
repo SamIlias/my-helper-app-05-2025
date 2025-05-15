@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { AddTaskForm } from './AddTaskForm.tsx';
+import { AddTaskForm, AddTaskFormData } from './AddTaskForm.tsx';
 import { TasksList, TaskType } from './TasksList.tsx';
-import axios from 'axios';
-import { getTasks } from '../../../api/todoApi.ts';
+import { getTasks, putTasks } from '../../../api/todoApi.ts';
+import uniqueId from 'lodash/uniqueId';
 
 const TodoPage = () => {
   const [tasks, setTasks] = useState<TaskType[]>([]);
@@ -12,35 +12,54 @@ const TodoPage = () => {
     setTasks(tasksResponse);
   };
 
+  const updateTasks: (tasks: TaskType[]) => Promise<void> = async (tasks) => {
+    const tasksResponse: TaskType[] | undefined = await putTasks(tasks);
+    if (tasksResponse) {
+      setTasks(tasksResponse);
+    }
+  };
+
   useEffect(() => {
     loadTasks();
   }, []);
 
   const [isAddFormActive, setIsAddFormActive] = useState(false);
 
-  const onAddTask = () => {
-    setIsAddFormActive(true);
-  };
-
-  const onCloseAddForm = () => {
+  const closeAddForm = () => {
     setIsAddFormActive(false);
   };
 
-  return isAddFormActive ? (
-    <AddTaskForm onCloseAddForm={onCloseAddForm} />
-  ) : (
-    <div className="grid grid-cols-14 grid-rows-7 content-center h-full">
-      <div className="col-span-14 col-start-1 row-span-1 row-start-1 border">
-        <div className="grid grid-cols-14">
-          <span className="m-3 text-3xl col-span-3 col-start-1">My tasks</span>
-          <button className="m-3 border col-span-2" onClick={onAddTask}>
-            Add new
+  const createTask = (data: AddTaskFormData) => {
+    const newTask: TaskType = { ...data, id: uniqueId(), isCompleted: false };
+    const updatedTasks: TaskType[] = [...tasks, newTask];
+    updateTasks(updatedTasks);
+    closeAddForm();
+  };
+
+  if (isAddFormActive) {
+    return <AddTaskForm closeAddForm={() => setIsAddFormActive(false)} onSubmit={createTask} />;
+  }
+
+  return (
+    <div className="flex flex-col h-full w-full p-6 dark:bg-gray-900">
+      {/* Header */}
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold text-gray-800 dark:text-white">My Tasks</h1>
+        <div className="space-x-4">
+          <button
+            onClick={() => setIsAddFormActive(true)}
+            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
+          >
+            Add New
           </button>
-          <button className="m-3 border col-span-2">Hide/Show</button>
+          <button className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition">
+            Hide/Show
+          </button>
         </div>
       </div>
 
-      <div className="col-span-14 col-start-1 row-span-6 row-start-2 justify-items-center border h-full">
+      {/* Tasks */}
+      <div className="flex-1 dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
         <TasksList tasks={tasks} />
       </div>
     </div>
