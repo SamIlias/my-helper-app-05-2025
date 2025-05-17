@@ -19,6 +19,7 @@ export const getTasks = async (): Promise<TaskType[]> => {
 
     return response.data.record;
   } catch (error) {
+    //todo handle error
     console.error(error);
     return [];
   }
@@ -39,6 +40,7 @@ export const putTasks = async (updatedTasks: TaskType[]): Promise<TaskType[] | u
 
     return response.data.record;
   } catch (error) {
+    //todo handle error
     console.error(error);
   }
 };
