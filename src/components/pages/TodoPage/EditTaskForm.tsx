@@ -1,17 +1,25 @@
 import { useForm } from 'react-hook-form';
 import * as React from 'react';
+import { TaskFormValues } from './AddTaskForm.tsx';
 import { TaskType } from './TasksList.tsx';
 
-export const AddTaskForm: React.FC<PropsType> = ({ closeAddForm, onSubmit }) => {
+export const EditTaskForm: React.FC<PropsType> = ({ closeForm, onSubmit, editedTask }) => {
+  const defaultValues: TaskFormValues = {
+    title: editedTask.title,
+    deadline: editedTask.deadline,
+    category: editedTask.category,
+    description: editedTask.description,
+  };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<TaskFormValues>({ mode: 'onChange' });
+  } = useForm<TaskFormValues>({ mode: 'onChange', defaultValues });
 
   return (
-    <div className="h-full grid grid-cols-2 grid-rows-7 gap-4 p-6 border rounded-lg shadow-md">
-      <h1 className="col-span-2 text-2xl font-bold row-start-1">Create Task</h1>
+    <div className="h-fit grid grid-cols-2 grid-rows-7 gap-4 p-6 border rounded-lg shadow-md">
+      <h1 className="col-span-2 text-2xl font-bold row-start-1">Edit task</h1>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -104,14 +112,14 @@ export const AddTaskForm: React.FC<PropsType> = ({ closeAddForm, onSubmit }) => 
         <div className="col-span-2 flex justify-around mt-4">
           <button
             type="button"
-            onClick={closeAddForm}
+            onClick={closeForm}
             className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
           >
             Cancel
           </button>
           <input
             type="submit"
-            value="Create Task"
+            value="Save changes"
             className="px-4 py-2 bg-blue-300 text-white font-medium rounded-md hover:bg-blue-800 cursor-pointer"
           />
         </div>
@@ -120,9 +128,8 @@ export const AddTaskForm: React.FC<PropsType> = ({ closeAddForm, onSubmit }) => 
   );
 };
 
-export type TaskFormValues = Pick<TaskType, 'title' | 'deadline' | 'category' | 'description'>;
-
 type PropsType = {
-  closeAddForm: () => void;
+  closeForm: () => void;
   onSubmit: (data: TaskFormValues) => void;
+  editedTask: TaskType;
 };

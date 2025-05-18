@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { AddTaskForm, AddTaskFormData } from './AddTaskForm.tsx';
+import { AddTaskForm, TaskFormValues } from './AddTaskForm.tsx';
 import { TasksList, TaskType } from './TasksList.tsx';
 import { getTasks, putTasks } from '../../../api/todoApi.ts';
 import { Preloader } from '../../common/Preloader.tsx';
@@ -29,12 +29,12 @@ const TodoPage: React.FC = () => {
   const closeAddForm = () => {
     setIsAddFormActive(false);
   };
-  const addNewTask = (data: AddTaskFormData) => {
+  const addNewTask = (data: TaskFormValues) => {
     const newTask: TaskType = { ...data, id: uniqueId(tasks), isCompleted: false };
     const updatedTasks: TaskType[] = [...tasks, newTask];
     updateTasks(updatedTasks);
   };
-  const onSubmit = (data: AddTaskFormData) => {
+  const onSubmit = (data: TaskFormValues) => {
     addNewTask(data);
     closeAddForm();
   };
@@ -97,6 +97,7 @@ const TodoPage: React.FC = () => {
           <TasksList
             tasks={handledTasks}
             deleteTask={deleteTask}
+            updateTasks={updateTasks}
             toggleCompletingOfTask={toggleCompletingOfTask}
           />
         </div>
