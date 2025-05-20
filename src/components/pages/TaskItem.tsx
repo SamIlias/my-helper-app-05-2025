@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { TaskType } from './TodoPage/TasksList.tsx';
+import { taskCategories } from './TodoPage/AddTaskForm.tsx';
 
 export const TaskItem: React.FC<IProps> = ({
   task,
@@ -7,10 +8,21 @@ export const TaskItem: React.FC<IProps> = ({
   onEditTask,
   toggleCompletingOfTask,
 }) => {
+  const categoryColor = {
+    [taskCategories.Work]: 'text-amber-500',
+    [taskCategories.Default]: 'text-lime-500',
+    [taskCategories.Urgent]: 'text-red-500',
+    [taskCategories.Daily]: 'text-cyan-400',
+    [taskCategories.Shopping]: 'text-violet-500',
+  } as const;
+  type Category = keyof typeof categoryColor;
+
   return (
     <>
       <div className="space-x-3">
-        <span className="text-amber-500 block">{task.category}</span>
+        <span className={`${categoryColor[task.category as Category]} block text-shadow-lg/30 `}>
+          {task.category}
+        </span>
         <div className="flex justify-between mb-3">
           <div className="space-x-2">
             <input
@@ -21,7 +33,7 @@ export const TaskItem: React.FC<IProps> = ({
               }}
               className="form-checkbox text-blue-600"
             />
-            <span className="text-gray-800 dark:text-white font-medium">{task.title}</span>
+            <span className="text-white dark:text-gray-800 font-medium">{task.title}</span>
           </div>
           <div className="flex items-end space-x-2">
             <span className="text-sm text-amber-500 dark:text-gray-300">{task.deadline}</span>

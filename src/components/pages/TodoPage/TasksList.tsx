@@ -93,7 +93,7 @@ export const TasksList: React.FC<PropsType> = ({
           <h2 className="text-xl font-semibold text-center text-gray-800 dark:text-white mb-4">
             Description
           </h2>
-          <p className="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
+          <p className="text-white dark:gray-700 whitespace-pre-wrap">
             {description || 'No description available.'}
           </p>
         </div>
