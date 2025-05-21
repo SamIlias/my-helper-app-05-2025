@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { TaskType } from './TodoPage/TasksList.tsx';
-import { taskCategories } from './TodoPage/AddTaskForm.tsx';
+import { TaskType } from './TasksList.tsx';
+import { taskCategories } from '../common/BaseTaskForm.tsx';
 
 export const TaskItem: React.FC<IProps> = ({
   task,

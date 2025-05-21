@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import * as React from 'react';
-import { TaskItem } from '../TaskItem.tsx';
+import { TaskItem } from './TaskItem.tsx';
 import { EditTaskForm } from './EditTaskForm.tsx';
-import { TaskFormValues } from './AddTaskForm.tsx';
+import { TaskFormValues } from '../addTaskForm/AddTaskForm.tsx';
 
 export const TasksList: React.FC<PropsType> = ({
   tasks,

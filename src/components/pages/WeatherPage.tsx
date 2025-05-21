@@ -35,29 +35,29 @@ const WeatherPage: React.FC = () => {
   };
 
   return (
-    <div className="grid grid-cols-14 grid-rows-7 text-center h-full">
+    <div className="grid col-14 text-center h-full">
       {weatherData ? (
         <>
-          <h1 className="col-start-2 col-span-12 row-start-2 content-start text-amber-400 text-3xl">
+          <h1 className="row-start-2 col-span-7 col-start-1 content-start text-amber-400 sm:text-[4vw] lg:text-[2vw]">
             The weather for today!
           </h1>
-          <div className="col-span-6 col-start-2 row-start-3 justify-items-end">
+          <div className="border col-span-7 col-start-1 md:text-[2vw] lg:text-[1vw] row-start-3 justify-self-end ">
             <p>Country: {weatherData.country}</p>
             <p>Current city: {weatherData.cityName}</p>
             <p>Temperature: {weatherData.current.temperature}</p>
             <p>Wind Speed: {weatherData.current.windSpeed}</p>
           </div>
-          <div className="col-span-6 col-start-8 row-start-3">
+          <div className="border col-span-7 row-start-3">
             <img src={weatherCodes[weatherCode].day.image} alt={weatherCode} />
           </div>
         </>
       ) : (
-        <div className="col-span-12 col-start-2 row-start-2 justify-items-center">
+        <div className="row-start-2 justify-items-center">
           <Preloader preloader={preloader} />
         </div>
       )}
 
-      <div className="col-span-6 col-start-5 row-start-6">
+      <div className="row-start-6">
         <SearchForm onSubmit={onSubmit} placeholder={'Search city...'} />
       </div>
 

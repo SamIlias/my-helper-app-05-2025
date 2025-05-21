@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { TaskFormValues } from './AddTaskForm.tsx';
+import { TaskFormValues } from '../addTaskForm/AddTaskForm.tsx';
 import { TaskType } from './TasksList.tsx';
-import { BaseTaskForm } from './BaseTaskForm.tsx';
+import { BaseTaskForm } from '../common/BaseTaskForm.tsx';
 
 type PropsType = {
   closeForm: () => void;

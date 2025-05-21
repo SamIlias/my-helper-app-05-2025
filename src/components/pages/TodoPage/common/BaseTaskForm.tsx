@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import * as React from 'react';
-import { TaskType } from './TasksList.tsx';
+import { TaskType } from '../tasksList/TasksList.tsx';
 
 export type TaskFormValues = Pick<TaskType, 'title' | 'deadline' | 'category' | 'description'>;
 

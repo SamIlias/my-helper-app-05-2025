@@ -30,8 +30,8 @@ export const HomePage: React.FC = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-14 grid-rows-7  h-full">
-      <h1 className="text-shadow-md text-3xl col-span-14 col-start-1 row-span-2 row-start-1 text-amber-400 p-1 content-center text-center">
+    <div className="grid grid-cols-14 grid-rows-7 h-full">
+      <h1 className="text-shadow-md text-[2vw] col-span-14 col-start-1 row-span-2 row-start-1 text-amber-400 p-1 content-center text-center">
         Hello, my friend! how can I help you?
       </h1>
 
@@ -40,7 +40,7 @@ export const HomePage: React.FC = () => {
       </div>
 
       <button
-        className="col-span-2 col-start-7 row-span-1 row-start-6  hover:text-yellow-400 m-2"
+        className="col-span-2 col-start-7 row-span-1 row-start-6 hover:text-yellow-400 m-2 cursor-pointer"
         onClick={loadQuote}
       >
         Refresh

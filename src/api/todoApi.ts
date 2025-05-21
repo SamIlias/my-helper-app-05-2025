@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { TaskType } from '../components/pages/TodoPage/TasksList.tsx';
+import { TaskType } from '../components/pages/TodoPage/tasksList/TasksList.tsx';
 
 const baseUrl = 'https://api.jsonbin.io/v3/b/';
 const masterKey = '$2a$10$6uI7t0Nh.1vRh4VfQdMjY.gCeSWN1si8AT2UwTkfK4bGqcKPC.i0i';

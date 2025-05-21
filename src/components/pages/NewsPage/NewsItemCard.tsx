@@ -10,17 +10,17 @@ export const NewsItemCard: React.FC<NewsItemType> = ({ title, link, summary, pub
   };
 
   return (
-    <div className="text-md border border-solid rounded-lg m-2 p-1 border-green-800">
+    <div className="border border-solid rounded-lg m-2 p-1 border-green-800">
       <p className="text-white">{title}</p>
       {!isShow && (
-        <button className="text-yellow-400 hover:text-amber-700" onClick={onClick}>
+        <button className="text-yellow-400 hover:text-amber-700 cursor-pointer" onClick={onClick}>
           Show more
         </button>
       )}
       {isShow && (
         <div className="absolute top-0 right-0 h-full w-full bg-lime-700/80 backdrop-blur-xl z-10 content-center overflow-auto">
           <button
-            className="absolute top-1 right-3 border rounded-sm px-1 text-yellow-400 hover:bg-orange-800"
+            className="absolute top-1 right-3 border rounded-sm px-1 text-yellow-400 hover:bg-orange-800 cursor-pointer"
             onClick={onClick}
           >
             Close

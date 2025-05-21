@@ -19,8 +19,8 @@ function App() {
   const navList: string[] = [pages.news, pages.weather, pages.todo];
 
   return (
-    <div className="max-h-screen min-h-screen grid grid-cols-24 grid-rows-14 content-start bg-linear-to-r from-green-700 to-yellow-300">
-      <div className="col-span-2 col-start-3 row-span-1 row-start-1 content-end">
+    <div className="text-[3vw] sm:text-[1.5vw] md:text-[1.5vw] lg:text-[1vw] max-h-screen min-h-screen grid grid-cols-24 grid-rows-14 bg-linear-to-r from-green-700 to-yellow-300">
+      <div className="lg:text-[1vw] col-span-2 col-start-3 row-span-1 row-start-1 content-end">
         <HomeButton />
       </div>
 
@@ -31,7 +31,8 @@ function App() {
       <div className="col-span-10 col-start-8 row-span-1 row-start-2">
         <MainNav list={navList} />
       </div>
-      <div className="col-span-14 col-start-6 row-span-7 row-start-4 bg-gray-700/50 border rounded-md border-gray-700  backdrop-blur-sm ">
+
+      <div className="col-span-18 col-start-4 row-span-8 row-start-3 bg-gray-700/50 border rounded-md border-gray-700  backdrop-blur-sm ">
         <Routes>
           <Route path={`/`} element={<HomePage />} />
           <Route path={`/${pages.todo}`} element={<TodoPage />} />
@@ -40,7 +41,7 @@ function App() {
         </Routes>
       </div>
 
-      <div className=" text-3xl text-yellow-950 font-bold col-span-4 col-start-11 row-span-1 row-start-12 text-center">
+      <div className="text-[5vw] md:text-[2vw] lg:text-[2vw] text-yellow-950 font-bold col-start-11 col-span-3 row-span-1 row-start-12 text-center">
         <Clock />
       </div>
     </div>

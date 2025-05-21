@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { AddTaskForm, TaskFormValues } from './AddTaskForm.tsx';
-import { TasksList, TaskType } from './TasksList.tsx';
+import { AddTaskForm, TaskFormValues } from './addTaskForm/AddTaskForm.tsx';
+import { TasksList, TaskType } from './tasksList/TasksList.tsx';
 import { getTasks, putTasks } from '../../../api/todoApi.ts';
 import { Preloader } from '../../common/Preloader.tsx';
 import preloader from '../../../assets/preloaderGear.svg';

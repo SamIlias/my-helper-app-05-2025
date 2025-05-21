@@ -34,15 +34,15 @@ const NewsPage: React.FC = () => {
   };
 
   return (
-    <div className="grid grid-cols-14 grid-rows-7 text-center content-center h-full">
+    <div className="grid gap-1 grid-cols-14 text-center content-center h-full">
       {!newsData.length ? (
         <div className="col-span-14 col-start-1 row-span-7 row-start-1 justify-items-center content-center">
           <Preloader preloader={preloader} />
         </div>
       ) : (
         <>
-          <div className="col-span-14 col-start-1 row-span-1 row-start-1 content-center">
-            <h1 className="text-shadow-md text-xl text-amber-400 p-1">News</h1>
+          <div className="border-b border-b-green-800  pb-3 col-span-14 col-start-1 row-start-1 content-center">
+            <h1 className="text-shadow-md text-[1.5vw] text-amber-400 p-1">News</h1>
             <Pagination
               totalItemsCount={newsData.length}
               currentPage={currentPage}
@@ -51,7 +51,7 @@ const NewsPage: React.FC = () => {
             />
           </div>
 
-          <div className="overflow-auto col-span-14 col-start-1 row-span-5 row-start-2">
+          <div className="overflow-auto col-span-14 col-start-1 row-span-5">
             {newsData
               .filter((_, index) => firstPortionItem <= index && index < lastPortionItem)
               .map((n: NewsItemType) => (

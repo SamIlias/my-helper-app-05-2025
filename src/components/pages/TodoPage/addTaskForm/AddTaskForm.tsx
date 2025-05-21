@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { TaskType } from './TasksList.tsx';
-import { BaseTaskForm } from './BaseTaskForm.tsx';
+import { TaskType } from '../tasksList/TasksList.tsx';
+import { BaseTaskForm } from '../common/BaseTaskForm.tsx';
 
 export const AddTaskForm: React.FC<PropsType> = ({ closeAddForm, onSubmit }) => {
   return (
