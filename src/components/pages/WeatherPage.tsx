@@ -35,20 +35,22 @@ const WeatherPage: React.FC = () => {
   };
 
   return (
-    <div className="grid col-14 text-center h-full">
+    <div className="grid text-center justify-center h-full">
       {weatherData ? (
         <>
-          <h1 className="row-start-2 col-span-7 col-start-1 content-start text-amber-400 sm:text-[4vw] lg:text-[2vw]">
+          <h1 className="mt-10 content-start text-amber-400 sm:text-[4vw] lg:text-[2vw]">
             The weather for today!
           </h1>
-          <div className="border col-span-7 col-start-1 md:text-[2vw] lg:text-[1vw] row-start-3 justify-self-end ">
-            <p>Country: {weatherData.country}</p>
-            <p>Current city: {weatherData.cityName}</p>
-            <p>Temperature: {weatherData.current.temperature}</p>
-            <p>Wind Speed: {weatherData.current.windSpeed}</p>
-          </div>
-          <div className="border col-span-7 row-start-3">
-            <img src={weatherCodes[weatherCode].day.image} alt={weatherCode} />
+          <div className="grid gap-4 grid-cols-[1fr_1fr] content-center ">
+            <div className="md:text-[2vw] lg:text-[1vw] justify-items-start">
+              <p>Country: {weatherData.country}</p>
+              <p>Current city: {weatherData.cityName}</p>
+              <p>Temperature: {weatherData.current.temperature}</p>
+              <p>Wind Speed: {weatherData.current.windSpeed}</p>
+            </div>
+            <div className="border rounded-lg border-gray-700 justify-items-center">
+              <img src={weatherCodes[weatherCode].day.image} alt={weatherCode} />
+            </div>
           </div>
         </>
       ) : (

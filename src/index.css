@@ -21,10 +21,3 @@ body {
   max-height: 100dvh;
 }
 
-.navElement {
-  color: darkcyan;
-}
-
-.activeElement {
-  color: goldenrod;
-}
