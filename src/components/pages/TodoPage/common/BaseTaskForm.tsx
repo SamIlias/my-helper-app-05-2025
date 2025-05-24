@@ -119,7 +119,7 @@ export const BaseTaskForm: React.FC<PropsType> = ({
       </div>
 
       {/* Buttons */}
-      <div className="col-span-2 flex justify-around mt-4">
+      <div className="col-span-2 flex justify-start mt-4">
         <button
           type="button"
           onClick={closeAddForm}

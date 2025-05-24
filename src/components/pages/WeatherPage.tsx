@@ -6,7 +6,7 @@ import { weatherCodes, WeatherCodesType } from '../../api/weatherAPI/weatherCode
 import { Preloader } from '../common/Preloader.tsx';
 import preloader from '../../assets/preloaderSun.svg';
 
-const INITIAL_CITY = import.meta.env.VITE_CURRENT_CITY;
+const INITIAL_CITY: string = import.meta.env.VITE_CURRENT_CITY;
 
 const WeatherPage: React.FC = () => {
   const [weatherData, setWeatherData] = useState<WeatherDataType>();

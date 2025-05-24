@@ -5,69 +5,77 @@ import { getTasks, putTasks } from '../../../api/todoApi.ts';
 import { Preloader } from '../../common/Preloader.tsx';
 import preloader from '../../../assets/preloaderGear.svg';
 import * as React from 'react';
-import { toString } from 'lodash';
-
-const uniqueId = (seed: Array<TaskType>) => {
-  return toString(seed.length + Math.random());
-};
+import { uniqueId } from '../../../utils/uniqueId.ts';
 
 const TodoPage: React.FC = () => {
   const [tasks, setTasks] = useState<TaskType[]>([]);
   const [isAddFormActive, setIsAddFormActive] = useState<boolean>(false);
   const [isCompletedTasksHidden, setIsCompletedTasksHidden] = useState(false);
 
-  const loadTasks = async () => {
-    const tasksResponse = await getTasks();
-    setTasks(tasksResponse);
+  const closeAddForm = () => {
+    setIsAddFormActive(false);
   };
+
   const updateTasks: (tasks: TaskType[]) => Promise<void> = async (tasks) => {
     const tasksResponse: TaskType[] | undefined = await putTasks(tasks);
     if (tasksResponse) {
       setTasks(tasksResponse);
     }
   };
-  const closeAddForm = () => {
-    setIsAddFormActive(false);
-  };
+
   const addNewTask = (data: TaskFormValues) => {
     const newTask: TaskType = { ...data, id: uniqueId(tasks), isCompleted: false };
     const updatedTasks: TaskType[] = [...tasks, newTask];
     updateTasks(updatedTasks);
   };
-  const onSubmit = (data: TaskFormValues) => {
-    addNewTask(data);
-    closeAddForm();
-  };
+
   const deleteTask = (id: string) => {
     const updatedTasks: TaskType[] = tasks.filter((task) => task.id !== id);
     updateTasks(updatedTasks);
   };
+
   const toggleCompletingOfTask = (id: string, isCompleted: boolean): void => {
     const currentTask: TaskType | undefined = tasks.find((task) => task.id === id);
     if (currentTask) {
-      // const updatedTask: TaskType = { ...currentTask, isCompleted };
-      // const filtered = tasks.filter((task) => task.id !== id);
-      // const updatedTasks: TaskType[] = [...filtered, updatedTask];
-      // updateTasks(updatedTasks);
       currentTask.isCompleted = isCompleted;
       const updatedTasks = [...tasks];
       updateTasks(updatedTasks);
     }
   };
-  const onHideShow = () => {
+
+  const onAddTaskSubmit = (data: TaskFormValues) => {
+    addNewTask(data);
+    closeAddForm();
+  };
+
+  const onClickHideShowButton = () => {
     setIsCompletedTasksHidden(!isCompletedTasksHidden);
   };
+
+  useEffect(() => {
+    let ignore: boolean = false;
+    const fetchTasks = async () => {
+      const tasksResponse: TaskType[] = await getTasks();
+      if (!ignore) {
+        setTasks(tasksResponse);
+      }
+    };
+    fetchTasks();
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
 
   const handledTasks: TaskType[] = isCompletedTasksHidden
     ? tasks.filter((t) => !t.isCompleted)
     : [...tasks];
 
-  useEffect(() => {
-    loadTasks();
-  }, []);
-
+  //JSX ------------------------------------------------------------------------
   if (isAddFormActive) {
-    return <AddTaskForm closeAddForm={() => setIsAddFormActive(false)} onSubmit={onSubmit} />;
+    return (
+      <AddTaskForm closeAddForm={() => setIsAddFormActive(false)} onSubmit={onAddTaskSubmit} />
+    );
   }
 
   return (
@@ -83,7 +91,7 @@ const TodoPage: React.FC = () => {
             Add New
           </button>
           <button
-            onClick={onHideShow}
+            onClick={onClickHideShowButton}
             title={isCompletedTasksHidden ? 'Show completed tasks' : 'Hide completed tasks'}
             className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition"
           >
