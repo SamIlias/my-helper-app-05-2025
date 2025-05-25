@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import NewsPage from './components/pages/NewsPage/NewsPage.tsx';
 import WeatherPage from './components/pages/WeatherPage.tsx';
 import MainNav from './components/MainNav.tsx';
-import { HomePage } from './components/pages/HomePage.tsx';
+import { HomePage } from './components/pages/HomePage/HomePage.tsx';
 import { HomeButton } from './components/common/HomeButton.tsx';
 import { Clock } from './components/common/Clock.tsx';
 import { Character } from './components/common/Character.tsx';
