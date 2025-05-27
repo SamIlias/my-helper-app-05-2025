@@ -5,10 +5,12 @@ import NewsPage from './components/pages/NewsPage/NewsPage.tsx';
 import WeatherPage from './components/pages/WeatherPage.tsx';
 import MainNav from './components/MainNav.tsx';
 import { HomePage } from './components/pages/HomePage/HomePage.tsx';
-import { HomeButton } from './components/common/HomeButton.tsx';
+import { MainLinkButton } from './components/common/MainLinkButton.tsx';
 import { Clock } from './components/common/Clock.tsx';
 import { Character } from './components/common/Character.tsx';
 import { myStyles } from './myStyles/myStyles.ts';
+import { LoginPage } from './components/pages/LoginPage/LoginPage.tsx';
+import AuthForm from './components/pages/AuthPage/AuthForm.tsx';
 
 const mainBackground = {
   default: 'bg-linear-to-r from-green-700 to-yellow-300',
@@ -22,6 +24,8 @@ function App() {
     todo: 'todo',
     news: 'news',
     weather: 'weather',
+    login: 'login',
+    auth: 'auth',
   };
 
   const navList: string[] = [pages.news, pages.weather, pages.todo];
@@ -33,7 +37,13 @@ function App() {
       <div
         className={`lg:text-[1vw] col-start-3 row-start-1 h-fit w-fit mt-10 ${myStyles.bgGrayBlur}`}
       >
-        <HomeButton />
+        <MainLinkButton path={'/'} title={'Home'} />
+      </div>
+
+      <div
+        className={`lg:text-[1vw] col-start-22 row-start-1 h-fit w-fit mt-10 ${myStyles.bgGrayBlur}`}
+      >
+        <MainLinkButton path={'/login'} title={'Login'} />
       </div>
 
       <div className="col-span-5 col-start-18 row-span-5 row-start-9 z-10 ">
@@ -47,6 +57,8 @@ function App() {
       <div className="col-span-18 col-start-4 row-span-8 row-start-3 bg-gray-700/50 border rounded-md border-gray-700  backdrop-blur-sm ">
         <Routes>
           <Route path={`/`} element={<HomePage />} />
+          <Route path={`/${pages.login}`} element={<LoginPage />} />
+          <Route path={`/${pages.auth}`} element={<AuthForm />} />
           <Route path={`/${pages.todo}`} element={<TodoPage />} />
           <Route path={`/${pages.news}`} element={<NewsPage />} />
           <Route path={`/${pages.weather}`} element={<WeatherPage />} />
