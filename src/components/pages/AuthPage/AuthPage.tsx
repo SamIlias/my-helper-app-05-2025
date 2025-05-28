@@ -5,11 +5,12 @@ import {
   signOut,
   GoogleAuthProvider,
   signInWithPopup,
+  type User,
 } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../../firebase.ts';
 
-export default function AuthForm() {
+export default function AuthPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [user, loading, error] = useAuthState(auth);

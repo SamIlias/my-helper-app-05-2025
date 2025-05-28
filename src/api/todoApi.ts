@@ -2,8 +2,8 @@ import axios, { AxiosResponse } from 'axios';
 import { TaskType } from '../components/pages/TodoPage/tasksList/TasksList.tsx';
 
 const baseUrl = 'https://api.jsonbin.io/v3/b/';
-const masterKey = '$2a$10$6uI7t0Nh.1vRh4VfQdMjY.gCeSWN1si8AT2UwTkfK4bGqcKPC.i0i';
-const binId = '682648a48a456b79669e7978';
+const masterKey: string = import.meta.env.VITE_BIN_MASTER_KEY;
+const binId: string = import.meta.env.VITE_BIN_ID;
 
 export const getTasks = async (): Promise<TaskType[]> => {
   try {

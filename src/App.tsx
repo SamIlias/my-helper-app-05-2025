@@ -9,8 +9,7 @@ import { MainLinkButton } from './components/common/MainLinkButton.tsx';
 import { Clock } from './components/common/Clock.tsx';
 import { Character } from './components/common/Character.tsx';
 import { myStyles } from './myStyles/myStyles.ts';
-import { LoginPage } from './components/pages/LoginPage/LoginPage.tsx';
-import AuthForm from './components/pages/AuthPage/AuthForm.tsx';
+import AuthPage from './components/pages/AuthPage/AuthPage.tsx';
 
 const mainBackground = {
   default: 'bg-linear-to-r from-green-700 to-yellow-300',
@@ -24,7 +23,6 @@ function App() {
     todo: 'todo',
     news: 'news',
     weather: 'weather',
-    login: 'login',
     auth: 'auth',
   };
 
@@ -57,8 +55,7 @@ function App() {
       <div className="col-span-18 col-start-4 row-span-8 row-start-3 bg-gray-700/50 border rounded-md border-gray-700  backdrop-blur-sm ">
         <Routes>
           <Route path={`/`} element={<HomePage />} />
-          <Route path={`/${pages.login}`} element={<LoginPage />} />
-          <Route path={`/${pages.auth}`} element={<AuthForm />} />
+          <Route path={`/${pages.auth}`} element={<AuthPage />} />
           <Route path={`/${pages.todo}`} element={<TodoPage />} />
           <Route path={`/${pages.news}`} element={<NewsPage />} />
           <Route path={`/${pages.weather}`} element={<WeatherPage />} />
