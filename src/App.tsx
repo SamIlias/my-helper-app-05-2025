@@ -9,7 +9,10 @@ import { MainLinkButton } from './components/common/MainLinkButton.tsx';
 import { Clock } from './components/common/Clock.tsx';
 import { Character } from './components/common/Character.tsx';
 import { myStyles } from './myStyles/myStyles.ts';
-import AuthPage from './components/pages/AuthPage/AuthPage.tsx';
+import { AuthPage } from './components/pages/AuthPage/AuthPage.tsx';
+import type { User } from 'firebase/auth';
+import { useState } from 'react';
+import { LoginWidget } from './components/LoginWidget.tsx';
 
 const mainBackground = {
   default: 'bg-linear-to-r from-green-700 to-yellow-300',
@@ -19,6 +22,8 @@ const mainBackground = {
 };
 
 function App() {
+  const [user, setUser] = useState<User | null | undefined>(null);
+
   const pages = {
     todo: 'todo',
     news: 'news',
@@ -39,9 +44,9 @@ function App() {
       </div>
 
       <div
-        className={`lg:text-[1vw] col-start-22 row-start-1 h-fit w-fit mt-10 ${myStyles.bgGrayBlur}`}
+        className={`lg:text-[1vw] col-start-20 col-span-4 row-start-1 h-fit w-fit mt-10 ${myStyles.bgGrayBlur}`}
       >
-        <MainLinkButton path={'/login'} title={'Login'} />
+        <LoginWidget user={user} setUser={setUser} />
       </div>
 
       <div className="col-span-5 col-start-18 row-span-5 row-start-9 z-10 ">
@@ -54,9 +59,9 @@ function App() {
 
       <div className="col-span-18 col-start-4 row-span-8 row-start-3 bg-gray-700/50 border rounded-md border-gray-700  backdrop-blur-sm ">
         <Routes>
-          <Route path={`/`} element={<HomePage />} />
-          <Route path={`/${pages.auth}`} element={<AuthPage />} />
-          <Route path={`/${pages.todo}`} element={<TodoPage />} />
+          <Route path={`/`} element={<HomePage user={user} />} />
+          <Route path={`/${pages.auth}`} element={<AuthPage setUser={setUser} />} />
+          <Route path={`/${pages.todo}`} element={<TodoPage user={user} />} />
           <Route path={`/${pages.news}`} element={<NewsPage />} />
           <Route path={`/${pages.weather}`} element={<WeatherPage />} />
         </Routes>

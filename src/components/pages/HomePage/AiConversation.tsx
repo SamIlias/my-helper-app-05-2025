@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { askModel, ConversationItem, initialConversationItem } from '../../../api/aiApi.ts';
-import { truncateArrayKeepFirst } from '../../../utils/truncateArrayKeepFirst.ts';
-import { uniqueId } from '../../../utils/uniqueId.ts';
+import { truncateArrayKeepFirst } from '../../../lib/utils/truncateArrayKeepFirst.ts';
+import { uniqueId } from '../../../lib/utils/uniqueId.ts';
 import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import 'highlight.js/styles/vs2015.css';

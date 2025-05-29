@@ -1,20 +1,29 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut,
   GoogleAuthProvider,
   signInWithPopup,
-  type User,
+  User,
 } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../../firebase.ts';
+import * as React from 'react';
+import { Navigate } from 'react-router-dom';
 
-export default function AuthPage() {
+type AuthProps = {
+  setUser: Dispatch<SetStateAction<User | null | undefined>>;
+};
+
+export const AuthPage: React.FC<AuthProps> = ({ setUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [user, loading, error] = useAuthState(auth);
   const [customError, setCustomError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setUser(user);
+  }, [user]);
 
   const handleError = (err: unknown) => {
     if (err instanceof Error) {
@@ -51,25 +60,12 @@ export default function AuthPage() {
     }
   };
 
-  const handleSignOut = async () => {
-    try {
-      await signOut(auth);
-    } catch (err: unknown) {
-      handleError(err);
-    }
-  };
-
   if (loading) return <p>Loading...</p>;
 
   return (
     <div className="p-4 max-w-sm mx-auto bg-gray-600 rounded shadow space-y-4">
       {user ? (
-        <>
-          <p>Hello, {user.email}</p>
-          <button onClick={handleSignOut} className="w-full py-2 bg-red-500 text-white rounded">
-            Sign Out
-          </button>
-        </>
+        <Navigate to="/" replace />
       ) : (
         <>
           {(error || customError) && (
@@ -102,4 +98,4 @@ export default function AuthPage() {
       )}
     </div>
   );
-}
+};
