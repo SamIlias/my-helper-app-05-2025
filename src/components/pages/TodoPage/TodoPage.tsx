@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 import { AddTaskForm, TaskFormValues } from './addTaskForm/AddTaskForm.tsx';
-import { TasksList, TaskType } from './tasksList/TasksList.tsx';
-import { getTasks, putTasks } from '../../../api/todoApi.ts';
+import { TaksNoIdType, TasksList, TaskType, TaskUpdateData } from './tasksList/TasksList.tsx';
 import { Preloader } from '../../common/Preloader.tsx';
 import preloader from '../../../assets/preloaderGear.svg';
 import * as React from 'react';
-import { uniqueId } from '../../../lib/utils/uniqueId.ts';
 import type { User } from 'firebase/auth';
 import { Navigate } from 'react-router-dom';
+import { addTask, deleteTaskById, getTasks, updateTaskById } from '../../../api/firebaseTodoAPI.ts';
+
+const normalizeError = (err: unknown) => {
+  return err instanceof Error ? err.message : String(err);
+};
 
 type Props = {
   user: User | null | undefined;
@@ -17,40 +20,54 @@ const TodoPage: React.FC<Props> = ({ user }) => {
   const [tasks, setTasks] = useState<TaskType[]>([]);
   const [isAddFormActive, setIsAddFormActive] = useState<boolean>(false);
   const [isCompletedTasksHidden, setIsCompletedTasksHidden] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const closeAddForm = () => {
     setIsAddFormActive(false);
   };
 
-  const updateTasks: (tasks: TaskType[]) => Promise<void> = async (tasks) => {
-    const tasksResponse: TaskType[] | undefined = await putTasks(tasks);
-    if (tasksResponse) {
-      setTasks(tasksResponse);
+  const addNewTask = async (inputData: TaskFormValues) => {
+    const newTask: TaksNoIdType = { ...inputData, isCompleted: false, userId: user!.uid };
+    try {
+      await addTask(newTask);
+      const updatedTasks: TaskType[] = await getTasks(user!.uid);
+      setTasks(updatedTasks);
+    } catch (error) {
+      setError(normalizeError(error));
     }
   };
 
-  const addNewTask = (data: TaskFormValues) => {
-    const newTask: TaskType = { ...data, id: uniqueId(tasks), isCompleted: false };
-    const updatedTasks: TaskType[] = [...tasks, newTask];
-    updateTasks(updatedTasks);
-  };
-
-  const deleteTask = (id: string) => {
-    const updatedTasks: TaskType[] = tasks.filter((task) => task.id !== id);
-    updateTasks(updatedTasks);
-  };
-
-  const toggleCompletingOfTask = (id: string, isCompleted: boolean): void => {
-    const currentTask: TaskType | undefined = tasks.find((task) => task.id === id);
-    if (currentTask) {
-      currentTask.isCompleted = isCompleted;
-      const updatedTasks = [...tasks];
-      updateTasks(updatedTasks);
+  const deleteTask = async (id: string) => {
+    try {
+      await deleteTaskById(id);
+      setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+    } catch (error) {
+      setError(normalizeError(error));
     }
   };
 
-  const onAddTaskSubmit = (data: TaskFormValues) => {
-    addNewTask(data);
+  const updateTask = async (id: string, updatedData: TaskUpdateData) => {
+    try {
+      await updateTaskById(id, updatedData);
+      setTasks((prevTasks) =>
+        prevTasks.map((t) => {
+          if (t.id === id) {
+            return { ...t, ...updatedData };
+          }
+          return t;
+        }),
+      );
+    } catch (error) {
+      setError(normalizeError(error));
+    }
+  };
+
+  const toggleCompletingOfTask = async (id: string, isCompleted: boolean): Promise<void> => {
+    await updateTask(id, { isCompleted });
+  };
+
+  const onAddTaskSubmit = async (data: TaskFormValues) => {
+    await addNewTask(data);
     closeAddForm();
   };
 
@@ -61,11 +78,13 @@ const TodoPage: React.FC<Props> = ({ user }) => {
   useEffect(() => {
     let ignore: boolean = false;
     const fetchTasks = async () => {
-      const tasksResponse: TaskType[] = await getTasks();
+      const tasksResponse: TaskType[] = await getTasks(user!.uid);
+      console.log(tasksResponse);
       if (!ignore) {
         setTasks(tasksResponse);
       }
     };
+
     fetchTasks();
 
     return () => {
@@ -108,13 +127,15 @@ const TodoPage: React.FC<Props> = ({ user }) => {
             </div>
           </div>
 
+          {error && <p className="text-red-600">{error}</p>}
+
           {/* Tasks */}
           {tasks.length ? (
             <div className="flex-1 dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
               <TasksList
                 tasks={handledTasks}
                 deleteTask={deleteTask}
-                updateTasks={updateTasks}
+                updateTask={updateTask}
                 toggleCompletingOfTask={toggleCompletingOfTask}
               />
             </div>

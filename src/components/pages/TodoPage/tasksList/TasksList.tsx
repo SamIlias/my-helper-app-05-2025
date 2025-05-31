@@ -5,7 +5,7 @@ import { EditTaskForm } from './EditTaskForm.tsx';
 import { TaskFormValues } from '../addTaskForm/AddTaskForm.tsx';
 
 export const TasksList: React.FC<PropsType> = React.memo(
-  ({ tasks, deleteTask, updateTasks, toggleCompletingOfTask }) => {
+  ({ tasks, deleteTask, updateTask, toggleCompletingOfTask }) => {
     const [activeTask, setActiveTask] = React.useState<TaskType | null | undefined>(tasks[0]);
     const [editTaskMode, setEditTaskMode] = useState<{
       active: boolean;
@@ -46,15 +46,8 @@ export const TasksList: React.FC<PropsType> = React.memo(
     };
 
     const changeTask = (data: TaskFormValues) => {
-      const currentTask = editTaskMode.editedTask;
-      if (currentTask) {
-        currentTask.title = data.title;
-        currentTask.deadline = data.deadline;
-        currentTask.description = data.description;
-        currentTask.category = data.category;
-      }
-
-      updateTasks(tasks);
+      const taskId = editTaskMode.editedTask!.id;
+      updateTask(taskId, { ...data });
     };
 
     const onEditFormSubmit = (data: TaskFormValues) => {
@@ -127,15 +120,19 @@ export const TasksList: React.FC<PropsType> = React.memo(
 type PropsType = {
   tasks: TaskType[];
   deleteTask: (id: string) => void;
-  updateTasks: (tasks: TaskType[]) => void;
+  updateTask: (id: string, updatedData: TaskUpdateData) => void;
   toggleCompletingOfTask: (id: string, isCompleted: boolean) => void;
 };
 
 export type TaskType = {
   id: string;
+  userId: string;
   deadline?: string;
   title: string;
   description?: string;
   isCompleted: boolean;
   category: string;
 };
+
+export type TaksNoIdType = Omit<TaskType, 'id'>;
+export type TaskUpdateData = Partial<Omit<TaskType, 'id' | 'userId'>>;

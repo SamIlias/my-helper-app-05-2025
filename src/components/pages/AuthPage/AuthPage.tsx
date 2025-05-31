@@ -7,7 +7,7 @@ import {
   User,
 } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../../../firebase.ts';
+import { auth } from '../../../api/firebase.ts';
 import * as React from 'react';
 import { Navigate } from 'react-router-dom';
 

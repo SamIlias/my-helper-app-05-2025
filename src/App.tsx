@@ -11,7 +11,7 @@ import { Character } from './components/common/Character.tsx';
 import { myStyles } from './myStyles/myStyles.ts';
 import { AuthPage } from './components/pages/AuthPage/AuthPage.tsx';
 import type { User } from 'firebase/auth';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { LoginWidget } from './components/LoginWidget.tsx';
 
 const mainBackground = {
@@ -30,6 +30,10 @@ function App() {
     weather: 'weather',
     auth: 'auth',
   };
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   const navList: string[] = [pages.news, pages.weather, pages.todo];
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { signOut, User } from 'firebase/auth';
 import { MainLinkButton } from './common/MainLinkButton.tsx';
-import { auth } from '../firebase.ts';
+import { auth } from '../api/firebase.ts';
 import { Dispatch, SetStateAction } from 'react';
 
 type Props = {
