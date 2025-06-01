@@ -3,6 +3,7 @@ import { signOut, User } from 'firebase/auth';
 import { MainLinkButton } from './common/MainLinkButton.tsx';
 import { auth } from '../api/firebase.ts';
 import { Dispatch, SetStateAction } from 'react';
+import { myStyles } from '../myStyles/myStyles.ts';
 
 type Props = {
   user: User | null | undefined;
@@ -28,12 +29,9 @@ export const LoginWidget: React.FC<Props> = ({ user, setUser }) => {
   return (
     <>
       {user ? (
-        <div className="flex gap-3">
-          <span>{getNameFromEmail(user.email)}</span>
-          <button
-            className="border rounded-md hover:text-yellow-400 cursor-pointer"
-            onClick={handleSignOut}
-          >
+        <div className={`flex gap-3`}>
+          <span className={`${myStyles.textCol.secondary}`}>{getNameFromEmail(user.email)}</span>
+          <button className={`${myStyles.button.main} h-fit`} onClick={handleSignOut}>
             Sign out
           </button>
         </div>

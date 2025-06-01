@@ -5,6 +5,7 @@ import { fetchWeather, WeatherDataType } from '../../api/weatherAPI/wheatherApi.
 import { weatherCodes, WeatherCodesType } from '../../api/weatherAPI/weatherCodes.ts';
 import { Preloader } from '../common/Preloader.tsx';
 import preloader from '../../assets/preloaderSun.svg';
+import { getCurrentPeriodOfDay } from '../../lib/utils/getCurrentPeriodOfDay.ts';
 
 const INITIAL_CITY: string = import.meta.env.VITE_CURRENT_CITY;
 
@@ -49,7 +50,11 @@ const WeatherPage: React.FC = () => {
               <p>Wind Speed: {weatherData.current.windSpeed}</p>
             </div>
             <div className="border rounded-lg border-gray-700 justify-items-center">
-              <img src={weatherCodes[weatherCode].day.image} alt={weatherCode} />
+              <img
+                src={weatherCodes[weatherCode][getCurrentPeriodOfDay()].image}
+                alt={weatherCode}
+              />
+              <p>{weatherCodes[weatherCode][getCurrentPeriodOfDay()].description}</p>
             </div>
           </div>
         </>

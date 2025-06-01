@@ -7,7 +7,8 @@ import { NewsItemCard } from './NewsItemCard.tsx';
 import { Preloader } from '../../common/Preloader.tsx';
 import preloader from '../../../assets/preloaderNews.svg';
 
-const NEWS_PORTION_SIZE = 10;
+const NEWS_PORTION_SIZE = 2;
+const lang = 'ru';
 
 const NewsPage: React.FC = () => {
   const [newsData, setNewsData] = useState<NewsItemType[]>([]);
@@ -21,7 +22,7 @@ const NewsPage: React.FC = () => {
   };
 
   const loadNews = async (term: string | undefined) => {
-    const news: NewsItemType[] = await fetchNews(term);
+    const news: NewsItemType[] = await fetchNews(term, lang);
     setNewsData(news);
   };
 
@@ -55,7 +56,7 @@ const NewsPage: React.FC = () => {
             {newsData
               .filter((_, index) => firstPortionItem <= index && index < lastPortionItem)
               .map((n: NewsItemType) => (
-                <NewsItemCard key={n.id} {...n} />
+                <NewsItemCard key={n.content.length} {...n} />
               ))}
           </div>
           <div className="col-span-12 col-start-2 row-span-1 row-start-7">

@@ -26,8 +26,8 @@ export const AiConversation: React.FC = () => {
 
   const onSubmit = async (prompt: string | undefined): Promise<void> => {
     setIsSending(true);
-    const currentUserQuestion: ConversationItem = { role: 'user', content: prompt };
-    const conversation: ConversationItem[] = [...conversationHistory, currentUserQuestion];
+    const currentUserPrompt: ConversationItem = { role: 'user', content: prompt };
+    const conversation: ConversationItem[] = [...conversationHistory, currentUserPrompt];
 
     const answer: string | null = await askModel(conversation);
 

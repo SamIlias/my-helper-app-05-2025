@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { myStyles } from '../myStyles/myStyles.ts';
 
 const navStyles = {
-  active: `text-amber-500 shadow text-shadow-lg border border-solid rounded px-2 ${myStyles.bgGrayBlur}`,
-  navElement: `text-teal-600 text-shadow-lg px-2 ${myStyles.bgGrayBlur}`,
+  active: `${myStyles.textCol.main} text-shadow-lg border border-solid px-2 ${myStyles.bgGrayBlur}`,
+  navElement: `${myStyles.textCol.secondary} text-shadow-lg px-2 ${myStyles.bgGrayLightBlur}`,
 };
 
 type PropsType = {

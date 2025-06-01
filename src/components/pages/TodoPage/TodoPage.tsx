@@ -18,6 +18,7 @@ type Props = {
 
 const TodoPage: React.FC<Props> = ({ user }) => {
   const [tasks, setTasks] = useState<TaskType[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isAddFormActive, setIsAddFormActive] = useState<boolean>(false);
   const [isCompletedTasksHidden, setIsCompletedTasksHidden] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -77,12 +78,15 @@ const TodoPage: React.FC<Props> = ({ user }) => {
 
   useEffect(() => {
     let ignore: boolean = false;
+    setIsLoading(true);
+
     const fetchTasks = async () => {
       const tasksResponse: TaskType[] = await getTasks(user!.uid);
       console.log(tasksResponse);
       if (!ignore) {
         setTasks(tasksResponse);
       }
+      setIsLoading(false);
     };
 
     fetchTasks();
@@ -130,7 +134,11 @@ const TodoPage: React.FC<Props> = ({ user }) => {
           {error && <p className="text-red-600">{error}</p>}
 
           {/* Tasks */}
-          {tasks.length ? (
+          {isLoading ? (
+            <div className="col-span-14 col-start-1 row-span-7 row-start-1 justify-items-center content-center">
+              <Preloader preloader={preloader} />
+            </div>
+          ) : (
             <div className="flex-1 dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
               <TasksList
                 tasks={handledTasks}
@@ -138,10 +146,6 @@ const TodoPage: React.FC<Props> = ({ user }) => {
                 updateTask={updateTask}
                 toggleCompletingOfTask={toggleCompletingOfTask}
               />
-            </div>
-          ) : (
-            <div className="col-span-14 col-start-1 row-span-7 row-start-1 justify-items-center content-center">
-              <Preloader preloader={preloader} />
             </div>
           )}
         </div>

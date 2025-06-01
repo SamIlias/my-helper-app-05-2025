@@ -67,6 +67,9 @@ export const TasksList: React.FC<PropsType> = React.memo(
           <h2 className="text-xl font-semibold text-center text-gray-800 dark:text-white mb-4">
             List of Tasks
           </h2>
+          {tasks.length === 0 && (
+            <h3 className="text-amber-500 text-center">The list is empty, add new task.</h3>
+          )}
           <div className="space-y-2">
             {tasks.map((task, index) => {
               const isActive = task.id === activeTask?.id;
