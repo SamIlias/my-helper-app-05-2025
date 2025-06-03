@@ -20,6 +20,14 @@ const getNameFromEmail = (email: string | null) => {
   return capitalize(rawName);
 };
 
+const truncate = (s: string, size: number = 7): string => {
+  if (size >= s.length) {
+    return s;
+  }
+
+  return s.slice(0, size) + '...';
+};
+
 export const LoginWidget: React.FC<Props> = ({ user, setUser }) => {
   const handleSignOut = async () => {
     await signOut(auth);
@@ -30,7 +38,9 @@ export const LoginWidget: React.FC<Props> = ({ user, setUser }) => {
     <>
       {user ? (
         <div className={`flex gap-3`}>
-          <span className={`${myStyles.textCol.secondary}`}>{getNameFromEmail(user.email)}</span>
+          <div className={`${myStyles.textCol.secondary}`}>
+            {truncate(getNameFromEmail(user.email), 15)}
+          </div>
           <button className={`${myStyles.button.main} h-fit`} onClick={handleSignOut}>
             Sign out
           </button>

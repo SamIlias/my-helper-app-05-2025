@@ -48,37 +48,11 @@ export const AiConversation: React.FC = () => {
   const isSubmitDisabled = isSending || !query.trim();
 
   return (
-    <div className="grid grid-cols-[2fr_1fr] h-full">
-      <div className="border border-amber-500/50 p-2 overflow-y-auto">
-        {conversationHistory.length > 1 ? (
-          conversationHistory.map((item: ConversationItem, index: number) => {
-            if (item.role === 'system') {
-              return <></>;
-            }
-
-            const isLast = index === conversationHistory.length - 1;
-
-            return (
-              <div
-                className="my-2 text-sm"
-                key={uniqueId(conversationHistory)}
-                ref={isLast ? lastConversationItem : null}
-              >
-                <p className="italic text-amber-500">{item.role}</p>
-                <div className="pl-2">
-                  <ReactMarkdown rehypePlugins={[rehypeHighlight, remarkGfm]}>
-                    {item.content}
-                  </ReactMarkdown>
-                </div>
-              </div>
-            );
-          })
-        ) : (
-          <p className="text-center m-3">Hello, my friend! how can I help you?</p>
-        )}
-      </div>
-
-      <form onSubmit={handleSubmit} className="grid grid-rows-[5fr_1fr] gap-2 p-2">
+    <div className="grid grid-cols-1 grid-rows-[minmax(100px, auto)_auto] h-full md:grid-cols-[1fr_2fr] md:grid-rows-1 gap-2">
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-rows-[3fr_1fr] md:grid-rows-[5fr_1fr] gap-2"
+      >
         <div className="relative">
           <textarea
             className="w-full h-full p-2 border rounded resize-none focus:outline-none focus:ring-2 focus:ring-amber-500"
@@ -95,7 +69,7 @@ export const AiConversation: React.FC = () => {
         <button
           type="submit"
           disabled={isSubmitDisabled}
-          className={`px-4 py-2  rounded ${
+          className={`rounded text-md md:text-xl md:font-bold ${
             !isSubmitDisabled
               ? 'bg-amber-500/80 text-white hover:bg-amber-700/80 transition'
               : `bg-amber-500/50 text-gray-500`
@@ -104,6 +78,33 @@ export const AiConversation: React.FC = () => {
           Send
         </button>
       </form>
+
+      <div className="border border-amber-500/50 overflow-y-auto text-base md:text-lg">
+        {conversationHistory.length > 1 ? (
+          conversationHistory.map((item: ConversationItem, index: number) => {
+            if (item.role === 'system') {
+              return <></>;
+            }
+            const isLast = index === conversationHistory.length - 1;
+            return (
+              <div
+                className="my-2 text-sm"
+                key={uniqueId(conversationHistory)}
+                ref={isLast ? lastConversationItem : null}
+              >
+                <p className="italic text-amber-500">{item.role}</p>
+                <div className="pl-2 overflow-x-clip">
+                  <ReactMarkdown rehypePlugins={[rehypeHighlight, remarkGfm]}>
+                    {item.content}
+                  </ReactMarkdown>
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <p className="text-center m-3">Hello, my friend! how can I help you?</p>
+        )}
+      </div>
     </div>
   );
 };

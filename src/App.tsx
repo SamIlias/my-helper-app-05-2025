@@ -39,28 +39,28 @@ function App() {
   const navList: string[] = [pages.news, pages.weather, pages.todo];
 
   return (
-    <div
-      className={`text-[3vw] sm:text-[1.5vw] md:text-[1.5vw] lg:text-[1vw] w-screen h-screen grid grid-cols-24 grid-rows-18 ${mainBackground.default} `}
-    >
-      <div
-        className={`lg:text-[1vw] col-start-3 row-start-1 h-fit w-fit mt-10 ${myStyles.bgGrayBlur}`}
-      >
-        <MainLinkButton path={'/'} title={'Home'} />
-      </div>
+    <div className={`w-screen h-screen grid grid-cols-24 grid-rows-18 ${mainBackground.default} `}>
+      <div className="col-span-24 row-span-1 grid grid-cols-[1fr_3fr] content-end">
+        <div className={`w-fit h-fit text-base justify-self-start ml-[3vw] ${myStyles.bgGrayBlur}`}>
+          <MainLinkButton path={'/'} title={'Home'} />
+        </div>
 
-      <div className={`lg:text-[1vw] col-start-20 col-span-4 row-start-1 h-fit w-fit mt-10`}>
-        <LoginWidget user={user} setUser={setUser} />
+        <div className="justify-self-end mr-[3vw]">
+          <LoginWidget user={user} setUser={setUser} />
+        </div>
       </div>
 
       {/*<div className="col-span-5 col-start-18 row-span-5 row-start-9 z-10 ">*/}
       {/*  <Character />*/}
       {/*</div>*/}
 
-      <div className={`col-span-10 col-start-8 row-span-1 row-start-2 w-full h-fit`}>
+      <div
+        className={`col-span-24 col-start-1 row-span-1 row-start-2 place-self-center w-full h-fit text-sm md:text-xl lg:text-xl xl:text-xl`}
+      >
         <MainNav list={navList} />
       </div>
 
-      <div className="col-span-22 col-start-2 row-span-14 row-start-3 bg-gray-700/50 border rounded-md border-gray-700  backdrop-blur-sm ">
+      <div className="col-span-22 col-start-2 row-span-14 row-start-3 bg-gray-700/50 border rounded-md border-gray-700 backdrop-blur-sm ">
         <Routes>
           <Route path={`/`} element={<HomePage user={user} />} />
           <Route path={`/${pages.auth}`} element={<AuthPage setUser={setUser} />} />
@@ -71,7 +71,7 @@ function App() {
       </div>
 
       <div
-        className={`rounded-md md:text-[2vw] lg:text-[2vw] text-yellow-600 font-bold col-start-11 col-span-3 row-span-2 row-start-17 text-center place-self-center h-fit w-full ${myStyles.bgGrayBlur}`}
+        className={`rounded-md md:text-[2vw] lg:text-[2vw] text-yellow-600 font-bold col-start-9 col-span-8 row-span-2 row-start-17 text-center place-self-center h-fit w-fit px-2 ${myStyles.bgGrayBlur}`}
       >
         <Clock />
       </div>

@@ -35,22 +35,22 @@ export const QuoteBlock: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col content-center text-center text-xl">
-      <p className="italic text-amber-500">Quote for you:</p>
+    <div className="flex flex-col text-center">
+      <h2 className="italic text-amber-500 text-base">Quote for you:</h2>
       {quote ? (
-        <p className="text-center text-xl italic">{`"${quote.quote}" - ${quote.author}`}</p>
+        <div className="text-center text-sm italic">{`"${quote.quote}" - ${quote.author}`}</div>
       ) : (
-        <p className="text-center text-xl">{'loading...'}</p>
+        <p className="text-center text-base">{'loading...'}</p>
       )}
 
-      <div className="flex between gap-2 h-1/2">
+      <div className="flex gap-2 m-2">
         <button
-          className="border w-fit h-1/2 px-2 rounded-md hover:text-yellow-400 cursor-pointer mt-4"
+          className="border w-fit h-fit px-2 rounded-md hover:text-yellow-400 cursor-pointer"
           onClick={loadQuote}
         >
           Refresh
         </button>
-        <span>{isLoading && <Preloader preloader={preloader} />}</span>
+        {isLoading && <Preloader preloader={preloader} />}
       </div>
     </div>
   );
