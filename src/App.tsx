@@ -32,6 +32,7 @@ function App() {
     auth: 'auth',
   };
 
+  //todo delete ------------------
   useEffect(() => {
     console.log(user);
   }, [user]);

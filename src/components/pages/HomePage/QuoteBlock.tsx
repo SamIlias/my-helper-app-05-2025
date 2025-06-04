@@ -17,8 +17,8 @@ export const QuoteBlock: React.FC = () => {
 
   useEffect(() => {
     let ignore = false;
-
     setIsLoading(true);
+
     const startFetchingQuotes = async () => {
       const quotes: QuoteType[] = await fetchQuotes();
       if (!ignore) {

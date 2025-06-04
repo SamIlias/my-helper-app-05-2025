@@ -10,9 +10,9 @@ type Props = {
   setUser: Dispatch<SetStateAction<User | null | undefined>>;
 };
 
+//todo move to utils-------------
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
-
-const getNameFromEmail = (email: string | null) => {
+export const getNameFromEmail = (email: string | null) => {
   if (!email) {
     return '';
   }
@@ -27,6 +27,7 @@ const truncate = (s: string, size: number = 7): string => {
 
   return s.slice(0, size) + '...';
 };
+//----------------------
 
 export const LoginWidget: React.FC<Props> = ({ user, setUser }) => {
   const handleSignOut = async () => {

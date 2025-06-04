@@ -5,7 +5,7 @@ export const Clock: React.FC = () => {
   const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
 
   useEffect(() => {
-    const internalId = setInterval(() => {
+    const intervalId = setInterval(() => {
       const newCurrentTime = new Date().toLocaleTimeString(undefined, {
         hour: '2-digit',
         minute: '2-digit',
@@ -16,7 +16,7 @@ export const Clock: React.FC = () => {
     }, 1000);
 
     return () => {
-      clearInterval(internalId);
+      clearInterval(intervalId);
     };
   }, []);
 

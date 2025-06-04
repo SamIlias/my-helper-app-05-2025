@@ -8,10 +8,12 @@ import rehypeHighlight from 'rehype-highlight';
 import 'highlight.js/styles/vs2015.css';
 import preloader from '../../../assets/preloaderGear.svg';
 import { Preloader } from '../../common/Preloader.tsx';
-import remarkGfm from 'remark-gfm'; // dark
+import remarkGfm from 'remark-gfm';
+import { getNameFromEmail } from '../../LoginWidget.tsx'; // dark
+import { User } from 'firebase/auth';
 // import 'highlight.js/styles/vs.css'; // light
 
-export const AiConversation: React.FC = () => {
+export const AiConversation: React.FC<{ user: User }> = ({ user }) => {
   const [conversationHistory, setConversationHistory] = useState<ConversationItem[]>([
     initialConversationItem,
   ]);
@@ -28,7 +30,6 @@ export const AiConversation: React.FC = () => {
     setIsSending(true);
     const currentUserPrompt: ConversationItem = { role: 'user', content: prompt };
     const conversation: ConversationItem[] = [...conversationHistory, currentUserPrompt];
-
     const answer: string | null = await askModel(conversation);
 
     conversation.push({ role: 'assistant', content: answer });
@@ -102,7 +103,7 @@ export const AiConversation: React.FC = () => {
             );
           })
         ) : (
-          <p className="text-center m-3">Hello, my friend! how can I help you?</p>
+          <p className="text-center m-3">{`Hello, ${getNameFromEmail(user.email)}! how can I help you?`}</p>
         )}
       </div>
     </div>

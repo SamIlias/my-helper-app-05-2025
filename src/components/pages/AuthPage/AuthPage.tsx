@@ -51,7 +51,7 @@ export const AuthPage: React.FC<AuthProps> = ({ setUser }) => {
     }
   };
 
-  const handleGoogle = async () => {
+  const handleGoogleAuth = async () => {
     try {
       setCustomError(null);
       await signInWithPopup(auth, new GoogleAuthProvider());
@@ -91,7 +91,7 @@ export const AuthPage: React.FC<AuthProps> = ({ setUser }) => {
           <button onClick={handleSignUp} className="w-full py-2 bg-green-500 text-white rounded">
             Sign Up
           </button>
-          <button onClick={handleGoogle} className="w-full py-2 bg-yellow-400 text-black rounded">
+          <button onClick={handleGoogleAuth} className="w-full py-2 bg-yellow-400 text-black rounded">
             Sign In with Google
           </button>
         </>

@@ -17,7 +17,10 @@ export const SearchForm: React.FC<PropsType> = ({ onSubmit, placeholder }) => {
   };
 
   return (
-    <form className="max-w-[40vw] mx-auto" onSubmit={handleSubmit}>
+    <form
+      className="sm:max-w-[80vw] md:max-w-[50vw] lg:max-w-[40vw] mx-auto"
+      onSubmit={handleSubmit}
+    >
       <label
         htmlFor="default-search"
         className="mb-2 font-medium text-gray-900 sr-only dark:text-white"

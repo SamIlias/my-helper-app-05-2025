@@ -6,7 +6,7 @@ type PropsType = {
   currentPage: number;
   onChangePageNumber: (pageNumber: number) => void;
   pageSize: number;
-  portionSize?: number;
+  portionOfPagesSize?: number;
 };
 
 const Pagination: React.FC<PropsType> = ({
@@ -14,7 +14,7 @@ const Pagination: React.FC<PropsType> = ({
   currentPage,
   onChangePageNumber,
   pageSize = 5,
-  portionSize = 10,
+  portionOfPagesSize = 3,
 }) => {
   const pagesCount = Math.ceil(totalItemsCount / pageSize);
   const pages = [];
@@ -23,15 +23,15 @@ const Pagination: React.FC<PropsType> = ({
     pages.push(i);
   }
 
-  const currentPortionNumber = Math.ceil(currentPage / portionSize) || 1;
+  const currentPortionNumber = Math.ceil(currentPage / portionOfPagesSize) || 1;
 
-  const portionsCount = pagesCount / portionSize;
+  const portionsCount = pagesCount / portionOfPagesSize;
   const [portionNumber, setPortionNumber] = useState<number>(currentPortionNumber);
-  const leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
-  const rightPortionPageNumber = portionNumber * portionSize;
+  const leftPortionPageNumber = (portionNumber - 1) * portionOfPagesSize + 1;
+  const rightPortionPageNumber = portionNumber * portionOfPagesSize;
 
   return (
-    <div>
+    <div className="text-sm md:text-base">
       {portionNumber > 1 && (
         <button
           className="px-1 font-bold text-yellow-300 hover:bg-yellow-600 cursor-pointer mx-1 border rounded-md"

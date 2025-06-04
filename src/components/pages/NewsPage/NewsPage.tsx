@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react';
 import * as React from 'react';
-import { fetchNews, NewsItemType } from '../../../api/newsApi.ts';
+import { fetchNews, initialNewsForPaginationTest, NewsItemType } from '../../../api/newsApi.ts';
 import { SearchForm } from '../../common/SearchForm.tsx';
 import Pagination from '../../common/Pagination.tsx';
 import { NewsItemCard } from './NewsItemCard.tsx';
 import { Preloader } from '../../common/Preloader.tsx';
 import preloader from '../../../assets/preloaderNews.svg';
+import { myStyles } from '../../../myStyles/myStyles.ts';
 
 const NEWS_PORTION_SIZE = 2;
 const lang = 'ru';
 
 const NewsPage: React.FC = () => {
   const [newsData, setNewsData] = useState<NewsItemType[]>([]);
+  // const [newsData, setNewsData] = useState<NewsItemType[]>(initialNewsForPaginationTest);
   const [currentPage, setCurrentPage] = useState(1);
 
   const lastPortionItem = currentPage * NEWS_PORTION_SIZE;
@@ -42,8 +44,8 @@ const NewsPage: React.FC = () => {
         </div>
       ) : (
         <>
-          <div className="border-b border-b-green-800  pb-3 col-span-14 col-start-1 row-start-1 content-center">
-            <h1 className="text-shadow-md text-[1.5vw] text-amber-400 p-1">News</h1>
+          <div className="border-b border-b-green-800 pb-2 col-span-14 col-start-1 row-start-1 row-span-2 content-center  mx-3">
+            <h1 className={`${myStyles.pageTitle} place-self-start mb-2`}>News</h1>
             <Pagination
               totalItemsCount={newsData.length}
               currentPage={currentPage}
@@ -59,7 +61,7 @@ const NewsPage: React.FC = () => {
                 <NewsItemCard key={n.content.length} {...n} />
               ))}
           </div>
-          <div className="col-span-12 col-start-2 row-span-1 row-start-7">
+          <div className="col-span-12 col-start-2 row-span-1 row-start-8">
             <SearchForm onSubmit={onSubmit} placeholder={'Find news...'} />
           </div>
         </>

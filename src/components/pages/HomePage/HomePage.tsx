@@ -15,12 +15,12 @@ export const HomePage: React.FC<Props> = ({ user }) => {
     <>
       {user ? (
         <div className="grid grid-rows-[1fr_8fr_1fr] h-full gap-2 mx-3">
-          <div className="place-self-center">
+          <div className="place-self-start">
             <h1 className={myStyles.pageTitle}>Home</h1>
           </div>
 
           <div className="h-full min-h-0">
-            <AiConversation />
+            <AiConversation user={user} />
           </div>
 
           <div className="h-full">

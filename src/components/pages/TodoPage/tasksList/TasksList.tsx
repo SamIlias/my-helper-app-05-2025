@@ -4,9 +4,31 @@ import { TaskItem } from './TaskItem.tsx';
 import { EditTaskForm } from './EditTaskForm.tsx';
 import { TaskFormValues } from '../addTaskForm/AddTaskForm.tsx';
 
+type PropsType = {
+  tasks: TaskType[];
+  deleteTask: (id: string) => void;
+  updateTask: (id: string, updatedData: TaskUpdateData) => void;
+  toggleCompletingOfTask: (id: string, isCompleted: boolean) => void;
+};
+export type TaskType = {
+  id: string;
+  userId: string;
+  deadline?: string;
+  title: string;
+  description?: string;
+  isCompleted: boolean;
+  category: string;
+};
+
+//todo fix spelling TaksNoIdType----------
+export type TaksNoIdType = Omit<TaskType, 'id'>;
+export type TaskUpdateData = Partial<Omit<TaskType, 'id' | 'userId'>>;
+
 export const TasksList: React.FC<PropsType> = React.memo(
   ({ tasks, deleteTask, updateTask, toggleCompletingOfTask }) => {
-    const [activeTask, setActiveTask] = React.useState<TaskType | null | undefined>(tasks[0]);
+    
+    //todo: check this type--------------1
+    const [activeTask, setActiveTask] = useState<TaskType | null | undefined>(tasks[0]);
     const [editTaskMode, setEditTaskMode] = useState<{
       active: boolean;
       editedTask: TaskType | null;
@@ -18,17 +40,20 @@ export const TasksList: React.FC<PropsType> = React.memo(
     const prevListLength = useRef<number>(tasks.length);
     const lastTaskElementAnchor = useRef<HTMLDivElement>(null);
 
+    // todo: check this feature------------
     useEffect(() => {
       if (tasks.length > prevListLength.current) {
         lastTaskElementAnchor.current?.scrollIntoView({ behavior: 'smooth' });
       }
     }, [tasks]);
 
+    //todo: check necesserity of this code
     useEffect(() => {
       setActiveTask(null);
     }, []);
 
     const onTaskClick = (id: string): void => {
+      //todo: check types -----------1
       const currentTask: TaskType | undefined = tasks.find((task) => task.id === id);
       if (currentTask) {
         setActiveTask(currentTask);
@@ -37,7 +62,6 @@ export const TasksList: React.FC<PropsType> = React.memo(
 
     const onEditClick: (task: TaskType) => void = (task) => {
       if (editTaskMode.active) return;
-
       setEditTaskMode({ active: true, editedTask: task });
     };
 
@@ -120,22 +144,3 @@ export const TasksList: React.FC<PropsType> = React.memo(
   },
 );
 
-type PropsType = {
-  tasks: TaskType[];
-  deleteTask: (id: string) => void;
-  updateTask: (id: string, updatedData: TaskUpdateData) => void;
-  toggleCompletingOfTask: (id: string, isCompleted: boolean) => void;
-};
-
-export type TaskType = {
-  id: string;
-  userId: string;
-  deadline?: string;
-  title: string;
-  description?: string;
-  isCompleted: boolean;
-  category: string;
-};
-
-export type TaksNoIdType = Omit<TaskType, 'id'>;
-export type TaskUpdateData = Partial<Omit<TaskType, 'id' | 'userId'>>;

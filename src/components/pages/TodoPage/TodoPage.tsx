@@ -8,6 +8,7 @@ import type { User } from 'firebase/auth';
 import { Navigate } from 'react-router-dom';
 import { addTask, deleteTaskById, getTasks, updateTaskById } from '../../../api/firebaseTodoAPI.ts';
 
+//todo: move to utils ---------------
 const normalizeError = (err: unknown) => {
   return err instanceof Error ? err.message : String(err);
 };
@@ -82,7 +83,6 @@ const TodoPage: React.FC<Props> = ({ user }) => {
 
     const fetchTasks = async () => {
       const tasksResponse: TaskType[] = await getTasks(user!.uid);
-      console.log(tasksResponse);
       if (!ignore) {
         setTasks(tasksResponse);
       }
