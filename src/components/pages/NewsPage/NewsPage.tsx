@@ -37,35 +37,39 @@ const NewsPage: React.FC = () => {
   };
 
   return (
-    <div className="grid gap-1 grid-cols-14 text-center content-center h-full">
-      {!newsData.length ? (
-        <div className="col-span-14 col-start-1 row-span-7 row-start-1 justify-items-center content-center">
-          <Preloader preloader={preloader} />
-        </div>
-      ) : (
-        <>
-          <div className="border-b border-b-green-800 pb-2 col-span-14 col-start-1 row-start-1 row-span-2 content-center  mx-3">
-            <h1 className={`${myStyles.pageTitle} place-self-start mb-2`}>News</h1>
-            <Pagination
-              totalItemsCount={newsData.length}
-              currentPage={currentPage}
-              onChangePageNumber={onChangePageNumber}
-              pageSize={NEWS_PORTION_SIZE}
-            />
+    <div className="flex flex-col h-full p-4 gap-2">
+      <header className="border-b pb-2 w-full">
+        <h1 className={`${myStyles.pageTitle}`}>News</h1>
+      </header>
+      <main className="grid h-full min-h-0">
+        {!newsData.length ? (
+          <div className="flex items-center justify-center h-64">
+            <Preloader preloader={preloader} />
           </div>
+        ) : (
+          <div className="flex flex-col gap-1 h-full min-h-0">
+            <div className="border-b border-b-green-800 self-center">
+              <Pagination
+                totalItemsCount={newsData.length}
+                currentPage={currentPage}
+                onChangePageNumber={onChangePageNumber}
+                pageSize={NEWS_PORTION_SIZE}
+              />
+            </div>
 
-          <div className="overflow-auto col-span-14 col-start-1 row-span-5">
-            {newsData
-              .filter((_, index) => firstPortionItem <= index && index < lastPortionItem)
-              .map((n: NewsItemType) => (
-                <NewsItemCard key={n.content.length} {...n} />
-              ))}
+            <div className="overflow-auto">
+              {newsData
+                .filter((_, index) => firstPortionItem <= index && index < lastPortionItem)
+                .map((n: NewsItemType) => (
+                  <NewsItemCard key={n.content.length} {...n} />
+                ))}
+            </div>
           </div>
-          <div className="col-span-12 col-start-2 row-span-1 row-start-8">
-            <SearchForm onSubmit={onSubmit} placeholder={'Find news...'} />
-          </div>
-        </>
-      )}
+        )}
+      </main>
+      <footer className="w-full border-t pt-4">
+        <SearchForm onSubmit={onSubmit} placeholder={'Find news...'} />
+      </footer>
     </div>
   );
 };

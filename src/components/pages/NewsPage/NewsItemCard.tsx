@@ -22,7 +22,7 @@ export const NewsItemCard: React.FC<NewsItemType> = ({
       <div className="place-self-center">
         <img className="rounded-lg" src={image} alt={title} />
       </div>
-      <div className=" md:text-md lg:text-xl xl:text-3xl">
+      <div className=" md:text-md lg:text-md xl:text-xl">
         <p className="font-bold text-amber-950">{title}</p>
         <p className="text-justify text-gray-200">{description}</p>
         {!isShow && (
