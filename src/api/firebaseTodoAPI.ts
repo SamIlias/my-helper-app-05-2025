@@ -10,12 +10,12 @@ import {
 } from 'firebase/firestore';
 import { db } from './firebase';
 import {
-  TaksNoIdType,
+  TaskWithoutId,
   TaskType,
   TaskUpdateData,
 } from '../components/pages/TodoPage/tasksList/TasksList.tsx';
 
-export const addTask = async (task: TaksNoIdType) => {
+export const addTask = async (task: TaskWithoutId) => {
   try {
     await addDoc(collection(db, 'tasks'), task);
   } catch (error) {

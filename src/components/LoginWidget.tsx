@@ -4,30 +4,12 @@ import { MainLinkButton } from './common/MainLinkButton.tsx';
 import { auth } from '../api/firebase.ts';
 import { Dispatch, SetStateAction } from 'react';
 import { myStyles } from '../myStyles/myStyles.ts';
+import { getNameFromEmail, truncate } from '../lib/utils/stringHandler.ts';
 
 type Props = {
   user: User | null | undefined;
   setUser: Dispatch<SetStateAction<User | null | undefined>>;
 };
-
-//todo move to utils-------------
-const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
-export const getNameFromEmail = (email: string | null) => {
-  if (!email) {
-    return '';
-  }
-  const rawName = email.split('@')[0];
-  return capitalize(rawName);
-};
-
-const truncate = (s: string, size: number = 7): string => {
-  if (size >= s.length) {
-    return s;
-  }
-
-  return s.slice(0, size) + '...';
-};
-//----------------------
 
 export const LoginWidget: React.FC<Props> = ({ user, setUser }) => {
   const handleSignOut = async () => {

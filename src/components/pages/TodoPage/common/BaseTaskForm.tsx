@@ -18,8 +18,8 @@ export const taskCategories = {
   Urgent: 'urgent',
   Shopping: 'shopping',
 } as const;
-type CategoriesType = typeof taskCategories;
-type CategoryKey = keyof CategoriesType;
+
+export type TaskCategoryType = keyof typeof taskCategories;
 
 // ------------------------------------- Component
 export const BaseTaskForm: React.FC<PropsType> = ({
@@ -93,7 +93,7 @@ export const BaseTaskForm: React.FC<PropsType> = ({
           {...register('category')}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
         >
-          {(Object.keys(taskCategories) as CategoryKey[]).map((key) => (
+          {(Object.keys(taskCategories) as TaskCategoryType[]).map((key) => (
             <option className="bg-lime-700/80" value={taskCategories[key]}>
               {key}
             </option>

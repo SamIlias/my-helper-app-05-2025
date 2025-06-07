@@ -7,6 +7,7 @@ import { NewsItemCard } from './NewsItemCard.tsx';
 import { Preloader } from '../../common/Preloader.tsx';
 import preloader from '../../../assets/preloaderNews.svg';
 import { myStyles } from '../../../myStyles/myStyles.ts';
+import { normalizeError } from '../../../lib/utils/errorHandler.ts';
 
 const NEWS_PORTION_SIZE = 2;
 const lang = 'ru';
@@ -15,6 +16,7 @@ const NewsPage: React.FC = () => {
   const [newsData, setNewsData] = useState<NewsItemType[]>([]);
   // const [newsData, setNewsData] = useState<NewsItemType[]>(initialNewsForPaginationTest);
   const [currentPage, setCurrentPage] = useState(1);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const lastPortionItem = currentPage * NEWS_PORTION_SIZE;
   const firstPortionItem = lastPortionItem - NEWS_PORTION_SIZE;
@@ -24,8 +26,13 @@ const NewsPage: React.FC = () => {
   };
 
   const loadNews = async (term: string | undefined) => {
-    const news: NewsItemType[] = await fetchNews(term, lang);
-    setNewsData(news);
+    try {
+      setErrorMessage(null);
+      const news: NewsItemType[] = await fetchNews(term, lang);
+      setNewsData(news);
+    } catch (err: unknown) {
+      setErrorMessage(normalizeError(err));
+    }
   };
 
   useEffect(() => {
@@ -41,9 +48,12 @@ const NewsPage: React.FC = () => {
       <header className="border-b pb-2 w-full">
         <h1 className={`${myStyles.pageTitle}`}>News</h1>
       </header>
-      <main className="grid h-full min-h-0">
+      <main className="relative grid h-full min-h-0">
+        {errorMessage && (
+          <strong className="absolute top-0 text-red-700 mt-2">{errorMessage}</strong>
+        )}
         {!newsData.length ? (
-          <div className="flex items-center justify-center h-64">
+          <div className="flex items-center justify-center h-full pb-15">
             <Preloader preloader={preloader} />
           </div>
         ) : (

@@ -9,8 +9,8 @@ import 'highlight.js/styles/vs2015.css';
 import preloader from '../../../assets/preloaderGear.svg';
 import { Preloader } from '../../common/Preloader.tsx';
 import remarkGfm from 'remark-gfm';
-import { getNameFromEmail } from '../../LoginWidget.tsx'; // dark
 import { User } from 'firebase/auth';
+import { getNameFromEmail } from '../../../lib/utils/stringHandler.ts';
 // import 'highlight.js/styles/vs.css'; // light
 
 export const AiConversation: React.FC<{ user: User }> = ({ user }) => {

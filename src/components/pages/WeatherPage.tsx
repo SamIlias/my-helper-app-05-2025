@@ -7,11 +7,13 @@ import { Preloader } from '../common/Preloader.tsx';
 import preloader from '../../assets/preloaderSun.svg';
 import { getCurrentPeriodOfDay } from '../../lib/utils/getCurrentPeriodOfDay.ts';
 import { myStyles } from '../../myStyles/myStyles.ts';
+import { normalizeError } from '../../lib/utils/errorHandler.ts';
 
 const INITIAL_CITY: string = import.meta.env.VITE_CURRENT_CITY;
 
 const WeatherPage: React.FC = () => {
   const [weatherData, setWeatherData] = useState<WeatherDataType>();
+
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const weatherCode = String(weatherData?.current.weatherCode) as WeatherCodesType;
@@ -19,14 +21,10 @@ const WeatherPage: React.FC = () => {
   const loadWeatherData: (cityName: string) => Promise<void> = async (cityName) => {
     try {
       setErrorMessage(null);
-
       const data: WeatherDataType = await fetchWeather(cityName);
       setWeatherData(data);
     } catch (err: unknown) {
-      // todo: use handleError from AuthPage
-      if (err instanceof Error) {
-        setErrorMessage(err.message);
-      }
+      setErrorMessage(normalizeError(err));
     }
   };
 
@@ -46,7 +44,10 @@ const WeatherPage: React.FC = () => {
       </header>
 
       {/* Main content */}
-      <main className="grid h-full">
+      <main className="relative grid h-full">
+        {errorMessage && (
+          <strong className="absolute top-0 text-red-700 mt-2">{errorMessage}</strong>
+        )}
         {weatherData ? (
           <div className="grid grid-rows-[auto_1fr] md:grid-rows-none md:grid-cols-2 ">
             {/* Weather details */}
@@ -81,7 +82,7 @@ const WeatherPage: React.FC = () => {
             </div>
           </div>
         ) : (
-          <div className="flex items-center justify-center h-64">
+          <div className="flex items-center justify-center h-full pb-15">
             <Preloader preloader={preloader} />
           </div>
         )}
@@ -90,7 +91,6 @@ const WeatherPage: React.FC = () => {
       {/* Search form */}
       <footer className="w-full border-t pt-4">
         <SearchForm onSubmit={onSubmit} placeholder="Search city..." />
-        {errorMessage && <p className="text-red-700 mt-2">{errorMessage}</p>}
       </footer>
     </div>
   );

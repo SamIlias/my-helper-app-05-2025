@@ -10,6 +10,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../../api/firebase.ts';
 import * as React from 'react';
 import { Navigate } from 'react-router-dom';
+import { normalizeError } from '../../../lib/utils/errorHandler.ts';
 
 type AuthProps = {
   setUser: Dispatch<SetStateAction<User | null | undefined>>;
@@ -19,44 +20,36 @@ export const AuthPage: React.FC<AuthProps> = ({ setUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [user, loading, error] = useAuthState(auth);
-  const [customError, setCustomError] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     setUser(user);
   }, [user]);
 
-  const handleError = (err: unknown) => {
-    if (err instanceof Error) {
-      setCustomError(err.message);
-    } else {
-      setCustomError(String(err));
-    }
-  };
-
   const handleSignUp = async () => {
     try {
-      setCustomError(null);
+      setErrorMessage(null);
       await createUserWithEmailAndPassword(auth, email, password);
     } catch (err: unknown) {
-      handleError(err);
+      setErrorMessage(normalizeError(err));
     }
   };
 
   const handleSignIn = async () => {
     try {
-      setCustomError(null);
+      setErrorMessage(null);
       await signInWithEmailAndPassword(auth, email, password);
     } catch (err: unknown) {
-      handleError(err);
+      setErrorMessage(normalizeError(err));
     }
   };
 
   const handleGoogleAuth = async () => {
     try {
-      setCustomError(null);
+      setErrorMessage(null);
       await signInWithPopup(auth, new GoogleAuthProvider());
     } catch (err: unknown) {
-      handleError(err);
+      setErrorMessage(normalizeError(err));
     }
   };
 
@@ -68,8 +61,8 @@ export const AuthPage: React.FC<AuthProps> = ({ setUser }) => {
         <Navigate to="/" replace />
       ) : (
         <>
-          {(error || customError) && (
-            <p className="text-red-500 text-sm">{error?.message || customError}</p>
+          {(error || errorMessage) && (
+            <p className="text-red-500 text-sm">{error?.message || errorMessage}</p>
           )}
           <input
             type="email"
@@ -91,7 +84,10 @@ export const AuthPage: React.FC<AuthProps> = ({ setUser }) => {
           <button onClick={handleSignUp} className="w-full py-2 bg-green-500 text-white rounded">
             Sign Up
           </button>
-          <button onClick={handleGoogleAuth} className="w-full py-2 bg-yellow-400 text-black rounded">
+          <button
+            onClick={handleGoogleAuth}
+            className="w-full py-2 bg-yellow-400 text-black rounded"
+          >
             Sign In with Google
           </button>
         </>

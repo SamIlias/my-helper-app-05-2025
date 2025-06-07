@@ -3,6 +3,7 @@ import * as React from 'react';
 import { TaskItem } from './TaskItem.tsx';
 import { EditTaskForm } from './EditTaskForm.tsx';
 import { TaskFormValues } from '../addTaskForm/AddTaskForm.tsx';
+import { TaskCategoryType } from '../common/BaseTaskForm.tsx';
 
 type PropsType = {
   tasks: TaskType[];
@@ -17,17 +18,14 @@ export type TaskType = {
   title: string;
   description?: string;
   isCompleted: boolean;
-  category: string;
+  category: TaskCategoryType;
 };
 
-//todo fix spelling TaksNoIdType----------
-export type TaksNoIdType = Omit<TaskType, 'id'>;
+export type TaskWithoutId = Omit<TaskType, 'id'>;
 export type TaskUpdateData = Partial<Omit<TaskType, 'id' | 'userId'>>;
 
 export const TasksList: React.FC<PropsType> = React.memo(
   ({ tasks, deleteTask, updateTask, toggleCompletingOfTask }) => {
-    
-    //todo: check this type--------------1
     const [activeTask, setActiveTask] = useState<TaskType | null | undefined>(tasks[0]);
     const [editTaskMode, setEditTaskMode] = useState<{
       active: boolean;
@@ -47,13 +45,7 @@ export const TasksList: React.FC<PropsType> = React.memo(
       }
     }, [tasks]);
 
-    //todo: check necesserity of this code
-    useEffect(() => {
-      setActiveTask(null);
-    }, []);
-
     const onTaskClick = (id: string): void => {
-      //todo: check types -----------1
       const currentTask: TaskType | undefined = tasks.find((task) => task.id === id);
       if (currentTask) {
         setActiveTask(currentTask);
@@ -85,9 +77,9 @@ export const TasksList: React.FC<PropsType> = React.memo(
     };
 
     return (
-      <div className="grid grid-cols-12 gap-4 h-full w-full p-4">
+      <div className="grid grid-rows-[2fr_1fr] md:grid-rows-none md:grid-cols-2 gap-2 h-full w-full p-1">
         {/* Task List */}
-        <div className="col-span-6  dark:bg-gray-800 rounded-xl shadow-lg p-4 overflow-y-auto">
+        <div className="border h-full dark:bg-gray-800 rounded-xl shadow-lg p-2 overflow-y-auto">
           <h2 className="text-xl font-semibold text-center text-gray-800 dark:text-white mb-4">
             List of Tasks
           </h2>
@@ -120,7 +112,7 @@ export const TasksList: React.FC<PropsType> = React.memo(
 
         {/* Description or edit form */}
         {editTaskMode.active ? (
-          <div className="col-span-6 dark:bg-gray-800 rounded-xl shadow-lg p-4 overflow-y-auto">
+          <div className="dark:bg-gray-800 rounded-xl shadow-lg p-2 overflow-y-scroll">
             <EditTaskForm
               closeForm={closeForm}
               onSubmit={onEditFormSubmit}
@@ -128,12 +120,12 @@ export const TasksList: React.FC<PropsType> = React.memo(
             />
           </div>
         ) : (
-          <div className="col-span-6 dark:bg-gray-800 rounded-xl shadow-lg p-4">
+          <div className="border h-full dark:bg-gray-800 rounded-xl shadow-lg p-2 overflow-y-scroll">
             <h2 className="text-xl font-semibold text-center text-gray-800 dark:text-white mb-4">
               Description
             </h2>
             <p
-              className={`${activeTask?.description ? 'text-white dark: text-gray-700 whitespace-pre-wrap' : 'text-cyan-700 text-shadow-lg/40 italic'}`}
+              className={`${activeTask?.description ? 'text-white dark: text-gray-700 whitespace-pre-wrap text-balance' : 'text-cyan-700 text-shadow-lg/40 italic'}`}
             >
               {activeTask?.description || 'There is no description...'}
             </p>
@@ -143,4 +135,3 @@ export const TasksList: React.FC<PropsType> = React.memo(
     );
   },
 );
-
