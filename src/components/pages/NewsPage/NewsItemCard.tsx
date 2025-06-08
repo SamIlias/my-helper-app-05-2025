@@ -22,7 +22,7 @@ export const NewsItemCard: React.FC<NewsItemType> = ({
       <div className="place-self-center">
         <img className="rounded-lg" src={image} alt={title} />
       </div>
-      <div className=" md:text-md lg:text-md xl:text-xl">
+      <div className="md:text-md lg:text-md xl:text-xl">
         <p className="font-bold text-amber-950">{title}</p>
         <p className="text-justify text-gray-200">{description}</p>
         {!isShow && (
@@ -33,19 +33,19 @@ export const NewsItemCard: React.FC<NewsItemType> = ({
       </div>
 
       {isShow && (
-        <div className="p-3 md:p-6 lg:p-10 text-justify text-base md:text-md lg:text-xl absolute top-0 right-0 h-full w-full bg-lime-700/80 backdrop-blur-xl z-10 content-center overflow-auto">
+        <div className=" flex flex-col  p-3 md:p-6 lg:p-10 text-justify text-base md:text-md lg:text-xl absolute top-0 right-0 h-full w-full bg-lime-700/80 backdrop-blur-xl z-10 content-center overflow-auto">
+          <p className="mb-7 text-green-100">{content}</p>
+          <p className="text-gray-200">{source.name}</p>
+          <a href={url} target={'_blank'} className="text-amber-950 break-all">
+            {url}
+          </a>
+          <p className="mt-2 text-right text-xs md:text-base text-yellow-300 te">{publishedAt}</p>
           <button
-            className="absolute top-1 right-3 border rounded-sm px-1 text-yellow-400 hover:bg-orange-800 cursor-pointer"
+            className="border place-self-center rounded-sm px-1 mt-4 text-yellow-400 hover:bg-orange-800 cursor-pointer"
             onClick={onClick}
           >
             Close
           </button>
-          <p className="mb-7 text-green-100">{content}</p>
-          <p className="text-gray-200">{source.name}</p>
-          <a href={url} target={'_blank'} className="text-amber-950">
-            {url}
-          </a>
-          <p className="mt-2 text-right text-xs md:text-base text-yellow-300 te">{publishedAt}</p>
         </div>
       )}
     </div>

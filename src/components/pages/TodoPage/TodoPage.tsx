@@ -8,7 +8,7 @@ import type { User } from 'firebase/auth';
 import { Navigate } from 'react-router-dom';
 import { addTask, deleteTaskById, getTasks, updateTaskById } from '../../../api/firebaseTodoAPI.ts';
 import { normalizeError } from '../../../lib/utils/errorHandler.ts';
-import { mockTasks } from '../../../lib/mockOfTasks.ts';
+// import { mockTasks } from '../../../lib/mockOfTasks.ts';
 import { myStyles } from '../../../myStyles/myStyles.ts';
 
 type Props = {
@@ -16,8 +16,8 @@ type Props = {
 };
 
 const TodoPage: React.FC<Props> = ({ user }) => {
-  // const [tasks, setTasks] = useState<TaskType[]>([]);
-  const [tasks, setTasks] = useState<TaskType[]>([...mockTasks]);
+  const [tasks, setTasks] = useState<TaskType[]>([]);
+  // const [tasks, setTasks] = useState<TaskType[]>([...mockTasks]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isAddFormActive, setIsAddFormActive] = useState<boolean>(false);
   const [isCompletedTasksHidden, setIsCompletedTasksHidden] = useState(false);
@@ -48,19 +48,19 @@ const TodoPage: React.FC<Props> = ({ user }) => {
   };
 
   const updateTask = async (id: string, updatedData: TaskUpdateData) => {
-    // try {
-    //   await updateTaskById(id, updatedData);
-    //   setTasks((prevTasks) =>
-    //     prevTasks.map((t) => {
-    //       if (t.id === id) {
-    //         return { ...t, ...updatedData };
-    //       }
-    //       return t;
-    //     }),
-    //   );
-    // } catch (error) {
-    //   setError(normalizeError(error));
-    // }
+    try {
+      await updateTaskById(id, updatedData);
+      setTasks((prevTasks) =>
+        prevTasks.map((t) => {
+          if (t.id === id) {
+            return { ...t, ...updatedData };
+          }
+          return t;
+        }),
+      );
+    } catch (error) {
+      setError(normalizeError(error));
+    }
   };
 
   const toggleCompletingOfTask = async (id: string, isCompleted: boolean): Promise<void> => {
@@ -76,24 +76,24 @@ const TodoPage: React.FC<Props> = ({ user }) => {
     setIsCompletedTasksHidden(!isCompletedTasksHidden);
   };
 
-  // useEffect(() => {
-  //   let ignore: boolean = false;
-  //   setIsLoading(true);
-  //
-  //   const fetchTasks = async () => {
-  //     const tasksResponse: TaskType[] = await getTasks(user!.uid);
-  //     if (!ignore) {
-  //       setTasks(tasksResponse);
-  //     }
-  //     setIsLoading(false);
-  //   };
-  //
-  //   fetchTasks();
-  //
-  //   return () => {
-  //     ignore = true;
-  //   };
-  // }, []);
+  useEffect(() => {
+    let ignore: boolean = false;
+    setIsLoading(true);
+
+    const fetchTasks = async () => {
+      const tasksResponse: TaskType[] = await getTasks(user!.uid);
+      if (!ignore) {
+        setTasks(tasksResponse);
+      }
+      setIsLoading(false);
+    };
+
+    fetchTasks();
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
 
   const handledTasks: TaskType[] = isCompletedTasksHidden
     ? tasks.filter((t) => !t.isCompleted)
@@ -113,17 +113,17 @@ const TodoPage: React.FC<Props> = ({ user }) => {
           {/* Header */}
           <header className="flex justify-between items-center border-b pb-2">
             <h1 className={`${myStyles.pageTitle} text-2xl md:text-3xl`}>My tasks</h1>
-            <div className="space-x-4">
+            <div className="">
               <button
                 onClick={() => setIsAddFormActive(true)}
-                className="px-4 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
+                className="px-2 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
               >
                 Add New
               </button>
               <button
                 onClick={onClickHideShowButton}
                 title={isCompletedTasksHidden ? 'Show completed tasks' : 'Hide completed tasks'}
-                className="px-4 py-1 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition"
+                className="px-2 py-1 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition"
               >
                 {isCompletedTasksHidden ? 'Show' : 'Hide'}
               </button>
@@ -134,7 +134,7 @@ const TodoPage: React.FC<Props> = ({ user }) => {
 
           {/* Tasks */}
           {isLoading ? (
-            <div className="col-span-14 col-start-1 row-span-7 row-start-1 justify-items-center content-center">
+            <div className="flex items-center justify-center h-full pb-15">
               <Preloader preloader={preloader} />
             </div>
           ) : (

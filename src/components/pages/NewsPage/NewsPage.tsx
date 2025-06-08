@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import * as React from 'react';
-import { fetchNews, initialNewsForPaginationTest, NewsItemType } from '../../../api/newsApi.ts';
+// import { fetchNews, initialNewsForPaginationTest, NewsItemType } from '../../../api/newsApi.ts';
+import { fetchNews, NewsItemType } from '../../../api/newsApi.ts';
 import { SearchForm } from '../../common/SearchForm.tsx';
 import Pagination from '../../common/Pagination.tsx';
 import { NewsItemCard } from './NewsItemCard.tsx';

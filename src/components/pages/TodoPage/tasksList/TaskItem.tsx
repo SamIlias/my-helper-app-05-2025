@@ -19,11 +19,11 @@ export const TaskItem: React.FC<IProps> = ({
 
   return (
     <>
-      <div className="space-x-3">
+      <div className="flex flex-col space-x-3">
         <span className={`${categoryColor[task.category as Category]} block text-shadow-lg/30 `}>
           {task.category}
         </span>
-        <div className="flex justify-between mb-3">
+        <div className="mb-1">
           <div className="space-x-2">
             <input
               type="checkbox"
@@ -35,12 +35,12 @@ export const TaskItem: React.FC<IProps> = ({
             />
             <span className="text-white dark:text-gray-800 font-medium">{task.title}</span>
           </div>
-          <div className="flex items-end space-x-2">
+          <div className="flex justify-between">
             <span className="text-sm text-amber-500 dark:text-gray-300">{task.deadline}</span>
             <div>
               <button
                 onClick={() => onEditTask(task)}
-                className="px-1 pb-0.5 text-sm text-white bg-amber-800 hover:bg-amber-600 rounded transition"
+                className="px-1 mx-1 pb-0.5 text-sm text-white bg-amber-800 hover:bg-amber-600 rounded transition"
               >
                 Edit
               </button>
