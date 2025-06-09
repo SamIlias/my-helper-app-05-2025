@@ -11,6 +11,7 @@ import { Preloader } from '../../common/Preloader.tsx';
 import remarkGfm from 'remark-gfm';
 import { User } from 'firebase/auth';
 import { getNameFromEmail } from '../../../lib/utils/stringHandler.ts';
+import { useTranslation } from 'react-i18next';
 // import 'highlight.js/styles/vs.css'; // light
 
 export const AiConversation: React.FC<{ user: User }> = ({ user }) => {
@@ -19,6 +20,8 @@ export const AiConversation: React.FC<{ user: User }> = ({ user }) => {
   ]);
   const [query, setQuery] = useState('');
   const [isSending, setIsSending] = useState<boolean>(false);
+
+  const { t } = useTranslation('homepage');
 
   const lastConversationItem = useRef<HTMLDivElement>(null);
 
@@ -57,7 +60,7 @@ export const AiConversation: React.FC<{ user: User }> = ({ user }) => {
         <div className="relative">
           <textarea
             className="w-full h-full p-2 border rounded resize-none focus:outline-none focus:ring-2 focus:ring-amber-500"
-            placeholder="Type your message..."
+            placeholder={t('aiConversation.form.textAreaPlaceholder')}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
@@ -76,7 +79,7 @@ export const AiConversation: React.FC<{ user: User }> = ({ user }) => {
               : `bg-amber-500/50 text-gray-500`
           }`}
         >
-          Send
+          {t('aiConversation.form.buttonTitle')}
         </button>
       </form>
 
@@ -103,7 +106,9 @@ export const AiConversation: React.FC<{ user: User }> = ({ user }) => {
             );
           })
         ) : (
-          <p className="text-center m-3">{`Hello, ${getNameFromEmail(user.email)}! how can I help you?`}</p>
+          <p className="text-center m-3">
+            {t('aiConversation.greeting', { userName: getNameFromEmail(user.email) })}
+          </p>
         )}
       </div>
     </div>

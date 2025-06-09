@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import * as React from 'react';
 import { TaskType } from '../tasksList/TasksList.tsx';
+import { useTranslation } from 'react-i18next';
 
 export type TaskFormValues = Pick<TaskType, 'title' | 'deadline' | 'category' | 'description'>;
 
@@ -34,6 +35,8 @@ export const BaseTaskForm: React.FC<PropsType> = ({
     formState: { errors },
   } = useForm<TaskFormValues>({ mode: 'onChange', defaultValues });
 
+  const { t } = useTranslation('todopage');
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -45,7 +48,7 @@ export const BaseTaskForm: React.FC<PropsType> = ({
           htmlFor="title"
           className="block text-sm font-medium text-gray-700 dark:text-gray-200"
         >
-          Title<span className="text-red-500">*</span>
+          {t("baseTaksForm.titleLabel")}<span className="text-red-500">*</span>
         </label>
         <input
           id="title"
@@ -56,7 +59,7 @@ export const BaseTaskForm: React.FC<PropsType> = ({
               message: 'Title must be at most 30 characters long',
             },
           })}
-          placeholder="Enter title"
+          placeholder={t("baseTaksForm.titlePlaceholder")}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
         />
         {errors.title && (
@@ -70,7 +73,7 @@ export const BaseTaskForm: React.FC<PropsType> = ({
           htmlFor="deadline"
           className="block text-sm font-medium text-gray-700 dark:text-gray-200"
         >
-          Deadline
+          {t("baseTaksForm.deadlineLabel")}
         </label>
         <input
           id="deadline"
@@ -86,7 +89,7 @@ export const BaseTaskForm: React.FC<PropsType> = ({
           htmlFor="category"
           className="block text-sm font-medium text-gray-700 dark:text-gray-200"
         >
-          Task category
+          {t("baseTaksForm.categoryLabel")}
         </label>
         <select
           id="category"
@@ -107,12 +110,12 @@ export const BaseTaskForm: React.FC<PropsType> = ({
           htmlFor="description"
           className="block text-sm font-medium text-gray-700 dark:text-gray-200"
         >
-          Description
+          {t("baseTaksForm.descriptionLabel")}
         </label>
         <textarea
           id="description"
           {...register('description')}
-          placeholder="Enter description"
+          placeholder={t("baseTaksForm.descriptionPlaceholder")}
           rows={4}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
         />
@@ -125,7 +128,7 @@ export const BaseTaskForm: React.FC<PropsType> = ({
           onClick={closeAddForm}
           className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
         >
-          Cancel
+          {t("baseTaksForm.cancelButtonName")}
         </button>
         <input
           type="submit"

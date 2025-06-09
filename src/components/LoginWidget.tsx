@@ -5,6 +5,7 @@ import { auth } from '../api/firebase.ts';
 import { Dispatch, SetStateAction } from 'react';
 import { myStyles } from '../myStyles/myStyles.ts';
 import { getNameFromEmail, truncate } from '../lib/utils/stringHandler.ts';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   user: User | null | undefined;
@@ -17,6 +18,8 @@ export const LoginWidget: React.FC<Props> = ({ user, setUser }) => {
     setUser(null);
   };
 
+  const { t } = useTranslation('common');
+
   return (
     <>
       {user ? (
@@ -25,11 +28,11 @@ export const LoginWidget: React.FC<Props> = ({ user, setUser }) => {
             {truncate(getNameFromEmail(user.email), 15)}
           </div>
           <button className={`${myStyles.button.main} h-fit`} onClick={handleSignOut}>
-            Sign out
+            {t("logoutButtonTitle")}
           </button>
         </div>
       ) : (
-        <MainLinkButton path={'/auth'} title={'Login'} />
+        <MainLinkButton path={'/auth'} title={t("loginButtonTitle")} />
       )}
     </>
   );

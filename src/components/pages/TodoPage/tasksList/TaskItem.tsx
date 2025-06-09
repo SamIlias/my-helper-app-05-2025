@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { TaskType } from './TasksList.tsx';
 import { taskCategories } from '../common/BaseTaskForm.tsx';
+import { useTranslation } from 'react-i18next';
 
 export const TaskItem: React.FC<IProps> = ({
   task,
@@ -16,6 +17,8 @@ export const TaskItem: React.FC<IProps> = ({
     [taskCategories.Shopping]: 'text-violet-500',
   } as const;
   type Category = keyof typeof categoryColor;
+
+  const { t } = useTranslation('todopage');
 
   return (
     <>
@@ -42,14 +45,14 @@ export const TaskItem: React.FC<IProps> = ({
                 onClick={() => onEditTask(task)}
                 className="px-1 mx-1 pb-0.5 text-sm text-white bg-amber-800 hover:bg-amber-600 rounded transition"
               >
-                Edit
+                {t("taskItem.editButtonName")}
               </button>
 
               <button
                 onClick={() => deleteTask(task.id)}
                 className="px-1 pb-0.5 text-sm text-white bg-red-900 hover:bg-red-600 rounded transition"
               >
-                Delete
+                {t("taskItem.deleteButtonName")}
               </button>
             </div>
           </div>

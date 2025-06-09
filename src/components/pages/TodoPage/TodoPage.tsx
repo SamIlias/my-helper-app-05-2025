@@ -10,6 +10,7 @@ import { addTask, deleteTaskById, getTasks, updateTaskById } from '../../../api/
 import { normalizeError } from '../../../lib/utils/errorHandler.ts';
 // import { mockTasks } from '../../../lib/mockOfTasks.ts';
 import { myStyles } from '../../../myStyles/myStyles.ts';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   user: User | null | undefined;
@@ -22,6 +23,7 @@ const TodoPage: React.FC<Props> = ({ user }) => {
   const [isAddFormActive, setIsAddFormActive] = useState<boolean>(false);
   const [isCompletedTasksHidden, setIsCompletedTasksHidden] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { t } = useTranslation('todopage');
 
   const closeAddForm = () => {
     setIsAddFormActive(false);
@@ -112,20 +114,20 @@ const TodoPage: React.FC<Props> = ({ user }) => {
         <div className="flex flex-col min-h-0 h-full p-2 gap-2">
           {/* Header */}
           <header className="flex justify-between items-center border-b pb-2">
-            <h1 className={`${myStyles.pageTitle} text-2xl md:text-3xl`}>My tasks</h1>
+            <h1 className={`${myStyles.pageTitle} text-2xl md:text-3xl`}>{t("title")}</h1>
             <div className="">
               <button
                 onClick={() => setIsAddFormActive(true)}
                 className="px-2 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
               >
-                Add New
+                {t("addTaskButtonName")}
               </button>
               <button
                 onClick={onClickHideShowButton}
-                title={isCompletedTasksHidden ? 'Show completed tasks' : 'Hide completed tasks'}
+                title={isCompletedTasksHidden ? t("showHideButton.titleOnHoverHide") : t("showHideButton.titleOnHoverShow")}
                 className="px-2 py-1 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition"
               >
-                {isCompletedTasksHidden ? 'Show' : 'Hide'}
+                {isCompletedTasksHidden ? t("showHideButton.showName") : t("showHideButton.hideName")}
               </button>
             </div>
           </header>

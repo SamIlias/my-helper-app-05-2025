@@ -4,6 +4,7 @@ import { TaskItem } from './TaskItem.tsx';
 import { EditTaskForm } from './EditTaskForm.tsx';
 import { TaskFormValues } from '../addTaskForm/AddTaskForm.tsx';
 import { TaskCategoryType } from '../common/BaseTaskForm.tsx';
+import { useTranslation } from 'react-i18next';
 
 type PropsType = {
   tasks: TaskType[];
@@ -34,6 +35,8 @@ export const TasksList: React.FC<PropsType> = React.memo(
       active: false,
       editedTask: null,
     });
+    
+    const { t } = useTranslation('todopage');
 
     const prevListLength = useRef<number>(tasks.length);
     const lastTaskElementAnchor = useRef<HTMLDivElement>(null);
@@ -81,10 +84,10 @@ export const TasksList: React.FC<PropsType> = React.memo(
         {/* Task List */}
         <div className="border h-full dark:bg-gray-800 rounded-xl shadow-lg p-2 overflow-y-auto">
           <h2 className="text-xl font-semibold text-center text-gray-800 dark:text-white mb-4">
-            List of Tasks
+            {t("tasksList.listTitle")}
           </h2>
           {tasks.length === 0 && (
-            <h3 className="text-amber-500 text-center">The list is empty, add new task.</h3>
+            <h3 className="text-amber-500 text-center">{t("tasksList.emptyListMessage")}</h3>
           )}
           <div className="space-y-2">
             {tasks.map((task, index) => {
@@ -122,7 +125,7 @@ export const TasksList: React.FC<PropsType> = React.memo(
         ) : (
           <div className="border h-full dark:bg-gray-800 rounded-xl shadow-lg p-2 overflow-y-scroll">
             <h2 className="text-xl font-semibold text-center text-gray-800 dark:text-white mb-4">
-              Description
+              {t("tasksList.descriptionTitle")}
             </h2>
             <p
               className={`${activeTask?.description ? 'text-white dark: text-gray-700 whitespace-pre-wrap text-balance' : 'text-cyan-700 text-shadow-lg/40 italic'}`}

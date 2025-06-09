@@ -3,10 +3,13 @@ import { fetchQuotes, QuoteType } from '../../../api/quotesApi.ts';
 import * as React from 'react';
 import { Preloader } from '../../common/Preloader.tsx';
 import preloader from '../../../assets/preloaderBook.svg';
+import { useTranslation } from 'react-i18next';
 
 export const QuoteBlock: React.FC = () => {
   const [quote, setQuote] = useState<QuoteType | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const { t } = useTranslation('homepage');
 
   const loadQuote = async () => {
     setIsLoading(true);
@@ -36,7 +39,7 @@ export const QuoteBlock: React.FC = () => {
 
   return (
     <div className="flex flex-col text-center">
-      <h2 className="italic text-amber-500 text-base">Quote for you:</h2>
+      <h2 className="italic text-amber-500 text-base">{t('quoteBlock.title')}</h2>
       {quote ? (
         <div className="text-center text-sm italic">{`"${quote.quote}" - ${quote.author}`}</div>
       ) : (
@@ -48,7 +51,7 @@ export const QuoteBlock: React.FC = () => {
           className="border w-fit h-fit px-2 rounded-md hover:text-yellow-400 cursor-pointer"
           onClick={loadQuote}
         >
-          Refresh
+          {t('quoteBlock.refreshButtonTitle')}
         </button>
         {isLoading && <Preloader preloader={preloader} />}
       </div>

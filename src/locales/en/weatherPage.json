@@ -1,0 +1,9 @@
+{
+    "title": "Weather",
+    "header": "The weather for now",
+    "country": "Country:",
+    "currentCity": "Current city:",
+    "temperature": "Temperature:",
+    "windSpeed": "Wind speed:", 
+    "description": "Description:"
+}

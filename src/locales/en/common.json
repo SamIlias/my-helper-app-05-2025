@@ -1,0 +1,15 @@
+{
+    "pageNames": {
+        "todo": "todo",
+        "news": "news",
+        "weather": "weather",
+        "auth": "authorization"
+    },
+    "homeButtonTitle": "Home",
+    "logoutButtonTitle": "Log out",
+    "loginButtonTitle": "Login",
+    "pagination": {
+        "prevBtnName": "Prev",
+        "nextBtnName": "Next"
+    }
+}

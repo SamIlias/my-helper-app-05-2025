@@ -1,0 +1,38 @@
+{
+    "title": "Мои задачи",
+    "addTaskButtonName": "Добавить новую",
+    "showHideButton": {
+        "showName": "Показать",
+        "hideName": "Скрыть",
+        "titleOnHoverShow": "Скрыть выполненные",
+        "titleOnHoverHide": "Показать выполненные"
+    },
+    "addTaskForm": {
+        "title": "Создание задачи",
+        "submitButtonName": "Добавить"
+    },
+    "editTaskForm": {
+        "title": "Редактировать",
+        "submitButtonName": "Сохранить"
+    },
+    "baseTaksForm": {
+        "titleLabel": "Название",
+        "titlePlaceholder": "Введите назавание",
+        "deadlineLabel": "Срок",
+        "categoryLabel": "Категория",
+        "descriptionLabel": "Описание",
+        "descriptionPlaceholder": "Введите описание",
+
+        "cancelButtonName": "Отмена"
+    },
+    "tasksList": {
+        "listTitle": "Список задач",
+        "descriptionTitle": "Описание",
+        "emptyListMessage": "Список пуст, создайте новую задачу.",
+        "emptyDescription": "Описание отсутствует..."
+    }, 
+    "taskItem": {
+        "editButtonName": "Редактировать",
+        "deleteButtonName": "Удалить"
+    } 
+}

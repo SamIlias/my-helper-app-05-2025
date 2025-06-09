@@ -26,13 +26,14 @@ const mainBackground = {
 
 function App() {
   const { i18n } = useTranslation();
+  const { t } = useTranslation('common');
   const [user, setUser] = useState<User | null | undefined>(null);
 
   const pages = {
-    todo: 'todo',
-    news: 'news',
-    weather: 'weather',
-    auth: 'auth',
+    todo: t('pageNames.todo'),
+    news: t('pageNames.news'),
+    weather: t('pageNames.weather'),
+    auth: t('pageNames.auth'),
   };
 
   const navList: string[] = [pages.news, pages.weather, pages.todo];
@@ -45,7 +46,7 @@ function App() {
     <div className={`w-screen h-screen grid grid-cols-24 grid-rows-19 ${mainBackground.default} `}>
       <div className="col-span-24 row-span-2 grid grid-cols-[1fr_3fr] w-full content-center">
         <div className={`w-fit h-fit text-base justify-self-start ml-[3vw] ${myStyles.bgGrayBlur}`}>
-          <MainLinkButton path={'/'} title={'Home'} />
+          <MainLinkButton path={'/'} title={t('homeButtonTitle')} />
         </div>
 
         <div className="justify-self-end mr-[3vw]">
@@ -78,10 +79,10 @@ function App() {
       <div className="col-span-22 col-start-2 row-span-14 row-start-4 bg-gray-700/50 border rounded-md border-gray-700 backdrop-blur-sm ">
         <Routes>
           <Route path={`/`} element={<HomePage user={user} />} />
-          <Route path={`/${pages.auth}`} element={<AuthPage setUser={setUser} />} />
-          <Route path={`/${pages.todo}`} element={<TodoPage user={user} />} />
-          <Route path={`/${pages.news}`} element={<NewsPage />} />
-          <Route path={`/${pages.weather}`} element={<WeatherPage />} />
+          <Route path={`/auth`} element={<AuthPage setUser={setUser} />} />
+          <Route path={`/todo`} element={<TodoPage user={user} />} />
+          <Route path={`/news`} element={<NewsPage />} />
+          <Route path={`/weather`} element={<WeatherPage />} />
         </Routes>
       </div>
 

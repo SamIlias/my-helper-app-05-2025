@@ -1,0 +1,10 @@
+{
+  "preloaderText": "Loading...",
+  "form": {
+    "emailPlaceholder": "Email",
+    "passwordPlaceholder": "Password",
+    "signInButtonTitle": "Sign in",
+    "signOutButtonTitle": "Sign out",
+    "signInGoogleButtonTitle": "Sign in with Google"
+  }
+}

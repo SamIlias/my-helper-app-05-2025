@@ -1,0 +1,10 @@
+{
+  "preloaderText": "Загрузка...",
+  "form": {
+    "emailPlaceholder": "Эл. почта",
+    "passwordPlaceholder": "Пароль",
+    "signInButtonTitle": "Войти",
+    "signOutButtonTitle": "Выйти",
+    "signInGoogleButtonTitle": "Войти, используя Google"
+  }
+}

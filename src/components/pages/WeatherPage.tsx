@@ -8,13 +8,15 @@ import preloader from '../../assets/preloaderSun.svg';
 import { getCurrentPeriodOfDay } from '../../lib/utils/getCurrentPeriodOfDay.ts';
 import { myStyles } from '../../myStyles/myStyles.ts';
 import { normalizeError } from '../../lib/utils/errorHandler.ts';
+import { useTranslation } from 'react-i18next';
 
 const INITIAL_CITY: string = import.meta.env.VITE_CURRENT_CITY;
 
 const WeatherPage: React.FC = () => {
   const [weatherData, setWeatherData] = useState<WeatherDataType>();
-
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const { t } = useTranslation('weatherpage');
 
   const weatherCode = String(weatherData?.current.weatherCode) as WeatherCodesType;
 
@@ -40,7 +42,7 @@ const WeatherPage: React.FC = () => {
     <div className="flex flex-col min-h-0 h-full p-4 gap-2">
       {/* Header */}
       <header className="w-full border-b pb-2">
-        <h1 className={`${myStyles.pageTitle} text-2xl md:text-3xl`}>Weather</h1>
+        <h1 className={`${myStyles.pageTitle} text-2xl md:text-3xl`}>{t('title')}</h1>
       </header>
 
       {/* Main content */}
@@ -52,22 +54,22 @@ const WeatherPage: React.FC = () => {
           <div className="grid grid-rows-[auto_1fr] md:grid-rows-none md:grid-cols-2 ">
             {/* Weather details */}
             <div className="w-full h-full md:w-2/3 content-end md:content-center justify-items-center md:justify-items-end md:justify-self-end p-4 text-sm md:text-base lg:text-lg space-y-2">
-              <h2 className="text-lg font-semibold text-amber-500">The weather for now!</h2>
+              <h2 className="text-lg font-semibold text-amber-500">{t('header')}</h2>
               <p>
-                <strong>Country:</strong> {weatherData.country}
+                <strong>{t('country')}</strong> {weatherData.country}
               </p>
               <p>
-                <strong>Current city:</strong> {weatherData.cityName}
+                <strong>{t('currentCity')}</strong> {weatherData.cityName}
               </p>
               <p>
-                <strong>Temperature:</strong> {weatherData.current.temperature}
+                <strong>{t('temperature')}</strong> {weatherData.current.temperature}
               </p>
               <p>
-                <strong>Wind Speed:</strong> {weatherData.current.windSpeed}
+                <strong>{t('windSpeed')}</strong> {weatherData.current.windSpeed}
               </p>
 
               <p>
-                <strong>Description:</strong>{' '}
+                <strong>{t('Description')}</strong>{' '}
                 {weatherCodes[weatherCode][getCurrentPeriodOfDay()].description}
               </p>
             </div>

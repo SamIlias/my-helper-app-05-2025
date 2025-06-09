@@ -9,6 +9,7 @@ import { Preloader } from '../../common/Preloader.tsx';
 import preloader from '../../../assets/preloaderNews.svg';
 import { myStyles } from '../../../myStyles/myStyles.ts';
 import { normalizeError } from '../../../lib/utils/errorHandler.ts';
+import { useTranslation } from 'react-i18next'; 
 
 const NEWS_PORTION_SIZE = 2;
 const lang = 'ru';
@@ -25,6 +26,8 @@ const NewsPage: React.FC = () => {
   const onChangePageNumber = (page: number) => {
     setCurrentPage(page);
   };
+  
+  const { t } = useTranslation('news');
 
   const loadNews = async (term: string | undefined) => {
     try {
@@ -47,7 +50,7 @@ const NewsPage: React.FC = () => {
   return (
     <div className="flex flex-col h-full p-4 gap-2">
       <header className="border-b pb-2 w-full">
-        <h1 className={`${myStyles.pageTitle}`}>News</h1>
+        <h1 className={`${myStyles.pageTitle}`}>{t("title")}</h1>
       </header>
       <main className="relative grid h-full min-h-0">
         {errorMessage && (
@@ -79,7 +82,7 @@ const NewsPage: React.FC = () => {
         )}
       </main>
       <footer className="w-full border-t pt-4">
-        <SearchForm onSubmit={onSubmit} placeholder={'Find news...'} />
+        <SearchForm onSubmit={onSubmit} placeholder={t("searchForm.placeholder")} />
       </footer>
     </div>
   );

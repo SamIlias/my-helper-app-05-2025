@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 
 type PropsType = {
   totalItemsCount: number;
@@ -16,9 +17,10 @@ const Pagination: React.FC<PropsType> = ({
   pageSize = 5,
   portionOfPagesSize = 3,
 }) => {
+  const { t } = useTranslation('common');
+
   const pagesCount = Math.ceil(totalItemsCount / pageSize);
   const pages = [];
-
   for (let i = 1; i <= pagesCount; i += 1) {
     pages.push(i);
   }
@@ -37,7 +39,7 @@ const Pagination: React.FC<PropsType> = ({
           className="px-1 font-bold text-yellow-300 hover:bg-yellow-600 cursor-pointer mx-1 border rounded-md"
           onClick={() => setPortionNumber(portionNumber - 1)}
         >
-          Prev
+          {t("pagination.prevBtnName")}
         </button>
       )}
       {pages
@@ -63,7 +65,7 @@ const Pagination: React.FC<PropsType> = ({
           className="px-1 font-bold text-yellow-300 hover:bg-yellow-600 cursor-pointer mx-1 border rounded-md"
           onClick={() => setPortionNumber(portionNumber + 1)}
         >
-          Next
+          {t("pagination.nextBtnName")}
         </button>
       )}
     </div>

@@ -1,0 +1,15 @@
+{
+    "pageNames": {
+        "todo": "список дел",
+        "news": "новости",
+        "weather": "погода",
+        "auth": "авторизация"
+    },
+    "homeButtonTitle": "Домой",
+    "logoutButtonTitle": "Выйти",
+    "loginButtonTitle": "Войти",
+    "pagination": {
+        "prevBtnName": "Пред",
+        "nextBtnName": "След"
+    }
+}

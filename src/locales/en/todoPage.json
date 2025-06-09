@@ -1,0 +1,38 @@
+{
+    "title": "My tasks",
+    "addTaskButtonName": "Add new",
+    "showHideButton": {
+        "showName": "Show",
+        "hideName": "Hide",
+        "titleOnHoverShow": "Hide completed tasks",
+        "titleOnHoverHide": "Show completed tasks"
+    },
+    "addTaskForm": {
+        "title": "Task creating",
+        "submitButtonName": "Add task"
+    },
+    "editTaskForm": {
+        "title": "Edit task",
+        "submitButtonName": "Save"
+    },
+    "baseTaksForm": {
+        "titleLabel": "Title",
+        "titlePlaceholder": "Enter title",
+        "deadlineLabel": "Deadline",
+        "categoryLabel": "Task category",
+        "descriptionLabel": "Description",
+        "descriptionPlaceholder": "Enter description",
+
+        "cancelButtonName": "Cancel"
+    },
+    "tasksList": {
+        "listTitle": "List of tasks",
+        "descriptionTitle": "Description",
+        "emptyListMessage": "The list is empty, add new task.",
+        "emptyDescription": "There is no description..."
+    }, 
+    "taskItem": {
+        "editButtonName": "Edit",
+        "deleteButtonName": "Delete"
+    } 
+}
