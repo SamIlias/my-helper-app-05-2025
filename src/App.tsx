@@ -30,13 +30,29 @@ function App() {
   const [user, setUser] = useState<User | null | undefined>(null);
 
   const pages = {
-    todo: t('pageNames.todo'),
-    news: t('pageNames.news'),
-    weather: t('pageNames.weather'),
-    auth: t('pageNames.auth'),
+    todo: {
+      //todo
+      name: t('pageNames.todo'),
+      pathName: 'todo',
+    },
+    news: {
+      name: t('pageNames.news'),
+      pathName: 'news',
+    },
+    weather: {
+      name: t('pageNames.weather'),
+      pathName: 'weather',
+    },
+    auth: {
+      name: t('pageNames.auth'),
+      pathName: 'auth',
+    },
   };
 
-  const navList: string[] = [pages.news, pages.weather, pages.todo];
+  //todo typify
+  type PageType = { name: string; pathName: string };
+
+  const navList: PageType[] = [pages.news, pages.weather, pages.todo];
 
   const handleSelectLng = (e: React.ChangeEvent<HTMLSelectElement>) => {
     i18n.changeLanguage(e.target.value);

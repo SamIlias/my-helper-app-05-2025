@@ -11,5 +11,8 @@
     "pagination": {
         "prevBtnName": "Prev",
         "nextBtnName": "Next"
+    },
+    "searchForm": {
+        "buttonName" : "Search"
     }
 }

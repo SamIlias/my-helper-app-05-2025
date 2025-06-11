@@ -8,7 +8,7 @@ const navStyles = {
 };
 
 type PropsType = {
-  list: Array<string>;
+  list: Array<{name: string, pathName: string}>;
 };
 
 const MainNav: React.FC<PropsType> = ({ list }) => {
@@ -18,9 +18,9 @@ const MainNav: React.FC<PropsType> = ({ list }) => {
         <NavLink
           key={index}
           className={({ isActive }) => (isActive ? navStyles.active : navStyles.navElement)}
-          to={`/${el}`}
+          to={`/${el.pathName}`}
         >
-          {el}
+          {el.name}
         </NavLink>
       ))}
     </div>

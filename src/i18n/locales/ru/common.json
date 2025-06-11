@@ -11,5 +11,8 @@
     "pagination": {
         "prevBtnName": "Пред",
         "nextBtnName": "След"
+    },
+    "searchForm": {
+        "buttonName": "Найти"
     }
 }

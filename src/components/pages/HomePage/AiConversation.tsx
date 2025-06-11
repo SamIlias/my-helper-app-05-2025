@@ -21,7 +21,7 @@ export const AiConversation: React.FC<{ user: User }> = ({ user }) => {
   const [query, setQuery] = useState('');
   const [isSending, setIsSending] = useState<boolean>(false);
 
-  const { t } = useTranslation('homepage');
+  const { t } = useTranslation();
 
   const lastConversationItem = useRef<HTMLDivElement>(null);
 

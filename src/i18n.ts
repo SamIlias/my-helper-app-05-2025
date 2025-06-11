@@ -1,7 +1,7 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import resources, { Namespaces, namespaces } from './locales/resources.ts';
+import resources, { Namespaces, namespaces } from './i18n/resources.ts';
 
 export const defaultNS: Namespaces = 'homepage';
 
@@ -16,6 +16,7 @@ i18n
     interpolation: {
       escapeValue: false,
     },
+    returnEmptyString: false,
   });
 
 export default i18n;

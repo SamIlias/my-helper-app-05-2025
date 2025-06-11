@@ -5,5 +5,6 @@
     "currentCity": "Current city:",
     "temperature": "Temperature:",
     "windSpeed": "Wind speed:", 
-    "description": "Description:"
+    "description": "Description:",
+    "searchFormPlaceholder": "Type city..."
 }

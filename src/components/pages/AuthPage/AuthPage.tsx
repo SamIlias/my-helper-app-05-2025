@@ -11,7 +11,7 @@ import { auth } from '../../../api/firebase.ts';
 import * as React from 'react';
 import { Navigate } from 'react-router-dom';
 import { normalizeError } from '../../../lib/utils/errorHandler.ts';
-// import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 type AuthProps = {
   setUser: Dispatch<SetStateAction<User | null | undefined>>;
@@ -22,7 +22,7 @@ export const AuthPage: React.FC<AuthProps> = ({ setUser }) => {
   const [password, setPassword] = useState('');
   const [user, loading, error] = useAuthState(auth);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  // const { t } = useTranslation('authpage');
+  const { t } = useTranslation('authpage');
 
   useEffect(() => {
     setUser(user);
@@ -68,29 +68,29 @@ export const AuthPage: React.FC<AuthProps> = ({ setUser }) => {
           )}
           <input
             type="email"
-            placeholder={'form.emailPlaceholder'}
+            placeholder={t('form.emailPlaceholder')}
             className="border p-2 w-full rounded"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="password"
-            placeholder={'form.passwordPlaceholder'}
+            placeholder={t('form.passwordPlaceholder')}
             className="border p-2 w-full rounded"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <button onClick={handleSignIn} className="w-full py-2 bg-blue-500 text-white rounded">
-            {'form.signInButtonTitle'}
+            {t('form.signInButtonTitle')}
           </button>
           <button onClick={handleSignUp} className="w-full py-2 bg-green-500 text-white rounded">
-            {'form.signOutButtonTitle'}
+            {t('form.signOutButtonTitle')}
           </button>
           <button
             onClick={handleGoogleAuth}
             className="w-full py-2 bg-yellow-400 text-black rounded"
           >
-            {'form.signInGoogleButtonTitle'}
+            {t('form.signInGoogleButtonTitle')}
           </button>
         </>
       )}

@@ -69,7 +69,7 @@ const WeatherPage: React.FC = () => {
               </p>
 
               <p>
-                <strong>{t('Description')}</strong>{' '}
+                <strong>{t('description')}</strong>{' '}
                 {weatherCodes[weatherCode][getCurrentPeriodOfDay()].description}
               </p>
             </div>
@@ -92,7 +92,7 @@ const WeatherPage: React.FC = () => {
 
       {/* Search form */}
       <footer className="w-full border-t pt-4">
-        <SearchForm onSubmit={onSubmit} placeholder="Search city..." />
+        <SearchForm onSubmit={onSubmit} placeholder={t('searchFormPlaceholder')} />
       </footer>
     </div>
   );

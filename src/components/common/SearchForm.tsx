@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 type PropsType = {
   onSubmit: (value: string) => void;
@@ -8,6 +9,7 @@ type PropsType = {
 
 export const SearchForm: React.FC<PropsType> = ({ onSubmit, placeholder }) => {
   const [query, setQuery] = useState('');
+  const { t } = useTranslation('common');
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -57,7 +59,7 @@ export const SearchForm: React.FC<PropsType> = ({ onSubmit, placeholder }) => {
           type="submit"
           className="text-amber-400 absolute end-2.5 bottom-2.5 bg-gray-700 hover:bg-amber-500 hover:text-amber-900 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
-          Search
+          {t('searchForm.buttonName')}
         </button>
       </div>
     </form>
