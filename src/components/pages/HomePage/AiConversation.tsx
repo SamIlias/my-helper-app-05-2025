@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
-import { askModel, ConversationItem, initialConversationItem } from '../../../api/aiApi.ts';
+import { askModel, ConversationItem, initialConversationItem } from '../../../api/aiAPI.ts';
 import { truncateArrayKeepFirst } from '../../../lib/utils/truncateArrayKeepFirst.ts';
 import { uniqueId } from '../../../lib/utils/uniqueId.ts';
 import ReactMarkdown from 'react-markdown';

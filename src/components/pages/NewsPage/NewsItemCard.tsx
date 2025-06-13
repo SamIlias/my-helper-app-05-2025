@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NewsItemType } from '../../../api/newsApi.ts';
+import { NewsItemType } from '../../../api/newsAPI.ts';
 import { useState } from 'react';
 
 export const NewsItemCard: React.FC<NewsItemType> = ({

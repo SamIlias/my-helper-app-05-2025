@@ -1,10 +1,10 @@
 import { fetchWeatherApi } from 'openmeteo';
-import { getCoordinatesApi } from '../getCoordinatesApi.ts';
+import { getCoordinatesAPI } from '../getCoordinatesAPI.ts';
 
 const url = 'https://api.open-meteo.com/v1/forecast';
 
 export const fetchWeather = async (city: string) => {
-  const { latitude, longitude, country, name } = await getCoordinatesApi(city);
+  const { latitude, longitude, country, name } = await getCoordinatesAPI(city);
 
   const params = {
     latitude,
