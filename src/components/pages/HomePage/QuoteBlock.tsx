@@ -38,10 +38,10 @@ export const QuoteBlock: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col text-center">
+    <div className="flex flex-col text-center h-30">
       <h2 className="italic text-amber-500 text-base">{t('quoteBlock.title')}</h2>
       {quote ? (
-        <div className="text-center text-sm italic">{`"${quote.quote}" - ${quote.author}`}</div>
+        <div className="text-center text-sm italic overflow-y-auto ">{`"${quote.quote}" - ${quote.author}`}</div>
       ) : (
         <p className="text-center text-base">{'loading...'}</p>
       )}

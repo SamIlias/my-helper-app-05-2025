@@ -12,6 +12,10 @@ import { normalizeError } from '../../../lib/utils/errorHandler.ts';
 import { myStyles } from '../../../myStyles/myStyles.ts';
 import { useTranslation } from 'react-i18next';
 
+function findNewTask(prevTasks: TaskType[], updatedTasks: TaskType[]): TaskType | undefined {
+  return updatedTasks.find((task) => !prevTasks.some((t) => t.id === task.id)) || undefined;
+}
+
 type Props = {
   user: User | null | undefined;
 };
@@ -23,6 +27,8 @@ const TodoPage: React.FC<Props> = ({ user }) => {
   const [isAddFormActive, setIsAddFormActive] = useState<boolean>(false);
   const [isCompletedTasksHidden, setIsCompletedTasksHidden] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [newAddedTask, setNewAddedTask] = useState<TaskType | undefined>(undefined);
+
   const { t } = useTranslation('todopage');
 
   const closeAddForm = () => {
@@ -30,10 +36,13 @@ const TodoPage: React.FC<Props> = ({ user }) => {
   };
 
   const addNewTask = async (inputData: TaskFormValues) => {
+    if (!user) return;
+
     const newTask: TaskWithoutId = { ...inputData, isCompleted: false, userId: user!.uid };
     try {
       await addTask(newTask);
-      const updatedTasks: TaskType[] = await getTasks(user!.uid);
+      const updatedTasks: TaskType[] = await getTasks(user.uid);
+      setNewAddedTask(findNewTask(tasks, updatedTasks));
       setTasks(updatedTasks);
     } catch (error) {
       setError(normalizeError(error));
@@ -79,11 +88,13 @@ const TodoPage: React.FC<Props> = ({ user }) => {
   };
 
   useEffect(() => {
+    if (!user) return;
+
     let ignore: boolean = false;
     setIsLoading(true);
 
     const fetchTasks = async () => {
-      const tasksResponse: TaskType[] = await getTasks(user!.uid);
+      const tasksResponse: TaskType[] = await getTasks(user.uid);
       if (!ignore) {
         setTasks(tasksResponse);
       }
@@ -102,6 +113,10 @@ const TodoPage: React.FC<Props> = ({ user }) => {
     : [...tasks];
 
   //JSX ------------------------------------------------------------------------
+  if (!user) {
+    return <Navigate to="/auth" replace={true} />;
+  }
+
   if (isAddFormActive) {
     return (
       <AddTaskForm closeAddForm={() => setIsAddFormActive(false)} onSubmit={onAddTaskSubmit} />
@@ -109,51 +124,50 @@ const TodoPage: React.FC<Props> = ({ user }) => {
   }
 
   return (
-    <>
-      {user ? (
-        <div className="flex flex-col min-h-0 h-full p-2 gap-2">
-          {/* Header */}
-          <header className="flex justify-between items-center border-b pb-2">
-            <h1 className={`${myStyles.pageTitle} text-2xl md:text-3xl`}>{t("title")}</h1>
-            <div className="">
-              <button
-                onClick={() => setIsAddFormActive(true)}
-                className="px-2 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
-              >
-                {t("addTaskButtonName")}
-              </button>
-              <button
-                onClick={onClickHideShowButton}
-                title={isCompletedTasksHidden ? t("showHideButton.titleOnHoverHide") : t("showHideButton.titleOnHoverShow")}
-                className="px-2 py-1 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition"
-              >
-                {isCompletedTasksHidden ? t("showHideButton.showName") : t("showHideButton.hideName")}
-              </button>
-            </div>
-          </header>
+    <div className="flex flex-col min-h-0 h-full p-2 gap-2">
+      {/* Header */}
+      <header className="flex justify-between items-center border-b pb-2">
+        <h1 className={`${myStyles.pageTitle} text-2xl md:text-3xl`}>{t('title')}</h1>
+        <div className="">
+          <button
+            onClick={() => setIsAddFormActive(true)}
+            className="px-2 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
+          >
+            {t('addTaskButtonName')}
+          </button>
+          <button
+            onClick={onClickHideShowButton}
+            title={
+              isCompletedTasksHidden
+                ? t('showHideButton.titleOnHoverHide')
+                : t('showHideButton.titleOnHoverShow')
+            }
+            className="px-2 py-1 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition"
+          >
+            {isCompletedTasksHidden ? t('showHideButton.showName') : t('showHideButton.hideName')}
+          </button>
+        </div>
+      </header>
 
-          {error && <p className="text-red-600">{error}</p>}
+      {error && <p className="text-red-600">{error}</p>}
 
-          {/* Tasks */}
-          {isLoading ? (
-            <div className="flex items-center justify-center h-full pb-15">
-              <Preloader preloader={preloader} />
-            </div>
-          ) : (
-            <div className="flex-1 dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
-              <TasksList
-                tasks={handledTasks}
-                deleteTask={deleteTask}
-                updateTask={updateTask}
-                toggleCompletingOfTask={toggleCompletingOfTask}
-              />
-            </div>
-          )}
+      {/* Tasks */}
+      {isLoading ? (
+        <div className="flex items-center justify-center h-full pb-15">
+          <Preloader preloader={preloader} />
         </div>
       ) : (
-        <Navigate to="/auth" replace={true} />
+        <div className="flex-1 dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+          <TasksList
+            tasks={handledTasks}
+            deleteTask={deleteTask}
+            updateTask={updateTask}
+            toggleCompletingOfTask={toggleCompletingOfTask}
+            newAddedTask={newAddedTask}
+          />
+        </div>
       )}
-    </>
+    </div>
   );
 };
 

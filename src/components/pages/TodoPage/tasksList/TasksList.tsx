@@ -11,6 +11,7 @@ type PropsType = {
   deleteTask: (id: string) => void;
   updateTask: (id: string, updatedData: TaskUpdateData) => void;
   toggleCompletingOfTask: (id: string, isCompleted: boolean) => void;
+  newAddedTask?: TaskType;
 };
 export type TaskType = {
   id: string;
@@ -26,8 +27,10 @@ export type TaskWithoutId = Omit<TaskType, 'id'>;
 export type TaskUpdateData = Partial<Omit<TaskType, 'id' | 'userId'>>;
 
 export const TasksList: React.FC<PropsType> = React.memo(
-  ({ tasks, deleteTask, updateTask, toggleCompletingOfTask }) => {
-    const [activeTask, setActiveTask] = useState<TaskType | null | undefined>(tasks[0]);
+  ({ tasks, deleteTask, updateTask, toggleCompletingOfTask, newAddedTask }) => {
+    const [activeTask, setActiveTask] = useState<TaskType | null | undefined>(
+      newAddedTask || tasks[0],
+    );
     const [editTaskMode, setEditTaskMode] = useState<{
       active: boolean;
       editedTask: TaskType | null;
@@ -35,17 +38,13 @@ export const TasksList: React.FC<PropsType> = React.memo(
       active: false,
       editedTask: null,
     });
-    
+
     const { t } = useTranslation('todopage');
 
-    const prevListLength = useRef<number>(tasks.length);
-    const lastTaskElementAnchor = useRef<HTMLDivElement>(null);
+    const newTaskElementAnchor = useRef<HTMLDivElement>(null);
 
-    // todo: check this feature------------
     useEffect(() => {
-      if (tasks.length > prevListLength.current) {
-        lastTaskElementAnchor.current?.scrollIntoView({ behavior: 'smooth' });
-      }
+      newTaskElementAnchor.current?.scrollIntoView({ behavior: 'smooth' });
     }, [tasks]);
 
     const onTaskClick = (id: string): void => {
@@ -84,22 +83,22 @@ export const TasksList: React.FC<PropsType> = React.memo(
         {/* Task List */}
         <div className="border h-full dark:bg-gray-800 rounded-xl shadow-lg p-2 overflow-y-auto">
           <h2 className="text-xl font-semibold text-center text-gray-800 dark:text-white mb-4">
-            {t("tasksList.listTitle")}
+            {t('tasksList.listTitle')}
           </h2>
           {tasks.length === 0 && (
-            <h3 className="text-amber-500 text-center">{t("tasksList.emptyListMessage")}</h3>
+            <h3 className="text-amber-500 text-center">{t('tasksList.emptyListMessage')}</h3>
           )}
           <div className="space-y-2">
-            {tasks.map((task, index) => {
+            {tasks.map((task) => {
               const isActive = task.id === activeTask?.id;
-              const isLast = index === tasks.length - 1;
+              const isNew = task.id === newAddedTask?.id;
 
               return (
                 <div
                   key={task.id}
                   className={`${isActive ? 'bg-amber-700/80' : 'hover:bg-gray-700/50 dark:hover:bg-gray-700 cursor-pointer'} border border-gray-300 dark:border-gray-700 rounded-md px-3 `}
                   onClick={() => onTaskClick(task.id)}
-                  ref={isLast ? lastTaskElementAnchor : null}
+                  ref={isNew ? newTaskElementAnchor : null}
                 >
                   <TaskItem
                     task={task}
@@ -125,7 +124,7 @@ export const TasksList: React.FC<PropsType> = React.memo(
         ) : (
           <div className="border h-full dark:bg-gray-800 rounded-xl shadow-lg p-2 overflow-y-scroll">
             <h2 className="text-xl font-semibold text-center text-gray-800 dark:text-white mb-4">
-              {t("tasksList.descriptionTitle")}
+              {t('tasksList.descriptionTitle')}
             </h2>
             <p
               className={`${activeTask?.description ? 'text-white dark: text-gray-700 whitespace-pre-wrap text-balance' : 'text-cyan-700 text-shadow-lg/40 italic'}`}

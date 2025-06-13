@@ -75,7 +75,7 @@ const NewsPage: React.FC = () => {
               {newsData
                 .filter((_, index) => firstPortionItem <= index && index < lastPortionItem)
                 .map((n: NewsItemType) => (
-                  <NewsItemCard key={n.content.length} {...n} />
+                  <NewsItemCard key={n.description} {...n} />
                 ))}
             </div>
           </div>
