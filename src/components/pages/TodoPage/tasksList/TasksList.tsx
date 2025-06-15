@@ -129,7 +129,7 @@ export const TasksList: React.FC<PropsType> = React.memo(
             <p
               className={`${activeTask?.description ? 'text-white dark: text-gray-700 whitespace-pre-wrap text-balance' : 'text-cyan-700 text-shadow-lg/40 italic'}`}
             >
-              {activeTask?.description || 'There is no description...'}
+              {activeTask?.description || t('tasksList.descriptionPlaceholder')}
             </p>
           </div>
         )}

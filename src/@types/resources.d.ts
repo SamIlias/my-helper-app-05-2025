@@ -76,6 +76,7 @@ interface Resources {
     "tasksList": {
       "listTitle": "List of tasks",
       "descriptionTitle": "Description",
+      "descriptionPlaceholder": "There is no description...",
       "emptyListMessage": "The list is empty, add new task.",
       "emptyDescription": "There is no description..."
     },

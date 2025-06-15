@@ -282,3 +282,7 @@ export const weatherCodes = {
 } as const;
 
 export type WeatherCodesType = keyof typeof weatherCodes;
+export type WeatherDescription = {
+  description: string;
+  image: string;
+};

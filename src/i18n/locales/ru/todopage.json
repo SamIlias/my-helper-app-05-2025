@@ -28,6 +28,7 @@
     "tasksList": {
         "listTitle": "Список задач",
         "descriptionTitle": "Описание",
+        "descriptionPlaceholder": "Описание отсутствует...",
         "emptyListMessage": "Список пуст, создайте новую задачу.",
         "emptyDescription": "Описание отсутствует..."
     }, 

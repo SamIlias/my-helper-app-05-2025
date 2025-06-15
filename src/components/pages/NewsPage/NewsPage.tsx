@@ -12,7 +12,6 @@ import { normalizeError } from '../../../lib/utils/errorHandler.ts';
 import { useTranslation } from 'react-i18next';
 
 const NEWS_PORTION_SIZE = 2;
-const lang = 'ru';
 
 const NewsPage: React.FC = () => {
   const [newsData, setNewsData] = useState<NewsItemType[]>([]);
@@ -27,9 +26,9 @@ const NewsPage: React.FC = () => {
     setCurrentPage(page);
   };
 
-  const { t } = useTranslation('newspage');
+  const { t, i18n } = useTranslation('newspage');
 
-  const loadNews = async (term: string | undefined) => {
+  const loadNews = async (term: string | undefined, lang: string) => {
     try {
       setErrorMessage(null);
       const news: NewsItemType[] = await fetchNews(term, lang);
@@ -40,11 +39,11 @@ const NewsPage: React.FC = () => {
   };
 
   useEffect(() => {
-    loadNews(undefined);
+    loadNews(undefined, i18n.language);
   }, []);
 
   const onSubmit = (term: string) => {
-    loadNews(term);
+    loadNews(term, i18n.language);
   };
 
   return (
