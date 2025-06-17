@@ -1,21 +1,16 @@
+import { getCachedTranslation, setCachedTranslation } from './translationCache';
+
 export const defaultLang = 'en';
 
-const translationCache = new Map<string, string>();
-
-function getCacheKey(input: string | object, lang: string): string {
-  const base = typeof input === 'string' ? input : JSON.stringify(input);
-  return `${lang}-${base}`;
-}
-
 // translation using AI model
-import { askModel, ConversationItem } from './aiAPI';
+import { askModel, ConversationItem } from '../aiAPI';
 
-export async function translate(text: string, lang: string): Promise<string | undefined | null> {
+async function translate(text: string, lang: string): Promise<string | undefined | null> {
   if (!text) return null;
 
-  const cacheKey = getCacheKey(text, lang);
-  if (translationCache.has(cacheKey)) {
-    return translationCache.get(cacheKey);
+  const cached = getCachedTranslation<string>(text, lang);
+  if (cached) {
+    return cached;
   }
 
   const systemPrompt: ConversationItem = {
@@ -24,25 +19,16 @@ export async function translate(text: string, lang: string): Promise<string | un
   };
   const response = await askModel([systemPrompt]);
   if (response) {
-    translationCache.set(cacheKey, response);
+    setCachedTranslation(text, lang, response);
     return response;
   }
 
   return null;
 }
 
-export async function translateObjectValues<T extends { [key: string]: string }>(
-  obj: T,
-  lang: string,
-): Promise<T> {
-  const cacheKey = getCacheKey(obj, lang);
-  if (translationCache.has(cacheKey)) {
-    try {
-      return JSON.parse(translationCache.get(cacheKey)!) as T;
-    } catch (err) {
-      console.error('Failed to parse cached JSON:', err);
-    }
-  }
+async function translateObjectValues<T extends object>(obj: T, lang: string): Promise<T> {
+  const cached = getCachedTranslation<T>(obj, lang);
+  if (cached) return cached;
 
   const systemPrompt: ConversationItem = {
     role: 'system',
@@ -53,8 +39,8 @@ export async function translateObjectValues<T extends { [key: string]: string }>
   if (response) {
     try {
       const parsed = JSON.parse(response);
-      translationCache.set(cacheKey, parsed);
-      return parsed as T;
+      setCachedTranslation(obj, lang, response);
+      return parsed;
     } catch (err) {
       console.error('Failed to parse model response as JSON:', response, err);
     }
@@ -66,7 +52,7 @@ export async function translateObjectValues<T extends { [key: string]: string }>
 export function getTranslation(source: string, currentLanguage: string): Promise<string>;
 export function getTranslation<T>(source: T, currentLanguage: string): Promise<T>;
 
-export async function getTranslation<T extends { [key: string]: string }>(
+export async function getTranslation<T extends object>(
   source: string | T,
   currentLanguage: string,
 ): Promise<string | T | undefined | null> {
@@ -85,7 +71,7 @@ export async function getTranslation<T extends { [key: string]: string }>(
   return null;
 }
 
-// LibreTranslate not free --------------------
+// LibreTranslate - not free --------------------
 
 // import axios from 'axios';
 // interface LibreTranslateResponse {

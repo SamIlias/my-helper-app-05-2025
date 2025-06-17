@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Preloader } from '../../common/Preloader.tsx';
 import preloader from '../../../assets/preloaderBook.svg';
 import { useTranslation } from 'react-i18next';
-import { translateObjectValues } from '../../../api/translatorAPI';
+import { getTranslation } from '../../../api/translator/translatorAPI';
 
 export const QuoteBlock: React.FC = () => {
   const [quote, setQuote] = useState<QuoteType | null>(null);
@@ -18,7 +18,7 @@ export const QuoteBlock: React.FC = () => {
       setQuote(quoteObj);
     }
 
-    const translatedQuote = await translateObjectValues<QuoteType>(quoteObj, currentLanguage);
+    const translatedQuote = await getTranslation<QuoteType>(quoteObj, currentLanguage);
     setQuote(translatedQuote);
   };
 

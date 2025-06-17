@@ -12,7 +12,7 @@ import { getCurrentPeriodOfDay } from '../../lib/utils/getCurrentPeriodOfDay.ts'
 import { myStyles } from '../../myStyles/myStyles.ts';
 import { normalizeError } from '../../lib/utils/errorHandler.ts';
 import { useTranslation } from 'react-i18next';
-import { getTranslation } from '../../api/translatorAPI.ts';
+import { getTranslation } from '../../api/translator/translatorAPI.ts';
 // import { translate, translateObjectValues } from '../../api/translatorAPI';
 
 const INITIAL_CITY: string = import.meta.env.VITE_CURRENT_CITY;
