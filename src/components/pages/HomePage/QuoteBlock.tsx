@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Preloader } from '../../common/Preloader.tsx';
 import preloader from '../../../assets/preloaderBook.svg';
 import { useTranslation } from 'react-i18next';
-import { translateObjectValues } from '../../../api/aiTranslatorAPI';
+import { translateObjectValues } from '../../../api/translatorAPI';
 
 export const QuoteBlock: React.FC = () => {
   const [quote, setQuote] = useState<QuoteType | null>(null);
@@ -26,7 +26,7 @@ export const QuoteBlock: React.FC = () => {
     setIsLoading(true);
     const quotes: QuoteType[] = await fetchQuotes();
 
-    setTranslatedQuote(quotes[0]);
+    await setTranslatedQuote(quotes[0]);
     setIsLoading(false);
   };
 
