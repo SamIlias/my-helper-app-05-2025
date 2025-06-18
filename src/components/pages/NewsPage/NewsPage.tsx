@@ -59,7 +59,7 @@ const NewsPage: React.FC = () => {
           </div>
         ) : (
           <div className="flex flex-col gap-1 h-full min-h-0">
-            <div className="border-b border-b-green-800 self-center">
+            <div className="self-center">
               <Pagination
                 totalItemsCount={newsData.length}
                 currentPage={currentPage}

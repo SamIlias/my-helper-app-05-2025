@@ -24,15 +24,15 @@ export const LoginWidget: React.FC<Props> = ({ user, setUser }) => {
     <>
       {user ? (
         <div className={`flex gap-3`}>
-          <div className={`${myStyles.textCol.secondary}`}>
+          <div className={`${myStyles.textColor.secondary}`}>
             {truncate(getNameFromEmail(user.email), 15)}
           </div>
           <button className={`${myStyles.button.main} h-fit`} onClick={handleSignOut}>
-            {t("logoutButtonTitle")}
+            {t('logoutButtonTitle')}
           </button>
         </div>
       ) : (
-        <MainLinkButton path={'/auth'} title={t("loginButtonTitle")} />
+        <MainLinkButton path={'/auth'} title={t('loginButtonTitle')} />
       )}
     </>
   );

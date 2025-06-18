@@ -12,6 +12,7 @@ import remarkGfm from 'remark-gfm';
 import { User } from 'firebase/auth';
 import { getNameFromEmail } from '../../../lib/utils/stringHandler.ts';
 import { useTranslation } from 'react-i18next';
+import { myStyles } from '../../../myStyles/myStyles';
 // import 'highlight.js/styles/vs.css'; // light
 
 export const AiConversation: React.FC<{ user: User }> = ({ user }) => {
@@ -96,7 +97,7 @@ export const AiConversation: React.FC<{ user: User }> = ({ user }) => {
                 key={uniqueId(conversationHistory)}
                 ref={isLast ? lastConversationItem : null}
               >
-                <p className="italic text-amber-500">{item.role}</p>
+                <p className={`italic ${myStyles.textColor.main}`}>{item.role}</p>
                 <div className="pl-2 overflow-x-clip">
                   <ReactMarkdown rehypePlugins={[rehypeHighlight, remarkGfm]}>
                     {item.content}

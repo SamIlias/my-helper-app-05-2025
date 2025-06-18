@@ -3,12 +3,12 @@ import { NavLink } from 'react-router-dom';
 import { myStyles } from '../myStyles/myStyles.ts';
 
 const navStyles = {
-  active: `${myStyles.textCol.main} text-shadow-lg border border-solid px-2 ${myStyles.bgGrayBlur}`,
-  navElement: `${myStyles.textCol.secondary} text-shadow-lg px-2 ${myStyles.bgGrayLightBlur}`,
+  active: `${myStyles.textColor.main} text-shadow-lg border border-solid px-2 ${myStyles.bgGrayBlur}`,
+  navElement: `${myStyles.textColor.secondary} text-shadow-lg px-2 ${myStyles.bgGrayLightBlur}`,
 };
 
 type PropsType = {
-  list: Array<{name: string, pathName: string}>;
+  list: Array<{ name: string; pathName: string }>;
 };
 
 const MainNav: React.FC<PropsType> = ({ list }) => {

@@ -75,7 +75,7 @@ const WeatherPage: React.FC = () => {
           <div className="grid grid-rows-[auto_1fr] md:grid-rows-none md:grid-cols-2 ">
             {/* Weather details */}
             <div className="w-full h-full md:w-2/3 content-end md:content-center justify-items-center md:justify-items-end md:justify-self-end p-4 text-sm md:text-base lg:text-lg space-y-2">
-              <h2 className="text-lg font-semibold text-amber-500">{t('header')}</h2>
+              <h2 className={`text-lg font-semibold ${myStyles.textColor.main}`}>{t('header')}</h2>
               <p>
                 <strong>{t('country')}</strong> {weatherData.country}
               </p>

@@ -15,7 +15,7 @@
         "title": "Редактировать",
         "submitButtonName": "Сохранить"
     },
-    "baseTaksForm": {
+    "baseTaskForm": {
         "titleLabel": "Название",
         "titlePlaceholder": "Введите назавание",
         "deadlineLabel": "Срок",

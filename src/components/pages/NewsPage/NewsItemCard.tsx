@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { NewsItemType } from '../../../api/newsAPI.ts';
 import { useState } from 'react';
+import { myStyles } from '../../../myStyles/myStyles';
 
 export const NewsItemCard: React.FC<NewsItemType> = ({
   title,
@@ -23,27 +24,26 @@ export const NewsItemCard: React.FC<NewsItemType> = ({
         <img className="rounded-lg" src={image} alt={title} />
       </div>
       <div className="md:text-md lg:text-md xl:text-xl">
-        <p className="font-bold text-amber-950">{title}</p>
-        <p className="text-justify text-gray-200">{description}</p>
+        <p className={`font-bold ${myStyles.textColor.main}`}>{title}</p>
+        <p className={`text-justify ${myStyles.textColor.newsContent}`}>{description}</p>
         {!isShow && (
           <button className="text-yellow-400 hover:text-amber-700 cursor-pointer" onClick={onClick}>
             Show more
           </button>
         )}
       </div>
-
+      0
       {isShow && (
-        <div className=" flex flex-col  p-3 md:p-6 lg:p-10 text-justify text-base md:text-md lg:text-xl absolute top-0 right-0 h-full w-full bg-lime-700/80 backdrop-blur-xl z-10 content-center overflow-auto">
-          <p className="mb-7 text-green-100">{content}</p>
-          <p className="text-gray-200">{source.name}</p>
-          <a href={url} target={'_blank'} className="text-amber-950 break-all">
+        <div className=" flex flex-col  p-3 md:p-6 lg:p-10 text-justify text-base md:text-md lg:text-xl absolute top-0 right-0 h-full w-full bg-gray-700/50 backdrop-blur-xl z-10 content-center overflow-auto">
+          <p className={`mb-7 ${myStyles.textColor.newsContent}`}>{content}</p>
+          <p className={`${myStyles.textColor.newsContent}`}>{source.name}</p>
+          <a href={url} target={'_blank'} className={`${myStyles.textColor.newsLink}`}>
             {url}
           </a>
-          <p className="mt-2 text-right text-xs md:text-base text-yellow-300 te">{publishedAt}</p>
-          <button
-            className="border place-self-center rounded-sm px-1 mt-4 text-yellow-400 hover:bg-orange-800 cursor-pointer"
-            onClick={onClick}
-          >
+          <p className={`mt-2 text-right text-xs md:text-base ${myStyles.textColor.main}`}>
+            {publishedAt}
+          </p>
+          <button className={`${myStyles.button.close}`} onClick={onClick}>
             Close
           </button>
         </div>

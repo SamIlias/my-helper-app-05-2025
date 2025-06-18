@@ -34,9 +34,9 @@ export const TaskItem: React.FC<IProps> = ({
               onChange={() => {
                 toggleCompletingOfTask(task.id, !task.isCompleted);
               }}
-              className="form-checkbox text-blue-600"
+              className="form-checkbox"
             />
-            <span className="text-white dark:text-gray-800 font-medium">{task.title}</span>
+            <span className={`text-white font-medium`}>{task.title}</span>
           </div>
           <div className="flex justify-between">
             <span className="text-sm text-amber-500 dark:text-gray-300">{task.deadline}</span>
@@ -45,14 +45,14 @@ export const TaskItem: React.FC<IProps> = ({
                 onClick={() => onEditTask(task)}
                 className="px-1 mx-1 pb-0.5 text-sm text-white bg-amber-800 hover:bg-amber-600 rounded transition"
               >
-                {t("taskItem.editButtonName")}
+                {t('taskItem.editButtonName')}
               </button>
 
               <button
                 onClick={() => deleteTask(task.id)}
                 className="px-1 pb-0.5 text-sm text-white bg-red-900 hover:bg-red-600 rounded transition"
               >
-                {t("taskItem.deleteButtonName")}
+                {t('taskItem.deleteButtonName')}
               </button>
             </div>
           </div>

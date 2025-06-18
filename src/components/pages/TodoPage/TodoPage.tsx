@@ -131,7 +131,7 @@ const TodoPage: React.FC<Props> = ({ user }) => {
         <div className="">
           <button
             onClick={() => setIsAddFormActive(true)}
-            className="px-2 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
+            className="px-2 py-1 bg-amber-900 text-white rounded-md hover:bg-amber-600 hover:text-black transition"
           >
             {t('addTaskButtonName')}
           </button>
@@ -157,7 +157,7 @@ const TodoPage: React.FC<Props> = ({ user }) => {
           <Preloader preloader={preloader} />
         </div>
       ) : (
-        <div className="flex-1 dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+        <div className="flex-1 rounded-xl shadow-lg overflow-hidden">
           <TasksList
             tasks={handledTasks}
             deleteTask={deleteTask}

@@ -64,7 +64,7 @@ interface Resources {
       "title": "Edit task",
       "submitButtonName": "Save"
     },
-    "baseTaksForm": {
+    "baseTaskForm": {
       "titleLabel": "Title",
       "titlePlaceholder": "Enter title",
       "deadlineLabel": "Deadline",

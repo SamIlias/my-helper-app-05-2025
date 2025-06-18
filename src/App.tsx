@@ -11,7 +11,11 @@ import { lazy, Suspense, useState } from 'react';
 import { LoginWidget } from './components/LoginWidget.tsx';
 import { useTranslation } from 'react-i18next';
 import * as React from 'react';
-import { ErrorBoundary, useErrorBoundary } from 'react-error-boundary';
+import { ErrorBoundary } from 'react-error-boundary';
+import { useTheme } from './ThemeContext';
+import { LanguageSelector } from './components/common/LanguageSelector';
+import { ThemeToggleButton } from './components/common/ThemeToggleButton.tsx';
+import { ErrorFallback } from './components/common/ErrorFallback';
 
 // import TodoPage from './components/pages/TodoPage/TodoPage.tsx';
 // import NewsPage from './components/pages/NewsPage/NewsPage.tsx';
@@ -20,18 +24,12 @@ const WeatherPage = lazy(() => import('./components/pages/WeatherPage'));
 const NewsPage = lazy(() => import('./components/pages/NewsPage/NewsPage'));
 const TodoPage = lazy(() => import('./components/pages/TodoPage/TodoPage'));
 
-const mainBackground = {
-  default: 'bg-linear-to-r from-green-700 to-yellow-300',
-  brown: 'bg-linear-to-r from-amber-700 to-yellow-900',
-  lake: 'bg-[url(./assets/lake.jpg)] bg-cover',
-  sunrise: 'bg-[url(./assets/sunrise.jpg)] bg-cover',
-  morning: 'bg-[url(./assets/morning.jpg)] bg-cover',
-};
-
 function App() {
   const { i18n } = useTranslation();
   const { t } = useTranslation('common');
   const [user, setUser] = useState<User | null | undefined>(null);
+
+  const { theme, toggleTheme } = useTheme();
 
   const pages = {
     todo: {
@@ -60,7 +58,9 @@ function App() {
   };
 
   return (
-    <div className={`w-screen h-screen grid grid-cols-24 grid-rows-19 ${mainBackground.default} `}>
+    <div
+      className={`w-screen h-screen grid grid-cols-24 grid-rows-19 bg-gradient-to-r from-green-700 to-yellow-300 dark:from-green-900 dark:to-yellow-600`}
+    >
       <div className="col-span-24 row-span-2 grid grid-cols-[1fr_3fr] w-full content-center">
         <div className={`w-fit h-fit text-base justify-self-start ml-[3vw] ${myStyles.bgGrayBlur}`}>
           <MainLinkButton path={'/'} title={t('homeButtonTitle')} />
@@ -70,22 +70,11 @@ function App() {
           <LoginWidget user={user} setUser={setUser} />
 
           <div className="relative flex gap-2 mt-1 justify-self-end">
-            <select value={i18n.language} onChange={handleSelectLng} className="text-amber-900">
-              <option className="text-amber-900" value="en">
-                English
-              </option>
-              <option className="text-amber-900" value="ru">
-                Русский
-              </option>
-            </select>
-            <div className="pointer-events-none absolute right-0 top-0 text-gray-500">▼</div>
+            <ThemeToggleButton theme={theme} toggleTheme={toggleTheme} />
+            <LanguageSelector currentLang={i18n.language} handleSelectLng={handleSelectLng} />
           </div>
         </div>
       </div>
-
-      {/*<div className="col-span-5 col-start-18 row-span-5 row-start-9 z-10 ">*/}
-      {/*  <Character />*/}
-      {/*</div>*/}
 
       <div
         className={`col-span-24 col-start-1 row-span-1 row-start-3 place-self-center w-full h-fit text-sm md:text-xl lg:text-xl xl:text-xl`}
@@ -108,27 +97,12 @@ function App() {
       </div>
 
       <div
-        className={`rounded-md md:text-[2vw] lg:text-[2vw] text-yellow-600 font-bold col-start-9 col-span-8 row-span-2 row-start-18 text-center place-self-center h-fit w-fit px-2 ${myStyles.bgGrayBlur}`}
+        className={`rounded-md md:text-[2vw] lg:text-[2vw] ${myStyles.textColor.main} font-bold col-start-9 col-span-8 row-span-2 row-start-18 text-center place-self-center h-fit w-fit px-2 ${myStyles.bgGrayBlur}`}
       >
         <Clock />
       </div>
     </div>
   );
-
-  function ErrorFallback({ error }: { error: Error }) {
-    const { resetBoundary } = useErrorBoundary();
-    return (
-      <div>
-        Something went wrong: {error.message}
-        <button
-          className="border p-1 px-1 hover:text-yellow-400 cursor-pointer"
-          onClick={resetBoundary}
-        >
-          Try again
-        </button>
-      </div>
-    );
-  }
 
   function Loading() {
     return <h2>🌀 Loading...</h2>;
