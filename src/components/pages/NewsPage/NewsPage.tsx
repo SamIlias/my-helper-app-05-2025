@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import * as React from 'react';
-// import { fetchNews, initialNewsForPaginationTest, NewsItemType } from '../../../api/newsAPI.ts';
 import { fetchNews, NewsItemType } from '../../../api/newsAPI.ts';
 import { SearchForm } from '../../common/SearchForm.tsx';
 import Pagination from '../../common/Pagination.tsx';
@@ -15,7 +14,6 @@ const NEWS_PORTION_SIZE = 2;
 
 const NewsPage: React.FC = () => {
   const [newsData, setNewsData] = useState<NewsItemType[]>([]);
-  // const [newsData, setNewsData] = useState<NewsItemType[]>(initialNewsForPaginationTest);
   const [currentPage, setCurrentPage] = useState(1);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 

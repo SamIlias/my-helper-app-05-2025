@@ -1,20 +1,24 @@
 import './App.css';
-import TodoPage from './components/pages/TodoPage/TodoPage.tsx';
 import { Route, Routes } from 'react-router-dom';
-import NewsPage from './components/pages/NewsPage/NewsPage.tsx';
-import WeatherPage from './components/pages/WeatherPage.tsx';
 import MainNav from './components/MainNav.tsx';
 import { HomePage } from './components/pages/HomePage/HomePage.tsx';
 import { MainLinkButton } from './components/common/MainLinkButton.tsx';
 import { Clock } from './components/common/Clock.tsx';
-// import { Character } from './components/common/Character.tsx';
 import { myStyles } from './myStyles/myStyles.ts';
 import { AuthPage } from './components/pages/AuthPage/AuthPage.tsx';
 import type { User } from 'firebase/auth';
-import { useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { LoginWidget } from './components/LoginWidget.tsx';
 import { useTranslation } from 'react-i18next';
 import * as React from 'react';
+import { ErrorBoundary, useErrorBoundary } from 'react-error-boundary';
+
+// import TodoPage from './components/pages/TodoPage/TodoPage.tsx';
+// import NewsPage from './components/pages/NewsPage/NewsPage.tsx';
+// import WeatherPage from './components/pages/WeatherPage';
+const WeatherPage = lazy(() => import('./components/pages/WeatherPage'));
+const NewsPage = lazy(() => import('./components/pages/NewsPage/NewsPage'));
+const TodoPage = lazy(() => import('./components/pages/TodoPage/TodoPage'));
 
 const mainBackground = {
   default: 'bg-linear-to-r from-green-700 to-yellow-300',
@@ -31,7 +35,6 @@ function App() {
 
   const pages = {
     todo: {
-      //todo
       name: t('pageNames.todo'),
       pathName: 'todo',
     },
@@ -49,9 +52,7 @@ function App() {
     },
   };
 
-  //todo typify
   type PageType = { name: string; pathName: string };
-
   const navList: PageType[] = [pages.news, pages.weather, pages.todo];
 
   const handleSelectLng = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -93,13 +94,17 @@ function App() {
       </div>
 
       <div className="col-span-22 col-start-2 row-span-14 row-start-4 bg-gray-700/50 border rounded-md border-gray-700 backdrop-blur-sm ">
-        <Routes>
-          <Route path={`/`} element={<HomePage user={user} />} />
-          <Route path={`/auth`} element={<AuthPage setUser={setUser} />} />
-          <Route path={`/todo`} element={<TodoPage user={user} />} />
-          <Route path={`/news`} element={<NewsPage />} />
-          <Route path={`/weather`} element={<WeatherPage />} />
-        </Routes>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <Suspense fallback={<Loading />}>
+            <Routes>
+              <Route path={`/`} element={<HomePage user={user} />} />
+              <Route path={`/auth`} element={<AuthPage setUser={setUser} />} />
+              <Route path={`/todo`} element={<TodoPage user={user} />} />
+              <Route path={`/news`} element={<NewsPage />} />
+              <Route path={`/weather`} element={<WeatherPage />} />
+            </Routes>
+          </Suspense>
+        </ErrorBoundary>
       </div>
 
       <div
@@ -109,6 +114,25 @@ function App() {
       </div>
     </div>
   );
+
+  function ErrorFallback({ error }: { error: Error }) {
+    const { resetBoundary } = useErrorBoundary();
+    return (
+      <div>
+        Something went wrong: {error.message}
+        <button
+          className="border p-1 px-1 hover:text-yellow-400 cursor-pointer"
+          onClick={resetBoundary}
+        >
+          Try again
+        </button>
+      </div>
+    );
+  }
+
+  function Loading() {
+    return <h2>🌀 Loading...</h2>;
+  }
 }
 
 export default App;
