@@ -16,19 +16,19 @@ export const HomePage: React.FC<Props> = ({ user }) => {
   return (
     <>
       {user ? (
-        <div className="grid grid-rows-[1fr_8fr_1fr] h-full gap-2 mx-3">
-          <div className="place-self-start">
+        <main className="grid grid-rows-[1fr_8fr_1fr] h-full gap-2 mx-3">
+          <header className="place-self-start">
             <h1 className={myStyles.pageTitle}>{t('title')}</h1>
-          </div>
+          </header>
 
-          <div className="h-full min-h-0">
+          <section className="h-full min-h-0">
             <AiConversation user={user} />
-          </div>
+          </section>
 
-          <div className="h-full">
+          <section className="h-full">
             <QuoteBlock />
-          </div>
-        </div>
+          </section>
+        </main>
       ) : (
         <Navigate to="/auth" replace={true} />
       )}

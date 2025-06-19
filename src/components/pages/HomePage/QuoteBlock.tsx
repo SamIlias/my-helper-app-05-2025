@@ -50,7 +50,7 @@ export const QuoteBlock: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col text-center h-30">
+    <main className="flex flex-col text-center h-30">
       <h2 className="italic text-amber-500 text-base">{t('quoteBlock.title')}</h2>
       {quote ? (
         <div className="text-center text-sm italic overflow-y-auto ">{`"${quote.quote}" - ${quote.author}`}</div>
@@ -67,6 +67,6 @@ export const QuoteBlock: React.FC = () => {
         </button>
         {isLoading && <Preloader preloader={preloader} />}
       </div>
-    </div>
+    </main>
   );
 };

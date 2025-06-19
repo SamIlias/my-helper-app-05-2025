@@ -54,6 +54,8 @@ export const BaseTaskForm: React.FC<PropsType> = ({
         </label>
         <input
           id="title"
+          aria-invalid={!!errors.title}
+          aria-describedby={errors.title ? 'title-error' : undefined}
           {...register('title', {
             required: 'Title is required',
             maxLength: {
@@ -65,7 +67,9 @@ export const BaseTaskForm: React.FC<PropsType> = ({
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 "
         />
         {errors.title && (
-          <p className="text-red-500 text-sm mt-1">{errors.title.message as string}</p>
+          <p className="text-red-500 text-sm mt-1" id="title-error" role="alert">
+            {errors.title.message as string}
+          </p>
         )}
       </div>
 
@@ -128,6 +132,7 @@ export const BaseTaskForm: React.FC<PropsType> = ({
         <button
           type="button"
           onClick={closeAddForm}
+          aria-label="Cancel form and close"
           className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
         >
           {t('baseTaskForm.cancelButtonName')}

@@ -8,6 +8,7 @@ const model = 'openai/gpt-4.1';
 export type ConversationItem = {
   role: 'system' | 'user' | 'assistant';
   content?: string | null;
+  id: string;
 };
 
 export async function askModel(conversation: ConversationItem[]): Promise<string | null> {
@@ -32,15 +33,5 @@ export const initialConversationItem: ConversationItem = {
   role: 'system',
   content:
     'You are a helpful assistant. Always respond in Markdown format. Use proper headings, lists, code blocks, and tables when appropriate.',
+  id: 'initial',
 };
-
-// export const generateQuote = async () => {
-//   const quotePrompt = 'give me one random inspirational quote without any additions on your part.';
-//   const answer: string | null = await askModel([{ role: 'user', content: quotePrompt }]);
-//
-//   return answer ? answer : 'Something went wrong, please try to refresh quote...';
-// };
-
-// askModel().catch((err) => {
-//   console.error("The sample encountered an error:", err);
-// });

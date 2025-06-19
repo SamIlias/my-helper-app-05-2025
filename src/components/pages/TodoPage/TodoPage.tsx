@@ -136,6 +136,8 @@ const TodoPage: React.FC<Props> = ({ user }) => {
             {t('addTaskButtonName')}
           </button>
           <button
+            aria-pressed={!isCompletedTasksHidden}
+            aria-controls="tasks-list"
             onClick={onClickHideShowButton}
             title={
               isCompletedTasksHidden
@@ -149,7 +151,11 @@ const TodoPage: React.FC<Props> = ({ user }) => {
         </div>
       </header>
 
-      {error && <p className="text-red-600">{error}</p>}
+      {error && (
+        <p className="text-red-600" role="alert" aria-live="assertive">
+          {error}
+        </p>
+      )}
 
       {/* Tasks */}
       {isLoading ? (
@@ -157,7 +163,7 @@ const TodoPage: React.FC<Props> = ({ user }) => {
           <Preloader preloader={preloader} />
         </div>
       ) : (
-        <div className="flex-1 rounded-xl shadow-lg overflow-hidden">
+        <main className="flex-1 rounded-xl shadow-lg overflow-hidden" id="tasks-list" role="list">
           <TasksList
             tasks={handledTasks}
             deleteTask={deleteTask}
@@ -165,7 +171,7 @@ const TodoPage: React.FC<Props> = ({ user }) => {
             toggleCompletingOfTask={toggleCompletingOfTask}
             newAddedTask={newAddedTask}
           />
-        </div>
+        </main>
       )}
     </div>
   );

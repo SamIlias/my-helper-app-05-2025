@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { askModel, ConversationItem, initialConversationItem } from '../../../api/aiAPI.ts';
 import { truncateArrayKeepFirst } from '../../../lib/utils/truncateArrayKeepFirst.ts';
-import { uniqueId } from '../../../lib/utils/uniqueId.ts';
 import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import 'highlight.js/styles/vs2015.css';
@@ -32,11 +31,15 @@ export const AiConversation: React.FC<{ user: User }> = ({ user }) => {
 
   const onSubmit = async (prompt: string | undefined): Promise<void> => {
     setIsSending(true);
-    const currentUserPrompt: ConversationItem = { role: 'user', content: prompt };
+    const currentUserPrompt: ConversationItem = {
+      role: 'user',
+      content: prompt,
+      id: `${conversationHistory.length}${prompt}`,
+    };
     const conversation: ConversationItem[] = [...conversationHistory, currentUserPrompt];
     const answer: string | null = await askModel(conversation);
 
-    conversation.push({ role: 'assistant', content: answer });
+    conversation.push({ role: 'assistant', content: answer, id: `${currentUserPrompt}-${answer}` });
     const trimmedConversation: ConversationItem[] = truncateArrayKeepFirst(conversation, 10);
     setConversationHistory(trimmedConversation);
     setQuery('');
@@ -84,7 +87,7 @@ export const AiConversation: React.FC<{ user: User }> = ({ user }) => {
         </button>
       </form>
 
-      <div className="border border-amber-500/50 overflow-y-auto text-base md:text-lg">
+      <main className="border border-amber-500/50 overflow-y-auto text-base md:text-lg">
         {conversationHistory.length > 1 ? (
           conversationHistory.map((item: ConversationItem, index: number) => {
             if (item.role === 'system') {
@@ -94,7 +97,7 @@ export const AiConversation: React.FC<{ user: User }> = ({ user }) => {
             return (
               <div
                 className="my-2 text-sm"
-                key={uniqueId(conversationHistory)}
+                key={item.id}
                 ref={isLast ? lastConversationItem : null}
               >
                 <p className={`italic ${myStyles.textColor.main}`}>{item.role}</p>
@@ -111,7 +114,7 @@ export const AiConversation: React.FC<{ user: User }> = ({ user }) => {
             {t('aiConversation.greeting', { userName: getNameFromEmail(user.email) })}
           </p>
         )}
-      </div>
+      </main>
     </div>
   );
 };
