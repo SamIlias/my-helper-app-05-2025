@@ -7,7 +7,7 @@
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
     "typeRoots": ["./node_modules/@types", "./src/@types"],
-    "types": ["react", "react-dom", "react-i18next"]
+    "types": ["react", "react-dom", "react-i18next"],
   },
   "include": [
     "src/**/*",

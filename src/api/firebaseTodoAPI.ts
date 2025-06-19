@@ -8,7 +8,7 @@ import {
   updateDoc,
   deleteDoc,
 } from 'firebase/firestore';
-import { db } from './firebase';
+import { db } from '@/shared/api/firebase/firebase';
 import {
   TaskWithoutId,
   TaskType,

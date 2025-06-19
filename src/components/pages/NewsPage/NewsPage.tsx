@@ -7,7 +7,7 @@ import { NewsItemCard } from './NewsItemCard.tsx';
 import { Preloader } from '../../common/Preloader.tsx';
 import preloader from '../../../assets/preloaderNews.svg';
 import { myStyles } from '../../../myStyles/myStyles.ts';
-import { normalizeError } from '../../../lib/utils/errorHandler.ts';
+import { normalizeError } from '../../../shared/lib/utils/errorHandler.ts';
 import { useTranslation } from 'react-i18next';
 
 const NEWS_PORTION_SIZE = 2;

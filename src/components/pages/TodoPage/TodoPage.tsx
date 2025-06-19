@@ -7,7 +7,7 @@ import * as React from 'react';
 import type { User } from 'firebase/auth';
 import { Navigate } from 'react-router-dom';
 import { addTask, deleteTaskById, getTasks, updateTaskById } from '../../../api/firebaseTodoAPI.ts';
-import { normalizeError } from '../../../lib/utils/errorHandler.ts';
+import { normalizeError } from '../../../shared/lib/utils/errorHandler.ts';
 // import { mockTasks } from '../../../lib/mockOfTasks.ts';
 import { myStyles } from '../../../myStyles/myStyles.ts';
 import { useTranslation } from 'react-i18next';
@@ -127,7 +127,8 @@ const TodoPage: React.FC<Props> = ({ user }) => {
     <div className="flex flex-col min-h-0 h-full p-2 gap-2">
       {/* Header */}
       <header className="flex justify-between items-center border-b pb-2">
-        <h1 className={`${myStyles.pageTitle} text-2xl md:text-3xl`}>{t('title')}</h1>
+        //todo header in comonent
+        <h1 className={`${myStyles.pageTitle}`}>{t('title')}</h1>
         <div className="">
           <button
             onClick={() => setIsAddFormActive(true)}

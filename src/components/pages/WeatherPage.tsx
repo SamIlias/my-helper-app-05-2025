@@ -8,11 +8,11 @@ import {
 } from '../../api/weatherAPI/weatherCodes.ts';
 import { Preloader } from '../common/Preloader.tsx';
 import preloader from '../../assets/preloaderSun.svg';
-import { getCurrentPeriodOfDay } from '../../lib/utils/getCurrentPeriodOfDay.ts';
+import { getCurrentPeriodOfDay } from '../../shared/lib/utils/getCurrentPeriodOfDay.ts';
 import { myStyles } from '../../myStyles/myStyles.ts';
-import { normalizeError } from '../../lib/utils/errorHandler.ts';
+import { normalizeError } from '../../shared/lib/utils/errorHandler.ts';
 import { useTranslation } from 'react-i18next';
-import { getTranslation } from '../../api/translator/translatorAPI.ts';
+import { getTranslation } from '../../shared/api/translator/translatorAPI.ts';
 // import { translate, translateObjectValues } from '../../api/translatorAPI';
 
 const INITIAL_CITY: string = import.meta.env.VITE_CURRENT_CITY;

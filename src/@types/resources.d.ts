@@ -5,7 +5,7 @@ interface Resources {
       "emailPlaceholder": "Email",
       "passwordPlaceholder": "Password",
       "signInButtonTitle": "Sign in",
-      "signOutButtonTitle": "Sign out",
+      "signUpButtonTitle": "Sign up",
       "signInGoogleButtonTitle": "Sign in with Google"
     }
   },
