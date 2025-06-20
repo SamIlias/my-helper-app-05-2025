@@ -1,4 +1,4 @@
-import { myStyles } from '../../myStyles/myStyles';
+import { myStyles } from '../myStyles/myStyles';
 import * as React from 'react';
 
 export const PageTitle: React.FC<{ pageTitle: string }> = ({ pageTitle }) => {

@@ -5,7 +5,7 @@ import type { User } from 'firebase/auth';
 import { Navigate } from 'react-router-dom';
 import { QuoteBlock } from '../../features/quotes/ui/QuoteBlock.tsx';
 import { useTranslation } from 'react-i18next';
-import { PageTitle } from '../../components/common/PageTitle';
+import { PageTitle } from '../../shared/ui/PageTitle';
 
 type Props = {
   user: User | null | undefined;

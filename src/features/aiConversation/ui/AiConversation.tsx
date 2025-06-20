@@ -5,12 +5,12 @@ import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import 'highlight.js/styles/vs2015.css';
 import preloader from '../../../assets/preloaderGear.svg';
-import { Preloader } from '../../../components/common/Preloader.tsx';
+import { Preloader } from '../../../shared/ui/Preloader.tsx';
 import remarkGfm from 'remark-gfm';
 import { User } from 'firebase/auth';
 import { getNameFromEmail } from '../../../shared/lib/utils/stringHandler.ts';
 import { useTranslation } from 'react-i18next';
-import { myStyles } from '../../../myStyles/myStyles';
+import { myStyles } from '../../../shared/myStyles/myStyles';
 import { useAiConversation } from '../model/useAiConversation';
 // import 'highlight.js/styles/vs.css'; // light
 

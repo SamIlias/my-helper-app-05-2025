@@ -8,7 +8,7 @@ export const getNameFromEmail = (email: string | null) => {
   return capitalize(rawName);
 };
 
-export const truncate = (s: string, size: number = 7): string => {
+export const truncate = (s: string, size: number = 15): string => {
   if (size >= s.length) {
     return s;
   }

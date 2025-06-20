@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import * as React from 'react';
 import { TaskType } from '../tasksList/TasksList.tsx';
 import { useTranslation } from 'react-i18next';
-import { myStyles } from '../../../../myStyles/myStyles';
+import { myStyles } from '../../../../shared/myStyles/myStyles';
 
 export type TaskFormValues = Pick<TaskType, 'title' | 'deadline' | 'category' | 'description'>;
 

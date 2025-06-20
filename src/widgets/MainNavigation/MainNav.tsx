@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
-import { myStyles } from '../myStyles/myStyles.ts';
+import { myStyles } from '../../shared/myStyles/myStyles.ts';
 
 const navStyles = {
   active: `${myStyles.textColor.main} text-shadow-lg border border-solid px-2 ${myStyles.bgGrayBlur}`,

@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { ThemeContextInterface } from '../../ThemeContext';
+import { useTheme } from '../../app/ThemeProvider';
 
-export const ThemeToggleButton: React.FC<ThemeContextInterface> = ({ theme, toggleTheme }) => {
+export const ThemeToggleButton: React.FC = () => {
+  const { theme, toggleTheme } = useTheme();
   return (
     <button
       onClick={toggleTheme}

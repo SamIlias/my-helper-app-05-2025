@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { signIn, signUp, signInWithGoogle } from '../api/signInLogic';
+import { signIn, signUp, signInWithGoogle } from '../api';
 import { useTranslation } from 'react-i18next';
 import { normalizeError } from '@/shared/lib/utils/errorHandler';
 import { UserCredential } from 'firebase/auth';

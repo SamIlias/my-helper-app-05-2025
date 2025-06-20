@@ -3,6 +3,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
+  signOut,
 } from 'firebase/auth';
 import { auth } from '@/shared/api/firebase/firebase';
 
@@ -13,3 +14,5 @@ export const signUp = (email: string, password: string) =>
   createUserWithEmailAndPassword(auth, email, password);
 
 export const signInWithGoogle = () => signInWithPopup(auth, new GoogleAuthProvider());
+
+export const logOut = () => signOut(auth);

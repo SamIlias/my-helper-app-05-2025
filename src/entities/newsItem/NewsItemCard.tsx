@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { NewsItemType } from '../../../api/newsAPI.ts';
+import { NewsItemType } from '../../features/news/api/newsAPI.ts';
 import { useState } from 'react';
-import { myStyles } from '../../../myStyles/myStyles';
+import { myStyles } from '../../shared/myStyles/myStyles';
 
 export const NewsItemCard: React.FC<NewsItemType> = ({
   title,
@@ -13,7 +13,6 @@ export const NewsItemCard: React.FC<NewsItemType> = ({
   publishedAt,
 }) => {
   const [isShow, setIsShow] = useState(false);
-
   const onClick = () => {
     setIsShow(!isShow);
   };
@@ -32,7 +31,7 @@ export const NewsItemCard: React.FC<NewsItemType> = ({
           </button>
         )}
       </div>
-      0
+
       {isShow && (
         <div className=" flex flex-col  p-3 md:p-6 lg:p-10 text-justify text-base md:text-md lg:text-xl absolute top-0 right-0 h-full w-full bg-gray-700/50 backdrop-blur-xl z-10 content-center overflow-auto">
           <p className={`mb-7 ${myStyles.textColor.newsContent}`}>{content}</p>

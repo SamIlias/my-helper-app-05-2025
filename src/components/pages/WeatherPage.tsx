@@ -1,4 +1,4 @@
-import { SearchForm } from '../common/SearchForm.tsx';
+import { SearchForm } from '../../shared/ui/SearchForm.tsx';
 import React, { useEffect, useState } from 'react';
 import { fetchWeather, WeatherDataType } from '../../api/weatherAPI/wheatherApi.ts';
 import {
@@ -6,10 +6,10 @@ import {
   WeatherCodesType,
   WeatherDescription,
 } from '../../api/weatherAPI/weatherCodes.ts';
-import { Preloader } from '../common/Preloader.tsx';
+import { Preloader } from '../../shared/ui/Preloader.tsx';
 import preloader from '../../assets/preloaderSun.svg';
 import { getCurrentPeriodOfDay } from '../../shared/lib/utils/getCurrentPeriodOfDay.ts';
-import { myStyles } from '../../myStyles/myStyles.ts';
+import { myStyles } from '../../shared/myStyles/myStyles.ts';
 import { normalizeError } from '../../shared/lib/utils/errorHandler.ts';
 import { useTranslation } from 'react-i18next';
 import { getTranslation } from '../../shared/api/translator/translatorAPI.ts';

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AddTaskForm, TaskFormValues } from './addTaskForm/AddTaskForm.tsx';
 import { TaskWithoutId, TasksList, TaskType, TaskUpdateData } from './tasksList/TasksList.tsx';
-import { Preloader } from '../../common/Preloader.tsx';
+import { Preloader } from '../../../shared/ui/Preloader.tsx';
 import preloader from '../../../assets/preloaderGear.svg';
 import * as React from 'react';
 import type { User } from 'firebase/auth';
@@ -9,7 +9,7 @@ import { Navigate } from 'react-router-dom';
 import { addTask, deleteTaskById, getTasks, updateTaskById } from '../../../api/firebaseTodoAPI.ts';
 import { normalizeError } from '../../../shared/lib/utils/errorHandler.ts';
 // import { mockTasks } from '../../../lib/mockOfTasks.ts';
-import { myStyles } from '../../../myStyles/myStyles.ts';
+import { myStyles } from '../../../shared/myStyles/myStyles.ts';
 import { useTranslation } from 'react-i18next';
 
 function findNewTask(prevTasks: TaskType[], updatedTasks: TaskType[]): TaskType | undefined {
