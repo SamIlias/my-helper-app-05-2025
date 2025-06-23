@@ -1,57 +1,28 @@
 import { SearchForm } from '../../shared/ui/SearchForm.tsx';
-import React, { useEffect, useState } from 'react';
-import { fetchWeather, WeatherDataType } from '../../api/weatherAPI/wheatherApi.ts';
-import {
-  weatherCodes,
-  WeatherCodesType,
-  WeatherDescription,
-} from '../../api/weatherAPI/weatherCodes.ts';
+import React, { useEffect } from 'react';
 import { Preloader } from '../../shared/ui/Preloader.tsx';
-import preloader from '../../assets/preloaderSun.svg';
-import { getCurrentPeriodOfDay } from '../../shared/lib/utils/getCurrentPeriodOfDay.ts';
+import preloader from '../../shared/assets/preloaderSun.svg';
 import { myStyles } from '../../shared/myStyles/myStyles.ts';
-import { normalizeError } from '../../shared/lib/utils/errorHandler.ts';
 import { useTranslation } from 'react-i18next';
-import { getTranslation } from '../../shared/api/translator/translatorAPI.ts';
+import { useWeather } from '../../features/weather/model/useWeather';
 // import { translate, translateObjectValues } from '../../api/translatorAPI';
 
 const INITIAL_CITY: string = import.meta.env.VITE_CURRENT_CITY;
 
 const WeatherPage: React.FC = () => {
-  const [weatherData, setWeatherData] = useState<WeatherDataType | null>(null);
-  const [description, setDescription] = useState<WeatherDescription | null>(null);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const { t, i18n } = useTranslation('weatherpage');
+  const { t } = useTranslation('weatherpage');
+  const { weatherData, loadWeatherData, setTranslatedDescription, errorMessage, description } =
+    useWeather();
 
-  const loadWeatherData: (cityName: string) => Promise<void> = async (cityName) => {
-    try {
-      setErrorMessage(null);
-      const data: WeatherDataType = await fetchWeather(cityName);
-      const translatedData = await getTranslation(data, i18n.language);
-      setWeatherData(translatedData);
-    } catch (err: unknown) {
-      setErrorMessage(normalizeError(err));
-    }
-  };
-
+  const hasLoaded = React.useRef(false);
   useEffect(() => {
+    if (hasLoaded.current) return;
+    hasLoaded.current = true;
     loadWeatherData(INITIAL_CITY);
   }, []);
 
   useEffect(() => {
     if (!weatherData?.current.weatherCode) return;
-
-    const setTranslatedDescription = async () => {
-      const weatherCode = String(weatherData.current.weatherCode) as WeatherCodesType;
-      if (weatherCode) {
-        const descriptionObj = weatherCodes[weatherCode][getCurrentPeriodOfDay()];
-        const translatedDescription = {
-          description: await getTranslation(descriptionObj.description, i18n.language),
-          image: descriptionObj.image,
-        };
-        setDescription(translatedDescription);
-      }
-    };
     setTranslatedDescription();
   }, [weatherData?.current.weatherCode]);
 

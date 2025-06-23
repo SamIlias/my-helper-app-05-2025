@@ -1,8 +1,8 @@
 import { Preloader } from '../../../shared/ui/Preloader';
-import preloader from '../../../assets/preloaderNews.svg';
+import preloader from '../../../shared/assets/preloaderNews.svg';
 import Pagination from '../../../shared/ui/Pagination';
 import { NewsItemType } from '../api/newsAPI';
-import { NewsItemCard } from '../../../entities/newsItem/NewsItemCard';
+import { NewsItemCard } from './NewsItemCard';
 import * as React from 'react';
 import { useNews } from '../model/useNews';
 import { useEffect } from 'react';

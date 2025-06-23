@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import * as React from 'react';
 import { Preloader } from '../../../shared/ui/Preloader.tsx';
-import preloader from '../../../assets/preloaderBook.svg';
+import preloader from '../../../shared/assets/preloaderBook.svg';
 import { useTranslation } from 'react-i18next';
 import { useQuote } from '../model/useQuote';
 

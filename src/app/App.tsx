@@ -16,9 +16,9 @@ import { LoadingFallback } from '../shared/ui/LoadingFallback';
 // import TodoPage from './components/pages/TodoPage/TodoPage.tsx';
 // import NewsPage from './components/pages/NewsPage/index.tsx';
 // import WeatherPage from './components/pages/WeatherPage';
-const WeatherPage = lazy(() => import('../components/pages/WeatherPage'));
+const WeatherPage = lazy(() => import('../pages/WeatherPage/WeatherPage'));
 const NewsPage = lazy(() => import('../pages/NewsPage'));
-const TodoPage = lazy(() => import('../components/pages/TodoPage/TodoPage'));
+const TodoPage = lazy(() => import('../pages/TodoPage/TodoPage'));
 
 function App() {
   const { t } = useTranslation('common');
@@ -48,7 +48,8 @@ function App() {
 
   return (
     <div
-      className={`w-screen h-screen grid grid-cols-24 grid-rows-19 bg-gradient-to-r from-green-700 to-yellow-300 dark:from-green-900 dark:to-yellow-600`}
+      className={`w-screen h-screen grid grid-cols-24 grid-rows-19 
+      bg-gradient-to-r from-yellow-500 to-blue-300 dark:from-black  dark:to-yellow-600`}
     >
       <header className="col-span-24 row-span-2 grid grid-cols-[1fr_3fr] w-full content-center">
         <Header user={user} setUser={setUser} />

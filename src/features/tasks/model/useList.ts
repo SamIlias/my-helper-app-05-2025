@@ -1,0 +1,68 @@
+import { useEffect, useRef, useState } from 'react';
+import { TaskType } from './types';
+import { TaskFormValues } from '../ui/AddTaskForm';
+import { TaskListProps } from '../ui/TasksList';
+
+type Args = Omit<TaskListProps, 'toggleCompletingOfTask'>;
+
+export const useList = (args: Args) => {
+  const { tasks, deleteTask, updateTask, newAddedTask } = args;
+  const [activeTask, setActiveTask] = useState<TaskType | null | undefined>(
+    newAddedTask || tasks[0],
+  );
+  const [editTaskMode, setEditTaskMode] = useState<{
+    active: boolean;
+    editedTask: TaskType | null;
+  }>({
+    active: false,
+    editedTask: null,
+  });
+
+  const newTaskElementAnchor = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    newTaskElementAnchor.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [tasks]);
+
+  const onTaskClick = (id: string): void => {
+    const currentTask: TaskType | undefined = tasks.find((task: TaskType) => task.id === id);
+    if (currentTask) {
+      setActiveTask(currentTask);
+    }
+  };
+
+  const onEditClick: (task: TaskType) => void = (task) => {
+    if (editTaskMode.active) return;
+    setEditTaskMode({ active: true, editedTask: task });
+  };
+
+  const closeEditForm: () => void = () => {
+    setEditTaskMode({ active: false, editedTask: null });
+  };
+
+  const changeTask = (data: TaskFormValues) => {
+    const taskId = editTaskMode.editedTask!.id;
+    updateTask(taskId, { ...data });
+  };
+
+  const onEditFormSubmit = (data: TaskFormValues) => {
+    changeTask(data);
+    setActiveTask(editTaskMode.editedTask);
+    closeEditForm();
+  };
+
+  const onDeleteTask = (id: string) => {
+    deleteTask(id);
+  };
+
+  return {
+    activeTask,
+    onTaskClick,
+    newTaskElementAnchor,
+    onDeleteTask,
+    onEditClick,
+    editTaskMode,
+    closeEditForm,
+    onEditFormSubmit,
+  };
+};

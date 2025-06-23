@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { TaskType } from './TasksList.tsx';
-import { taskCategories } from '../common/BaseTaskForm.tsx';
+import { taskCategories } from './BaseTaskForm.tsx';
 import { useTranslation } from 'react-i18next';
 
 export const TaskItem: React.FC<IProps> = ({

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { myStyles } from '../../shared/myStyles/myStyles.ts';
 import { useTranslation } from 'react-i18next';
-import { NewsList } from '@/features/news/ui/newsList.tsx';
+import { NewsList } from '@/features/news/ui/NewsList.tsx';
 
 const NewsPage: React.FC = () => {
   const { t } = useTranslation('newspage');

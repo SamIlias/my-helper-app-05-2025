@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { NewsItemType } from '../../features/news/api/newsAPI.ts';
+import { NewsItemType } from '../api/newsAPI.ts';
 import { useState } from 'react';
-import { myStyles } from '../../shared/myStyles/myStyles';
+import { myStyles } from '../../../shared/myStyles/myStyles';
 
 export const NewsItemCard: React.FC<NewsItemType> = ({
   title,

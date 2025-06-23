@@ -1,17 +1,8 @@
 import { useForm } from 'react-hook-form';
 import * as React from 'react';
-import { TaskType } from '../tasksList/TasksList.tsx';
 import { useTranslation } from 'react-i18next';
-import { myStyles } from '../../../../shared/myStyles/myStyles';
-
-export type TaskFormValues = Pick<TaskType, 'title' | 'deadline' | 'category' | 'description'>;
-
-type PropsType = {
-  closeAddForm: () => void;
-  onSubmit: (data: TaskFormValues) => void;
-  submitButtonText: string;
-  defaultValues?: TaskFormValues;
-};
+import { myStyles } from '../../../shared/myStyles/myStyles';
+import { TaskType } from '../model/types';
 
 export const taskCategories = {
   Default: 'default',
@@ -20,10 +11,16 @@ export const taskCategories = {
   Urgent: 'urgent',
   Shopping: 'shopping',
 } as const;
-
 export type TaskCategoryType = keyof typeof taskCategories;
 
-// ------------------------------------- Component
+export type TaskFormValues = Pick<TaskType, 'title' | 'deadline' | 'category' | 'description'>;
+type PropsType = {
+  closeAddForm: () => void;
+  onSubmit: (data: TaskFormValues) => void;
+  submitButtonText: string;
+  defaultValues?: TaskFormValues;
+};
+
 export const BaseTaskForm: React.FC<PropsType> = ({
   closeAddForm,
   onSubmit,
@@ -103,7 +100,7 @@ export const BaseTaskForm: React.FC<PropsType> = ({
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 "
         >
           {(Object.keys(taskCategories) as TaskCategoryType[]).map((key) => (
-            <option className="bg-lime-700/80" value={taskCategories[key]}>
+            <option className="bg-gray-700/80" value={taskCategories[key]}>
               {key}
             </option>
           ))}

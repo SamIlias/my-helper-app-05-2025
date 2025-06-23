@@ -6,7 +6,9 @@
     "moduleResolution": "Node",
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
-    "typeRoots": ["./node_modules/@types", "./src/@types"],
+    "typeRoots": ["./node_modules/@types",
+      "./src/shared/i18n/@types"
+    ],
     "types": ["react", "react-dom", "react-i18next"],
   },
   "include": [

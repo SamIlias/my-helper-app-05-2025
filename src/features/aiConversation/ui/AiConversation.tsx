@@ -4,7 +4,7 @@ import { ConversationItem } from '@/shared/api/aiGPT/aiAPI';
 import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import 'highlight.js/styles/vs2015.css';
-import preloader from '../../../assets/preloaderGear.svg';
+import preloader from '../../../shared/assets/preloaderGear.svg';
 import { Preloader } from '../../../shared/ui/Preloader.tsx';
 import remarkGfm from 'remark-gfm';
 import { User } from 'firebase/auth';

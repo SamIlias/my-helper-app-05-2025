@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "interface": "i18next-resources-for-ts interface -i src/i18n/locales/en -o src/@types/resources.d.ts"
+    "interface": "i18next-resources-for-ts interface -i src/shared/i18n/locales/en -o src/i18n/@types/resources.d.ts"
   },
   "dependencies": {
     "@azure-rest/ai-inference": "latest",

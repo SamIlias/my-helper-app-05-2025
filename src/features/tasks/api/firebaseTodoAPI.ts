@@ -9,17 +9,13 @@ import {
   deleteDoc,
 } from 'firebase/firestore';
 import { db } from '@/shared/api/firebase/firebase';
-import {
-  TaskWithoutId,
-  TaskType,
-  TaskUpdateData,
-} from '../components/pages/TodoPage/tasksList/TasksList.tsx';
+import { TaskWithoutId, TaskType, TaskUpdateData } from '../ui/TasksList.tsx';
 
 export const addTask = async (task: TaskWithoutId) => {
   try {
     await addDoc(collection(db, 'tasks'), task);
   } catch (error) {
-    console.error('Error adding task:', error);
+    console.error('Error adding tasks:', error);
     throw error;
   }
 };
@@ -50,7 +46,7 @@ export const updateTaskById = async (taskId: string, updatedData: TaskUpdateData
     const taskRef = doc(db, 'tasks', taskId);
     await updateDoc(taskRef, updatedData);
   } catch (error) {
-    console.error('Error updating task:', error);
+    console.error('Error updating tasks:', error);
     throw error;
   }
 };
@@ -60,7 +56,7 @@ export const deleteTaskById = async (taskId: string) => {
     const taskRef = doc(db, 'tasks', taskId);
     await deleteDoc(taskRef);
   } catch (error) {
-    console.error('Error deleting task:', error);
+    console.error('Error deleting tasks:', error);
     throw error;
   }
 };

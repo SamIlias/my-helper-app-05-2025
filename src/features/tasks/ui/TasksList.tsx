@@ -1,83 +1,32 @@
-import { useEffect, useRef, useState } from 'react';
 import * as React from 'react';
 import { TaskItem } from './TaskItem.tsx';
 import { EditTaskForm } from './EditTaskForm.tsx';
-import { TaskFormValues } from '../addTaskForm/AddTaskForm.tsx';
-import { TaskCategoryType } from '../common/BaseTaskForm.tsx';
 import { useTranslation } from 'react-i18next';
+import { TaskType, TaskUpdateData } from '../model/types';
+import { useList } from '../model/useList.ts';
 
-type PropsType = {
+export type TaskListProps = {
   tasks: TaskType[];
   deleteTask: (id: string) => void;
   updateTask: (id: string, updatedData: TaskUpdateData) => void;
   toggleCompletingOfTask: (id: string, isCompleted: boolean) => void;
   newAddedTask?: TaskType;
 };
-export type TaskType = {
-  id: string;
-  userId: string;
-  deadline?: string;
-  title: string;
-  description?: string;
-  isCompleted: boolean;
-  category: TaskCategoryType;
-};
 
-export type TaskWithoutId = Omit<TaskType, 'id'>;
-export type TaskUpdateData = Partial<Omit<TaskType, 'id' | 'userId'>>;
-
-export const TasksList: React.FC<PropsType> = React.memo(
+export const TasksList: React.FC<TaskListProps> = React.memo(
   ({ tasks, deleteTask, updateTask, toggleCompletingOfTask, newAddedTask }) => {
-    const [activeTask, setActiveTask] = useState<TaskType | null | undefined>(
-      newAddedTask || tasks[0],
-    );
-    const [editTaskMode, setEditTaskMode] = useState<{
-      active: boolean;
-      editedTask: TaskType | null;
-    }>({
-      active: false,
-      editedTask: null,
-    });
+    const {
+      activeTask,
+      onTaskClick,
+      newTaskElementAnchor,
+      onDeleteTask,
+      onEditClick,
+      editTaskMode,
+      closeEditForm,
+      onEditFormSubmit,
+    } = useList({ tasks, deleteTask, updateTask, newAddedTask });
 
     const { t } = useTranslation('todopage');
-
-    const newTaskElementAnchor = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-      newTaskElementAnchor.current?.scrollIntoView({ behavior: 'smooth' });
-    }, [tasks]);
-
-    const onTaskClick = (id: string): void => {
-      const currentTask: TaskType | undefined = tasks.find((task) => task.id === id);
-      if (currentTask) {
-        setActiveTask(currentTask);
-      }
-    };
-
-    const onEditClick: (task: TaskType) => void = (task) => {
-      if (editTaskMode.active) return;
-      setEditTaskMode({ active: true, editedTask: task });
-    };
-
-    const closeForm: () => void = () => {
-      setEditTaskMode({ active: false, editedTask: null });
-    };
-
-    const changeTask = (data: TaskFormValues) => {
-      const taskId = editTaskMode.editedTask!.id;
-      updateTask(taskId, { ...data });
-    };
-
-    const onEditFormSubmit = (data: TaskFormValues) => {
-      changeTask(data);
-      setActiveTask(editTaskMode.editedTask);
-      closeForm();
-    };
-
-    const onDeleteTask = (id: string) => {
-      deleteTask(id);
-    };
-
     return (
       <div className="grid grid-rows-[2fr_1fr] md:grid-rows-none md:grid-cols-2 gap-2 h-full w-full p-1">
         {/* Task List */}
@@ -116,7 +65,7 @@ export const TasksList: React.FC<PropsType> = React.memo(
         {editTaskMode.active ? (
           <div className="rounded-xl shadow-lg p-2 overflow-y-scroll">
             <EditTaskForm
-              closeForm={closeForm}
+              closeForm={closeEditForm}
               onSubmit={onEditFormSubmit}
               editedTask={editTaskMode.editedTask as TaskType}
             />

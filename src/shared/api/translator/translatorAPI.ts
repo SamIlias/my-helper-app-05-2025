@@ -14,6 +14,7 @@ async function translate(text: string, lang: string): Promise<string | undefined
   }
 
   const systemPrompt: ConversationItem = {
+    id: 'initialPrompt',
     role: 'system',
     content: `Translate the following text into ${lang}. Return only the translation, no extra output: "${text}"`,
   };
@@ -31,6 +32,7 @@ async function translateObjectValues<T extends object>(obj: T, lang: string): Pr
   if (cached) return cached;
 
   const systemPrompt: ConversationItem = {
+    id: 'initialPrompt',
     role: 'system',
     content: `Translate all string values in this JSON object into ${lang}. Return only the translated JSON without any explanation or formatting: ${JSON.stringify(obj)}`,
   };
