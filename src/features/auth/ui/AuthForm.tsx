@@ -20,40 +20,42 @@ export const AuthForm: React.FC = () => {
   };
 
   return (
-    <div className="p-4 max-w-sm mx-auto bg-gray-600 rounded shadow space-y-4">
-      {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
-      <input
-        type="email"
-        placeholder={t('form.emailPlaceholder')}
-        className="border p-2 w-full rounded"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder={t('form.passwordPlaceholder')}
-        className="border p-2 w-full rounded"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button
-        onClick={handleAction(() => signIn(email, password))}
-        className="w-full py-2 bg-blue-500 text-white rounded"
-      >
-        {t('form.signInButtonTitle')}
-      </button>
-      <button
-        onClick={handleAction(() => signUp(email, password))}
-        className="w-full py-2 bg-green-500 text-white rounded"
-      >
-        {t('form.signUpButtonTitle')}
-      </button>
-      <button
-        onClick={handleAction(signInWithGoogle)}
-        className="w-full py-2 bg-yellow-400 text-black rounded"
-      >
-        {t('form.signInGoogleButtonTitle')}
-      </button>
+    <div className="flex items-center h-full w-full">
+      <div className="flex flex-col gap-4 p-4 sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/4 mx-auto bg-gray-400/40 mb-40 rounded ">
+        {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
+        <input
+          type="email"
+          placeholder={t('form.emailPlaceholder')}
+          className="border p-2 w-full rounded"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder={t('form.passwordPlaceholder')}
+          className="border p-2 w-full rounded"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button
+          onClick={handleAction(() => signIn(email, password))}
+          className="w-full py-2 bg-cyan-500/80 text-white rounded hover:bg-cyan-800 cursor-pointer"
+        >
+          {t('form.signInButtonTitle')}
+        </button>
+        <button
+          onClick={handleAction(() => signUp(email, password))}
+          className="w-full py-2 bg-amber-500/80 text-white rounded hover:bg-amber-700 cursor-pointer"
+        >
+          {t('form.signUpButtonTitle')}
+        </button>
+        <button
+          onClick={handleAction(signInWithGoogle)}
+          className="w-full py-2 bg-yellow-500/50 text-white rounded hover:bg-yellow-800 cursor-pointer"
+        >
+          {t('form.signInGoogleButtonTitle')}
+        </button>
+      </div>
     </div>
   );
 };

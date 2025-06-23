@@ -49,7 +49,7 @@ function App() {
   return (
     <div
       className={`w-screen h-screen grid grid-cols-24 grid-rows-19 
-      bg-gradient-to-r from-yellow-500 to-blue-300 dark:from-black  dark:to-yellow-600`}
+      bg-stone-100 dark:bg-stone-800`}
     >
       <header className="col-span-24 row-span-2 grid grid-cols-[1fr_3fr] w-full content-center">
         <Header user={user} setUser={setUser} />
@@ -61,7 +61,7 @@ function App() {
         <MainNav list={navList} />
       </div>
 
-      <div className="col-span-22 col-start-2 row-span-14 row-start-4 bg-gray-700/50 border rounded-md border-gray-700 backdrop-blur-sm ">
+      <div className="col-span-22 col-start-2 row-span-14 row-start-4  border rounded-md bg-stone-50/50 border-stone-700/50 backdrop-blur-sm ">
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <Suspense fallback={<LoadingFallback />}>
             <Routes>

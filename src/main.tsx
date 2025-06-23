@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './app/App.tsx';
 import { BrowserRouter } from 'react-router-dom';
-import './i18n';
+import './shared/i18n/i18n';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ThemeProvider } from './app/ThemeProvider';
 
