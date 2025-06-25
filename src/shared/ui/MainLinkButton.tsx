@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { myStyles } from '../myStyles/myStyles.ts';
+import { buttonStyles } from '../myStyles/myStyles';
 
 type Props = {
   path: string;
@@ -9,7 +9,7 @@ type Props = {
 
 export const MainLinkButton: React.FC<Props> = ({ path, title }) => {
   return (
-    <Link to={path} className={`${myStyles.button.main}`}>
+    <Link to={path} className={`${buttonStyles.main}`}>
       {title}
     </Link>
   );

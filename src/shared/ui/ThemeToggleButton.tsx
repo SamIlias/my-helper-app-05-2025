@@ -6,7 +6,7 @@ export const ThemeToggleButton: React.FC = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="px-1 rounded dark:bg-gray-200 bg-gray-800 dark:text-black text-white"
+      className="px-1 rounded cursor-pointer bg-stone-600 text-white dark:bg-stone-200  dark:text-black border "
     >
       {theme === 'light' ? 'Dark' : 'Light'}
     </button>

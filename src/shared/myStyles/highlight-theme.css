@@ -1,0 +1,101 @@
+.hljs {
+    background: transparent !important;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    transition: color 0.2s, background-color 0.2s;
+}
+
+/* light theme (default) */
+.hljs {
+    color: #000000;
+    background-color: transparent !important;
+}
+
+.hljs-keyword {
+    color: #0000ff;
+    font-weight: bold;
+}
+
+.hljs-string {
+    color: #a31515;
+}
+
+.hljs-comment {
+    color: #008000;
+    font-style: italic;
+}
+
+.hljs-title {
+    color: #795e26;
+}
+
+.hljs-number,
+.hljs-literal {
+    color: #098658;
+}
+
+.hljs-variable,
+.hljs-params {
+    color: #001080;
+}
+
+.hljs-built_in,
+.hljs-type {
+    color: #267f99;
+}
+
+.hljs-tag {
+    color: #800000;
+}
+
+.hljs-attribute {
+    color: #0000ff;
+}
+
+/* dark theme */
+.dark .hljs {
+    color: #a9b7c6;
+    background-color: transparent !important;
+}
+
+.dark .hljs-keyword {
+    color: #cc7832;
+    font-weight: bold;
+}
+
+.dark .hljs-string {
+    color: #6a8759;
+}
+
+.dark .hljs-comment {
+    color: #808080;
+    font-style: italic;
+}
+
+.dark .hljs-title,
+.dark .hljs-function,
+.dark .hljs-name {
+    color: #ffc66d;
+}
+
+.dark .hljs-number,
+.dark .hljs-literal,
+.dark .hljs-attr {
+    color: #6897bb;
+}
+
+.dark .hljs-type,
+.dark .hljs-built_in,
+.dark .hljs-symbol {
+    color: #9876aa;
+}
+
+.dark .hljs-variable,
+.dark .hljs-params,
+.dark .hljs-parameter {
+    color: #a9b7c6;
+}

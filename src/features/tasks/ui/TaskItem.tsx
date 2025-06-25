@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { TaskType } from './TasksList.tsx';
 import { taskCategories } from './BaseTaskForm.tsx';
 import { useTranslation } from 'react-i18next';
+import { TaskType } from '../model/types';
+import { textColors } from '../../../shared/myStyles/myStyles';
 
 export const TaskItem: React.FC<IProps> = ({
   task,
@@ -23,7 +24,7 @@ export const TaskItem: React.FC<IProps> = ({
   return (
     <>
       <div className="flex flex-col space-x-3">
-        <span className={`${categoryColor[task.category as Category]} block text-shadow-lg/30 `}>
+        <span className={`${categoryColor[task.category as Category]} block text-shadow-md/30 `}>
           {task.category}
         </span>
         <div className="mb-1">
@@ -36,10 +37,12 @@ export const TaskItem: React.FC<IProps> = ({
               }}
               className="form-checkbox"
             />
-            <span className={`text-white font-medium`}>{task.title}</span>
+            <span className={`${textColors.main} font-bold`}>{task.title}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-sm text-amber-500 dark:text-gray-300">{task.deadline}</span>
+            <span className={`text-sm ${textColors.secondary} dark:text-gray-300`}>
+              {task.deadline}
+            </span>
             <div>
               <button
                 onClick={() => onEditTask(task)}

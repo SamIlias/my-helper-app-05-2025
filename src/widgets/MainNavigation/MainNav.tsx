@@ -1,11 +1,6 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
-import { myStyles } from '../../shared/myStyles/myStyles.ts';
-
-const navStyles = {
-  active: `${myStyles.textColor.main} text-shadow-lg border border-solid px-2 ${myStyles.bgGrayBlur}`,
-  navElement: `${myStyles.textColor.secondary} text-shadow-lg px-2 ${myStyles.bgGrayLightBlur}`,
-};
+import { buttonStyles } from '../../shared/myStyles/myStyles';
 
 type PropsType = {
   list: Array<{ name: string; pathName: string }>;
@@ -17,7 +12,9 @@ const MainNav: React.FC<PropsType> = ({ list }) => {
       {list.map((el, index) => (
         <NavLink
           key={index}
-          className={({ isActive }) => (isActive ? navStyles.active : navStyles.navElement)}
+          className={({ isActive }) =>
+            isActive ? buttonStyles.navActive : buttonStyles.navPassive
+          }
           to={`/${el.pathName}`}
         >
           {el.name}

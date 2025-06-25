@@ -1,6 +1,6 @@
-import { myStyles } from '../myStyles/myStyles';
 import * as React from 'react';
+import { pageTitleStyle } from '../myStyles/myStyles';
 
 export const PageTitle: React.FC<{ pageTitle: string }> = ({ pageTitle }) => {
-  return <h1 className={myStyles.pageTitle}>{pageTitle}</h1>;
+  return <h1 className={pageTitleStyle}>{pageTitle}</h1>;
 };

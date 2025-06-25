@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { TaskFormValues } from './AddTaskForm.tsx';
-import { TaskType } from './TasksList.tsx';
 import { BaseTaskForm } from './BaseTaskForm.tsx';
 import { useTranslation } from 'react-i18next';
+import { borderColors, textColors } from '../../../shared/myStyles/myStyles';
+import { TaskType } from '../model/types';
 
 type PropsType = {
   closeForm: () => void;
@@ -21,8 +22,12 @@ export const EditTaskForm: React.FC<PropsType> = ({ closeForm, onSubmit, editedT
   const { t } = useTranslation('todopage');
 
   return (
-    <div className="h-fit grid grid-cols-2 grid-rows-7 gap-4 p-6 border rounded-lg shadow-md">
-      <h1 className="col-span-2 text-2xl font-bold row-start-1">{t('editTaskForm.title')}</h1>
+    <div
+      className={`md:h-full grid grid-cols-2 grid-rows-7 gap-4 p-6 border rounded ${borderColors.primary} shadow-md`}
+    >
+      <h1 className={`${textColors.main} col-span-2 text-2xl font-bold row-start-1`}>
+        {t('editTaskForm.title')}
+      </h1>
       <BaseTaskForm
         closeAddForm={closeForm}
         onSubmit={onSubmit}

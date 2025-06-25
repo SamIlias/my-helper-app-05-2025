@@ -1,6 +1,7 @@
-import { useState } from 'react';
 import * as React from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { buttonStyles } from '../myStyles/myStyles';
 
 type PropsType = {
   totalItemsCount: number;
@@ -33,13 +34,13 @@ const Pagination: React.FC<PropsType> = ({
   const rightPortionPageNumber = portionNumber * portionOfPagesSize;
 
   return (
-    <div className="text-sm md:text-base">
+    <div className="flex gap-1 text-sm md:text-base">
       {portionNumber > 1 && (
         <button
-          className="px-1 font-bold text-yellow-300 hover:bg-yellow-600 cursor-pointer mx-1 border rounded-md"
+          className={`${buttonStyles.main}`}
           onClick={() => setPortionNumber(portionNumber - 1)}
         >
-          {t("pagination.prevBtnName")}
+          {t('pagination.prevBtnName')}
         </button>
       )}
       {pages
@@ -49,8 +50,9 @@ const Pagination: React.FC<PropsType> = ({
             <button
               key={p}
               className={
-                (currentPage === p ? 'text-yellow-400 border rounded-md font-bold' : 'text-white') +
-                ' px-1 hover:text-yellow-400 cursor-pointer'
+                (currentPage === p
+                  ? `${buttonStyles.paginationActive}`
+                  : `${buttonStyles.paginationPassive}`) + ' px-1'
               }
               onClick={() => {
                 onChangePageNumber(p);
@@ -62,10 +64,10 @@ const Pagination: React.FC<PropsType> = ({
         })}
       {portionNumber < portionsCount && (
         <button
-          className="px-1 font-bold text-yellow-300 hover:bg-yellow-600 cursor-pointer mx-1 border rounded-md"
+          className={`${buttonStyles.main}`}
           onClick={() => setPortionNumber(portionNumber + 1)}
         >
-          {t("pagination.nextBtnName")}
+          {t('pagination.nextBtnName')}
         </button>
       )}
     </div>

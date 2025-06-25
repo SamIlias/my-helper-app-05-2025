@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+import { textColors } from '../myStyles/myStyles';
 
 export const LanguageSelector: React.FC = () => {
   const { i18n } = useTranslation('common');
@@ -11,7 +12,11 @@ export const LanguageSelector: React.FC = () => {
 
   return (
     <div>
-      <select value={currentLanguage} onChange={handleSelectLng} className="text-amber-900">
+      <select
+        value={currentLanguage}
+        onChange={handleSelectLng}
+        className={`${textColors.secondary}`}
+      >
         <option className="text-amber-900" value="en">
           English
         </option>

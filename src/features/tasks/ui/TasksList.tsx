@@ -4,6 +4,7 @@ import { EditTaskForm } from './EditTaskForm.tsx';
 import { useTranslation } from 'react-i18next';
 import { TaskType, TaskUpdateData } from '../model/types';
 import { useList } from '../model/useList.ts';
+import { borderColors, textColors } from '../../../shared/myStyles/myStyles';
 
 export type TaskListProps = {
   tasks: TaskType[];
@@ -30,12 +31,16 @@ export const TasksList: React.FC<TaskListProps> = React.memo(
     return (
       <div className="grid grid-rows-[2fr_1fr] md:grid-rows-none md:grid-cols-2 gap-2 h-full w-full p-1">
         {/* Task List */}
-        <div className="border h-full rounded-xl shadow-lg p-2 overflow-y-auto">
+        <div
+          className={`border ${borderColors.primary} h-full rounded p-2 overflow-y-auto shadow-md`}
+        >
           <h2 className="text-xl font-semibold text-center text-gray-800 dark:text-white mb-4">
             {t('tasksList.listTitle')}
           </h2>
           {tasks.length === 0 && (
-            <h3 className="text-amber-500 text-center">{t('tasksList.emptyListMessage')}</h3>
+            <h3 className={`${textColors.highlight} text-center`}>
+              {t('tasksList.emptyListMessage')}
+            </h3>
           )}
           <div className="space-y-2">
             {tasks.map((task) => {
@@ -45,7 +50,7 @@ export const TasksList: React.FC<TaskListProps> = React.memo(
               return (
                 <div
                   key={task.id}
-                  className={`${isActive ? 'bg-amber-700/80' : 'hover:bg-gray-700/50 dark:hover:bg-gray-700 cursor-pointer'} border border-gray-300 dark:border-gray-700 rounded-md px-3 `}
+                  className={`${isActive ? 'bg-amber-500/80 dark:bg-orange-500/50' : 'hover:bg-stone-900/10 dark:hover:bg-stone-500/90 cursor-pointer'} border ${borderColors.primary}  rounded px-3`}
                   onClick={() => onTaskClick(task.id)}
                   ref={isNew ? newTaskElementAnchor : null}
                 >
@@ -63,7 +68,7 @@ export const TasksList: React.FC<TaskListProps> = React.memo(
 
         {/* Description or edit form */}
         {editTaskMode.active ? (
-          <div className="rounded-xl shadow-lg p-2 overflow-y-scroll">
+          <div className={`overflow-y-scroll`}>
             <EditTaskForm
               closeForm={closeEditForm}
               onSubmit={onEditFormSubmit}
@@ -71,7 +76,7 @@ export const TasksList: React.FC<TaskListProps> = React.memo(
             />
           </div>
         ) : (
-          <div className="border h-full rounded-xl shadow-lg p-2 overflow-y-scroll">
+          <div className={`border ${borderColors.primary}  h-full rounded p-2 overflow-y-scroll`}>
             <h2 className="text-xl font-semibold text-center dark:text-white mb-4">
               {t('tasksList.descriptionTitle')}
             </h2>

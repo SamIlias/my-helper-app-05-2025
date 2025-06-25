@@ -1,11 +1,11 @@
-import { SearchForm } from '../../shared/ui/SearchForm.tsx';
+import { SearchForm } from '@/shared/ui/SearchForm.tsx';
 import React, { useEffect } from 'react';
-import { Preloader } from '../../shared/ui/Preloader.tsx';
-import preloader from '../../shared/assets/preloaderSun.svg';
-import { myStyles } from '../../shared/myStyles/myStyles.ts';
+import { Preloader } from '@/shared/ui/Preloader.tsx';
+import preloader from '@/shared/assets/preloaderSun.svg';
 import { useTranslation } from 'react-i18next';
-import { useWeather } from '../../features/weather/model/useWeather';
-// import { translate, translateObjectValues } from '../../api/translatorAPI';
+import { useWeather } from '@/features/weather/model/useWeather';
+import { textColors } from '@/shared/myStyles/myStyles';
+import { PageHeader } from '@/shared/ui/PageHeader';
 
 const INITIAL_CITY: string = import.meta.env.VITE_CURRENT_CITY;
 
@@ -33,9 +33,7 @@ const WeatherPage: React.FC = () => {
   return (
     <div className="flex flex-col min-h-0 h-full p-4 gap-2">
       {/* Header */}
-      <header className="w-full border-b pb-2">
-        <h1 className={`${myStyles.pageTitle} text-2xl md:text-3xl`}>{t('title')}</h1>
-      </header>
+      <PageHeader title={t('title')} />
 
       {/* Main content */}
       <main className="relative grid h-full">
@@ -44,9 +42,10 @@ const WeatherPage: React.FC = () => {
         )}
         {weatherData ? (
           <div className="grid grid-rows-[auto_1fr] md:grid-rows-none md:grid-cols-2 ">
-            {/* Weather details */}
-            <div className="w-full h-full md:w-2/3 content-end md:content-center justify-items-center md:justify-items-end md:justify-self-end p-4 text-sm md:text-base lg:text-lg space-y-2">
-              <h2 className={`text-lg font-semibold ${myStyles.textColor.main}`}>{t('header')}</h2>
+            <div
+              className={` ${textColors.secondary} w-full h-full md:w-2/3 content-end md:content-center justify-items-center md:justify-items-end md:justify-self-end p-4 text-sm md:text-base lg:text-lg space-y-2`}
+            >
+              <h2 className={`text-lg font-semibold ${textColors.main}`}>{t('header')}</h2>
               <p>
                 <strong>{t('country')}</strong> {weatherData.country}
               </p>
@@ -70,7 +69,7 @@ const WeatherPage: React.FC = () => {
               <img
                 src={description?.image}
                 alt={description?.description}
-                className="h-2/3 md:h-2/5 lg:h-1/2 border rounded-md"
+                className="h-2/3 md:h-2/5 lg:h-1/2 border rounded-md bg-stone-300 dark:bg-stone-500/10"
               />
             </div>
           </div>

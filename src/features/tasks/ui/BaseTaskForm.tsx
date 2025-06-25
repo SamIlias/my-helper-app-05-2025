@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { myStyles } from '../../../shared/myStyles/myStyles';
 import { TaskType } from '../model/types';
+import { textColors } from '../../../shared/myStyles/myStyles';
 
 export const taskCategories = {
   Default: 'default',
@@ -42,10 +42,7 @@ export const BaseTaskForm: React.FC<PropsType> = ({
     >
       {/* Title */}
       <div className="col-span-2">
-        <label
-          htmlFor="title"
-          className={`block text-sm font-medium ${myStyles.textColor.formLabel}`}
-        >
+        <label htmlFor="title" className={`block text-sm font-medium ${textColors.formLabel}`}>
           {t('baseTaskForm.titleLabel')}
           <span className="text-red-500">*</span>
         </label>
@@ -72,10 +69,7 @@ export const BaseTaskForm: React.FC<PropsType> = ({
 
       {/* Deadline */}
       <div>
-        <label
-          htmlFor="deadline"
-          className={`block text-sm font-medium ${myStyles.textColor.formLabel}`}
-        >
+        <label htmlFor="deadline" className={`block text-sm font-medium ${textColors.formLabel}`}>
           {t('baseTaskForm.deadlineLabel')}
         </label>
         <input
@@ -88,10 +82,7 @@ export const BaseTaskForm: React.FC<PropsType> = ({
 
       {/* Type */}
       <div>
-        <label
-          htmlFor="category"
-          className={`block text-sm font-medium ${myStyles.textColor.formLabel}`}
-        >
+        <label htmlFor="category" className={`block text-sm font-medium ${textColors.formLabel}`}>
           {t('baseTaskForm.categoryLabel')}
         </label>
         <select
@@ -111,7 +102,7 @@ export const BaseTaskForm: React.FC<PropsType> = ({
       <div className="col-span-2">
         <label
           htmlFor="description"
-          className={`block text-sm font-medium ${myStyles.textColor.formLabel}`}
+          className={`block text-sm font-medium ${textColors.formLabel}`}
         >
           {t('baseTaskForm.descriptionLabel')}
         </label>
