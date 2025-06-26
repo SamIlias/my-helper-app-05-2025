@@ -13,12 +13,12 @@ import { ErrorFallback } from '../shared/ui/ErrorFallback';
 import { Header } from '../widgets/Header/Header';
 import { LoadingFallback } from '../shared/ui/LoadingFallback';
 
-// import TodoPage from './components/pages/TodoPage/TodoPage.tsx';
-// import NewsPage from './components/pages/NewsPage/index.tsx';
-// import WeatherPage from './components/pages/WeatherPage';
-const WeatherPage = lazy(() => import('../pages/WeatherPage/WeatherPage'));
+// import TodoPage from '@/pages/TodoPage';
+// import NewsPage from '@/pages/NewsPage';
+// import WeatherPage from '@/pages/WeatherPage';
+const WeatherPage = lazy(() => import('../pages/WeatherPage'));
 const NewsPage = lazy(() => import('../pages/NewsPage'));
-const TodoPage = lazy(() => import('../pages/TodoPage/TodoPage'));
+const TodoPage = lazy(() => import('../pages/TodoPage'));
 
 function App() {
   const { t } = useTranslation('common');
@@ -42,8 +42,8 @@ function App() {
       pathName: 'auth',
     },
   } as const;
-
   type PageType = { name: string; pathName: (typeof pages)[keyof typeof pages]['pathName'] };
+
   const navList: PageType[] = [pages.news, pages.weather, pages.todo];
 
   return (
@@ -54,6 +54,7 @@ function App() {
       <header className="col-span-24 row-span-2 grid grid-cols-[1fr_3fr] w-full content-center">
         <Header user={user} setUser={setUser} />
       </header>
+
       <div
         className={`col-span-24 col-start-1 row-span-1 row-start-3 place-self-center w-full h-fit text-sm md:text-xl lg:text-xl xl:text-xl`}
       >

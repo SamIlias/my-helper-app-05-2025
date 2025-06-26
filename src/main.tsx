@@ -6,10 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import './shared/i18n/i18n';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ThemeProvider } from './app/ThemeProvider';
-
-function ErrorFallback({ error }: { error: Error }) {
-  return <div>Something went wrong: {error.message}</div>;
-}
+import { ErrorFallback } from './shared/ui/ErrorFallback';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

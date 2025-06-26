@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { fetchNews, NewsItemType } from '../api/newsAPI';
-import { normalizeError } from '../../../shared/lib/utils/errorHandler';
+import { normalizeError } from '../../../shared/utils/errorHandler';
 
 const NEWS_PORTION_SIZE = 2;
 

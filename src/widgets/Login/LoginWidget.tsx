@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { User } from 'firebase/auth';
 import { Dispatch, SetStateAction } from 'react';
-import { getNameFromEmail, truncate } from '@/shared/lib/utils/stringHandler.ts';
+import { getNameFromEmail, truncate } from '@/shared/utils/stringHandler.ts';
 import { LogoutButton } from '@/features/auth/ui/LogoutButton';
 import { LoginButton } from '@/features/auth/ui/LoginButton';
 import { textColors } from '@/shared/myStyles/myStyles';

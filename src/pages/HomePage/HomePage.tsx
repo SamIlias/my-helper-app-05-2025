@@ -1,11 +1,11 @@
-import '../../index.css';
+import '@/index.css';
 import * as React from 'react';
-import { AiConversation } from '../../features/aiConversation/ui/AiConversation.tsx';
+import { AiConversation } from '@/features/aiConversation';
 import type { User } from 'firebase/auth';
 import { Navigate } from 'react-router-dom';
-import { QuoteBlock } from '../../features/quotes/ui/QuoteBlock.tsx';
+import { QuoteBlock } from '@/features/showQuote';
 import { useTranslation } from 'react-i18next';
-import { PageTitle } from '../../shared/ui/PageTitle';
+import { PageTitle } from '@/shared/ui/PageTitle';
 
 type Props = {
   user: User | null | undefined;

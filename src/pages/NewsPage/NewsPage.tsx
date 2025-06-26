@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { NewsList } from '@/features/news/ui/NewsList.tsx';
+import { NewsList } from '@/features/showNews';
 import { PageHeader } from '@/shared/ui/PageHeader';
 
-const NewsPage: React.FC = () => {
+export const NewsPage: React.FC = () => {
   const { t } = useTranslation('newspage');
 
   return (
@@ -13,5 +13,3 @@ const NewsPage: React.FC = () => {
     </div>
   );
 };
-
-export default NewsPage;

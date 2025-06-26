@@ -2,7 +2,7 @@ import { Preloader } from '../../../shared/ui/Preloader';
 import preloader from '../../../shared/assets/preloaderNews.svg';
 import Pagination from '../../../shared/ui/Pagination';
 import { NewsItemType } from '../api/newsAPI';
-import { NewsItemCard } from './NewsItemCard';
+import { NewsItem } from './NewsItem';
 import * as React from 'react';
 import { useNews } from '../model/useNews';
 import { useEffect } from 'react';
@@ -58,7 +58,7 @@ export const NewsList: React.FC = () => {
               {newsData
                 .filter((_, index) => firstPortionItem <= index && index < lastPortionItem)
                 .map((n: NewsItemType) => (
-                  <NewsItemCard key={n.description} {...n} />
+                  <NewsItem key={n.description} {...n} />
                 ))}
             </div>
           </div>

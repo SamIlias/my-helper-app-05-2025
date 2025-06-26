@@ -19,9 +19,9 @@ export const initialNewsForPaginationTest = [
     title:
       "Cristiano Ronaldo transfer latest as former Manchester United star 'responds' to request",
     description:
-      'Latest Manchester United news and gossip as Cristiano Ronaldo reportedly responds to a transfer offer ahead of the FIFA Club World Cup',
+      'Latest Manchester United showNews and gossip as Cristiano Ronaldo reportedly responds to a transfer offer ahead of the FIFA Club World Cup',
     content:
-      "Cristiano Ronaldo transfer latest as former Manchester United star 'responds' to request\nLatest Manchester United news and gossip as Cristiano Ronaldo reportedly responds to a transfer offer ahead of the FIFA Club World Cup\nCristiano Ronaldo of Al Na... [2844 chars]",
+      "Cristiano Ronaldo transfer latest as former Manchester United star 'responds' to request\nLatest Manchester United showNews and gossip as Cristiano Ronaldo reportedly responds to a transfer offer ahead of the FIFA Club World Cup\nCristiano Ronaldo of Al Na... [2844 chars]",
     url: 'https://www.manchestereveningnews.co.uk/sport/football/transfer-news/cristiano-ronaldo-transfer-latest-former-31789068',
     image:
       'https://i2-prod.manchestereveningnews.co.uk/article31789381.ece/ALTERNATES/s1200/0_JS368186065.jpg',
@@ -51,9 +51,9 @@ export const initialNewsForPaginationTest = [
     title:
       "Liverpool next transfer 'decided' after record Florian Wirtz deal amid Arne Slot meeting",
     description:
-      "Latest Liverpool transfer news with an update on the club's summer transfer business",
+      "Latest Liverpool transfer showNews with an update on the club's summer transfer business",
     content:
-      "Liverpool next transfer 'decided' after record Florian Wirtz deal amid Arne Slot meeting\nLatest Liverpool transfer news with an update on the club's summer transfer business\nLiverpool head coach Arne Slot met with Rayan Cherki last week (Image: Getty... [2479 chars]",
+      "Liverpool next transfer 'decided' after record Florian Wirtz deal amid Arne Slot meeting\nLatest Liverpool transfer showNews with an update on the club's summer transfer business\nLiverpool head coach Arne Slot met with Rayan Cherki last week (Image: Getty... [2479 chars]",
     url: 'https://www.liverpoolecho.co.uk/sport/football/transfer-news/liverpool-next-transfer-decided-after-31788751',
     image:
       'https://i2-prod.liverpoolecho.co.uk/article31788672.ece/ALTERNATES/s1200/0_Arne-Slot-14.jpg',
@@ -66,9 +66,9 @@ export const initialNewsForPaginationTest = [
   {
     title: 'Understanding how base editing tools work at the molecular level',
     description:
-      'You may have seen it in the news recently: a baby in Pennsylvania with a rare genetic disorder was healed with a personalized treatment that repaired his specific genetic mutation.',
+      'You may have seen it in the showNews recently: a baby in Pennsylvania with a rare genetic disorder was healed with a personalized treatment that repaired his specific genetic mutation.',
     content:
-      'You may have seen it in the news recently: a baby in Pennsylvania with a rare genetic disorder was healed with a personalized treatment that repaired his specific genetic mutation. The treatment was created using a form of gene editing called base ed... [7002 chars]',
+      'You may have seen it in the showNews recently: a baby in Pennsylvania with a rare genetic disorder was healed with a personalized treatment that repaired his specific genetic mutation. The treatment was created using a form of gene editing called base ed... [7002 chars]',
     url: 'https://www.news-medical.net/news/20250604/Understanding-how-base-editing-tools-work-at-the-molecular-level.aspx',
     image: 'https://www.news-medical.net/image-handler/picture/2014/7/Gene-620x480.jpg',
     publishedAt: '2025-06-04T17:15:00Z',
@@ -80,7 +80,7 @@ export const initialNewsForPaginationTest = [
   {
     title: 'Where to start with: Edmund White',
     description:
-      'After the news of White’s death, here is a guide to a foundational writer of gay lives and elder statesman of American queer literary fiction',
+      'After the showNews of White’s death, here is a guide to a foundational writer of gay lives and elder statesman of American queer literary fiction',
     content:
       'Edmund White, who has died aged 85, was born in Cincinatti, to conservative, homophobic parents. Although he soon rejected almost all his family’s cultural values, he retained their work ethic: White published 36 books in his lifetime, and was workin... [5189 chars]',
     url: 'https://www.theguardian.com/books/2025/jun/04/where-to-start-with-edmund-white',
@@ -169,9 +169,9 @@ export const initialNewsForPaginationTest = [
     title:
       "Cristiano Ronaldo transfer latest as former Manchester United star 'responds' to request",
     description:
-      'Latest Manchester United news and gossip as Cristiano Ronaldo reportedly responds to a transfer offer ahead of the FIFA Club World Cup',
+      'Latest Manchester United showNews and gossip as Cristiano Ronaldo reportedly responds to a transfer offer ahead of the FIFA Club World Cup',
     content:
-      "Cristiano Ronaldo transfer latest as former Manchester United star 'responds' to request\nLatest Manchester United news and gossip as Cristiano Ronaldo reportedly responds to a transfer offer ahead of the FIFA Club World Cup\nCristiano Ronaldo of Al Na... [2844 chars]",
+      "Cristiano Ronaldo transfer latest as former Manchester United star 'responds' to request\nLatest Manchester United showNews and gossip as Cristiano Ronaldo reportedly responds to a transfer offer ahead of the FIFA Club World Cup\nCristiano Ronaldo of Al Na... [2844 chars]",
     url: 'https://www.manchestereveningnews.co.uk/sport/football/transfer-news/cristiano-ronaldo-transfer-latest-former-31789068',
     image:
       'https://i2-prod.manchestereveningnews.co.uk/article31789381.ece/ALTERNATES/s1200/0_JS368186065.jpg',
@@ -201,9 +201,9 @@ export const initialNewsForPaginationTest = [
     title:
       "Liverpool next transfer 'decided' after record Florian Wirtz deal amid Arne Slot meeting",
     description:
-      "Latest Liverpool transfer news with an update on the club's summer transfer business",
+      "Latest Liverpool transfer showNews with an update on the club's summer transfer business",
     content:
-      "Liverpool next transfer 'decided' after record Florian Wirtz deal amid Arne Slot meeting\nLatest Liverpool transfer news with an update on the club's summer transfer business\nLiverpool head coach Arne Slot met with Rayan Cherki last week (Image: Getty... [2479 chars]",
+      "Liverpool next transfer 'decided' after record Florian Wirtz deal amid Arne Slot meeting\nLatest Liverpool transfer showNews with an update on the club's summer transfer business\nLiverpool head coach Arne Slot met with Rayan Cherki last week (Image: Getty... [2479 chars]",
     url: 'https://www.liverpoolecho.co.uk/sport/football/transfer-news/liverpool-next-transfer-decided-after-31788751',
     image:
       'https://i2-prod.liverpoolecho.co.uk/article31788672.ece/ALTERNATES/s1200/0_Arne-Slot-14.jpg',
@@ -216,9 +216,9 @@ export const initialNewsForPaginationTest = [
   {
     title: 'Understanding how base editing tools work at the molecular level',
     description:
-      'You may have seen it in the news recently: a baby in Pennsylvania with a rare genetic disorder was healed with a personalized treatment that repaired his specific genetic mutation.',
+      'You may have seen it in the showNews recently: a baby in Pennsylvania with a rare genetic disorder was healed with a personalized treatment that repaired his specific genetic mutation.',
     content:
-      'You may have seen it in the news recently: a baby in Pennsylvania with a rare genetic disorder was healed with a personalized treatment that repaired his specific genetic mutation. The treatment was created using a form of gene editing called base ed... [7002 chars]',
+      'You may have seen it in the showNews recently: a baby in Pennsylvania with a rare genetic disorder was healed with a personalized treatment that repaired his specific genetic mutation. The treatment was created using a form of gene editing called base ed... [7002 chars]',
     url: 'https://www.news-medical.net/news/20250604/Understanding-how-base-editing-tools-work-at-the-molecular-level.aspx',
     image: 'https://www.news-medical.net/image-handler/picture/2014/7/Gene-620x480.jpg',
     publishedAt: '2025-06-04T17:15:00Z',
@@ -230,7 +230,7 @@ export const initialNewsForPaginationTest = [
   {
     title: 'Where to start with: Edmund White',
     description:
-      'After the news of White’s death, here is a guide to a foundational writer of gay lives and elder statesman of American queer literary fiction',
+      'After the showNews of White’s death, here is a guide to a foundational writer of gay lives and elder statesman of American queer literary fiction',
     content:
       'Edmund White, who has died aged 85, was born in Cincinatti, to conservative, homophobic parents. Although he soon rejected almost all his family’s cultural values, he retained their work ethic: White published 36 books in his lifetime, and was workin... [5189 chars]',
     url: 'https://www.theguardian.com/books/2025/jun/04/where-to-start-with-edmund-white',
@@ -319,9 +319,9 @@ export const initialNewsForPaginationTest = [
     title:
       "Cristiano Ronaldo transfer latest as former Manchester United star 'responds' to request",
     description:
-      'Latest Manchester United news and gossip as Cristiano Ronaldo reportedly responds to a transfer offer ahead of the FIFA Club World Cup',
+      'Latest Manchester United showNews and gossip as Cristiano Ronaldo reportedly responds to a transfer offer ahead of the FIFA Club World Cup',
     content:
-      "Cristiano Ronaldo transfer latest as former Manchester United star 'responds' to request\nLatest Manchester United news and gossip as Cristiano Ronaldo reportedly responds to a transfer offer ahead of the FIFA Club World Cup\nCristiano Ronaldo of Al Na... [2844 chars]",
+      "Cristiano Ronaldo transfer latest as former Manchester United star 'responds' to request\nLatest Manchester United showNews and gossip as Cristiano Ronaldo reportedly responds to a transfer offer ahead of the FIFA Club World Cup\nCristiano Ronaldo of Al Na... [2844 chars]",
     url: 'https://www.manchestereveningnews.co.uk/sport/football/transfer-news/cristiano-ronaldo-transfer-latest-former-31789068',
     image:
       'https://i2-prod.manchestereveningnews.co.uk/article31789381.ece/ALTERNATES/s1200/0_JS368186065.jpg',
@@ -351,9 +351,9 @@ export const initialNewsForPaginationTest = [
     title:
       "Liverpool next transfer 'decided' after record Florian Wirtz deal amid Arne Slot meeting",
     description:
-      "Latest Liverpool transfer news with an update on the club's summer transfer business",
+      "Latest Liverpool transfer showNews with an update on the club's summer transfer business",
     content:
-      "Liverpool next transfer 'decided' after record Florian Wirtz deal amid Arne Slot meeting\nLatest Liverpool transfer news with an update on the club's summer transfer business\nLiverpool head coach Arne Slot met with Rayan Cherki last week (Image: Getty... [2479 chars]",
+      "Liverpool next transfer 'decided' after record Florian Wirtz deal amid Arne Slot meeting\nLatest Liverpool transfer showNews with an update on the club's summer transfer business\nLiverpool head coach Arne Slot met with Rayan Cherki last week (Image: Getty... [2479 chars]",
     url: 'https://www.liverpoolecho.co.uk/sport/football/transfer-news/liverpool-next-transfer-decided-after-31788751',
     image:
       'https://i2-prod.liverpoolecho.co.uk/article31788672.ece/ALTERNATES/s1200/0_Arne-Slot-14.jpg',
@@ -366,9 +366,9 @@ export const initialNewsForPaginationTest = [
   {
     title: 'Understanding how base editing tools work at the molecular level',
     description:
-      'You may have seen it in the news recently: a baby in Pennsylvania with a rare genetic disorder was healed with a personalized treatment that repaired his specific genetic mutation.',
+      'You may have seen it in the showNews recently: a baby in Pennsylvania with a rare genetic disorder was healed with a personalized treatment that repaired his specific genetic mutation.',
     content:
-      'You may have seen it in the news recently: a baby in Pennsylvania with a rare genetic disorder was healed with a personalized treatment that repaired his specific genetic mutation. The treatment was created using a form of gene editing called base ed... [7002 chars]',
+      'You may have seen it in the showNews recently: a baby in Pennsylvania with a rare genetic disorder was healed with a personalized treatment that repaired his specific genetic mutation. The treatment was created using a form of gene editing called base ed... [7002 chars]',
     url: 'https://www.news-medical.net/news/20250604/Understanding-how-base-editing-tools-work-at-the-molecular-level.aspx',
     image: 'https://www.news-medical.net/image-handler/picture/2014/7/Gene-620x480.jpg',
     publishedAt: '2025-06-04T17:15:00Z',
@@ -380,7 +380,7 @@ export const initialNewsForPaginationTest = [
   {
     title: 'Where to start with: Edmund White',
     description:
-      'After the news of White’s death, here is a guide to a foundational writer of gay lives and elder statesman of American queer literary fiction',
+      'After the showNews of White’s death, here is a guide to a foundational writer of gay lives and elder statesman of American queer literary fiction',
     content:
       'Edmund White, who has died aged 85, was born in Cincinatti, to conservative, homophobic parents. Although he soon rejected almost all his family’s cultural values, he retained their work ethic: White published 36 books in his lifetime, and was workin... [5189 chars]',
     url: 'https://www.theguardian.com/books/2025/jun/04/where-to-start-with-edmund-white',
@@ -469,9 +469,9 @@ export const initialNewsForPaginationTest = [
     title:
       "Cristiano Ronaldo transfer latest as former Manchester United star 'responds' to request",
     description:
-      'Latest Manchester United news and gossip as Cristiano Ronaldo reportedly responds to a transfer offer ahead of the FIFA Club World Cup',
+      'Latest Manchester United showNews and gossip as Cristiano Ronaldo reportedly responds to a transfer offer ahead of the FIFA Club World Cup',
     content:
-      "Cristiano Ronaldo transfer latest as former Manchester United star 'responds' to request\nLatest Manchester United news and gossip as Cristiano Ronaldo reportedly responds to a transfer offer ahead of the FIFA Club World Cup\nCristiano Ronaldo of Al Na... [2844 chars]",
+      "Cristiano Ronaldo transfer latest as former Manchester United star 'responds' to request\nLatest Manchester United showNews and gossip as Cristiano Ronaldo reportedly responds to a transfer offer ahead of the FIFA Club World Cup\nCristiano Ronaldo of Al Na... [2844 chars]",
     url: 'https://www.manchestereveningnews.co.uk/sport/football/transfer-news/cristiano-ronaldo-transfer-latest-former-31789068',
     image:
       'https://i2-prod.manchestereveningnews.co.uk/article31789381.ece/ALTERNATES/s1200/0_JS368186065.jpg',
@@ -501,9 +501,9 @@ export const initialNewsForPaginationTest = [
     title:
       "Liverpool next transfer 'decided' after record Florian Wirtz deal amid Arne Slot meeting",
     description:
-      "Latest Liverpool transfer news with an update on the club's summer transfer business",
+      "Latest Liverpool transfer showNews with an update on the club's summer transfer business",
     content:
-      "Liverpool next transfer 'decided' after record Florian Wirtz deal amid Arne Slot meeting\nLatest Liverpool transfer news with an update on the club's summer transfer business\nLiverpool head coach Arne Slot met with Rayan Cherki last week (Image: Getty... [2479 chars]",
+      "Liverpool next transfer 'decided' after record Florian Wirtz deal amid Arne Slot meeting\nLatest Liverpool transfer showNews with an update on the club's summer transfer business\nLiverpool head coach Arne Slot met with Rayan Cherki last week (Image: Getty... [2479 chars]",
     url: 'https://www.liverpoolecho.co.uk/sport/football/transfer-news/liverpool-next-transfer-decided-after-31788751',
     image:
       'https://i2-prod.liverpoolecho.co.uk/article31788672.ece/ALTERNATES/s1200/0_Arne-Slot-14.jpg',
@@ -516,9 +516,9 @@ export const initialNewsForPaginationTest = [
   {
     title: 'Understanding how base editing tools work at the molecular level',
     description:
-      'You may have seen it in the news recently: a baby in Pennsylvania with a rare genetic disorder was healed with a personalized treatment that repaired his specific genetic mutation.',
+      'You may have seen it in the showNews recently: a baby in Pennsylvania with a rare genetic disorder was healed with a personalized treatment that repaired his specific genetic mutation.',
     content:
-      'You may have seen it in the news recently: a baby in Pennsylvania with a rare genetic disorder was healed with a personalized treatment that repaired his specific genetic mutation. The treatment was created using a form of gene editing called base ed... [7002 chars]',
+      'You may have seen it in the showNews recently: a baby in Pennsylvania with a rare genetic disorder was healed with a personalized treatment that repaired his specific genetic mutation. The treatment was created using a form of gene editing called base ed... [7002 chars]',
     url: 'https://www.news-medical.net/news/20250604/Understanding-how-base-editing-tools-work-at-the-molecular-level.aspx',
     image: 'https://www.news-medical.net/image-handler/picture/2014/7/Gene-620x480.jpg',
     publishedAt: '2025-06-04T17:15:00Z',
@@ -530,7 +530,7 @@ export const initialNewsForPaginationTest = [
   {
     title: 'Where to start with: Edmund White',
     description:
-      'After the news of White’s death, here is a guide to a foundational writer of gay lives and elder statesman of American queer literary fiction',
+      'After the showNews of White’s death, here is a guide to a foundational writer of gay lives and elder statesman of American queer literary fiction',
     content:
       'Edmund White, who has died aged 85, was born in Cincinatti, to conservative, homophobic parents. Although he soon rejected almost all his family’s cultural values, he retained their work ethic: White published 36 books in his lifetime, and was workin... [5189 chars]',
     url: 'https://www.theguardian.com/books/2025/jun/04/where-to-start-with-edmund-white',

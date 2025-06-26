@@ -4,7 +4,7 @@ import { EditTaskForm } from './EditTaskForm.tsx';
 import { useTranslation } from 'react-i18next';
 import { TaskType, TaskUpdateData } from '../model/types';
 import { useList } from '../model/useList.ts';
-import { borderColors, textColors } from '../../../shared/myStyles/myStyles';
+import { borderColors, textColors } from '@/shared/myStyles/myStyles';
 
 export type TaskListProps = {
   tasks: TaskType[];
@@ -28,6 +28,7 @@ export const TasksList: React.FC<TaskListProps> = React.memo(
     } = useList({ tasks, deleteTask, updateTask, newAddedTask });
 
     const { t } = useTranslation('todopage');
+
     return (
       <div className="grid grid-rows-[2fr_1fr] md:grid-rows-none md:grid-cols-2 gap-2 h-full w-full p-1">
         {/* Task List */}

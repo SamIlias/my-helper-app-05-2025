@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { TaskFormValues } from './AddTaskForm.tsx';
-import { BaseTaskForm } from './BaseTaskForm.tsx';
+import { BaseTaskForm, TaskFormValues } from './BaseTaskForm.tsx';
 import { useTranslation } from 'react-i18next';
-import { borderColors, textColors } from '../../../shared/myStyles/myStyles';
+import { borderColors, textColors } from '@/shared/myStyles/myStyles';
 import { TaskType } from '../model/types';
 
 type PropsType = {

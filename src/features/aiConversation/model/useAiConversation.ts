@@ -1,7 +1,6 @@
-import { ConversationItem, initialConversationItem } from '@/shared/api/aiGPT/aiAPI';
+import { askModel, ConversationItem, initialConversationItem } from '@/shared/api/aiGPT/aiAPI';
 import { useState } from 'react';
-import { askModel } from '@/shared/api/aiGPT/aiAPI';
-import { truncateArrayKeepFirst } from '../lib/truncateArrayKeepFirst';
+import { truncateArrayKeepFirst } from './truncateArrayKeepFirst';
 
 export function useAiConversation() {
   const [conversationHistory, setConversationHistory] = useState<ConversationItem[]>([

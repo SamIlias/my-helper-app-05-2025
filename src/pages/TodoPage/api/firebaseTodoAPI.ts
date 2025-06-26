@@ -9,7 +9,7 @@ import {
   deleteDoc,
 } from 'firebase/firestore';
 import { db } from '@/shared/api/firebase/firebase';
-import { TaskWithoutId, TaskType, TaskUpdateData } from '../ui/TasksList.tsx';
+import { TaskWithoutId, TaskType, TaskUpdateData } from '../../../features/tasks/ui/TasksList.tsx';
 
 export const addTask = async (task: TaskWithoutId) => {
   try {

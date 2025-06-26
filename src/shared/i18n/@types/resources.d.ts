@@ -44,7 +44,7 @@ interface Resources {
   newspage: {
     title: 'News';
     searchForm: {
-      placeholder: 'Find news...';
+      placeholder: 'Find showNews...';
     };
   };
   todopage: {

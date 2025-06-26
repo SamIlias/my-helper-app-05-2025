@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { fetchWeather, WeatherDataType } from '../api/wheatherApi';
 import { weatherCodes, WeatherCodesType, WeatherDescription } from '../api/weatherCodes';
 import { getTranslation } from '../../../shared/api/translator/translatorAPI';
-import { normalizeError } from '../../../shared/lib/utils/errorHandler';
-import { getCurrentPeriodOfDay } from '../../../shared/lib/utils/getCurrentPeriodOfDay';
+import { normalizeError } from '../../../shared/utils/errorHandler';
+import { getCurrentPeriodOfDay } from '../../../shared/utils/getCurrentPeriodOfDay';
 import { useTranslation } from 'react-i18next';
 
 export const useWeather = () => {

@@ -1,20 +1,18 @@
 import * as React from 'react';
-import { AddTaskForm } from '@/features/tasks/ui/AddTaskForm.tsx';
-import { TasksList } from '@/features/tasks/ui/TasksList.tsx';
+import { TasksList, AddTaskForm } from '@/features/tasks';
 import { Preloader } from '@/shared/ui/Preloader.tsx';
 import { Navigate } from 'react-router-dom';
 import preloader from '@/shared/assets/preloaderGear.svg';
 import type { User } from 'firebase/auth';
 import { useTranslation } from 'react-i18next';
-import { useTasks } from '@/features/tasks/model/useTasks.ts';
-import { PageHeader } from '../../shared/ui/PageHeader';
-// import { mockTasks } from '../../../lib/mockOfTasks.ts';
+import { PageHeader } from '@/shared/ui/PageHeader';
+import { useTasks } from '../model/useTasks';
 
 type Props = {
   user: User | null | undefined;
 };
 
-const TodoPage: React.FC<Props> = ({ user }) => {
+export const TodoPage: React.FC<Props> = ({ user }) => {
   const { t } = useTranslation('todopage');
   const {
     isAddFormActive,
@@ -95,5 +93,3 @@ const TodoPage: React.FC<Props> = ({ user }) => {
     </div>
   );
 };
-
-export default TodoPage;

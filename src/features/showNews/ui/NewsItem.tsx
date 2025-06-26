@@ -3,7 +3,7 @@ import { NewsItemType } from '../api/newsAPI.ts';
 import { useState } from 'react';
 import { borderColors, buttonStyles, textColors } from '../../../shared/myStyles/myStyles';
 
-export const NewsItemCard: React.FC<NewsItemType> = ({
+export const NewsItem: React.FC<NewsItemType> = ({
   title,
   description,
   content,

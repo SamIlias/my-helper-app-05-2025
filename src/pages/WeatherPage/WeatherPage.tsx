@@ -3,13 +3,13 @@ import React, { useEffect } from 'react';
 import { Preloader } from '@/shared/ui/Preloader.tsx';
 import preloader from '@/shared/assets/preloaderSun.svg';
 import { useTranslation } from 'react-i18next';
-import { useWeather } from '@/features/weather/model/useWeather';
+import { useWeather } from '@/features/weather';
 import { textColors } from '@/shared/myStyles/myStyles';
 import { PageHeader } from '@/shared/ui/PageHeader';
 
 const INITIAL_CITY: string = import.meta.env.VITE_CURRENT_CITY;
 
-const WeatherPage: React.FC = () => {
+export const WeatherPage: React.FC = () => {
   const { t } = useTranslation('weatherpage');
   const { weatherData, loadWeatherData, setTranslatedDescription, errorMessage, description } =
     useWeather();
@@ -87,5 +87,3 @@ const WeatherPage: React.FC = () => {
     </div>
   );
 };
-
-export default WeatherPage;

@@ -40,13 +40,9 @@ export const useList = (args: Args) => {
     setEditTaskMode({ active: false, editedTask: null });
   };
 
-  const changeTask = (data: TaskFormValues) => {
+  const onEditFormSubmit = (data: TaskFormValues) => {
     const taskId = editTaskMode.editedTask!.id;
     updateTask(taskId, { ...data });
-  };
-
-  const onEditFormSubmit = (data: TaskFormValues) => {
-    changeTask(data);
     setActiveTask(editTaskMode.editedTask);
     closeEditForm();
   };

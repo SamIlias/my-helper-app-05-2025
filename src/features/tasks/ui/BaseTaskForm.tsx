@@ -1,19 +1,9 @@
 import { useForm } from 'react-hook-form';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { TaskType } from '../model/types';
-import { borderColors, textColors } from '../../../shared/myStyles/myStyles';
+import { taskCategories, TaskCategoryType, TaskFormValues } from '../model/types';
+import { borderColors, textColors } from '@/shared/myStyles/myStyles';
 
-export const taskCategories = {
-  Default: 'default',
-  Work: 'work',
-  Daily: 'daily',
-  Urgent: 'urgent',
-  Shopping: 'shopping',
-} as const;
-export type TaskCategoryType = keyof typeof taskCategories;
-
-export type TaskFormValues = Pick<TaskType, 'title' | 'deadline' | 'category' | 'description'>;
 type PropsType = {
   closeAddForm: () => void;
   onSubmit: (data: TaskFormValues) => void;

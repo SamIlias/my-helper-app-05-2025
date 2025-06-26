@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { BaseTaskForm } from './BaseTaskForm.tsx';
+import { BaseTaskForm, TaskFormValues } from './BaseTaskForm.tsx';
 import { useTranslation } from 'react-i18next';
-import { textColors } from '../../../shared/myStyles/myStyles';
-import { TaskType } from '../model/types';
+import { textColors } from '@/shared/myStyles/myStyles';
 
-export const AddTaskForm: React.FC<PropsType> = React.memo(({ closeAddForm, onSubmit }) => {
+export const AddTaskForm: React.FC<PropsType> = ({ closeAddForm, onSubmit }) => {
   const { t } = useTranslation('todopage');
 
   return (
@@ -19,9 +18,7 @@ export const AddTaskForm: React.FC<PropsType> = React.memo(({ closeAddForm, onSu
       />
     </div>
   );
-});
-
-export type TaskFormValues = Pick<TaskType, 'title' | 'deadline' | 'category' | 'description'>;
+};
 
 type PropsType = {
   closeAddForm: () => void;

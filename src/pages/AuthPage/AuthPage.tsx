@@ -1,10 +1,10 @@
+import * as React from 'react';
 import { Dispatch, SetStateAction, useEffect } from 'react';
 import { User } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../../shared/api/firebase/firebase.ts';
-import * as React from 'react';
+import { auth } from '@/shared/api';
 import { Navigate } from 'react-router-dom';
-import { AuthForm } from '../../features/auth/ui/AuthForm';
+import { AuthForm } from '@/features/auth';
 
 type AuthProps = {
   setUser: Dispatch<SetStateAction<User | null | undefined>>;

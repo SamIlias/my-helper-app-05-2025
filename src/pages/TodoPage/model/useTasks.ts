@@ -1,21 +1,20 @@
 import type { User } from 'firebase/auth';
 import { useEffect, useState } from 'react';
-import { TaskFormValues } from '../ui/AddTaskForm';
+import { TaskFormValues, TaskType, TaskUpdateData, TaskWithoutId } from '@/features/tasks';
 import { addTask, deleteTaskById, getTasks, updateTaskById } from '../api/firebaseTodoAPI';
-import { normalizeError } from '@/shared/lib/utils/errorHandler';
-import { TaskType, TaskUpdateData, TaskWithoutId } from './types';
+import { normalizeError } from '@/shared/utils/errorHandler';
 
 export const useTasks = (user: User | null | undefined) => {
   function findNewTask(prevTasks: TaskType[], updatedTasks: TaskType[]): TaskType | undefined {
     return updatedTasks.find((task) => !prevTasks.some((t) => t.id === task.id)) || undefined;
   }
   const [tasks, setTasks] = useState<TaskType[]>([]);
-  // const [tasks, setTasks] = useState<TaskType[]>([...mockTasks]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isAddFormActive, setIsAddFormActive] = useState<boolean>(false);
   const [isCompletedTasksHidden, setIsCompletedTasksHidden] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [newAddedTask, setNewAddedTask] = useState<TaskType | undefined>(undefined);
+
   const closeAddForm = () => {
     setIsAddFormActive(false);
   };

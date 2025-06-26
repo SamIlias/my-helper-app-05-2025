@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { taskCategories } from './BaseTaskForm.tsx';
+import { taskCategories } from '../model/types';
 import { useTranslation } from 'react-i18next';
 import { TaskType } from '../model/types';
-import { textColors } from '../../../shared/myStyles/myStyles';
+import { textColors } from '@/shared/myStyles/myStyles';
 
 export const TaskItem: React.FC<IProps> = ({
   task,
