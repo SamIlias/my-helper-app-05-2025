@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { TaskType } from '../model/types';
-import { textColors } from '../../../shared/myStyles/myStyles';
+import { borderColors, textColors } from '../../../shared/myStyles/myStyles';
 
 export const taskCategories = {
   Default: 'default',
@@ -58,7 +58,7 @@ export const BaseTaskForm: React.FC<PropsType> = ({
             },
           })}
           placeholder={t('baseTaskForm.titlePlaceholder')}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 "
+          className={`${textColors.placeholder} ${borderColors.formInput} px-1 mt-1 block w-full`}
         />
         {errors.title && (
           <p className="text-red-500 text-sm mt-1" id="title-error" role="alert">
@@ -76,7 +76,7 @@ export const BaseTaskForm: React.FC<PropsType> = ({
           id="deadline"
           {...register('deadline')}
           type="date"
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          className={`${textColors.placeholder} ${borderColors.formInput} px-1 mt-1 block w-full`}
         />
       </div>
 
@@ -88,10 +88,10 @@ export const BaseTaskForm: React.FC<PropsType> = ({
         <select
           id="category"
           {...register('category')}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 "
+          className={`${textColors.placeholder} ${borderColors.formInput} px-1 mt-1 block w-full`}
         >
           {(Object.keys(taskCategories) as TaskCategoryType[]).map((key) => (
-            <option className="bg-gray-700/80" value={taskCategories[key]}>
+            <option className={` bg-stone-700/20`} value={taskCategories[key]}>
               {key}
             </option>
           ))}
@@ -111,12 +111,12 @@ export const BaseTaskForm: React.FC<PropsType> = ({
           {...register('description')}
           placeholder={t('baseTaskForm.descriptionPlaceholder')}
           rows={4}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          className={`${textColors.placeholder} ${borderColors.formInput} px-1 mt-1 block w-full`}
         />
       </div>
 
       {/* Buttons */}
-      <div className="col-span-2 flex justify-start mt-4">
+      <div className="col-span-2 flex gap-1 justify-start mt-4">
         <button
           type="button"
           onClick={closeAddForm}

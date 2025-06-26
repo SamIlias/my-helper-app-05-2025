@@ -34,7 +34,7 @@ export const TasksList: React.FC<TaskListProps> = React.memo(
         <div
           className={`border ${borderColors.primary} h-full rounded p-2 overflow-y-auto shadow-md`}
         >
-          <h2 className="text-xl font-semibold text-center text-gray-800 dark:text-white mb-4">
+          <h2 className={`${textColors.main} text-xl font-semibold text-center mb-4`}>
             {t('tasksList.listTitle')}
           </h2>
           {tasks.length === 0 && (
@@ -77,11 +77,11 @@ export const TasksList: React.FC<TaskListProps> = React.memo(
           </div>
         ) : (
           <div className={`border ${borderColors.primary}  h-full rounded p-2 overflow-y-scroll`}>
-            <h2 className="text-xl font-semibold text-center dark:text-white mb-4">
+            <h2 className={`${textColors.main} text-xl font-semibold text-center mb-4`}>
               {t('tasksList.descriptionTitle')}
             </h2>
             <p
-              className={`${activeTask?.description ? 'text-white dark:text-gray-200 text-shadow-lg/40 whitespace-pre-wrap text-balance' : 'text-amber-700 text-shadow-lg/40 italic'}`}
+              className={`${activeTask?.description ? `${textColors.secondary} text-shadow-md whitespace-pre-wrap text-balance` : 'text-amber-700 text-shadow-md italic'}`}
             >
               {activeTask?.description || t('tasksList.descriptionPlaceholder')}
             </p>

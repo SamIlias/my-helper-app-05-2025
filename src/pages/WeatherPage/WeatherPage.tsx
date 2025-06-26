@@ -33,7 +33,7 @@ const WeatherPage: React.FC = () => {
   return (
     <div className="flex flex-col min-h-0 h-full p-4 gap-2">
       {/* Header */}
-      <PageHeader title={t('title')} />
+      <PageHeader title={t('title')} children={null} />
 
       {/* Main content */}
       <main className="relative grid h-full">
@@ -69,7 +69,7 @@ const WeatherPage: React.FC = () => {
               <img
                 src={description?.image}
                 alt={description?.description}
-                className="h-2/3 md:h-2/5 lg:h-1/2 border rounded-md bg-stone-300 dark:bg-stone-500/10"
+                className="h-2/3 md:h-2/5 lg:h-1/2 border rounded-md bg-stone-300 dark:bg-stone-300/20"
               />
             </div>
           </div>

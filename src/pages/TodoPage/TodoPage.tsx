@@ -47,10 +47,10 @@ const TodoPage: React.FC<Props> = ({ user }) => {
       <PageHeader
         title={t('title')}
         children={
-          <div className="">
+          <div className="flex gap-1">
             <button
               onClick={() => setIsAddFormActive(true)}
-              className="px-2 py-1 bg-amber-900 text-white rounded-md hover:bg-amber-600 hover:text-black transition"
+              className="px-2 py-1 bg-yellow-500 text-black rounded-md hover:bg-amber-700 hover:text-white transition"
             >
               {t('addTaskButtonName')}
             </button>
@@ -63,7 +63,7 @@ const TodoPage: React.FC<Props> = ({ user }) => {
                   ? t('showHideButton.titleOnHoverHide')
                   : t('showHideButton.titleOnHoverShow')
               }
-              className="px-2 py-1 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition"
+              className="px-2 py-1 bg-stone-400 text-white rounded-md hover:bg-stone-600 dark:hover:bg-stone-300 dark:hover:text-black hover:text-amber-200 transition"
             >
               {isCompletedTasksHidden ? t('showHideButton.showName') : t('showHideButton.hideName')}
             </button>
