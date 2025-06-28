@@ -1,4 +1,4 @@
-import { MainLinkButton } from '../../../shared/ui/MainLinkButton';
+import { MainLinkButton } from './MainLinkButton';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 

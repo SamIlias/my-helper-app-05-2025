@@ -1,4 +1,4 @@
-import { SearchForm } from '@/shared/ui/SearchForm.tsx';
+import { SearchForm } from '@/shared/ui';
 import React, { useEffect } from 'react';
 import { Preloader } from '@/shared/ui/Preloader.tsx';
 import preloader from '@/shared/assets/preloaderSun.svg';

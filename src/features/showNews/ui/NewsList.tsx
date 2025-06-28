@@ -1,12 +1,10 @@
-import { Preloader } from '../../../shared/ui/Preloader';
-import preloader from '../../../shared/assets/preloaderNews.svg';
-import Pagination from '../../../shared/ui/Pagination';
+import { Pagination, Preloader, SearchForm } from '@/shared/ui';
+import preloader from '@/shared/assets/preloaderNews.svg';
 import { NewsItemType } from '../api/newsAPI';
 import { NewsItem } from './NewsItem';
 import * as React from 'react';
-import { useNews } from '../model/useNews';
 import { useEffect } from 'react';
-import { SearchForm } from '../../../shared/ui/SearchForm';
+import { useNews } from '../model/useNews';
 import { useTranslation } from 'react-i18next';
 
 export const NewsList: React.FC = () => {
@@ -18,7 +16,7 @@ export const NewsList: React.FC = () => {
     onChangePageNumber,
     firstPortionItem,
     lastPortionItem,
-    NEWS_PORTION_SIZE,
+    NEWS_ON_ONE_PAGE_COUNT,
   } = useNews();
 
   const { t, i18n } = useTranslation('newspage');
@@ -50,7 +48,7 @@ export const NewsList: React.FC = () => {
                 totalItemsCount={newsData.length}
                 currentPage={currentPage}
                 onChangePageNumber={onChangePageNumber}
-                pageSize={NEWS_PORTION_SIZE}
+                itemsOnOnePageCount={NEWS_ON_ONE_PAGE_COUNT}
               />
             </div>
 

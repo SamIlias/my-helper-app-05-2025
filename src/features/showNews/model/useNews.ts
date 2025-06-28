@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { fetchNews, NewsItemType } from '../api/newsAPI';
-import { normalizeError } from '../../../shared/utils/errorHandler';
+import { normalizeError } from '@/shared/utils/errorHandler';
 
-const NEWS_PORTION_SIZE = 2;
+const NEWS_ON_ONE_PAGE_COUNT = 2;
 
 export const useNews = () => {
   const [newsData, setNewsData] = useState<NewsItemType[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const lastPortionItem = currentPage * NEWS_PORTION_SIZE;
-  const firstPortionItem = lastPortionItem - NEWS_PORTION_SIZE;
+  const lastPortionItem = currentPage * NEWS_ON_ONE_PAGE_COUNT;
+  const firstPortionItem = lastPortionItem - NEWS_ON_ONE_PAGE_COUNT;
 
   const onChangePageNumber = (page: number) => {
     setCurrentPage(page);
@@ -34,6 +34,6 @@ export const useNews = () => {
     onChangePageNumber,
     firstPortionItem,
     lastPortionItem,
-    NEWS_PORTION_SIZE,
+    NEWS_ON_ONE_PAGE_COUNT,
   };
 };

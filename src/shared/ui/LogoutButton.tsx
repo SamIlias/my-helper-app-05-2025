@@ -2,8 +2,8 @@ import * as React from 'react';
 import { User } from 'firebase/auth';
 import { Dispatch, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
-import { logOut } from '../api';
-import { buttonStyles } from '../../../shared/myStyles/myStyles';
+import { logOut } from '../../features/auth/api/auth';
+import { buttonStyles } from '../myStyles/myStyles';
 
 type Props = {
   setUser: Dispatch<SetStateAction<User | null | undefined>>;

@@ -5,7 +5,7 @@ import {
   GoogleAuthProvider,
   signOut,
 } from 'firebase/auth';
-import { auth } from '@/shared/api/firebase/firebase';
+import { auth } from '@/shared/api';
 
 export const signIn = (email: string, password: string) =>
   signInWithEmailAndPassword(auth, email, password);

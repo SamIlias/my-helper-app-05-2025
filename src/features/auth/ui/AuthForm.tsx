@@ -1,24 +1,20 @@
-import { useState } from 'react';
-import { signIn, signUp, signInWithGoogle } from '../api';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { normalizeError } from '@/shared/utils/errorHandler';
-import { UserCredential } from 'firebase/auth';
-import { textColors } from '../../../shared/myStyles/myStyles';
+import { textColors } from '@/shared/myStyles/myStyles';
+import { useAuth } from '../model/useAuth';
 
 export const AuthForm: React.FC = () => {
   const { t } = useTranslation('authpage');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-  const handleAction = (action: () => Promise<UserCredential>) => async () => {
-    setErrorMessage(null);
-    try {
-      await action();
-    } catch (err: unknown) {
-      setErrorMessage(normalizeError(err));
-    }
-  };
+  const {
+    email,
+    password,
+    setEmail,
+    setPassword,
+    errorMessage,
+    signInAction,
+    signUpAction,
+    signInWithGoogleAction,
+  } = useAuth();
 
   return (
     <div className="flex items-center h-full w-full">
@@ -41,19 +37,19 @@ export const AuthForm: React.FC = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button
-          onClick={handleAction(() => signIn(email, password))}
+          onClick={signInAction}
           className="w-full py-2 bg-lime-500/40  rounded hover:bg-lime-500 cursor-pointer"
         >
           {t('form.signInButtonTitle')}
         </button>
         <button
-          onClick={handleAction(() => signUp(email, password))}
+          onClick={signUpAction}
           className="w-full py-2 bg-amber-500/40  rounded hover:bg-amber-500 cursor-pointer"
         >
           {t('form.signUpButtonTitle')}
         </button>
         <button
-          onClick={handleAction(signInWithGoogle)}
+          onClick={signInWithGoogleAction}
           className="w-full py-2 bg-yellow-500/40  rounded hover:bg-yellow-500 cursor-pointer"
         >
           {t('form.signInGoogleButtonTitle')}

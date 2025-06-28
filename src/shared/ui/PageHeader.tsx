@@ -2,10 +2,9 @@ import { borderColors, pageTitleStyle } from '../myStyles/myStyles';
 import * as React from 'react';
 import { ReactElement } from 'react';
 
-export const PageHeader: React.FC<{ title: string; children: ReactElement | null }> = ({
-  title,
-  children = null,
-}) => {
+type Props = { title: string; children: ReactElement | null };
+
+export const PageHeader: React.FC<Props> = ({ title, children = null }) => {
   return (
     <header
       className={`border-b ${borderColors.primary} pb-2 w-full flex justify-between items-center`}
