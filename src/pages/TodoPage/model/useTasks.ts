@@ -14,7 +14,7 @@ export const useTasks = (user: User | null | undefined) => {
   const [isAddFormActive, setIsAddFormActive] = useState<boolean>(false);
   const [isCompletedTasksHidden, setIsCompletedTasksHidden] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [newAddedTask, setNewAddedTask] = useState<TaskType | undefined>(undefined);
+  const [newAddedTask, setNewAddedTask] = useState<TaskType | undefined | null>(undefined);
 
   const closeAddForm = () => {
     setIsAddFormActive(false);
@@ -104,6 +104,7 @@ export const useTasks = (user: User | null | undefined) => {
     error,
     handledTasks,
     newAddedTask,
+    setNewAddedTask,
     setIsAddFormActive,
     onAddTaskSubmit,
     onClickHideShowButton,

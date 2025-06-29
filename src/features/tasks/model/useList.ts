@@ -5,7 +5,7 @@ import { TaskListProps } from '../ui/TasksList';
 type Params = Omit<TaskListProps, 'toggleCompletingOfTask'>;
 
 export const useList = (params: Params) => {
-  const { tasks, deleteTask, updateTask, newAddedTask } = params;
+  const { tasks, deleteTask, updateTask, newAddedTask, setNewAddedTask } = params;
   const [activeTask, setActiveTask] = useState<TaskType | null | undefined>(
     newAddedTask || tasks[0],
   );
@@ -21,6 +21,7 @@ export const useList = (params: Params) => {
 
   useEffect(() => {
     newTaskElementAnchor.current?.scrollIntoView({ behavior: 'smooth' });
+    setNewAddedTask(null);
   }, [tasks]);
 
   const onTaskClick = (id: string): void => {

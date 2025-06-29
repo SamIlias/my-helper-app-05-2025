@@ -12,11 +12,12 @@ export type TaskListProps = {
   deleteTask: (id: string) => void;
   updateTask: (id: string, updatedData: TaskUpdateData) => void;
   toggleCompletingOfTask: (id: string, isCompleted: boolean) => void;
-  newAddedTask?: TaskType;
+  newAddedTask?: TaskType | null;
+  setNewAddedTask: (task: TaskType | null | undefined) => void;
 };
 
 export const TasksList: React.FC<TaskListProps> = React.memo(
-  ({ tasks, deleteTask, updateTask, toggleCompletingOfTask, newAddedTask }) => {
+  ({ tasks, deleteTask, updateTask, toggleCompletingOfTask, newAddedTask, setNewAddedTask }) => {
     const {
       activeTask,
       onTaskClick,
@@ -26,7 +27,7 @@ export const TasksList: React.FC<TaskListProps> = React.memo(
       editTaskMode,
       closeEditForm,
       onEditFormSubmit,
-    } = useList({ tasks, deleteTask, updateTask, newAddedTask });
+    } = useList({ tasks, deleteTask, updateTask, newAddedTask, setNewAddedTask });
 
     const { t } = useTranslation('todopage');
 

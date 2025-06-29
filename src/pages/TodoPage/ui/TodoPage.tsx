@@ -22,6 +22,7 @@ export const TodoPage: React.FC<Props> = ({ user }) => {
     error,
     handledTasks,
     newAddedTask,
+    setNewAddedTask,
     setIsAddFormActive,
     onAddTaskSubmit,
     onClickHideShowButton,
@@ -72,6 +73,7 @@ export const TodoPage: React.FC<Props> = ({ user }) => {
             updateTask={updateTask}
             toggleCompletingOfTask={toggleCompletingOfTask}
             newAddedTask={newAddedTask}
+            setNewAddedTask={setNewAddedTask}
           />
         </main>
       )}
