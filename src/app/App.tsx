@@ -1,17 +1,15 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import MainNav from '../widgets/MainNavigation/MainNav.tsx';
-import { HomePage } from '../pages/HomePage';
-import { Clock } from '../shared/ui/Clock.tsx';
-import { textColors } from '../shared/myStyles/myStyles.ts';
-import { AuthPage } from '../pages/AuthPage';
+import MainNav from '@/widgets/MainNavigation/MainNav.tsx';
+import { HomePage } from '@/pages/HomePage';
+import { Clock, ErrorFallback, LoadingFallback } from '@/shared/ui';
+import { textColors } from '@/shared/myStyles/myStyles.ts';
+import { AuthPage } from '@/pages/AuthPage';
 import type { User } from 'firebase/auth';
 import { lazy, Suspense, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ErrorBoundary } from 'react-error-boundary';
-import { ErrorFallback } from '../shared/ui/ErrorFallback';
-import { Header } from '../widgets/Header/Header';
-import { LoadingFallback } from '../shared/ui/LoadingFallback';
+import { Header } from '@/widgets/Header/Header';
 
 // import TodoPage from '@/pages/TodoPage';
 // import NewsPage from '@/pages/NewsPage';

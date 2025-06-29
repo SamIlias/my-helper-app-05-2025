@@ -1,23 +1,44 @@
-export type TaskType = {
+type TaskType = {
   id: string;
   userId: string;
   deadline?: string;
   title: string;
   description?: string;
   isCompleted: boolean;
-  category: TaskCategoryType;
+  category: TaskCategoryKey;
 };
 
-export type TaskWithoutId = Omit<TaskType, 'id'>;
-export type TaskUpdateData = Partial<Omit<TaskType, 'id' | 'userId'>>;
+type TaskWithoutId = Omit<TaskType, 'id'>;
+type TaskUpdateData = Partial<Omit<TaskType, 'id' | 'userId'>>;
 
-export const taskCategories = {
+type TaskFormValues = Pick<TaskType, 'title' | 'deadline' | 'category' | 'description'>;
+
+const taskCategories = {
   Default: 'default',
   Work: 'work',
   Daily: 'daily',
   Urgent: 'urgent',
   Shopping: 'shopping',
 } as const;
-export type TaskCategoryType = keyof typeof taskCategories;
 
-export type TaskFormValues = Pick<TaskType, 'title' | 'deadline' | 'category' | 'description'>;
+type TaskCategoryKey = keyof typeof taskCategories;
+
+const categoryColor = {
+  [taskCategories.Work]: 'text-amber-800 dark:text-amber-300',
+  [taskCategories.Default]: 'text-lime-700 dark:text-lime-300',
+  [taskCategories.Urgent]: 'text-red-500 dark:text-red-400',
+  [taskCategories.Daily]: 'text-cyan-600',
+  [taskCategories.Shopping]: 'text-violet-500',
+} as const;
+
+type TaskCategoryValue = keyof typeof categoryColor;
+
+export type {
+  TaskType,
+  TaskWithoutId,
+  TaskUpdateData,
+  TaskFormValues,
+  TaskCategoryKey,
+  TaskCategoryValue,
+};
+export { categoryColor, taskCategories };

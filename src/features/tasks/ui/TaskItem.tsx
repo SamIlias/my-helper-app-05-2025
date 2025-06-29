@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { taskCategories } from '../model/types';
 import { useTranslation } from 'react-i18next';
-import { TaskType } from '../model/types';
+import { categoryColor, TaskCategoryValue, TaskType } from '../model/types';
 import { textColors } from '@/shared/myStyles/myStyles';
 
 export const TaskItem: React.FC<IProps> = ({
@@ -10,58 +9,47 @@ export const TaskItem: React.FC<IProps> = ({
   onEditTask,
   toggleCompletingOfTask,
 }) => {
-  const categoryColor = {
-    [taskCategories.Work]: 'text-amber-500',
-    [taskCategories.Default]: 'text-lime-500',
-    [taskCategories.Urgent]: 'text-red-500',
-    [taskCategories.Daily]: 'text-cyan-400',
-    [taskCategories.Shopping]: 'text-violet-500',
-  } as const;
-  type Category = keyof typeof categoryColor;
-
   const { t } = useTranslation('todopage');
 
   return (
-    <>
-      <div className="flex flex-col space-x-3">
-        <span className={`${categoryColor[task.category as Category]} block text-shadow-md/30 `}>
-          {task.category}
-        </span>
-        <div className="mb-1">
-          <div className="space-x-2">
-            <input
-              type="checkbox"
-              checked={task.isCompleted}
-              onChange={() => {
-                toggleCompletingOfTask(task.id, !task.isCompleted);
-              }}
-              className="form-checkbox"
-            />
-            <span className={`${textColors.main} font-bold`}>{task.title}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className={`text-sm ${textColors.secondary} dark:text-gray-300`}>
-              {task.deadline}
-            </span>
-            <div>
-              <button
-                onClick={() => onEditTask(task)}
-                className="px-1 mx-1 pb-0.5 text-sm text-white bg-amber-800 hover:bg-amber-600 rounded transition"
-              >
-                {t('taskItem.editButtonName')}
-              </button>
+    <div className="flex flex-col space-x-3">
+      <span className={`${categoryColor[task.category as TaskCategoryValue]} block `}>
+        {task.category}
+      </span>
+      <div className="mb-1">
+        <div className="space-x-2">
+          <input
+            type="checkbox"
+            checked={task.isCompleted}
+            onChange={() => {
+              toggleCompletingOfTask(task.id, !task.isCompleted);
+            }}
+            className="form-checkbox"
+          />
+          <span className={`${textColors.main} font-bold`}>{task.title}</span>
+        </div>
+        <div className="flex justify-between">
+          <span className={`text-sm ${textColors.secondary} dark:text-gray-300`}>
+            {task.deadline}
+          </span>
+          <div>
+            <button
+              onClick={() => onEditTask(task)}
+              className="px-1 mx-1 pb-0.5 text-sm text-white bg-amber-800 hover:bg-amber-600 rounded transition"
+            >
+              {t('taskItem.editButtonName')}
+            </button>
 
-              <button
-                onClick={() => deleteTask(task.id)}
-                className="px-1 pb-0.5 text-sm text-white bg-red-900 hover:bg-red-600 rounded transition"
-              >
-                {t('taskItem.deleteButtonName')}
-              </button>
-            </div>
+            <button
+              onClick={() => deleteTask(task.id)}
+              className="px-1 pb-0.5 text-sm text-white bg-red-900 hover:bg-red-600 rounded transition"
+            >
+              {t('taskItem.deleteButtonName')}
+            </button>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { TaskType, TaskUpdateData } from '../model/types';
 import { useList } from '../model/useList.ts';
 import { borderColors, textColors } from '@/shared/myStyles/myStyles';
+import { Description } from './Description';
 
 export type TaskListProps = {
   tasks: TaskType[];
@@ -31,18 +32,19 @@ export const TasksList: React.FC<TaskListProps> = React.memo(
 
     return (
       <div className="grid grid-rows-[2fr_1fr] md:grid-rows-none md:grid-cols-2 gap-2 h-full w-full p-1">
-        {/* Task List */}
         <div
           className={`border ${borderColors.primary} h-full rounded p-2 overflow-y-auto shadow-md`}
         >
           <h2 className={`${textColors.main} text-xl font-semibold text-center mb-4`}>
             {t('tasksList.listTitle')}
           </h2>
+
           {tasks.length === 0 && (
             <h3 className={`${textColors.highlight} text-center`}>
               {t('tasksList.emptyListMessage')}
             </h3>
           )}
+
           <div className="space-y-2">
             {tasks.map((task) => {
               const isActive = task.id === activeTask?.id;
@@ -69,24 +71,13 @@ export const TasksList: React.FC<TaskListProps> = React.memo(
 
         {/* Description or edit form */}
         {editTaskMode.active ? (
-          <div className={`overflow-y-scroll`}>
-            <EditTaskForm
-              closeForm={closeEditForm}
-              onSubmit={onEditFormSubmit}
-              editedTask={editTaskMode.editedTask as TaskType}
-            />
-          </div>
+          <EditTaskForm
+            closeForm={closeEditForm}
+            onSubmit={onEditFormSubmit}
+            editedTask={editTaskMode.editedTask as TaskType}
+          />
         ) : (
-          <div className={`border ${borderColors.primary}  h-full rounded p-2 overflow-y-scroll`}>
-            <h2 className={`${textColors.main} text-xl font-semibold text-center mb-4`}>
-              {t('tasksList.descriptionTitle')}
-            </h2>
-            <p
-              className={`${activeTask?.description ? `${textColors.secondary} text-shadow-md whitespace-pre-wrap text-balance` : 'text-amber-700 text-shadow-md italic'}`}
-            >
-              {activeTask?.description || t('tasksList.descriptionPlaceholder')}
-            </p>
-          </div>
+          <Description activeTask={activeTask} />
         )}
       </div>
     );

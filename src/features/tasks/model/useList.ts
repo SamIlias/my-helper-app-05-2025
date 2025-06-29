@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { TaskType } from './types';
-import { TaskFormValues } from '../ui/AddTaskForm';
+import { TaskFormValues, TaskType } from './types';
 import { TaskListProps } from '../ui/TasksList';
 
-type Args = Omit<TaskListProps, 'toggleCompletingOfTask'>;
+type Params = Omit<TaskListProps, 'toggleCompletingOfTask'>;
 
-export const useList = (args: Args) => {
-  const { tasks, deleteTask, updateTask, newAddedTask } = args;
+export const useList = (params: Params) => {
+  const { tasks, deleteTask, updateTask, newAddedTask } = params;
   const [activeTask, setActiveTask] = useState<TaskType | null | undefined>(
     newAddedTask || tasks[0],
   );

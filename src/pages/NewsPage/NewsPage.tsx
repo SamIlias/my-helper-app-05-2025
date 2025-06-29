@@ -7,7 +7,7 @@ export const NewsPage: React.FC = () => {
   const { t } = useTranslation('newspage');
 
   return (
-    <div className="flex flex-col h-full p-4 gap-2">
+    <div className="flex flex-col h-full mx-3 gap-2">
       <PageHeader title={t('title')} children={null} />
       <NewsList />
     </div>

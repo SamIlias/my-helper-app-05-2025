@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { fetchWeather, WeatherDataType } from '../api/wheatherApi';
 import { weatherCodes, WeatherCodesType, WeatherDescription } from '../api/weatherCodes';
-import { getTranslation } from '../../../shared/api/translator/translatorAPI';
-import { normalizeError } from '../../../shared/utils/errorHandler';
-import { getCurrentPeriodOfDay } from '../../../shared/utils/getCurrentPeriodOfDay';
+import { getTranslation } from '@/shared/api';
+import { normalizeError } from '@/shared/utils/errorHandler';
+import { getCurrentPeriodOfDay } from '@/shared/utils/getCurrentPeriodOfDay';
 import { useTranslation } from 'react-i18next';
+
+const INITIAL_CITY: string = import.meta.env.VITE_CURRENT_CITY;
 
 export const useWeather = () => {
   const [weatherData, setWeatherData] = useState<WeatherDataType | null>(null);
@@ -12,6 +14,8 @@ export const useWeather = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const { i18n } = useTranslation('weatherpage');
+
+  const hasLoaded = React.useRef(false);
 
   const loadWeatherData: (cityName: string) => Promise<void> = async (cityName) => {
     try {
@@ -36,10 +40,24 @@ export const useWeather = () => {
     }
   };
 
+  useEffect(() => {
+    if (hasLoaded.current) return;
+    hasLoaded.current = true;
+    loadWeatherData(INITIAL_CITY);
+  }, []);
+
+  useEffect(() => {
+    if (!weatherData?.current.weatherCode) return;
+    setTranslatedDescription();
+  }, [weatherData?.current.weatherCode]);
+
+  const onSubmit = (cityName: string) => {
+    loadWeatherData(cityName);
+  };
+
   return {
     weatherData,
-    loadWeatherData,
-    setTranslatedDescription,
+    onSubmit,
     errorMessage,
     description,
   };

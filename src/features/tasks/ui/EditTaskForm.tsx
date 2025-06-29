@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { BaseTaskForm, TaskFormValues } from './BaseTaskForm.tsx';
+import { BaseTaskForm } from './BaseTaskForm.tsx';
 import { useTranslation } from 'react-i18next';
-import { borderColors, textColors } from '@/shared/myStyles/myStyles';
-import { TaskType } from '../model/types';
+import { borderColors } from '@/shared/myStyles/myStyles';
+import { TaskFormValues, TaskType } from '../model/types';
 
 type PropsType = {
   closeForm: () => void;
@@ -22,12 +22,10 @@ export const EditTaskForm: React.FC<PropsType> = ({ closeForm, onSubmit, editedT
 
   return (
     <div
-      className={`md:h-full grid grid-cols-2 grid-rows-7 gap-4 p-6 border rounded ${borderColors.primary} shadow-md`}
+      className={`md:h-full grid  px-6 pt-3 border rounded ${borderColors.primary} shadow-md overflow-y-scroll`}
     >
-      <h1 className={`${textColors.main} col-span-2 text-2xl font-bold row-start-1`}>
-        {t('editTaskForm.title')}
-      </h1>
       <BaseTaskForm
+        title={t('editTaskForm.title')}
         closeAddForm={closeForm}
         onSubmit={onSubmit}
         submitButtonText={t('editTaskForm.submitButtonName')}

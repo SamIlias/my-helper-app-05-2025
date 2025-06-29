@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TasksList, AddTaskForm } from '@/features/tasks';
+import { AddTaskForm, TasksList } from '@/features/tasks';
 import { Preloader } from '@/shared/ui/Preloader.tsx';
 import { Navigate } from 'react-router-dom';
 import preloader from '@/shared/assets/preloaderGear.svg';
@@ -7,6 +7,7 @@ import type { User } from 'firebase/auth';
 import { useTranslation } from 'react-i18next';
 import { PageHeader } from '@/shared/ui/PageHeader';
 import { useTasks } from '../model/useTasks';
+import { HeaderButtons } from './HeaderButtons';
 
 type Props = {
   user: User | null | undefined;
@@ -29,43 +30,27 @@ export const TodoPage: React.FC<Props> = ({ user }) => {
     toggleCompletingOfTask,
   } = useTasks(user);
 
-  //JSX ------------------------------------------------------------------------
+  const onCloseTaskForm = () => setIsAddFormActive(false);
+  const onOpenTaskForm = () => setIsAddFormActive(true);
+
   if (!user) {
     return <Navigate to="/auth" replace={true} />;
   }
 
   if (isAddFormActive) {
-    return (
-      <AddTaskForm closeAddForm={() => setIsAddFormActive(false)} onSubmit={onAddTaskSubmit} />
-    );
+    return <AddTaskForm closeAddForm={onCloseTaskForm} onSubmit={onAddTaskSubmit} />;
   }
 
   return (
-    <div className="flex flex-col min-h-0 h-full p-2 gap-2">
+    <div className="flex flex-col min-h-0 h-full mx-3 gap-2">
       <PageHeader
         title={t('title')}
         children={
-          <div className="flex gap-1">
-            <button
-              onClick={() => setIsAddFormActive(true)}
-              className="px-2 py-1 bg-yellow-500 text-black rounded-md hover:bg-amber-700 hover:text-white transition"
-            >
-              {t('addTaskButtonName')}
-            </button>
-            <button
-              aria-pressed={!isCompletedTasksHidden}
-              aria-controls="tasks-list"
-              onClick={onClickHideShowButton}
-              title={
-                isCompletedTasksHidden
-                  ? t('showHideButton.titleOnHoverHide')
-                  : t('showHideButton.titleOnHoverShow')
-              }
-              className="px-2 py-1 bg-stone-400 text-white rounded-md hover:bg-stone-600 dark:hover:bg-stone-300 dark:hover:text-black hover:text-amber-200 transition"
-            >
-              {isCompletedTasksHidden ? t('showHideButton.showName') : t('showHideButton.hideName')}
-            </button>
-          </div>
+          <HeaderButtons
+            onOpenTaskForm={onOpenTaskForm}
+            isCompletedTasksHidden={isCompletedTasksHidden}
+            onClickHideShowButton={onClickHideShowButton}
+          />
         }
       />
 

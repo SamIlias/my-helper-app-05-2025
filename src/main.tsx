@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import './shared/i18n/i18n';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ThemeProvider } from './app/ThemeProvider';
-import { ErrorFallback } from './shared/ui/ErrorFallback';
+import { ErrorFallback } from './shared/ui';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

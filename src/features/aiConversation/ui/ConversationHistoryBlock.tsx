@@ -34,7 +34,7 @@ export const ConversationHistoryBlock: React.FC<Props> = ({
 
     return (
       <div className="my-2 text-sm" key={item.id} ref={isLast ? lastConversationItem : null}>
-        <p className={`italic ${textColors.secondary} ml-2`}>{item.role}</p>
+        <p className={`font-display italic ${textColors.secondary} ml-2`}>{item.role}</p>
         <div className={`ml-6 overflow-x-clip ${textColors.main} `}>
           <ReactMarkdown rehypePlugins={[rehypeHighlight, remarkGfm]}>{item.content}</ReactMarkdown>
         </div>

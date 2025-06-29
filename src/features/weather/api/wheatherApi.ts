@@ -1,5 +1,5 @@
 import { fetchWeatherApi } from 'openmeteo';
-import { getCoordinatesAPI } from '../../../shared/api/getCoordinates/getCoordinatesAPI.ts';
+import { getCoordinatesAPI } from '@/shared/api';
 
 const url = 'https://api.open-meteo.com/v1/forecast';
 

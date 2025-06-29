@@ -9,9 +9,9 @@ import {
   deleteDoc,
 } from 'firebase/firestore';
 import { db } from '@/shared/api/firebase/firebase';
-import { TaskWithoutId, TaskType, TaskUpdateData } from '../../../features/tasks/ui/TasksList.tsx';
+import { TaskWithoutId, TaskType, TaskUpdateData } from '@/features/tasks';
 
-export const addTask = async (task: TaskWithoutId) => {
+const addTask = async (task: TaskWithoutId) => {
   try {
     await addDoc(collection(db, 'tasks'), task);
   } catch (error) {
@@ -20,7 +20,7 @@ export const addTask = async (task: TaskWithoutId) => {
   }
 };
 
-export const getTasks = async (userId: string): Promise<TaskType[]> => {
+const getTasks = async (userId: string): Promise<TaskType[]> => {
   const q = query(collection(db, 'tasks'), where('userId', '==', userId));
   const querySnapshot = await getDocs(q);
 
@@ -41,7 +41,7 @@ export const getTasks = async (userId: string): Promise<TaskType[]> => {
   return tasks;
 };
 
-export const updateTaskById = async (taskId: string, updatedData: TaskUpdateData) => {
+const updateTaskById = async (taskId: string, updatedData: TaskUpdateData) => {
   try {
     const taskRef = doc(db, 'tasks', taskId);
     await updateDoc(taskRef, updatedData);
@@ -51,7 +51,7 @@ export const updateTaskById = async (taskId: string, updatedData: TaskUpdateData
   }
 };
 
-export const deleteTaskById = async (taskId: string) => {
+const deleteTaskById = async (taskId: string) => {
   try {
     const taskRef = doc(db, 'tasks', taskId);
     await deleteDoc(taskRef);
@@ -60,3 +60,5 @@ export const deleteTaskById = async (taskId: string) => {
     throw error;
   }
 };
+
+export { addTask, getTasks, updateTaskById, deleteTaskById };

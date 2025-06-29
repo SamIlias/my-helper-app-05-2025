@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { NewsItemType } from '../api/newsAPI.ts';
 import { useState } from 'react';
-import { borderColors, buttonStyles, textColors } from '../../../shared/myStyles/myStyles';
+import { borderColors, buttonStyles, textColors } from '@/shared/myStyles/myStyles';
 
 export const NewsItem: React.FC<NewsItemType> = ({
   title,

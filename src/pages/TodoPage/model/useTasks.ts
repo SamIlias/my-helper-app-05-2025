@@ -4,10 +4,11 @@ import { TaskFormValues, TaskType, TaskUpdateData, TaskWithoutId } from '@/featu
 import { addTask, deleteTaskById, getTasks, updateTaskById } from '../api/firebaseTodoAPI';
 import { normalizeError } from '@/shared/utils/errorHandler';
 
+function findNewTask(prevTasks: TaskType[], updatedTasks: TaskType[]): TaskType | undefined {
+  return updatedTasks.find((task) => !prevTasks.some((t) => t.id === task.id)) || undefined;
+}
+
 export const useTasks = (user: User | null | undefined) => {
-  function findNewTask(prevTasks: TaskType[], updatedTasks: TaskType[]): TaskType | undefined {
-    return updatedTasks.find((task) => !prevTasks.some((t) => t.id === task.id)) || undefined;
-  }
   const [tasks, setTasks] = useState<TaskType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isAddFormActive, setIsAddFormActive] = useState<boolean>(false);

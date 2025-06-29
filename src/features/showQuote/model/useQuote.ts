@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchQuotes, QuoteType } from '../api/quotesAPI';
-import { getTranslation } from '../../../shared/api/translator/translatorAPI';
+import { getTranslation } from '@/shared/api';
 import { useTranslation } from 'react-i18next';
+import * as React from 'react';
 
 export function useQuote() {
   const [quote, setQuote] = useState<QuoteType | null>(null);
@@ -25,6 +26,15 @@ export function useQuote() {
     await setTranslatedQuote(quotes[0]);
     setIsLoading(false);
   };
+
+  const hasLoaded = React.useRef(false);
+
+  useEffect(() => {
+    if (hasLoaded.current) return;
+
+    hasLoaded.current = true;
+    loadQuote();
+  }, []);
 
   return { quote, loadQuote, isLoading };
 }
