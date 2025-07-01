@@ -7,15 +7,19 @@ import './shared/i18n/i18n';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ThemeProvider } from './app/ThemeProvider';
 import { ErrorFallback } from './shared/ui';
+import { Provider } from 'react-redux';
+import { store } from './app/store';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ThemeProvider>
-      <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </ErrorBoundary>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ErrorBoundary>
+      </ThemeProvider>
+    </Provider>
   </StrictMode>,
 );

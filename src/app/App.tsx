@@ -5,11 +5,11 @@ import { HomePage } from '@/pages/HomePage';
 import { Clock, ErrorFallback, LoadingFallback } from '@/shared/ui';
 import { textColors } from '@/shared/myStyles/myStyles.ts';
 import { AuthPage } from '@/pages/AuthPage';
-import type { User } from 'firebase/auth';
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Header } from '@/widgets/Header/Header';
+import { RequireAuth } from '../features/auth/ui/RequireAuth';
 
 // import TodoPage from '@/pages/TodoPage';
 // import NewsPage from '@/pages/NewsPage';
@@ -20,7 +20,6 @@ const TodoPage = lazy(() => import('../pages/TodoPage'));
 
 function App() {
   const { t } = useTranslation('common');
-  const [user, setUser] = useState<User | null | undefined>(null);
 
   const pages = {
     todo: {
@@ -50,7 +49,7 @@ function App() {
       bg-radial from-white to-white dark:from-stone-800 dark:to-stone-600`}
     >
       <header className="col-span-24 row-span-2 grid grid-cols-[1fr_3fr] w-full content-center">
-        <Header user={user} setUser={setUser} />
+        <Header />
       </header>
 
       <div
@@ -63,11 +62,25 @@ function App() {
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <Suspense fallback={<LoadingFallback />}>
             <Routes>
-              <Route path={`/`} element={<HomePage user={user} />} />
-              <Route path={`/auth`} element={<AuthPage setUser={setUser} />} />
-              <Route path={`/todo`} element={<TodoPage user={user} />} />
+              <Route path={`/auth`} element={<AuthPage />} />
               <Route path={`/news`} element={<NewsPage />} />
               <Route path={`/weather`} element={<WeatherPage />} />
+              <Route
+                path={`/`}
+                element={
+                  <RequireAuth>
+                    <HomePage />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path={`/todo`}
+                element={
+                  <RequireAuth>
+                    <TodoPage />
+                  </RequireAuth>
+                }
+              />
             </Routes>
           </Suspense>
         </ErrorBoundary>

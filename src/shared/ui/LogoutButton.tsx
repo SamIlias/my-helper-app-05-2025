@@ -1,20 +1,18 @@
 import * as React from 'react';
-import { User } from 'firebase/auth';
-import { Dispatch, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
 import { logOut } from '../../features/auth/api/auth';
 import { buttonStyles } from '../myStyles/myStyles';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../app/store';
+import { setUser } from '../../features/auth/model/authSlice';
 
-type Props = {
-  setUser: Dispatch<SetStateAction<User | null | undefined>>;
-};
-
-export const LogoutButton: React.FC<Props> = ({ setUser }) => {
+export const LogoutButton: React.FC = () => {
   const { t } = useTranslation('common');
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleSignOut = async () => {
     await logOut();
-    setUser(null);
+    dispatch(setUser(null));
   };
 
   return (

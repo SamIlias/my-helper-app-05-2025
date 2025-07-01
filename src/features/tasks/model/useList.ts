@@ -1,13 +1,22 @@
 import { useEffect, useRef, useState } from 'react';
 import { TaskFormValues, TaskType } from './types';
-import { TaskListProps } from '../ui/TasksList';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/app/store';
+import { setNewAddedTask } from './tasksSlice';
+import { deleteTaskThunk, updateTaskThunk } from './tasksThunks';
 
-type Params = Omit<TaskListProps, 'toggleCompletingOfTask'>;
+function isTaskInList(task: TaskType | undefined | null, taskList: TaskType[]): boolean {
+  if (!task) return false;
+  return taskList.some((t) => t.id === task.id);
+}
 
-export const useList = (params: Params) => {
-  const { tasks, deleteTask, updateTask, newAddedTask, setNewAddedTask } = params;
+export const useList = (tasks: TaskType[]) => {
+  const { newAddedTask } = useSelector((state: RootState) => state.tasks);
+  const dispatch = useDispatch<AppDispatch>();
+  const user = useSelector((state: RootState) => state.auth.user);
+
   const [activeTask, setActiveTask] = useState<TaskType | null | undefined>(
-    newAddedTask || tasks[0],
+    newAddedTask ? newAddedTask : tasks[0],
   );
   const [editTaskMode, setEditTaskMode] = useState<{
     active: boolean;
@@ -21,7 +30,14 @@ export const useList = (params: Params) => {
 
   useEffect(() => {
     newTaskElementAnchor.current?.scrollIntoView({ behavior: 'smooth' });
-    setNewAddedTask(null);
+    dispatch(setNewAddedTask(null));
+  }, [tasks]);
+
+  useEffect(() => {
+    setActiveTask((prevActiveTask) => {
+      if (isTaskInList(prevActiveTask, tasks)) return prevActiveTask;
+      return newAddedTask ? newAddedTask : tasks[0];
+    });
   }, [tasks]);
 
   const onTaskClick = (id: string): void => {
@@ -42,17 +58,18 @@ export const useList = (params: Params) => {
 
   const onEditFormSubmit = (data: TaskFormValues) => {
     const taskId = editTaskMode.editedTask!.id;
-    updateTask(taskId, { ...data });
+    dispatch(updateTaskThunk({ taskId, data, userId: user!.uid }));
     setActiveTask(editTaskMode.editedTask);
     closeEditForm();
   };
 
   const onDeleteTask = (id: string) => {
-    deleteTask(id);
+    dispatch(deleteTaskThunk(id));
   };
 
   return {
     activeTask,
+    newAddedTask,
     onTaskClick,
     newTaskElementAnchor,
     onDeleteTask,

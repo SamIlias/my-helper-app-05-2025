@@ -45,6 +45,7 @@ export const BaseTaskForm: React.FC<PropsType> = ({
           </label>
           <input
             id="title"
+            autoFocus={true}
             aria-invalid={!!errors.title}
             aria-describedby={errors.title ? 'title-error' : undefined}
             {...register('title', {

@@ -1,13 +1,8 @@
 import * as React from 'react';
-import { TaskType } from '../model/types';
 import { borderColors, textColors } from '../../../shared/myStyles/myStyles';
 import { useTranslation } from 'react-i18next';
 
-type Props = {
-  activeTask?: TaskType | null;
-};
-
-export const Description: React.FC<Props> = ({ activeTask }) => {
+export const Description: React.FC<{ description: string | undefined }> = ({ description }) => {
   const { t } = useTranslation('todopage');
 
   return (
@@ -16,9 +11,9 @@ export const Description: React.FC<Props> = ({ activeTask }) => {
         {t('tasksList.descriptionTitle')}
       </h2>
       <p
-        className={`${activeTask?.description ? `${textColors.secondary} text-shadow-md whitespace-pre-wrap text-balance` : 'text-amber-700 text-shadow-md italic'}`}
+        className={`${description ? `${textColors.secondary} text-shadow-md whitespace-pre-wrap text-balance` : 'text-amber-700 text-shadow-md italic'}`}
       >
-        {activeTask?.description || t('tasksList.descriptionPlaceholder')}
+        {description || t('tasksList.descriptionPlaceholder')}
       </p>
     </div>
   );

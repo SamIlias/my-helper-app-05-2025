@@ -1,19 +1,13 @@
 import * as React from 'react';
 import { AddTaskForm, TasksList } from '@/features/tasks';
 import { Preloader } from '@/shared/ui/Preloader.tsx';
-import { Navigate } from 'react-router-dom';
 import preloader from '@/shared/assets/preloaderGear.svg';
-import type { User } from 'firebase/auth';
 import { useTranslation } from 'react-i18next';
 import { PageHeader } from '@/shared/ui/PageHeader';
 import { useTasks } from '../model/useTasks';
 import { HeaderButtons } from './HeaderButtons';
 
-type Props = {
-  user: User | null | undefined;
-};
-
-export const TodoPage: React.FC<Props> = ({ user }) => {
+export const TodoPage: React.FC = () => {
   const { t } = useTranslation('todopage');
   const {
     isAddFormActive,
@@ -21,27 +15,18 @@ export const TodoPage: React.FC<Props> = ({ user }) => {
     isLoading,
     error,
     handledTasks,
-    newAddedTask,
-    setNewAddedTask,
     setIsAddFormActive,
     onAddTaskSubmit,
     onClickHideShowButton,
-    deleteTask,
-    updateTask,
     toggleCompletingOfTask,
-  } = useTasks(user);
+  } = useTasks();
 
   const onCloseTaskForm = () => setIsAddFormActive(false);
   const onOpenTaskForm = () => setIsAddFormActive(true);
 
-  if (!user) {
-    return <Navigate to="/auth" replace={true} />;
-  }
-
   if (isAddFormActive) {
     return <AddTaskForm closeAddForm={onCloseTaskForm} onSubmit={onAddTaskSubmit} />;
   }
-
   return (
     <div className="flex flex-col min-h-0 h-full mx-3 gap-2">
       <PageHeader
@@ -67,14 +52,7 @@ export const TodoPage: React.FC<Props> = ({ user }) => {
         </div>
       ) : (
         <main className="flex-1 overflow-hidden" id="tasks-list" role="list">
-          <TasksList
-            tasks={handledTasks}
-            deleteTask={deleteTask}
-            updateTask={updateTask}
-            toggleCompletingOfTask={toggleCompletingOfTask}
-            newAddedTask={newAddedTask}
-            setNewAddedTask={setNewAddedTask}
-          />
+          <TasksList tasks={handledTasks} toggleCompletingOfTask={toggleCompletingOfTask} />
         </main>
       )}
     </div>

@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../app/store';
+import { RootState } from '@/app/store';
 import React, { ReactElement } from 'react';
 
 interface Props {

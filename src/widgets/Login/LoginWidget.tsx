@@ -1,17 +1,13 @@
 import * as React from 'react';
-import { Dispatch, SetStateAction } from 'react';
-import { User } from 'firebase/auth';
 import { getNameFromEmail, truncate } from '@/shared/utils/stringHandler.ts';
 import { textColors } from '@/shared/myStyles/myStyles';
-import { LoginButton, LogoutButton } from '../../shared/ui';
+import { LoginButton, LogoutButton } from '@/shared/ui';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/app/store';
 
-type Props = {
-  user: User | null | undefined;
-  setUser: Dispatch<SetStateAction<User | null | undefined>>;
-};
-
-export const LoginWidget: React.FC<Props> = ({ user, setUser }) => {
+export const LoginWidget: React.FC = () => {
   const usernameLettersNumber = 15;
+  const user = useSelector((state: RootState) => state.auth.user);
 
   if (user) {
     return (
@@ -19,7 +15,7 @@ export const LoginWidget: React.FC<Props> = ({ user, setUser }) => {
         <div className={`${textColors.secondary}`}>
           {truncate(getNameFromEmail(user.email), usernameLettersNumber)}
         </div>
-        <LogoutButton setUser={setUser} />
+        <LogoutButton />
       </div>
     );
   }

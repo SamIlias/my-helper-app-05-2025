@@ -5,6 +5,7 @@ import { textColors } from '../../../shared/myStyles/myStyles';
 import { WeatherDescription } from '../api/weatherCodes';
 
 type Props = { weatherData: WeatherDataType; description: WeatherDescription | null };
+
 export const WeatherInfo: React.FC<Props> = ({ weatherData, description }) => {
   const { t } = useTranslation('weatherpage');
   return (

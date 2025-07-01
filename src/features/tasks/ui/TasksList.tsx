@@ -2,24 +2,21 @@ import * as React from 'react';
 import { TaskItem } from './TaskItem.tsx';
 import { EditTaskForm } from './EditTaskForm.tsx';
 import { useTranslation } from 'react-i18next';
-import { TaskType, TaskUpdateData } from '../model/types';
+import { TaskType } from '../model/types';
 import { useList } from '../model/useList.ts';
 import { borderColors, textColors } from '@/shared/myStyles/myStyles';
 import { Description } from './Description';
 
 export type TaskListProps = {
   tasks: TaskType[];
-  deleteTask: (id: string) => void;
-  updateTask: (id: string, updatedData: TaskUpdateData) => void;
   toggleCompletingOfTask: (id: string, isCompleted: boolean) => void;
-  newAddedTask?: TaskType | null;
-  setNewAddedTask: (task: TaskType | null | undefined) => void;
 };
 
 export const TasksList: React.FC<TaskListProps> = React.memo(
-  ({ tasks, deleteTask, updateTask, toggleCompletingOfTask, newAddedTask, setNewAddedTask }) => {
+  ({ tasks, toggleCompletingOfTask }) => {
     const {
       activeTask,
+      newAddedTask,
       onTaskClick,
       newTaskElementAnchor,
       onDeleteTask,
@@ -27,7 +24,7 @@ export const TasksList: React.FC<TaskListProps> = React.memo(
       editTaskMode,
       closeEditForm,
       onEditFormSubmit,
-    } = useList({ tasks, deleteTask, updateTask, newAddedTask, setNewAddedTask });
+    } = useList(tasks);
 
     const { t } = useTranslation('todopage');
 
@@ -78,7 +75,7 @@ export const TasksList: React.FC<TaskListProps> = React.memo(
             editedTask={editTaskMode.editedTask as TaskType}
           />
         ) : (
-          <Description activeTask={activeTask} />
+          <Description description={activeTask?.description} />
         )}
       </div>
     );
