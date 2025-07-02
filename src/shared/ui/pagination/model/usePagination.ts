@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 const DEFAULT_PAGES_PORTION_SIZE = 3;
 
 export const usePagination = (
@@ -16,6 +16,10 @@ export const usePagination = (
   const [currentPortionOfPages, setPortionNumber] = useState<number>(
     Math.ceil(currentPage / portionOfPagesSize),
   );
+
+  useEffect(() => {
+    setPortionNumber(Math.ceil(currentPage / portionOfPagesSize));
+  }, [currentPage]);
 
   const portionsCount = pagesCount / portionOfPagesSize;
   const leftPortionPageNumber = (currentPortionOfPages - 1) * portionOfPagesSize + 1;

@@ -9,7 +9,7 @@ type Props = {
 
 export const MainLinkButton: React.FC<Props> = ({ path, title }) => {
   return (
-    <Link to={path} className={`${buttonStyles.main}`}>
+    <Link to={path} className={`${buttonStyles.main} py-1`}>
       {title}
     </Link>
   );

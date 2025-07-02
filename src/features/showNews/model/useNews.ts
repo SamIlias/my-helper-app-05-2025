@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import * as React from 'react';
 
 const NEWS_ON_ONE_PAGE_COUNT = 2;
+const INITIAL_PAGE = 1;
 
 export const useNews = () => {
   console.log('useNews');
@@ -43,6 +44,10 @@ export const useNews = () => {
     hasLoaded.current = true;
     loadNews(undefined, i18n.language);
   }, []);
+
+  useEffect(() => {
+    setCurrentPage(INITIAL_PAGE);
+  }, [newsData]);
 
   // on current page
   const lastNewsItemNumber = currentPage * NEWS_ON_ONE_PAGE_COUNT;
