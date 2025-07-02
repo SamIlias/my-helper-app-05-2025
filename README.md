@@ -55,19 +55,6 @@ Create, edit, delete, and manage your tasks using Firebase backend.
 
 ---
 
-## Folder Structure (FSD Pattern)
-
-src/
-├── app/ # App setup (Redux store, routes)
-├── features/ # Feature-level logic (e.g., tasks, weather, AI)
-├── shared/ # Shared utilities, UI components, types
-├── entities/ # Reusable domain models
-├── widgets/ # Widget components composed of features
-└── pages/ # Page components (AI, Weather, News, Todo)
-
-
----
-
 ## 🌐 Localization
 
 - Default language: `English`
