@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { borderColors, textColors } from '../../../shared/myStyles/myStyles';
+import { borderColors, textColors } from '@/shared/myStyles/myStyles';
 import { useTranslation } from 'react-i18next';
 
 export const Description: React.FC<{ description: string | undefined }> = ({ description }) => {

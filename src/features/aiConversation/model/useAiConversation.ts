@@ -2,6 +2,7 @@ import { askModel, ConversationItem, initialConversationItem } from '@/shared/ap
 import { ChangeEventHandler, useEffect, useRef, useState } from 'react';
 import { truncateArrayKeepFirst } from './truncateArrayKeepFirst';
 import * as React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 const HISTORY_LENGTH = 10;
 
@@ -24,11 +25,11 @@ export function useAiConversation() {
     const currentUserPrompt: ConversationItem = {
       role: 'user',
       content: prompt,
-      id: `${conversationHistory.length}${prompt}`,
+      id: uuidv4(),
     };
     const conversation: ConversationItem[] = [...conversationHistory, currentUserPrompt];
     const answer: string | null = await askModel(conversation);
-    conversation.push({ role: 'assistant', content: answer, id: `${currentUserPrompt}-${answer}` });
+    conversation.push({ role: 'assistant', content: answer, id: uuidv4() });
     const trimmedConversation: ConversationItem[] = truncateArrayKeepFirst(
       conversation,
       HISTORY_LENGTH,

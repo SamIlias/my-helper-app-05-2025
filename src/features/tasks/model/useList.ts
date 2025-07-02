@@ -5,9 +5,9 @@ import { AppDispatch, RootState } from '@/app/store';
 import { setNewAddedTask } from './tasksSlice';
 import { deleteTaskThunk, updateTaskThunk } from './tasksThunks';
 
-function isTaskInList(task: TaskType | undefined | null, taskList: TaskType[]): boolean {
-  if (!task) return false;
-  return taskList.some((t) => t.id === task.id);
+function isTaskInList(taskId: string | null | undefined, taskList: TaskType[]): boolean {
+  if (!taskId) return false;
+  return taskList.some((t) => t.id === taskId);
 }
 
 export const useList = (tasks: TaskType[]) => {
@@ -15,9 +15,7 @@ export const useList = (tasks: TaskType[]) => {
   const dispatch = useDispatch<AppDispatch>();
   const user = useSelector((state: RootState) => state.auth.user);
 
-  const [activeTask, setActiveTask] = useState<TaskType | null | undefined>(
-    newAddedTask ? newAddedTask : tasks[0],
-  );
+  const [activeTaskId, setActiveTaskId] = useState<string | null | undefined>(null);
   const [editTaskMode, setEditTaskMode] = useState<{
     active: boolean;
     editedTask: TaskType | null;
@@ -31,19 +29,22 @@ export const useList = (tasks: TaskType[]) => {
   useEffect(() => {
     newTaskElementAnchor.current?.scrollIntoView({ behavior: 'smooth' });
     dispatch(setNewAddedTask(null));
-  }, [tasks]);
+  }, [tasks, dispatch]);
 
   useEffect(() => {
-    setActiveTask((prevActiveTask) => {
-      if (isTaskInList(prevActiveTask, tasks)) return prevActiveTask;
-      return newAddedTask ? newAddedTask : tasks[0];
+    setActiveTaskId((prevActiveTaskId) => {
+      if (isTaskInList(prevActiveTaskId, tasks)) {
+        setActiveTaskId(prevActiveTaskId);
+      }
+      if (newAddedTask) return newAddedTask.id;
+      if (tasks[0]) return tasks[0].id;
     });
-  }, [tasks]);
+  }, [tasks, newAddedTask]);
 
   const onTaskClick = (id: string): void => {
     const currentTask: TaskType | undefined = tasks.find((task: TaskType) => task.id === id);
     if (currentTask) {
-      setActiveTask(currentTask);
+      setActiveTaskId(currentTask.id);
     }
   };
 
@@ -59,7 +60,7 @@ export const useList = (tasks: TaskType[]) => {
   const onEditFormSubmit = (data: TaskFormValues) => {
     const taskId = editTaskMode.editedTask!.id;
     dispatch(updateTaskThunk({ taskId, data, userId: user!.uid }));
-    setActiveTask(editTaskMode.editedTask);
+    setActiveTaskId(taskId);
     closeEditForm();
   };
 
@@ -68,7 +69,7 @@ export const useList = (tasks: TaskType[]) => {
   };
 
   return {
-    activeTask,
+    activeTaskId,
     newAddedTask,
     onTaskClick,
     newTaskElementAnchor,

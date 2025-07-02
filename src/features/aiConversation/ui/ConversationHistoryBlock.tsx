@@ -28,7 +28,7 @@ export const ConversationHistoryBlock: React.FC<Props> = ({
     );
 
   return conversationHistory.map((item: ConversationItem, index: number) => {
-    if (item.role === 'system') return <></>;
+    if (item.role === 'system') return;
 
     const isLast = index === conversationHistory.length - 1;
 

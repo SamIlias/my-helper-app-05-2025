@@ -47,7 +47,6 @@ export const useWeather = () => {
   }, []);
 
   useEffect(() => {
-    if (!weatherData?.current.weatherCode) return;
     setTranslatedDescription();
   }, [weatherData?.current.weatherCode]);
 
