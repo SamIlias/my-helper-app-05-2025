@@ -63,13 +63,18 @@ Create, edit, delete, and manage your tasks using Firebase backend.
 
 ---
 
-## Environment Variables
+## Environment Configuration
 
-Create a `.env` file in the root with:
+Before running the project, create a `.env` file in the root directory based on `.env.example`, and fill in the required API keys:
 
 ```env
-VITE_CURRENT_CITY=YourCityHere
+VITE_CURRENT_CITY=your-current-city
+VITE_FIREBASE_API_KEY=your-firebase-key
+VITE_NEWS_API_KEY=your-newsapi-key
+VITE_GITHUB_TOKEN=your-github-token
+VITE_QUOTES_API_KEY=your-quotesapi-key
 ```
+
 ## License
 This project is private and not licensed for public use.
 Contact the author for access or licensing inquiries.
