@@ -5,17 +5,34 @@ import { getTranslation } from '@/shared/api';
 import { normalizeError } from '@/shared/utils/errorHandler';
 import { getCurrentPeriodOfDay } from '@/shared/utils/getCurrentPeriodOfDay';
 import { useTranslation } from 'react-i18next';
+import { useGeolocation } from '@/shared/hooks';
+import { getCityFromCoords } from '../../../shared/api/coordinates/getCityFromCoordinates';
 
 const INITIAL_CITY: string = import.meta.env.VITE_CURRENT_CITY;
 
 export const useWeather = () => {
+  const { i18n } = useTranslation('weatherpage');
   const [weatherData, setWeatherData] = useState<WeatherDataType | null>(null);
   const [description, setDescription] = useState<WeatherDescription | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [currentCity, setCurrentCity] = useState<string | null>(null);
 
-  const { i18n } = useTranslation('weatherpage');
+  const { coords, error } = useGeolocation();
+  useEffect(() => {
+    if (!coords || error) return;
 
-  const hasLoaded = React.useRef(false);
+    const fetchCityName = async () => {
+      try {
+        const cityName = await getCityFromCoords(coords.latitude, coords.longitude);
+        setCurrentCity(cityName);
+      } catch (err) {
+        console.log(err);
+        setCurrentCity(INITIAL_CITY);
+      }
+    };
+
+    fetchCityName();
+  }, [coords, error]);
 
   const loadWeatherData: (cityName: string) => Promise<void> = async (cityName) => {
     try {
@@ -40,11 +57,14 @@ export const useWeather = () => {
     }
   };
 
+  const hasLoaded = React.useRef(false);
+
   useEffect(() => {
-    if (hasLoaded.current) return;
+    if (hasLoaded.current || !currentCity) return;
     hasLoaded.current = true;
-    loadWeatherData(INITIAL_CITY);
-  }, []);
+
+    loadWeatherData(currentCity);
+  }, [currentCity]);
 
   useEffect(() => {
     setTranslatedDescription();

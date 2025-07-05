@@ -30,7 +30,7 @@ export const WeatherPage: React.FC = () => {
         )}
       </main>
 
-      <footer className="w-full border-t pt-4">
+      <footer className="w-full border-t py-2">
         <SearchForm onSubmit={onSubmit} placeholder={t('searchFormPlaceholder')} />
       </footer>
     </div>

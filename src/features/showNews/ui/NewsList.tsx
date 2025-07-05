@@ -51,7 +51,7 @@ export const NewsList: React.FC = () => {
         )}
       </main>
 
-      <footer className="w-full border-t pt-4">
+      <footer className="w-full border-t py-2">
         <SearchForm onSubmit={onSearchFormSubmit} placeholder={t('searchForm.placeholder')} />
       </footer>
     </>
