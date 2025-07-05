@@ -1,58 +1,40 @@
-import { askModel, ConversationItem, initialConversationItem } from '@/shared/api/aiGPT/aiAPI';
-import { ChangeEventHandler, useEffect, useRef, useState } from 'react';
-import { truncateArrayKeepFirst } from './truncateArrayKeepFirst';
 import * as React from 'react';
-import { v4 as uuidv4 } from 'uuid';
-
-const HISTORY_LENGTH = 10;
+import { ChangeEventHandler, useEffect, useMemo, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/app/store';
+import { sendPrompt } from './aiConversationThunks';
+import { setQuery } from './aiConversationSlice';
+import { ConversationItem } from '@/shared/api';
 
 export function useAiConversation() {
-  const [conversationHistory, setConversationHistory] = useState<ConversationItem[]>([
-    initialConversationItem,
-  ]);
-  const [query, setQuery] = useState('');
+  const conversationHistory: ConversationItem[] = useSelector(
+    (state: RootState) => state.aiConversation.conversationHistory,
+  );
+  const query = useSelector((state: RootState) => state.aiConversation.query);
+  const dispatch = useDispatch<AppDispatch>();
+
   const [isSending, setIsSending] = useState<boolean>(false);
 
   const lastConversationItem = useRef<HTMLDivElement>(null);
-
-  const trimmedQuery = query.trim();
-  const isSubmitDisabled = isSending || !trimmedQuery;
+  const trimmedQuery = useMemo(() => query.trim(), [query]);
+  const isSubmitDisabled = useMemo(() => isSending || !trimmedQuery, [isSending, trimmedQuery]);
   const isConversationStarted = conversationHistory.length > 1; // first element is initial system prompt
-
-  const onSubmit = async (prompt: string | undefined): Promise<void> => {
-    setIsSending(true);
-
-    const currentUserPrompt: ConversationItem = {
-      role: 'user',
-      content: prompt,
-      id: uuidv4(),
-    };
-    const conversation: ConversationItem[] = [...conversationHistory, currentUserPrompt];
-    const answer: string | null = await askModel(conversation);
-    conversation.push({ role: 'assistant', content: answer, id: uuidv4() });
-    const trimmedConversation: ConversationItem[] = truncateArrayKeepFirst(
-      conversation,
-      HISTORY_LENGTH,
-    );
-
-    setConversationHistory(trimmedConversation);
-    setQuery('');
-    setIsSending(false);
-  };
 
   useEffect(() => {
     lastConversationItem.current?.scrollIntoView({ behavior: 'smooth' });
   }, [conversationHistory]);
 
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     if (trimmedQuery) {
-      onSubmit(trimmedQuery);
+      setIsSending(true);
+      await dispatch(sendPrompt(trimmedQuery));
+      setIsSending(false);
     }
   };
 
   const onPromptChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
-    setQuery(e.target.value);
+    dispatch(setQuery(e.target.value));
   };
 
   return {
