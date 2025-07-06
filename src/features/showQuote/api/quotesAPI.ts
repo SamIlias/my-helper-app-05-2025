@@ -1,33 +1,36 @@
-import axios from 'axios';
-
-const quotesApiUrl = 'https://api.api-ninjas.com/v1/quotes';
-
-export const fetchQuotes = async (): Promise<QuoteType[]> => {
+export const fetchRandomQuote = async () => {
   try {
-    return await axios
-      .get<QuoteType[]>(quotesApiUrl, {
-        headers: { 'X-Api-Key': import.meta.env.VITE_QUOTES_API_KEY },
-      })
-      .then((response) => response.data);
+    const response = await fetch('/.netlify/functions/fetchQuote');
+    const data = await response.json();
+    return data.quotes[0];
   } catch (error) {
-    console.error('Could not fetch quote', error);
-    throw error;
+    console.error('Fetching quotes error:', error);
+    return null;
   }
 };
 
-export type QuoteType = { quote: string; author: string; category: string };
+export type { QuoteType } from '../../../../netlify/functions/fetchQuote';
 
-// const quotesApiUrl = 'https://api.kanye.rest/';
-// const defaultQuote = "First of all, awareness... Try to fetch quote again!";
-//
-// export const fetchQuote = async (): Promise<string> => {
+// Premium subscription
+// export const fetchQuoteByCategory = async (category: string) => {
 //   try {
-//     return await axios.get<QuoteResponseType>(quotesApiUrl)
-//       .then(response => response.data.quote);
+//     const response = await fetch(`/.netlify/functions/fetchQuote?category=${category}`);
+//     const data = await response.json();
+//     return data.quotes[0];
 //   } catch (error) {
-//     console.error("Could not fetch quote", error);
-//     return defaultQuote;
+//     console.error('Fetching quotes error:', error);
+//     return null;
 //   }
-// }
+// };
 //
-// type QuoteResponseType = { quote: string };
+// export const fetchMultipleQuotes = async (limit = 5, category = null) => {
+//   try {
+//     const url = `/.netlify/functions/fetchQuote?limit=${limit}${category ? `&category=${category}` : ''}`;
+//     const response = await fetch(url);
+//     const data = await response.json();
+//     return data.quotes;
+//   } catch (error) {
+//     console.error('Fetching quotes error:', error);
+//     return [];
+//   }
+// };

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { fetchQuotes, QuoteType } from '../api/quotesAPI';
 import { getTranslation } from '@/shared/api';
 import { useTranslation } from 'react-i18next';
 import * as React from 'react';
+import { fetchRandomQuote, QuoteType } from '../api/quotesAPI';
 
 export function useQuote() {
   const [quote, setQuote] = useState<QuoteType | null>(null);
@@ -21,9 +21,8 @@ export function useQuote() {
 
   const loadQuote = async () => {
     setIsLoading(true);
-    const quotes: QuoteType[] = await fetchQuotes();
-
-    await setTranslatedQuote(quotes[0]);
+    const randomQuote: QuoteType = await fetchRandomQuote();
+    await setTranslatedQuote(randomQuote);
     setIsLoading(false);
   };
 

@@ -1,37 +1,31 @@
-import ModelClient, { isUnexpected } from '@azure-rest/ai-inference';
-import { AzureKeyCredential } from '@azure/core-auth';
+import { ConversationItem, initialConversationItem } from '../../../../netlify/functions/askModel';
 
-const token: string = import.meta.env.VITE_GITHUB_TOKEN;
-const endpoint = 'https://models.github.ai/inference';
-const model = 'openai/gpt-4.1';
+export { initialConversationItem };
+export type { ConversationItem };
 
-export async function askModel(conversation: ConversationItem[]): Promise<string | null> {
-  const client = ModelClient(endpoint, new AzureKeyCredential(token));
-  const response = await client.path('/chat/completions').post({
-    body: {
-      messages: conversation,
-      temperature: 1.0,
-      top_p: 1.0,
-      model: model,
-    },
-  });
+export const askModel = async (conversation: ConversationItem[]) => {
+  try {
+    const response = await fetch('/.netlify/functions/askModel', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        conversation: conversation,
+        temperature: 1.0,
+        top_p: 1.0,
+      }),
+    });
 
-  if (isUnexpected(response)) {
-    throw response.body.error;
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to get response');
+    }
+
+    return data.content;
+  } catch (error) {
+    console.error('Model request error', error);
+    throw error;
   }
-
-  return response.body.choices[0].message.content;
-}
-
-export const initialConversationItem: ConversationItem = {
-  role: 'system',
-  content:
-    'You are a helpful assistant. Always respond in Markdown format. Use proper headings, lists, code blocks, and tables when appropriate.',
-  id: 'initial',
-};
-
-export type ConversationItem = {
-  role: 'system' | 'user' | 'assistant';
-  content?: string | null;
-  id: string;
 };

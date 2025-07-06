@@ -9,7 +9,7 @@
     "typeRoots": ["./node_modules/@types",
       "./src/shared/i18n/@types"
     ],
-    "types": ["react", "react-dom", "react-i18next"],
+    "types": ["react", "react-dom", "react-i18next", "node"],
   },
   "include": [
     "src/**/*",

@@ -1,12 +1,8 @@
 import axios from 'axios';
-
-const baseUrl = 'https://gnews.io/api/v4/search';
-//todo secure apikey
-const apiKey = import.meta.env.VITE_NEWS_API_KEY;
+import { NewsItemType } from '../../../../netlify/functions/fetchNews';
 
 export const fetchNews = async (term: string = 'news', lang = 'en') => {
-  // term - query for search
-  const url = `${baseUrl}?q=${term}&lang=${lang}&apikey=${apiKey}`;
+  const url = `/.netlify/functions/fetchNews?term=${term}&lang=${lang}`;
   const response = await axios.get(url);
 
   if (response.status === 200) {
@@ -17,15 +13,4 @@ export const fetchNews = async (term: string = 'news', lang = 'en') => {
   }
 };
 
-export type NewsItemType = {
-  title: string;
-  description: string;
-  content: string;
-  url: string;
-  image: string;
-  publishedAt: string;
-  source: {
-    name: string;
-    url: string;
-  };
-};
+export type { NewsItemType };

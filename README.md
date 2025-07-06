@@ -12,18 +12,20 @@ This app provides a clean and responsive interface with multiple features:
 
 ## Tech Stack
 
-| Category     | Technologies |
-|--------------|--------------|
-| Frontend     | React 19, Vite, TypeScript |
-| Styling      | Tailwind CSS, @tailwindcss/typography |
-| State Mgmt   | Redux Toolkit, React |
-| Forms        | React Hook Form |
-| Localization | i18next, react-i18next |
-| Auth & DB    | Firebase, react-firebase-hooks |
-| Networking   | Axios |
-| AI/ML        | Azure AI Inference |
-| Utilities    | Lodash, Highlight.js, react-markdown |
-| Lint & Format| ESLint, Prettier |
+| Category           | Technologies                          |
+|--------------------|---------------------------------------|
+| Frontend           | React 19, Vite, TypeScript            |
+| Styling            | Tailwind CSS, @tailwindcss/typography |
+| State Mgmt         | Redux Toolkit, React                  |
+| Forms              | React Hook Form                       |
+| Localization       | i18next, react-i18next                |
+| Auth & DB          | Firebase, react-firebase-hooks        |
+| Networking         | Axios                                 |
+| AI/ML              | Azure AI Inference                    |
+| Utilities          | Lodash, Highlight.js, react-markdown  |
+| Lint & Format      | ESLint, Prettier                      |
+| Security and CI/CD | Netlify                               |
+
 
 ---
 
@@ -32,10 +34,14 @@ This app provides a clean and responsive interface with multiple features:
 | Script       | Description |
 |--------------|-------------|
 | `npm run dev`     | Start development server with Vite |
-| `npm run build`   | Build the app using TypeScript and Vite |
-| `npm run preview` | Preview the production build |
+| `npm run build`   | Build the app using TypeScript and Vite for Netlify deployment |
+| `npm run preview` | Preview the production build locally |
 | `npm run lint`    | Run ESLint for code quality |
 | `npm run interface` | Generate i18next TypeScript resource typings |
+| `npm run netlify:dev` | Start local development with Netlify Functions support |
+| `npm run netlify:build` | Build the app with Netlify Functions |
+| `npm run netlify:deploy` | Deploy to Netlify preview |
+| `npm run netlify:deploy:prod` | Deploy to Netlify production |
 
 ---
 
@@ -71,7 +77,7 @@ Before running the project, create a `.env` file in the root directory based on 
 VITE_CURRENT_CITY=your-current-city
 VITE_FIREBASE_API_KEY=your-firebase-key
 VITE_NEWS_API_KEY=your-newsapi-key
-VITE_GITHUB_TOKEN=your-github-token
+VITE_GITHUB_TOKEN=your-github-token-for-using-ai-model ---- https://github.com/marketplace/models/azure-openai/gpt-4-1
 VITE_QUOTES_API_KEY=your-quotesapi-key
 ```
 
