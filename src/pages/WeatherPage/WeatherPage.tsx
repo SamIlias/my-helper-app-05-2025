@@ -1,6 +1,6 @@
 import { SearchForm } from '@/shared/ui';
 import React from 'react';
-import { Preloader } from '@/shared/ui/Preloader.tsx';
+import { Preloader } from '@/shared/ui/Preloader';
 import preloader from '@/shared/assets/preloaderSun.svg';
 import { useTranslation } from 'react-i18next';
 import { useWeather } from '@/features/weather';

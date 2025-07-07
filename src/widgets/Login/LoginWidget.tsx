@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getNameFromEmail, truncate } from '@/shared/utils/stringHandler.ts';
+import { getNameFromEmail, truncate } from '@/shared/utils/stringHandler';
 import { textColors } from '@/shared/myStyles/myStyles';
 import { LoginButton, LogoutButton } from '@/shared/ui';
 import { useSelector } from 'react-redux';

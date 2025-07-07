@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NewsItemType } from '../api/newsAPI.ts';
+import { NewsItemType } from '../api/newsAPI';
 import { useState } from 'react';
 import { borderColors, buttonStyles, textColors } from '@/shared/myStyles/myStyles';
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BaseTaskForm } from './BaseTaskForm.tsx';
+import { BaseTaskForm } from './BaseTaskForm';
 import { useTranslation } from 'react-i18next';
 import { borderColors } from '@/shared/myStyles/myStyles';
 import { TaskFormValues, TaskType } from '../model/types';

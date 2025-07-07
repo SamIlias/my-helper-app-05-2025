@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TaskType } from './types';
 import { addTaskThunk, deleteTaskThunk, fetchTasksThunk, updateTaskThunk } from './tasksThunks';
 
-interface TasksState {
+export interface TasksState {
   tasks: TaskType[];
   isLoading: boolean;
   error: string | null;

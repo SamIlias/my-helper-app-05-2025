@@ -1,8 +1,8 @@
-import { ConversationItem, initialConversationItem } from '@/shared/api';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { sendPrompt } from './aiConversationThunks';
+import { ConversationItem, initialConversationItem } from '@/shared/api/aiGPT/aiAPI';
 
-interface ConversationState {
+export interface ConversationState {
   conversationHistory: ConversationItem[];
   query: string;
   error?: string | null;

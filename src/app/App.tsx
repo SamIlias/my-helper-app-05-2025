@@ -1,9 +1,9 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import MainNav from '@/widgets/MainNavigation/MainNav.tsx';
+import MainNav from '@/widgets/MainNavigation/MainNav';
 import { HomePage } from '@/pages/HomePage';
 import { Clock, ErrorFallback, LoadingFallback } from '@/shared/ui';
-import { textColors } from '@/shared/myStyles/myStyles.ts';
+import { textColors } from '@/shared/myStyles/myStyles';
 import { AuthPage } from '@/pages/AuthPage';
 import { lazy, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';

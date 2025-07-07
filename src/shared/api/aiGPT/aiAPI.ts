@@ -1,7 +1,15 @@
-import { ConversationItem, initialConversationItem } from '../../../../netlify/functions/askModel';
+export type ConversationItem = {
+  role: 'system' | 'user' | 'assistant';
+  content?: string | null;
+  id: string;
+};
 
-export { initialConversationItem };
-export type { ConversationItem };
+export const initialConversationItem: ConversationItem = {
+  role: 'system',
+  content:
+    'You are a helpful assistant. Always respond in Markdown format. Use proper headings, lists, code blocks, and tables when appropriate.',
+  id: 'initial',
+};
 
 export const askModel = async (conversation: ConversationItem[]) => {
   try {

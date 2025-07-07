@@ -10,50 +10,28 @@ export type QuoteType = {
   category: string;
 };
 
-const handler: Handler = async (event, context) => {
+const handler: Handler = async (event) => {
   console.log('[fetchQuote] Function called!');
   console.log('[fetchQuote] Event:', JSON.stringify(event, null, 2));
 
-  //Premium subscription
-  // const { category, limit = '1' } = event.queryStringParameters || {};
+  const { category, limit = '1' } = event.queryStringParameters || {};
 
   const apiKey = process.env.VITE_QUOTES_API_KEY;
 
   if (!apiKey) {
-    return {
-      statusCode: 500,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      },
-      body: JSON.stringify({ error: 'API key is not set' }),
-    };
+    return errorResponse(500, 'API key is not set');
   }
 
-  // handle CORS preflight queries
   if (event.httpMethod === 'OPTIONS') {
-    return {
-      statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      },
-      body: '',
-    };
+    return corsResponse(200, '');
   }
 
   try {
     const url = new URL(quotesApiUrl);
-    // if (category) {
-    //   url.searchParams.append('category', category);
-    // }
-    // url.searchParams.append('limit', limit);
-    //
+    if (category) url.searchParams.append('category', category);
+    url.searchParams.append('limit', limit);
+
     console.log('[fetchQuote] Query to API:', url.toString());
-    // console.log('[fetchQuote] Parameters:', { category, limit });
 
     const response = await axios.get<QuoteType[]>(url.toString(), {
       headers: {
@@ -62,25 +40,13 @@ const handler: Handler = async (event, context) => {
       },
     });
 
-    console.log(
-      '[fetchQuote] The response is received, the number of quotes is:',
-      response.data.length,
-    );
+    console.log('[fetchQuote] Quotes received:', response.data.length);
     console.log('[fetchQuote] First quote:', response.data[0]);
 
-    return {
-      statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      },
-      body: JSON.stringify({
-        quotes: response.data,
-        count: response.data.length,
-      }),
-    };
+    return corsResponse(200, {
+      quotes: response.data,
+      count: response.data.length,
+    });
   } catch (error) {
     console.error('[fetchQuote] Error:', error);
 
@@ -97,20 +63,33 @@ const handler: Handler = async (event, context) => {
       });
     }
 
-    return {
-      statusCode,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      },
-      body: JSON.stringify({
-        error: errorMessage,
-        message: normalizeError(error),
-      }),
-    };
+    return errorResponse(statusCode, errorMessage, normalizeError(error));
   }
 };
+
+function corsHeaders() {
+  return {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+  };
+}
+
+function corsResponse(statusCode: number, body: unknown) {
+  return {
+    statusCode,
+    headers: corsHeaders(),
+    body: typeof body === 'string' ? body : JSON.stringify(body),
+  };
+}
+
+function errorResponse(statusCode: number, error: string, message?: unknown) {
+  return {
+    statusCode,
+    headers: corsHeaders(),
+    body: JSON.stringify({ error, message }),
+  };
+}
 
 export { handler };

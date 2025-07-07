@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { TaskItem } from './TaskItem.tsx';
-import { EditTaskForm } from './EditTaskForm.tsx';
+import { TaskItem } from './TaskItem';
+import { EditTaskForm } from './EditTaskForm';
 import { useTranslation } from 'react-i18next';
 import { TaskType } from '../model/types';
-import { useList } from '../model/useList.ts';
+import { useList } from '../model/useList';
 import { borderColors, textColors } from '@/shared/myStyles/myStyles';
 import { Description } from './Description';
 

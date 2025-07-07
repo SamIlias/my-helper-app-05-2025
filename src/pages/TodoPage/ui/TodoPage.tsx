@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { AddTaskForm, TasksList } from '@/features/tasks';
-import { Preloader } from '@/shared/ui/Preloader.tsx';
+import { Preloader } from '@/shared/ui/Preloader';
 import preloader from '@/shared/assets/preloaderGear.svg';
 import { useTranslation } from 'react-i18next';
 import { PageHeader } from '@/shared/ui/PageHeader';
