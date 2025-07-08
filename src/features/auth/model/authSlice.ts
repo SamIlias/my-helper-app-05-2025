@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { SerializableUser } from '../../../pages/AuthPage/model/useAuthData';
+import { SerializableUser } from '@/pages/AuthPage/model/useAuthData';
 
 export interface AuthState {
   user: SerializableUser | null | undefined;
