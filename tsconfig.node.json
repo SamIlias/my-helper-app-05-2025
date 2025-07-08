@@ -20,7 +20,8 @@
     }
   },
   "include": [
-    "netlify/functions/**/*"
+    "netlify/functions/**/*",
+    "src/**/*"
   ],
   "exclude": [
     "node_modules/@netlify/**/*"
