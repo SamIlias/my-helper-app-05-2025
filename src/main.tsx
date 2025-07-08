@@ -9,6 +9,7 @@ import { ThemeProvider } from './app/ThemeProvider';
 import { ErrorFallback } from './shared/ui';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
+import React from 'react';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

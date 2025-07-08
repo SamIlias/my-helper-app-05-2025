@@ -1,6 +1,6 @@
 import { Handler } from '@netlify/functions';
 import axios from 'axios';
-import { normalizeError } from '../../src/shared/utils/errorHandler';
+import { normalizeError } from '@/shared/utils/errorHandler';
 
 const quotesApiUrl = 'https://api.api-ninjas.com/v1/quotes';
 
@@ -14,7 +14,7 @@ const handler: Handler = async (event) => {
   console.log('[fetchQuote] Function called!');
   console.log('[fetchQuote] Event:', JSON.stringify(event, null, 2));
 
-  const { category, limit = '1' } = event.queryStringParameters || {};
+  // const { category, limit = '1' } = event.queryStringParameters || {};
 
   const apiKey = process.env.VITE_QUOTES_API_KEY;
 
@@ -28,8 +28,8 @@ const handler: Handler = async (event) => {
 
   try {
     const url = new URL(quotesApiUrl);
-    if (category) url.searchParams.append('category', category);
-    url.searchParams.append('limit', limit);
+    // if (category) url.searchParams.append('category', category);
+    // url.searchParams.append('limit', limit);
 
     console.log('[fetchQuote] Query to API:', url.toString());
 

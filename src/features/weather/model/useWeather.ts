@@ -6,7 +6,7 @@ import { normalizeError } from '@/shared/utils/errorHandler';
 import { getCurrentPeriodOfDay } from '@/shared/utils/getCurrentPeriodOfDay';
 import { useTranslation } from 'react-i18next';
 import { useGeolocation } from '@/shared/hooks';
-import { getCityFromCoords } from '../../../shared/api/coordinates/getCityFromCoordinates';
+import { getCityFromCoords } from '@/shared/api/coordinates/getCityFromCoordinates';
 
 const INITIAL_CITY: string = import.meta.env.VITE_CURRENT_CITY;
 
@@ -46,17 +46,26 @@ export const useWeather = () => {
   };
 
   const setTranslatedDescription = async () => {
-    const weatherCode = String(weatherData?.current.weatherCode) as WeatherCodesType;
-    if (weatherCode) {
-      const descriptionObj = weatherCodes[weatherCode][getCurrentPeriodOfDay()];
+    if (!weatherData) return;
+
+    const weatherCode = String(weatherData.current.weatherCode) as WeatherCodesType;
+    const period = getCurrentPeriodOfDay(); //"day" | "night"
+    const codeEntry = weatherCodes[weatherCode];
+
+    if (codeEntry && codeEntry[period]) {
+      const descriptionObj = codeEntry[period];
       const translatedDescription = {
         description: await getTranslation(descriptionObj.description, i18n.language),
         image: descriptionObj.image,
       };
       setDescription(translatedDescription);
+    } else {
+      console.warn(
+        `There is no description for weather code: ${weatherCode} - and period of day: ${period}`,
+      );
+      setDescription(null);
     }
   };
-
   const hasLoaded = React.useRef(false);
 
   useEffect(() => {
