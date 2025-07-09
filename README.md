@@ -1,5 +1,7 @@
 # Helper App
 
+## 🌐 [Live Demo](https://my-helper.netlify.app)
+
 A modern and lightweight web application built with **React 19**, **TypeScript**, and **Vite**, designed to give you a productive start to your day.
 
 This app provides a clean and responsive interface with multiple features:
@@ -12,22 +14,42 @@ This app provides a clean and responsive interface with multiple features:
 
 ## Tech Stack
 
-| Category           | Technologies                          |
-|--------------------|---------------------------------------|
-| Frontend           | React 19, Vite, TypeScript            |
-| Styling            | Tailwind CSS, @tailwindcss/typography |
-| State Mgmt         | Redux Toolkit, React                  |
-| Forms              | React Hook Form                       |
-| Localization       | i18next, react-i18next                |
-| Auth & DB          | Firebase, react-firebase-hooks        |
-| Networking         | Axios                                 |
-| AI/ML              | Azure AI Inference                    |
-| Utilities          | Lodash, Highlight.js, react-markdown  |
-| Lint & Format      | ESLint, Prettier                      |
-| Security and CI/CD | Netlify                               |
+| Category      | Technologies                          |
+|---------------|---------------------------------------|
+| Frontend      | React 19, Vite, TypeScript            |
+| Styling       | Tailwind CSS, @tailwindcss/typography |
+| State Mgmt    | Redux Toolkit, React                  |
+| Forms         | React Hook Form                       |
+| Localization  | i18next, react-i18next                |
+| Auth & DB     | Firebase, react-firebase-hooks        |
+| Networking    | Axios                                 |
+| AI/ML         | Azure AI Inference                    |
+| Utilities     | Lodash, Highlight.js, react-markdown  |
+| Lint & Format | ESLint, Prettier                      |
+| Deployment    | Netlify                               |
 
 
 ---
+
+## Installation
+
+```bash
+git clone https://github.com/your-username/helper-app.git
+cd helper-app
+npm install
+```
+
+## Environment Configuration
+
+Before running the project, create a `.env` file in the root directory based on `.env.example`, and fill in the required API keys:
+
+```env
+VITE_CURRENT_CITY=your-current-city
+VITE_FIREBASE_API_KEY=your-firebase-key
+VITE_NEWS_API_KEY=your-newsapi-key
+VITE_GITHUB_TOKEN=your-github-token-for-using-ai-model
+VITE_QUOTES_API_KEY=your-quotesapi-key
+```
 
 ## Scripts
 
@@ -67,19 +89,13 @@ Create, edit, delete, and manage your tasks using Firebase backend.
 - Translation files located at: `src/shared/i18n/locales/*`
 - Auto-generated typings: `src/i18n/@types/resources.d.ts`
 
+To generate typings:
+
+```bash
+npm run interface
+```
 ---
 
-## Environment Configuration
-
-Before running the project, create a `.env` file in the root directory based on `.env.example`, and fill in the required API keys:
-
-```env
-VITE_CURRENT_CITY=your-current-city
-VITE_FIREBASE_API_KEY=your-firebase-key
-VITE_NEWS_API_KEY=your-newsapi-key
-VITE_GITHUB_TOKEN=your-github-token-for-using-ai-model ---- https://github.com/marketplace/models/azure-openai/gpt-4-1
-VITE_QUOTES_API_KEY=your-quotesapi-key
-```
 
 ## License
 This project is private and not licensed for public use.
