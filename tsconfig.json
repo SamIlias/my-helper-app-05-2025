@@ -5,6 +5,7 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "jsx": "react",
+    "declaration": false,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
