@@ -8,6 +8,7 @@
     "homeButtonTitle": "Home",
     "logoutButtonTitle": "Log out",
     "loginButtonTitle": "Login",
+    "closeButtonTitle": "Close",
     "pagination": {
         "prevBtnName": "Prev",
         "nextBtnName": "Next"

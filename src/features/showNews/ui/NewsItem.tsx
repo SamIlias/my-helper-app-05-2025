@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { NewsItemType } from '../api/newsAPI';
 import { useState } from 'react';
-import { borderColors, buttonStyles, textColors } from '@/shared/myStyles/myStyles';
+import { NewsItemType } from '../api/newsAPI';
+import { borderColors, textColors } from '@/shared/myStyles/myStyles';
+import { CloseButton } from '@/shared/ui/CloseButton';
+import { useTranslation } from 'react-i18next';
 
 export const NewsItem: React.FC<NewsItemType> = ({
   title,
@@ -13,9 +15,11 @@ export const NewsItem: React.FC<NewsItemType> = ({
   publishedAt,
 }) => {
   const [isShow, setIsShow] = useState(false);
-  const onClick = () => {
+  const toggleIsShow = () => {
     setIsShow(!isShow);
   };
+
+  const { t } = useTranslation();
 
   return (
     <div
@@ -30,7 +34,7 @@ export const NewsItem: React.FC<NewsItemType> = ({
         {!isShow && (
           <button
             className="text-stone-600 dark:text-stone-400 hover:text-amber-700 cursor-pointer"
-            onClick={onClick}
+            onClick={toggleIsShow}
           >
             Show more
           </button>
@@ -45,9 +49,7 @@ export const NewsItem: React.FC<NewsItemType> = ({
             {url}
           </a>
           <p className={`mt-2 text-right text-xs md:text-base ${textColors.main}`}>{publishedAt}</p>
-          <button className={`${buttonStyles.close}`} onClick={onClick}>
-            Close
-          </button>
+          <CloseButton onClick={toggleIsShow} title={t('closeButtonTitle', { ns: 'common' })} />
         </div>
       )}
     </div>

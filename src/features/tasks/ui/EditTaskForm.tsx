@@ -22,7 +22,7 @@ export const EditTaskForm: React.FC<PropsType> = ({ closeForm, onSubmit, editedT
 
   return (
     <div
-      className={`md:h-full grid  px-6 pt-3 border rounded ${borderColors.primary} shadow-md overflow-y-scroll`}
+      className={`h-full grid  px-6 pt-3 border rounded ${borderColors.primary} shadow-md overflow-y-scroll`}
     >
       <BaseTaskForm
         title={t('editTaskForm.title')}

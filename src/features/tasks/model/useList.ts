@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/app/store';
 import { setNewAddedTask } from './tasksSlice';
 import { deleteTaskThunk, updateTaskThunk } from './tasksThunks';
+import { useIsMobile } from '@/shared/hooks';
 
 function isTaskInList(taskId: string | null | undefined, taskList: TaskType[]): boolean {
   if (!taskId) return false;
@@ -23,6 +24,10 @@ export const useList = (tasks: TaskType[]) => {
     active: false,
     editedTask: null,
   });
+  const [isShowDescriptionBlockOnMobile, setIsShowDescriptionBlockOnMobile] =
+    useState<boolean>(false);
+
+  const isMobile = useIsMobile();
 
   const newTaskElementAnchor = useRef<HTMLDivElement>(null);
 
@@ -43,8 +48,9 @@ export const useList = (tasks: TaskType[]) => {
 
   const onTaskClick = (id: string): void => {
     const currentTask: TaskType | undefined = tasks.find((task: TaskType) => task.id === id);
-    if (currentTask) {
-      setActiveTaskId(currentTask.id);
+    if (currentTask) setActiveTaskId(currentTask.id);
+    if (currentTask && isMobile) {
+      setIsShowDescriptionBlockOnMobile(true);
     }
   };
 
@@ -55,6 +61,13 @@ export const useList = (tasks: TaskType[]) => {
 
   const closeEditForm: () => void = () => {
     setEditTaskMode({ active: false, editedTask: null });
+    if (isMobile) {
+      setIsShowDescriptionBlockOnMobile(false);
+    }
+  };
+
+  const closeDescriptionOnMobile: () => void = () => {
+    setIsShowDescriptionBlockOnMobile(false);
   };
 
   const onEditFormSubmit = (data: TaskFormValues) => {
@@ -78,5 +91,8 @@ export const useList = (tasks: TaskType[]) => {
     editTaskMode,
     closeEditForm,
     onEditFormSubmit,
+    isMobile,
+    isShowDescriptionBlockOnMobile,
+    closeDescriptionOnMobile,
   };
 };

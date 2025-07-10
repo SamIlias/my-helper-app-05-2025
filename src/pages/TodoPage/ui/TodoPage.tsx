@@ -28,7 +28,7 @@ export const TodoPage: React.FC = () => {
     return <AddTaskForm closeAddForm={onCloseTaskForm} onSubmit={onAddTaskSubmit} />;
   }
   return (
-    <div className="flex flex-col min-h-0 h-full mx-3 gap-2">
+    <div className="flex flex-col min-h-0 h-full mx-1  md:mx-3 gap-2">
       <PageHeader
         title={t('title')}
         children={

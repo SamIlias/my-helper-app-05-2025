@@ -23,6 +23,9 @@ export const TasksList: React.FC<TaskListProps> = ({ tasks, toggleCompletingOfTa
     editTaskMode,
     closeEditForm,
     onEditFormSubmit,
+    isMobile,
+    isShowDescriptionBlockOnMobile,
+    closeDescriptionOnMobile,
   } = useList(tasks);
 
   const activeTask: TaskType | undefined = tasks.find((task) => task.id === activeTaskId);
@@ -30,7 +33,7 @@ export const TasksList: React.FC<TaskListProps> = ({ tasks, toggleCompletingOfTa
   const { t } = useTranslation('todopage');
 
   return (
-    <div className="grid grid-rows-[2fr_1fr] md:grid-rows-none md:grid-cols-2 gap-2 h-full w-full p-1">
+    <div className="relative grid md:grid-cols-2 gap-2 pb-1 h-full w-full md:p-1">
       <div
         className={`border ${borderColors.primary} h-full rounded p-2 overflow-y-auto shadow-md`}
       >
@@ -68,16 +71,33 @@ export const TasksList: React.FC<TaskListProps> = ({ tasks, toggleCompletingOfTa
         </div>
       </div>
 
-      {/* Description or edit form */}
-      {editTaskMode.active ? (
-        <EditTaskForm
-          closeForm={closeEditForm}
-          onSubmit={onEditFormSubmit}
-          editedTask={editTaskMode.editedTask as TaskType}
-        />
-      ) : (
-        <Description description={activeTask?.description} />
-      )}
+      {/* DescriptionAndEditFormBlock */}
+      <div
+        className={`
+          ${
+            isShowDescriptionBlockOnMobile
+              ? 'absolute inset-0 z-10 bg-stone-100/95 dark:bg-stone-600/95'
+              : isMobile
+                ? 'hidden'
+                : 'block'
+          }
+           rounded pb-1
+        `}
+      >
+        {editTaskMode.active ? (
+          <EditTaskForm
+            closeForm={closeEditForm}
+            onSubmit={onEditFormSubmit}
+            editedTask={editTaskMode.editedTask as TaskType}
+          />
+        ) : (
+          <Description
+            description={activeTask?.description}
+            isMobile={isMobile}
+            onCloseDescription={closeDescriptionOnMobile}
+          />
+        )}
+      </div>
     </div>
   );
 };

@@ -8,6 +8,7 @@
     "homeButtonTitle": "Домой",
     "logoutButtonTitle": "Выйти",
     "loginButtonTitle": "Войти",
+    "closeButtonTitle": "Закрыть",
     "pagination": {
         "prevBtnName": "Пред",
         "nextBtnName": "След"
