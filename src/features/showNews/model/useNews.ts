@@ -8,7 +8,6 @@ const NEWS_ON_ONE_PAGE_COUNT = 2;
 const INITIAL_PAGE = 1;
 
 export const useNews = () => {
-  console.log('useNews');
   const [newsData, setNewsData] = useState<NewsItemType[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);

@@ -87,7 +87,7 @@ Create, edit, delete, and manage your tasks using Firebase backend.
 
 - Default language: `English`
 - Translation files located at: `src/shared/i18n/locales/*`
-- Auto-generated typings: `src/i18n/@types/resources.d.ts`
+- Auto-generated typings: `src/shared/i18n/@types/resources.d.ts`
 
 To generate typings:
 

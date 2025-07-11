@@ -27,7 +27,6 @@ export function useQuote() {
   };
 
   const hasLoaded = React.useRef(false);
-
   useEffect(() => {
     if (hasLoaded.current) return;
 

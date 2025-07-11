@@ -5,7 +5,7 @@ import { textColors } from '@/shared/myStyles/myStyles';
 import { PromptForm } from './PromptForm';
 import { ConversationHistoryBlock } from './ConversationHistoryBlock';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../app/store';
+import { RootState } from '@/app/store';
 // import 'highlight.js/styles/vs.css'; // light
 
 export const AiConversation: React.FC = () => {
