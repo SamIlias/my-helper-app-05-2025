@@ -1,15 +1,32 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
-import { buttonStyles } from '../../shared/myStyles/myStyles';
+import { buttonStyles } from '@/shared/myStyles/myStyles';
 
-type PropsType = {
-  list: Array<{ name: string; pathName: string }>;
-};
+const pages = {
+  assistant: {
+    // name: t('pageNames.weather'),
+    name: 'Assistant',
+    pathName: 'assistant',
+  },
+  todo: {
+    // name: t('pageNames.todo'),
+    name: 'My tasks',
+    pathName: 'todo',
+  },
+  auth: {
+    // name: t('pageNames.auth'),
+    name: 'Auth',
+    pathName: 'auth',
+  },
+} as const;
+type PageType = { name: string; pathName: (typeof pages)[keyof typeof pages]['pathName'] };
 
-const MainNav: React.FC<PropsType> = ({ list }) => {
+const navList: PageType[] = [pages.assistant, pages.todo];
+
+const MainNav: React.FC = () => {
   return (
-    <div className="flex justify-center gap-2">
-      {list.map((el, index) => (
+    <>
+      {navList.map((el, index) => (
         <NavLink
           key={index}
           className={({ isActive }) =>
@@ -20,7 +37,7 @@ const MainNav: React.FC<PropsType> = ({ list }) => {
           {el.name}
         </NavLink>
       ))}
-    </div>
+    </>
   );
 };
 

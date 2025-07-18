@@ -20,5 +20,5 @@ export const Clock: React.FC = () => {
     };
   }, []);
 
-  return <p>{currentTime}</p>;
+  return <span>{currentTime}</span>;
 };
