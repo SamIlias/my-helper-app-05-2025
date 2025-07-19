@@ -11,8 +11,8 @@ export const LoginWidget: React.FC = () => {
 
   if (user) {
     return (
-      <div className={`flex gap-3`}>
-        <div className={`${textColors.secondary}`}>
+      <div className={`flex gap-1 h-full items-center`}>
+        <div className={`${textColors.main}`}>
           {truncate(getNameFromEmail(user.email), usernameLettersNumber)}
         </div>
         <LogoutButton />

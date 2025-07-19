@@ -22,10 +22,10 @@ const TodoPage = lazy(() => import('../pages/TodoPage'));
 function App() {
   return (
     <div
-      className={`w-screen h-screen grid grid-cols-24 grid-rows-24 
+      className={`w-screen h-screen grid grid-cols-24  
       bg-gradient-to-b from-white to-white dark:from-stone-950 dark:via-stone-800 dark:to-amber-950/50`}
     >
-      <header className="col-span-24 row-span-3 w-full content-center bg-gradient-to-r from-stone-500 from-5% via-stone-600 via-20% to-stone-700 to-90% ">
+      <header className="col-span-24 w-full h-24 content-center bg-gradient-to-r from-stone-500 from-5% via-stone-600 via-20% to-stone-700 to-90% ">
         <Header />
       </header>
 

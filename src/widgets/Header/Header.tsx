@@ -17,11 +17,15 @@ export const Header: React.FC = () => {
           <MainNav />
         </nav>
       </div>
-      <div className="flex gap-10 justify-end items-center border h-full ">
-        <Clock />
+      <div className="flex gap-2 justify-end items-center  h-full ">
+        <div className="pr-10 text-2xl">
+          <Clock />
+        </div>
         <ThemeToggleButton />
         <LanguageSelector />
-        <LoginWidget />
+        <div className="pr-5 pl-10 h-full">
+          <LoginWidget />
+        </div>
       </div>
     </div>
   );

@@ -11,11 +11,16 @@ export const LanguageSelector: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="h-full flex items-center pl-5">
+      <img
+        className="h-1/3 px-2 filter invert"
+        src={'/public/assets/icons/language.png'}
+        alt="Language"
+      />
       <select
         value={currentLanguage}
         onChange={handleSelectLng}
-        className={`${textColors.secondary}`}
+        className={`${textColors.secondary} text-sm cursor-pointer hover:text-amber-300`}
       >
         <option className="text-amber-900" value="en">
           English
