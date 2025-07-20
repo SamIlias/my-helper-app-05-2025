@@ -2,7 +2,7 @@ import * as React from 'react';
 
 export const Preloader: React.FC<{ preloader: string }> = ({ preloader }) => {
   return (
-    <div className="max-h-[26px]">
+    <div className="flex items-center justify-center w-full p-2">
       <img src={preloader} alt="preloader" className="h-full object-contain" />
     </div>
   );

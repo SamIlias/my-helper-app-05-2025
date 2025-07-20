@@ -21,3 +21,19 @@ body {
   max-height: 100dvh;
 }
 
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;               /* Толщина полосы */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;  /* Фон трека */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #888;   /* Цвет полосы */
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}

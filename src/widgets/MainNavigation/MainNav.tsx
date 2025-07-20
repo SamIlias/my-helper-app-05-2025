@@ -6,7 +6,7 @@ const pages = {
   assistant: {
     // name: t('pageNames.weather'),
     name: 'Assistant',
-    pathName: 'assistant',
+    pathName: '',
   },
   todo: {
     // name: t('pageNames.todo'),

@@ -5,7 +5,7 @@ export const textColors = {
   link: 'text-amber-700 dark:text-stone-400 hover:text-amber-900 dark:hover:text-stone-300',
   formLabel: 'text-gray-700 dark:text-amber-500',
   highlight: 'text-amber-700 dark:text-amber-400',
-  placeholder: 'text-stone-700 dark:text-stone-400',
+  placeholder: 'text-stone-700 dark:text-stone-100',
 };
 
 export const buttonStyles = {
@@ -20,6 +20,10 @@ export const buttonStyles = {
 export const borderColors = {
   primary: 'border-stone-500',
   formInput: 'border rounded border-gray-400 focus:border-yellow-600 outline-none',
+};
+
+export const mainLayoutColors = {
+  tilesBackground: 'bg-stone-500/40',
 };
 
 export const pageTitleStyle = `${textColors.main} text-shadow-md font-bold text-2xl md:text-3xl lg:text-4xl xl:text-4xl`;
