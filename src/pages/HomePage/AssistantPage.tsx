@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { MainLayout } from '@/shared/ui/layouts/MainLayout';
 import { mainLayoutColors } from '@/shared/myStyles/myStyles';
 import WeatherWidget from '@/widgets/Weather';
+import NewsWidget from '@/widgets/News';
 
 export const AssistantPage: React.FC = () => {
   // const { t } = useTranslation('homepage');
@@ -19,12 +20,14 @@ export const AssistantPage: React.FC = () => {
             <AiConversation />
           </section>
 
-          <aside className={`grid gap-2 grid-rows-[30%_80%] rounded-xs h-full `}>
+          <aside className={`grid grid-rows-[190px_1fr_150px] gap-2 h-full`}>
             <section className={`${mainLayoutColors.tilesBackground}`}>
               <WeatherWidget />
             </section>
 
-            <section className={`${mainLayoutColors.tilesBackground} `}></section>
+            <section className={`${mainLayoutColors.tilesBackground} overflow-auto`}>
+              <NewsWidget />
+            </section>
 
             <section className={`${mainLayoutColors.tilesBackground} `}></section>
           </aside>

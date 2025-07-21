@@ -13,25 +13,36 @@ export const WeatherInfo: React.FC<Props> = ({ weatherData, description }) => {
   const currentLaguage = i18n.language;
 
   return (
-    <div className={`${textColors.secondary} h-full text-sm flex flex-col`}>
-      <p>
-        {weatherData.country}, {weatherData.cityName}
-      </p>
+    <div className="flex ml-7 my-3 gap-10 w-full">
+      <div className={` gap-1 h-full text-sm flex flex-col`}>
+        <div className={`${textColors.main}`}>
+          {weatherData.country}, {weatherData.cityName}
+        </div>
 
-      <div className="flex h-1/2 justify-center gap-10 items-center ">
-        <span className={`text-5xl`}>{weatherData.current.temperature} °C</span>
-        <img src={description?.image} alt={description?.description} className="" />
+        <div className="flex justify-end gap-5 items-center">
+          <span className={`text-5xl ${textColors.main}`}>
+            {weatherData.current.temperature} °C
+          </span>
+        </div>
+
+        <div className={`flex justify-start gap-5 items-center text-lg ${textColors.secondary}`}>
+          <span>
+            {
+              getWindDirectionLabel(Number(weatherData.current.windDirection))[
+                currentLaguage === 'ru' || currentLaguage === 'en' ? currentLaguage : 'en'
+              ]
+            }
+          </span>
+          <span>{weatherData.current.windSpeed} m/s</span>
+        </div>
       </div>
 
-      <div className="flex justify-start gap-5 items-center ">
-        <span>
-          {
-            getWindDirectionLabel(Number(weatherData.current.windDirection))[
-              currentLaguage === 'ru' || currentLaguage === 'en' ? currentLaguage : 'en'
-            ]
-          }
-        </span>
-        <span>{weatherData.current.windSpeed} m/s</span>
+      <div>
+        <img
+          src={description?.image}
+          alt={description?.description}
+          className="h-24 w-24 object-contain"
+        />
       </div>
     </div>
   );

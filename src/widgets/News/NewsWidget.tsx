@@ -3,12 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { NewsList } from '@/features/showNews';
 import { PageHeader } from '@/shared/ui/PageHeader';
 
-export const NewsPage: React.FC = () => {
+export const NewsWidget: React.FC = () => {
   const { t } = useTranslation('newspage');
 
   return (
-    <div className="flex flex-col h-full mx-3 gap-2">
-      <PageHeader title={t('title')} children={null} />
+    <div className="h-full">
       <NewsList />
     </div>
   );

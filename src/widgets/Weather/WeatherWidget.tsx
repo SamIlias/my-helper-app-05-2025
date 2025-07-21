@@ -11,8 +11,8 @@ export const WeatherWidget: React.FC = () => {
   const { weatherData, onSubmit, errorMessage, description } = useWeather();
 
   return (
-    <div className="flex flex-col min-h-0 h-full m-2 gap-2">
-      <div className="relative grid h-full">
+    <div className="flex flex-col h-full">
+      <div className="relative grid">
         {errorMessage && (
           <strong className="absolute top-0 text-red-700 mt-2">{errorMessage}</strong>
         )}
@@ -20,13 +20,13 @@ export const WeatherWidget: React.FC = () => {
         {weatherData ? (
           <WeatherInfo weatherData={weatherData} description={description} />
         ) : (
-          <div className="flex items-center justify-center h-full pb-15">
+          <div className="flex items-center justify-center h-full pb-12">
             <Preloader preloader={preloader} />
           </div>
         )}
       </div>
 
-      <div className="w-full border-t py-2">
+      <div className="w-7/8 mx-auto">
         <SearchForm onSubmit={onSubmit} placeholder={t('searchFormPlaceholder')} />
       </div>
     </div>

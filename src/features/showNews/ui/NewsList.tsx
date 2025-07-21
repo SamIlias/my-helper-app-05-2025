@@ -33,14 +33,14 @@ export const NewsList: React.FC = () => {
           </div>
         ) : (
           <div className="flex flex-col gap-1 h-full min-h-0">
-            <div className="self-center">
-              <Pagination
-                totalItemsCount={totalItemsCount}
-                currentPage={currentPage}
-                onChangePageNumber={onChangePageNumber}
-                itemsOnOnePageCount={NEWS_ON_ONE_PAGE_COUNT}
-              />
-            </div>
+            {/*<div className="self-center">*/}
+            {/*  <Pagination*/}
+            {/*    totalItemsCount={totalItemsCount}*/}
+            {/*    currentPage={currentPage}*/}
+            {/*    onChangePageNumber={onChangePageNumber}*/}
+            {/*    itemsOnOnePageCount={NEWS_ON_ONE_PAGE_COUNT}*/}
+            {/*  />*/}
+            {/*</div>*/}
 
             <div className="overflow-auto">
               {newsItems.map((n: NewsItemType) => (
