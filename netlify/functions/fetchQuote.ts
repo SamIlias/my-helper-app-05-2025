@@ -50,7 +50,7 @@ const handler: Handler = async (event) => {
   } catch (error) {
     console.error('[fetchQuote] Error:', error);
 
-    let errorMessage = 'Failed to fetch quotes';
+    let errorMessage = 'Failed to fetch Quotes';
     let statusCode = 500;
 
     if (axios.isAxiosError(error)) {

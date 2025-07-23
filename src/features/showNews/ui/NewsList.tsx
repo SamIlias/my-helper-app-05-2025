@@ -1,59 +1,76 @@
-import { Pagination, Preloader, SearchForm } from '@/shared/ui';
+import { Preloader, SearchForm } from '@/shared/ui';
 import preloader from '@/shared/assets/preloaderNews.svg';
-import { NewsItemType } from '../api/newsAPI';
 import { NewsItem } from './NewsItem';
 import * as React from 'react';
-import { useNews } from '../model/useNews';
+import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNews } from '@/features/showNews/model/useNews';
 
 export const NewsList: React.FC = () => {
-  const {
-    newsItems,
-    totalItemsCount,
-    isFetching,
-    errorMessage,
-    currentPage,
-    onChangePageNumber,
-    NEWS_ON_ONE_PAGE_COUNT,
-    onSearchFormSubmit,
-  } = useNews();
+  const { i18n, t } = useTranslation('newspage');
+  const [searchTerm, setSearchTerm] = React.useState('news');
+  const language = i18n.language;
 
-  const { t } = useTranslation('newspage');
+  const handleSearchSubmit = (value: string) => {
+    setSearchTerm(value);
+  };
+
+  const { data, error, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, status } =
+    useNews(searchTerm, language);
+
+  const observerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!hasNextPage || isFetchingNextPage) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          fetchNextPage();
+        }
+      },
+      { threshold: 0.3 },
+    );
+
+    const el = observerRef.current;
+    if (el) observer.observe(el);
+    return () => {
+      if (el) observer.unobserve(el);
+    };
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+
+  if (status === 'error') {
+    return <strong className="text-red-700 mt-2">{(error as Error).message}</strong>;
+  }
+
+  const articles = data?.pages.flatMap((page) => page.articles) ?? [];
 
   return (
-    <>
-      <main className="relative grid h-full min-h-0">
-        {errorMessage && (
-          <strong className="absolute top-0 text-red-700 mt-2">{errorMessage}</strong>
-        )}
-
-        {isFetching ? (
-          <div className="flex items-center justify-center h-full pb-15">
+    <div className="h-full flex flex-col">
+      <main className="relative flex-1 min-h-0">
+        {isLoading ? (
+          <div className="h-full flex justify-center items-center">
             <Preloader preloader={preloader} />
           </div>
         ) : (
-          <div className="flex flex-col gap-1 h-full min-h-0">
-            {/*<div className="self-center">*/}
-            {/*  <Pagination*/}
-            {/*    totalItemsCount={totalItemsCount}*/}
-            {/*    currentPage={currentPage}*/}
-            {/*    onChangePageNumber={onChangePageNumber}*/}
-            {/*    itemsOnOnePageCount={NEWS_ON_ONE_PAGE_COUNT}*/}
-            {/*  />*/}
-            {/*</div>*/}
-
-            <div className="overflow-auto">
-              {newsItems.map((n: NewsItemType) => (
-                <NewsItem key={n.content} {...n} />
+          <div className="flex overflow-y-auto custom-scrollbar flex-col gap-1 h-full">
+            <div className="grid grid-cols-2 gap-2 m-1">
+              {articles.map((n) => (
+                <NewsItem key={n.url} {...n} />
               ))}
             </div>
+
+            {isFetchingNextPage && <div className="text-center h-fit py-4">loading...</div>}
+
+            {/* Observer anchor */}
+            <div ref={observerRef} className="h-12 w-full py-3" />
           </div>
         )}
       </main>
 
-      <footer className="w-full border-t py-2">
-        <SearchForm onSubmit={onSearchFormSubmit} placeholder={t('searchForm.placeholder')} />
+      <footer className="w-7/8 mx-auto my-2">
+        <SearchForm onSubmit={handleSearchSubmit} placeholder={t('searchForm.placeholder')} />
       </footer>
-    </>
+    </div>
   );
 };

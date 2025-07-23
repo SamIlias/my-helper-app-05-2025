@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { getNameFromEmail } from '@/shared/utils/stringHandler';
 import { useAiConversation } from '../model/useAiConversation';
-import { textColors } from '@/shared/myStyles/myStyles';
 import { PromptForm } from './PromptForm';
 import { ConversationHistoryBlock } from './ConversationHistoryBlock';
 import { useSelector } from 'react-redux';

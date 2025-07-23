@@ -10,7 +10,7 @@ export const NewsItem: React.FC<NewsItemType> = ({
   description,
   content,
   source,
-  image,
+  urlToImage,
   url,
   publishedAt,
 }) => {
@@ -23,12 +23,12 @@ export const NewsItem: React.FC<NewsItemType> = ({
 
   return (
     <div
-      className={`grid gap-2 grid-rows-[auto_1fr] md:grid-cols-2 border border-solid rounded-lg m-2 p-1 ${borderColors.primary}`}
+      className={`grid content-start justify-items-center gap-2 border border-solid rounded-lg p-1 ${borderColors.primary}`}
     >
-      <div className="place-self-center">
-        <img className="rounded-lg" src={image} alt={title} />
+      <div className="">
+        <img className="rounded-lg" src={urlToImage || undefined} alt={urlToImage || undefined} />
       </div>
-      <div className="md:text-md lg:text-md xl:text-xl">
+      <div className="text-sm ">
         <p className={`font-bold ${textColors.main}`}>{title}</p>
         <p className={`text-justify ${textColors.secondary}`}>{description}</p>
         {!isShow && (
@@ -42,7 +42,7 @@ export const NewsItem: React.FC<NewsItemType> = ({
       </div>
 
       {isShow && (
-        <div className="flex flex-col p-3 md:p-6 lg:p-10 text-justify text-base md:text-md lg:text-xl absolute top-0 right-0 h-full w-full bg-radial from-orange-50 to-stone-200 dark:from-stone-600 dark:to-stone-700 z-10 content-center overflow-auto">
+        <div className="flex flex-col p-3 text-justify text-md absolute top-0 right-0 h-full w-full bg-radial from-orange-50 to-stone-200 dark:from-stone-600 dark:to-stone-700 z-10 content-center overflow-auto">
           <p className={`mb-7 ${textColors.main}`}>{content}</p>
           <p className={`${textColors.main}`}>{source.name}</p>
           <a href={url} target={'_blank'} className={`${textColors.link}`}>

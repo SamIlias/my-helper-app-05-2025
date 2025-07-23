@@ -6,9 +6,11 @@ import { ErrorFallback, LoadingFallback } from '@/shared/ui';
 import { AuthPage } from '@/pages/AuthPage';
 import { ErrorBoundary } from 'react-error-boundary';
 import { RequireAuth } from '@/features/auth/ui/RequireAuth';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 // import TodoPage from '@/pages/TodoPage';
 const TodoPage = lazy(() => import('../pages/TodoPage'));
+const queryClient = new QueryClient();
 
 function App() {
   return (
@@ -20,7 +22,9 @@ function App() {
             path={`/`}
             element={
               <RequireAuth>
-                <AssistantPage />
+                <QueryClientProvider client={queryClient}>
+                  <AssistantPage />
+                </QueryClientProvider>
               </RequireAuth>
             }
           />

@@ -1,1 +1,1 @@
-export { QuoteBlock } from './ui/QuoteBlock';
+export { Quote } from './ui/Quote';

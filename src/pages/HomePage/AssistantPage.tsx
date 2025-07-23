@@ -6,6 +6,7 @@ import { MainLayout } from '@/shared/ui/layouts/MainLayout';
 import { mainLayoutColors } from '@/shared/myStyles/myStyles';
 import WeatherWidget from '@/widgets/Weather';
 import NewsWidget from '@/widgets/News';
+import { QuotesWidget } from '@/widgets/Quotes/QuotesWidget';
 
 export const AssistantPage: React.FC = () => {
   // const { t } = useTranslation('homepage');
@@ -20,16 +21,18 @@ export const AssistantPage: React.FC = () => {
             <AiConversation />
           </section>
 
-          <aside className={`grid grid-rows-[190px_1fr_150px] gap-2 h-full`}>
-            <section className={`${mainLayoutColors.tilesBackground}`}>
+          <aside className={`flex flex-col gap-2 h-full`}>
+            <section className={`${mainLayoutColors.tilesBackground} h-48`}>
               <WeatherWidget />
             </section>
 
-            <section className={`${mainLayoutColors.tilesBackground} overflow-auto`}>
+            <section className={`${mainLayoutColors.tilesBackground} overflow-auto h-96 `}>
               <NewsWidget />
             </section>
 
-            <section className={`${mainLayoutColors.tilesBackground} `}></section>
+            <section className={`${mainLayoutColors.tilesBackground} flex-1 `}>
+              <QuotesWidget />
+            </section>
           </aside>
 
           {/*<section className="h-full">*/}

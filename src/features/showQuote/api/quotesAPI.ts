@@ -4,7 +4,7 @@ export const fetchRandomQuote = async () => {
     const data = await response.json();
     return data.quotes[0];
   } catch (error) {
-    console.error('Fetching quotes error:', error);
+    console.error('Fetching Quotes error:', error);
     return null;
   }
 };
@@ -16,9 +16,9 @@ export type { QuoteType } from '../../../../netlify/functions/fetchQuote';
 //   try {
 //     const response = await fetch(`/.netlify/functions/fetchQuote?category=${category}`);
 //     const data = await response.json();
-//     return data.quotes[0];
+//     return data.Quotes[0];
 //   } catch (error) {
-//     console.error('Fetching quotes error:', error);
+//     console.error('Fetching Quotes error:', error);
 //     return null;
 //   }
 // };
@@ -28,9 +28,9 @@ export type { QuoteType } from '../../../../netlify/functions/fetchQuote';
 //     const url = `/.netlify/functions/fetchQuote?limit=${limit}${category ? `&category=${category}` : ''}`;
 //     const response = await fetch(url);
 //     const data = await response.json();
-//     return data.quotes;
+//     return data.Quotes;
 //   } catch (error) {
-//     console.error('Fetching quotes error:', error);
+//     console.error('Fetching Quotes error:', error);
 //     return [];
 //   }
 // };
