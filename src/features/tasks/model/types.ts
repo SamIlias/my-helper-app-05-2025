@@ -1,3 +1,5 @@
+type TaskStatus = 'queue' | 'in-progress' | 'completed';
+
 type TaskType = {
   id: string;
   userId: string;
@@ -6,6 +8,7 @@ type TaskType = {
   description?: string;
   isCompleted: boolean;
   category: TaskCategoryKey;
+  status: TaskStatus;
 };
 
 type TaskWithoutId = Omit<TaskType, 'id'>;
@@ -40,5 +43,6 @@ export type {
   TaskFormValues,
   TaskCategoryKey,
   TaskCategoryValue,
+  TaskStatus,
 };
 export { categoryColor, taskCategories };

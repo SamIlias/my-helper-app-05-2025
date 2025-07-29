@@ -34,10 +34,6 @@ export const AssistantPage: React.FC = () => {
               <QuotesWidget />
             </section>
           </aside>
-
-          {/*<section className="h-full">*/}
-          {/*  <QuoteBlock />*/}
-          {/*</section>*/}
         </main>
       }
     />

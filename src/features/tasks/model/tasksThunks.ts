@@ -5,7 +5,7 @@ import {
   deleteTaskById,
   getTasks,
   updateTaskById,
-} from '../../../pages/TodoPage/api/firebaseTodoAPI';
+} from '@/features/tasks/api/firebaseTodoAPI';
 import { normalizeError } from '../../../shared/utils/errorHandler';
 import { RootState } from '../../../app/store';
 
@@ -30,6 +30,7 @@ export const addTaskThunk = createAsyncThunk<
       ...data,
       userId,
       isCompleted: false,
+      status: 'queue',
     };
     await addTask(taskWithoutId);
     const prevTasks: TaskType[] = getState().tasks.tasks;

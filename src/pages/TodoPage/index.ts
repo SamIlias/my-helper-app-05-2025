@@ -1,1 +1,1 @@
-export { TodoPage as default } from './ui/TodoPage';
+export { TodoPage as default } from './TodoPage';

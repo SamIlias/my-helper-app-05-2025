@@ -1,12 +1,12 @@
 import './App.css';
 import React, { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { AssistantPage } from '@/pages/HomePage';
 import { ErrorFallback, LoadingFallback } from '@/shared/ui';
 import { AuthPage } from '@/pages/AuthPage';
 import { ErrorBoundary } from 'react-error-boundary';
 import { RequireAuth } from '@/features/auth/ui/RequireAuth';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { AssistantPage } from '@/pages/AssistantPage';
 
 // import TodoPage from '@/pages/TodoPage';
 const TodoPage = lazy(() => import('../pages/TodoPage'));

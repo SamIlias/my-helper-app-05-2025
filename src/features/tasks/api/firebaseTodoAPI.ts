@@ -35,6 +35,7 @@ const getTasks = async (userId: string): Promise<TaskType[]> => {
       isCompleted: data.isCompleted,
       description: data.description,
       category: data.category,
+      status: data.status,
     });
   });
 

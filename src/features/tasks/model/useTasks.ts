@@ -5,6 +5,7 @@ import { RootState } from '@/app/store';
 import { updateTaskThunk } from '@/features/tasks/model/tasksThunks';
 import { AppDispatch } from '@/app/store';
 import { addTaskThunk, fetchTasksThunk } from '@/features/tasks/model/tasksThunks';
+import { TaskStatus } from '@/features/tasks/model/types';
 
 export const useTasks = () => {
   const { tasks, error, isLoading } = useSelector((state: RootState) => state.tasks);
@@ -19,8 +20,12 @@ export const useTasks = () => {
     setIsAddFormActive(false);
   };
 
-  const toggleCompletingOfTask = async (id: string, isCompleted: boolean): Promise<void> => {
-    await dispatch(updateTaskThunk({ taskId: id, data: { isCompleted }, userId: user!.uid }));
+  // const toggleCompletingOfTask = async (id: string, isCompleted: boolean): Promise<void> => {
+  //   await dispatch(updateTaskThunk({ taskId: id, data: { isCompleted }, userId: user!.uid }));
+  // };
+
+  const updateTaskStatus = async (id: string, status: TaskStatus): Promise<void> => {
+    await dispatch(updateTaskThunk({ taskId: id, data: { status }, userId: user!.uid }));
   };
 
   const onAddTaskSubmit = async (data: TaskFormValues) => {
@@ -50,6 +55,7 @@ export const useTasks = () => {
     setIsAddFormActive,
     onAddTaskSubmit,
     onClickHideShowButton,
-    toggleCompletingOfTask,
+    // toggleCompletingOfTask,
+    updateTaskStatus,
   };
 };

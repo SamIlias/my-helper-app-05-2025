@@ -15,7 +15,7 @@ export const HeaderButtons: React.FC<Props> = ({
   const { t } = useTranslation('todopage');
 
   return (
-    <div className="flex gap-1">
+    <div className="flex w-full gap-2">
       <button
         onClick={onOpenTaskForm}
         className="px-2 bg-yellow-500 text-black rounded-md hover:bg-amber-700 hover:text-white transition"

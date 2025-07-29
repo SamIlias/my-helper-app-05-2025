@@ -47,9 +47,9 @@ export const NewsList: React.FC = () => {
 
   return (
     <div className="h-full flex flex-col">
-      <main className="relative flex-1 min-h-0">
+      <main className="relative flex justify-center items-center flex-1 min-h-0">
         {isLoading ? (
-          <div className="h-full flex justify-center items-center">
+          <div className="">
             <Preloader preloader={preloader} />
           </div>
         ) : (
