@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { TaskFormValues, TaskType } from './types';
+import { TaskFormValues, TaskStatus, TaskType } from './types';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/app/store';
 import { setNewAddedTask } from './tasksSlice';
@@ -32,7 +32,7 @@ export const useList = (tasks: TaskType[]) => {
   const newTaskElementAnchor = useRef<HTMLDivElement>(null);
 
   const queueTasks = tasks.filter((task) => task.status === 'queue');
-  const inProgressTasks = tasks.filter((task) => task.status === 'in-progress');
+  const inProgressTasks = tasks.filter((task) => task.status === 'inProgress');
   const completedTasks = tasks.filter((task) => task.status === 'completed');
 
   useEffect(() => {
@@ -56,6 +56,10 @@ export const useList = (tasks: TaskType[]) => {
     if (currentTask && isMobile) {
       setIsShowDescriptionBlockOnMobile(true);
     }
+  };
+
+  const updateTaskStatus = async (id: string, status: TaskStatus): Promise<void> => {
+    await dispatch(updateTaskThunk({ taskId: id, data: { status }, userId: user!.uid }));
   };
 
   const onEditClick: (task: TaskType) => void = (task) => {
@@ -102,5 +106,6 @@ export const useList = (tasks: TaskType[]) => {
     inProgressTasks,
     completedTasks,
     setActiveTaskId,
+    updateTaskStatus,
   };
 };

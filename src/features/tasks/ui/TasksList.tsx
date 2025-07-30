@@ -1,55 +1,41 @@
 import React, { useState } from 'react';
 import {
-  DndContext,
   closestCenter,
+  defaultDropAnimationSideEffects,
+  DndContext,
+  DragEndEvent,
+  DragOverEvent,
+  DragOverlay,
+  DragStartEvent,
+  DropAnimation,
   KeyboardSensor,
   PointerSensor,
   useSensor,
   useSensors,
-  DragEndEvent,
-  DragOverEvent,
-  DragOverlay,
-  defaultDropAnimationSideEffects,
-  DropAnimation,
 } from '@dnd-kit/core';
-import {
-  arrayMove,
-  SortableContext,
-  sortableKeyboardCoordinates,
-  verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
-import { useDroppable } from '@dnd-kit/core';
+import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import { SortableTaskItem } from '@/features/tasks/ui/SortableTaskItem';
 import { TaskType } from '@/features/tasks';
+import { DroppableTasksContainer } from '@/features/tasks/ui/DroppableTasksContainer';
+import { TaskStatus } from '@/features/tasks/model/types';
 
-// Компонент для droppable контейнера
-const DroppableContainer: React.FC<{
-  id: string;
-  children: React.ReactNode;
-  title: string;
-  className?: string;
-}> = ({ id, children, title, className = '' }) => {
-  const { setNodeRef, isOver } = useDroppable({
-    id,
-  });
-
-  return (
-    <div
-      ref={setNodeRef}
-      className={`w-full flex gap-2 flex-col min-h-32 p-4 rounded-lg transition-colors ${className} ${
-        isOver ? 'ring-2 ring-blue-400 bg-blue-50/10' : ''
-      }`}
-    >
-      <h3 className="text-lg font-semibold text-center mb-2">{title}</h3>
-      {children}
-    </div>
-  );
+type ContainerIdType = { [key: string]: TaskStatus };
+const containersId: ContainerIdType = {
+  queue: 'queue',
+  inProgress: 'inProgress',
+  completed: 'completed',
 };
 
 export const TasksList: React.FC<{ tasks: TaskType[] }> = ({ tasks }) => {
-  const [queueTasks, setQueueTasks] = useState<TaskType[]>(tasks);
-  const [inProgressTasks, setInProgressTasks] = useState<TaskType[]>([]);
-  const [completedTasks, setCompletedTasks] = useState<TaskType[]>([]);
+  const [queueTasks, setQueueTasks] = useState<TaskType[]>(
+    tasks.filter((t) => t.status === containersId.queue),
+  );
+  const [inProgressTasks, setInProgressTasks] = useState<TaskType[]>(
+    tasks.filter((t) => t.status === containersId.inProgress),
+  );
+  const [completedTasks, setCompletedTasks] = useState<TaskType[]>(
+    tasks.filter((t) => t.status === containersId.completed),
+  );
   const [activeTask, setActiveTask] = useState<TaskType | null>(null);
 
   const sensors = useSensors(
@@ -69,50 +55,49 @@ export const TasksList: React.FC<{ tasks: TaskType[] }> = ({ tasks }) => {
     }),
   };
 
-  // Функция для поиска задачи по ID во всех контейнерах
+  // The function for search the task by ID in all the containers
   function findTaskById(id: string): { task: TaskType; container: string } | null {
     let task = queueTasks.find((t) => t.id === id);
-    if (task) return { task, container: 'queue' };
+    if (task) return { task, container: containersId.queue };
 
     task = inProgressTasks.find((t) => t.id === id);
-    if (task) return { task, container: 'inProgress' };
+    if (task) return { task, container: containersId.inProgress };
 
     task = completedTasks.find((t) => t.id === id);
-    if (task) return { task, container: 'completed' };
+    if (task) return { task, container: containersId.completed };
 
     return null;
   }
 
-  // Функция для получения задач по названию контейнера
   function getTasksByContainer(container: string): TaskType[] {
     switch (container) {
-      case 'queue':
+      case containersId.queue:
         return queueTasks;
-      case 'inProgress':
+      case containersId.inProgress:
         return inProgressTasks;
-      case 'completed':
+      case containersId.completed:
         return completedTasks;
       default:
         return [];
     }
   }
 
-  // Функция для обновления задач в контейнере
+  // The function for update the tasks in the definite container
   function setTasksByContainer(container: string, tasks: TaskType[]) {
     switch (container) {
-      case 'queue':
+      case containersId.queue:
         setQueueTasks(tasks);
         break;
-      case 'inProgress':
+      case containersId.inProgress:
         setInProgressTasks(tasks);
         break;
-      case 'completed':
+      case containersId.completed:
         setCompletedTasks(tasks);
         break;
     }
   }
 
-  function handleDragStart(event: DragEndEvent) {
+  function handleDragStart(event: DragStartEvent) {
     const taskInfo = findTaskById(event.active.id as string);
     if (taskInfo) {
       setActiveTask(taskInfo.task);
@@ -127,44 +112,39 @@ export const TasksList: React.FC<{ tasks: TaskType[] }> = ({ tasks }) => {
     const activeId = active.id as string;
     const overId = over.id as string;
 
-    // Найдем активную задачу
     const activeTaskInfo = findTaskById(activeId);
     if (!activeTaskInfo) return;
 
-    // Определим контейнер назначения
+    //if drag over the container
     let targetContainer: string;
-
-    // Если перетаскиваем на контейнер
-    if (['queue', 'inProgress', 'completed'].includes(overId)) {
+    if (Object.values(containersId).includes(overId)) {
       targetContainer = overId;
     } else {
-      // Если перетаскиваем на задачу, найдем ее контейнер
+      //if drag over the task - find its container
       const overTaskInfo = findTaskById(overId);
       if (!overTaskInfo) return;
       targetContainer = overTaskInfo.container;
     }
 
     const activeContainer = activeTaskInfo.container;
-
-    // Если контейнеры одинаковые, ничего не делаем (обработается в handleDragEnd)
     if (activeContainer === targetContainer) return;
 
-    // Перемещаем задачу между контейнерами
+    // Move the task between the containers
     const activeContainerTasks = getTasksByContainer(activeContainer);
     const targetContainerTasks = getTasksByContainer(targetContainer);
 
     const activeIndex = activeContainerTasks.findIndex((t) => t.id === activeId);
     if (activeIndex === -1) return;
 
-    // Удаляем из исходного контейнера
+    //Delete the task from active container
     const newActiveContainerTasks = activeContainerTasks.filter((t) => t.id !== activeId);
     setTasksByContainer(activeContainer, newActiveContainerTasks);
 
-    // Добавляем в целевой контейнер
+    //Add the task to target container
     let insertIndex = targetContainerTasks.length;
 
-    // Если перетаскиваем на конкретную задачу, вставляем перед ней
-    if (!['queue', 'inProgress', 'completed'].includes(overId)) {
+    // If move over the concrete task, insert before it
+    if (!Object.values(containersId).includes(overId)) {
       const overIndex = targetContainerTasks.findIndex((t) => t.id === overId);
       if (overIndex !== -1) {
         insertIndex = overIndex;
@@ -186,14 +166,12 @@ export const TasksList: React.FC<{ tasks: TaskType[] }> = ({ tasks }) => {
     const activeId = active.id as string;
     const overId = over.id as string;
 
-    // Найдем активную задачу
     const activeTaskInfo = findTaskById(activeId);
     if (!activeTaskInfo) return;
 
-    // Если перетаскиваем на контейнер, ничего не делаем (уже обработано в handleDragOver)
-    if (['queue', 'inProgress', 'completed'].includes(overId)) return;
+    if (Object.values(containersId).includes(overId)) return;
 
-    // Если перетаскиваем на задачу в том же контейнере, меняем порядок
+    // If we move over the task in the same container, change the order
     const overTaskInfo = findTaskById(overId);
     if (!overTaskInfo || activeTaskInfo.container !== overTaskInfo.container) return;
 
@@ -223,47 +201,24 @@ export const TasksList: React.FC<{ tasks: TaskType[] }> = ({ tasks }) => {
       onDragCancel={handleDragCancel}
     >
       <div className="flex w-full gap-4">
-        {/* Queue Column */}
-        <DroppableContainer id="queue" title="Очередь" className="bg-red-800/40">
-          <SortableContext
-            items={queueTasks.map((t) => t.id)}
-            strategy={verticalListSortingStrategy}
-          >
-            {queueTasks.length ? (
-              queueTasks.map((t) => <SortableTaskItem key={t.id} id={t.id} task={t} />)
-            ) : (
-              <p className="text-center text-gray-500 py-8">Пусто</p>
-            )}
-          </SortableContext>
-        </DroppableContainer>
-
-        {/* In Progress Column */}
-        <DroppableContainer id="inProgress" title="В работе" className="bg-green-700/30">
-          <SortableContext
-            items={inProgressTasks.map((t) => t.id)}
-            strategy={verticalListSortingStrategy}
-          >
-            {inProgressTasks.length ? (
-              inProgressTasks.map((t) => <SortableTaskItem key={t.id} id={t.id} task={t} />)
-            ) : (
-              <p className="text-center text-gray-500 py-8">Пусто</p>
-            )}
-          </SortableContext>
-        </DroppableContainer>
-
-        {/* Completed Column */}
-        <DroppableContainer id="completed" title="Выполнено" className="bg-amber-700/30">
-          <SortableContext
-            items={completedTasks.map((t) => t.id)}
-            strategy={verticalListSortingStrategy}
-          >
-            {completedTasks.length ? (
-              completedTasks.map((t) => <SortableTaskItem key={t.id} id={t.id} task={t} />)
-            ) : (
-              <p className="text-center text-gray-500 py-8">Пусто</p>
-            )}
-          </SortableContext>
-        </DroppableContainer>
+        <DroppableTasksContainer
+          id={containersId.queue}
+          title="Task queue"
+          tasks={queueTasks}
+          className="bg-red-500/40"
+        />
+        <DroppableTasksContainer
+          id={containersId.inProgress}
+          title="Tasks in progress"
+          tasks={inProgressTasks}
+          className="bg-orange-500/40"
+        />
+        <DroppableTasksContainer
+          id={containersId.completed}
+          title="Completed"
+          tasks={completedTasks}
+          className="bg-green-500/30"
+        />
       </div>
 
       {/* Drag Overlay */}

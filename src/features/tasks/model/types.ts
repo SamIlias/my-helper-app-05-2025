@@ -1,4 +1,4 @@
-type TaskStatus = 'queue' | 'in-progress' | 'completed';
+type TaskStatus = 'queue' | 'inProgress' | 'completed';
 
 type TaskType = {
   id: string;

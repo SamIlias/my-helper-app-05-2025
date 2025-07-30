@@ -85,12 +85,10 @@ export const TaskSection: React.FC = () => {
     isCompletedTasksHidden,
     isLoading,
     error,
-    handledTasks,
+    tasks,
     setIsAddFormActive,
     onAddTaskSubmit,
     onClickHideShowButton,
-    // toggleCompletingOfTask,
-    updateTaskStatus,
   } = useTasks();
 
   const { t } = useTranslation('todopage');
@@ -125,7 +123,7 @@ export const TaskSection: React.FC = () => {
           ) : (
             <div className="flex-1 w-full " id="tasks-list" role="list">
               {/*<TasksList tasks={handledTasks} />*/}
-              <TasksList tasks={tasksExample} />
+              <TasksList tasks={tasks} />
             </div>
           )}
         </div>
