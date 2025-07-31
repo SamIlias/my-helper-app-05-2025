@@ -31,9 +31,9 @@ export const useList = (tasks: TaskType[]) => {
 
   const newTaskElementAnchor = useRef<HTMLDivElement>(null);
 
-  const queueTasks = tasks.filter((task) => task.status === 'queue');
-  const inProgressTasks = tasks.filter((task) => task.status === 'inProgress');
-  const completedTasks = tasks.filter((task) => task.status === 'completed');
+  // const queueTasks = tasks.filter((task) => task.status === 'queue');
+  // const inProgressTasks = tasks.filter((task) => task.status === 'inProgress');
+  // const completedTasks = tasks.filter((task) => task.status === 'completed');
 
   useEffect(() => {
     newTaskElementAnchor.current?.scrollIntoView({ behavior: 'smooth' });
@@ -102,9 +102,9 @@ export const useList = (tasks: TaskType[]) => {
     isMobile,
     isShowDescriptionBlockOnMobile,
     closeDescriptionOnMobile,
-    queueTasks,
-    inProgressTasks,
-    completedTasks,
+    // queueTasks,
+    // inProgressTasks,
+    // completedTasks,
     setActiveTaskId,
     updateTaskStatus,
   };

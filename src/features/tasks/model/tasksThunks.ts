@@ -6,8 +6,8 @@ import {
   getTasks,
   updateTaskById,
 } from '@/features/tasks/api/firebaseTodoAPI';
-import { normalizeError } from '../../../shared/utils/errorHandler';
-import { RootState } from '../../../app/store';
+import { normalizeError } from '@/shared/utils/errorHandler';
+import { RootState } from '@/app/store';
 
 export const fetchTasksThunk = createAsyncThunk<TaskType[], string, { rejectValue: string }>(
   'tasks/fetchTasks',
