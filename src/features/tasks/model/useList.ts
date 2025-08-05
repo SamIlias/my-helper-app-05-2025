@@ -31,10 +31,6 @@ export const useList = (tasks: TaskType[]) => {
 
   const newTaskElementAnchor = useRef<HTMLDivElement>(null);
 
-  // const queueTasks = tasks.filter((task) => task.status === 'queue');
-  // const inProgressTasks = tasks.filter((task) => task.status === 'inProgress');
-  // const completedTasks = tasks.filter((task) => task.status === 'completed');
-
   useEffect(() => {
     newTaskElementAnchor.current?.scrollIntoView({ behavior: 'smooth' });
     dispatch(setNewAddedTask(null));
@@ -85,16 +81,16 @@ export const useList = (tasks: TaskType[]) => {
     closeEditForm();
   };
 
-  const onDeleteTask = (id: string) => {
-    dispatch(deleteTaskThunk(id));
-  };
+  // const onDeleteTask = (id: string) => {
+  //   dispatch(deleteTaskThunk(id));
+  // };
 
   return {
     activeTaskId,
     newAddedTask,
     onTaskClick,
     newTaskElementAnchor,
-    onDeleteTask,
+    // onDeleteTask,
     onEditClick,
     editTaskMode,
     closeEditForm,
@@ -102,9 +98,6 @@ export const useList = (tasks: TaskType[]) => {
     isMobile,
     isShowDescriptionBlockOnMobile,
     closeDescriptionOnMobile,
-    // queueTasks,
-    // inProgressTasks,
-    // completedTasks,
     setActiveTaskId,
     updateTaskStatus,
   };

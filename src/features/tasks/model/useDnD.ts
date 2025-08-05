@@ -12,7 +12,7 @@ import {
 import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import { TaskType } from '@/features/tasks';
 import { TaskStatus } from '@/features/tasks/model/types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type ContainerIdType = { [key: string]: TaskStatus };
 export const containersId: ContainerIdType = {
@@ -37,8 +37,22 @@ export const useDnD = (
     tasks.filter((t) => t.status === containersId.completed),
   );
 
+  useEffect(() => {
+    setQueueTasks(tasks.filter((t) => t.status === containersId.queue));
+    setInProgressTasks(tasks.filter((t) => t.status === containersId.inProgress));
+    setCompletedTasks(tasks.filter((t) => t.status === containersId.completed));
+  }, [tasks]);
+
   const sensors = useSensors(
-    useSensor(PointerSensor),
+    // useSensor(PointerSensor),
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 5,
+      },
+      eventOptions: {
+        preventDefault: true,
+      },
+    }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     }),
@@ -162,7 +176,7 @@ export const useDnD = (
     const activeId = active.id as string;
     const currentTaskInfo = findTaskById(activeId);
 
-    // Сбрасываем состояние
+    // clear the state
     setActiveTask(null);
     const originalContainerValue = originalContainer;
     setOriginalContainer(null);
@@ -171,41 +185,35 @@ export const useDnD = (
 
     const overId = over.id as string;
 
-    // Определяем целевой контейнер
     let targetContainer: TaskStatus;
 
     if (Object.values(containersId).includes(overId as TaskStatus)) {
-      // Перетащили на контейнер
       targetContainer = overId as TaskStatus;
     } else {
-      // Перетащили на задачу - определяем контейнер этой задачи
       const overTaskInfo = findTaskById(overId);
       if (!overTaskInfo) return;
       targetContainer = overTaskInfo.container;
     }
 
-    // Если контейнер изменился - обновляем статус в базе данных
     if (originalContainerValue !== targetContainer) {
       try {
         await updateTaskStatus(activeId, targetContainer);
       } catch (error) {
         console.error('Failed to update task status:', error);
-        // В случае ошибки возвращаем задачу в исходный контейнер
+        // in the case of error - return the task to originalContainer
         const targetTasks = getTasksByContainer(targetContainer);
         const originalTasks = getTasksByContainer(originalContainerValue);
 
-        // Убираем из целевого контейнера
         const updatedTargetTasks = targetTasks.filter((t) => t.id !== activeId);
         setTasksByContainer(targetContainer, updatedTargetTasks);
 
-        // Возвращаем в исходный контейнер
         const updatedOriginalTasks = [...originalTasks, currentTaskInfo.task];
         setTasksByContainer(originalContainerValue, updatedOriginalTasks);
       }
-      return; // Выходим после обработки смены контейнера
+      return;
     }
 
-    // Если перетаскиваем внутри одного контейнера - меняем порядок
+    // If we drag inside the same container, we change the order.
     if (!Object.values(containersId).includes(overId as TaskStatus)) {
       const containerTasks = getTasksByContainer(targetContainer);
       const activeIndex = containerTasks.findIndex((t) => t.id === activeId);

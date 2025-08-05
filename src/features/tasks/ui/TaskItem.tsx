@@ -2,10 +2,12 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { categoryColor, TaskCategoryValue, TaskType } from '../model/types';
 import { textColors } from '@/shared/myStyles/myStyles';
+import { useTask } from '@/features/tasks/model/useTask';
 
-// export const TaskItem: React.FC<TaskItemProps> = React.memo(({ task, onEditTask, deleteTask }) => {
 export const TaskItem: React.FC<{ task: TaskType }> = React.memo(({ task }) => {
   const { t } = useTranslation('todopage');
+  const { onDeleteTask } = useTask();
+
   return (
     <div className="flex flex-col space-y-1">
       <span className={`${categoryColor[task.category as TaskCategoryValue]} block`}>
@@ -26,7 +28,11 @@ export const TaskItem: React.FC<{ task: TaskType }> = React.memo(({ task }) => {
             {t('taskItem.editButtonName')}
           </button>
           <button
-            // onClick={() => deleteTask(task.id)}
+            data-no-dnd
+            onClick={(e) => {
+              e.stopPropagation();
+              onDeleteTask(task.id);
+            }}
             className="px-1 pb-0.5 text-sm text-white bg-red-900 hover:bg-red-600 rounded transition"
           >
             {t('taskItem.deleteButtonName')}

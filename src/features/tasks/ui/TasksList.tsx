@@ -12,7 +12,7 @@ export const TasksList: React.FC<{ tasks: TaskType[] }> = ({ tasks }) => {
     newAddedTask,
     onTaskClick,
     newTaskElementAnchor,
-    onDeleteTask,
+    // onDeleteTask,
     onEditClick,
     editTaskMode,
     closeEditForm,
@@ -20,9 +20,6 @@ export const TasksList: React.FC<{ tasks: TaskType[] }> = ({ tasks }) => {
     isMobile,
     isShowDescriptionBlockOnMobile,
     closeDescriptionOnMobile,
-    // queueTasks,
-    // inProgressTasks,
-    // completedTasks,
     setActiveTaskId,
     updateTaskStatus,
   } = useList(tasks);
@@ -49,7 +46,7 @@ export const TasksList: React.FC<{ tasks: TaskType[] }> = ({ tasks }) => {
       onDragEnd={handleDragEnd}
       onDragCancel={handleDragCancel}
     >
-      <div className="flex w-full gap-4">
+      <div className="flex w-full h-full gap-4">
         <DroppableTasksContainer
           id={containersId.queue}
           title="Task queue"
