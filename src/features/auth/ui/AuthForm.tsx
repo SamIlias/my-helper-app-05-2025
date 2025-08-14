@@ -17,7 +17,7 @@ export const AuthForm: React.FC = () => {
   } = useAuth();
 
   return (
-    <div className="flex items-center h-full w-full">
+    <div className="flex items-center h-screen w-screen bg-stone-900">
       <div
         className={`flex flex-col gap-4 ${textColors.main} bg-stone-300/10 shadow-md p-4 sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/4 mx-auto border mb-40 rounded `}
       >
@@ -38,19 +38,19 @@ export const AuthForm: React.FC = () => {
         />
         <button
           onClick={signInAction}
-          className="w-full py-2 bg-lime-500/40  rounded hover:bg-lime-500 cursor-pointer"
+          className="w-full py-2 bg-lime-500/40  rounded hover:bg-lime-500 hover:text-stone-800 cursor-pointer"
         >
           {t('form.signInButtonTitle')}
         </button>
         <button
           onClick={signUpAction}
-          className="w-full py-2 bg-amber-500/40  rounded hover:bg-amber-500 cursor-pointer"
+          className="w-full py-2 bg-amber-500/40  rounded hover:bg-amber-500 hover:text-stone-800 cursor-pointer"
         >
           {t('form.signUpButtonTitle')}
         </button>
         <button
           onClick={signInWithGoogleAction}
-          className="w-full py-2 bg-yellow-500/40  rounded hover:bg-yellow-500 cursor-pointer"
+          className="w-full py-2 bg-yellow-500/40  rounded hover:bg-yellow-500 hover:text-stone-800 cursor-pointer"
         >
           {t('form.signInGoogleButtonTitle')}
         </button>
