@@ -41,7 +41,7 @@ export const SortableTaskItem: React.FC<Props> = ({ id, task }) => {
     <div
       ref={setNodeRef}
       style={style}
-      className="border cursor-grab w-full "
+      className=" bg-stone-300/30 cursor-grab w-full p-2 hover:bg-amber-300/40 rounded-md"
       {...attributes}
       {...listeners}
     >

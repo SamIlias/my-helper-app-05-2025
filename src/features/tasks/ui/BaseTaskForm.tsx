@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { taskCategories, TaskCategoryKey, TaskFormValues } from '../model/types';
+import { categoryColor, taskCategories, TaskCategoryKey, TaskFormValues } from '../model/types';
 import { borderColors, textColors } from '@/shared/myStyles/myStyles';
 
 type PropsType = {
@@ -89,7 +89,10 @@ export const BaseTaskForm: React.FC<PropsType> = ({
             className={`${textColors.placeholder} ${borderColors.formInput} px-1 mt-1 block w-full`}
           >
             {(Object.keys(taskCategories) as TaskCategoryKey[]).map((key) => (
-              <option className={` bg-stone-700/20`} value={taskCategories[key]}>
+              <option
+                className={` bg-stone-700 ${categoryColor[taskCategories[key]]}`}
+                value={taskCategories[key]}
+              >
                 {key}
               </option>
             ))}
@@ -119,14 +122,14 @@ export const BaseTaskForm: React.FC<PropsType> = ({
             type="button"
             onClick={closeAddForm}
             aria-label="Cancel form and close"
-            className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
+            className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition duration-300 ease-in-out"
           >
             {t('baseTaskForm.cancelButtonName')}
           </button>
           <input
             type="submit"
             value={submitButtonText}
-            className="px-4 py-2 bg-amber-600 text-white font-medium rounded-md hover:bg-amber-800 cursor-pointer"
+            className="px-4 py-2 bg-amber-600 text-white font-medium rounded-md hover:bg-amber-800 cursor-pointer transition duration-300 ease-in-out"
           />
         </div>
       </form>

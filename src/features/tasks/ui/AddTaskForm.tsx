@@ -7,7 +7,7 @@ export const AddTaskForm: React.FC<PropsType> = ({ closeAddForm, onSubmit }) => 
   const { t } = useTranslation('todopage');
 
   return (
-    <div className="h-full grid grid-cols-2 grid-rows-7 gap-4 p-6 border rounded-lg shadow-md">
+    <div className="h-fit grid w-1/3 grid-cols-2 grid-rows-7 gap-4 p-6 bg-stone-500/30 rounded-lg shadow-lg ">
       <BaseTaskForm
         title={t('addTaskForm.title')}
         closeAddForm={closeAddForm}

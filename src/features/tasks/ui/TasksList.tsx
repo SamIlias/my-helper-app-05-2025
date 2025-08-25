@@ -46,24 +46,24 @@ export const TasksList: React.FC<{ tasks: TaskType[] }> = ({ tasks }) => {
       onDragEnd={handleDragEnd}
       onDragCancel={handleDragCancel}
     >
-      <div className="flex w-full h-full gap-4">
+      <div className="flex w-full h-full justify-around gap-2 overflow-auto">
         <DroppableTasksContainer
           id={containersId.queue}
           title="Task queue"
           tasks={queueTasks}
-          className="bg-red-500/40"
+          className="bg-red-300/10  hover:bg-red-500/20 transition shadow-lg duration-800 ease-in-out h-full overflow-y-auto"
         />
         <DroppableTasksContainer
           id={containersId.inProgress}
           title="Tasks in progress"
           tasks={inProgressTasks}
-          className="bg-orange-500/40"
+          className="bg-yellow-300/10  hover:bg-yellow-500/20 transition duration-800 ease-in-out shadow-lg"
         />
         <DroppableTasksContainer
           id={containersId.completed}
           title="Completed"
           tasks={completedTasks}
-          className="bg-green-500/30"
+          className="bg-green-300/20 hover:bg-green-400/20 transition duration-800 ease-in-out shadow-lg"
         />
       </div>
 

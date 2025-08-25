@@ -14,7 +14,7 @@ export const TaskItem: React.FC<{ task: TaskType }> = React.memo(({ task }) => {
         {task.category}
       </span>
       <div>
-        <span className={`${textColors.main} font-bold`}>{task.title}</span>
+        <span className={`${textColors.main} font-bold pl-2`}>{task.title}</span>
       </div>
       <div className="flex justify-between items-center">
         <span className={`text-sm ${textColors.secondary} dark:text-gray-300`}>
