@@ -7,7 +7,7 @@ export const TodoPage: React.FC = () => {
   return (
     <MainLayout
       children={
-        <main className="grid grid-cols-[3fr_1fr] h-full border-green-500 border gap-2">
+        <main className="grid grid-cols-[3fr_1fr] h-full gap-2">
           <TaskSection />
 
           <aside className={`flex flex-col gap-2 h-full`}>

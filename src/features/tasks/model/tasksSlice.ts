@@ -7,6 +7,7 @@ export interface TasksState {
   isLoading: boolean;
   error: string | null;
   newAddedTask: TaskType | undefined | null;
+  taskInDrag: TaskType | null;
 }
 
 const initialState: TasksState = {
@@ -14,6 +15,7 @@ const initialState: TasksState = {
   isLoading: false,
   error: null,
   newAddedTask: null,
+  taskInDrag: null,
 };
 
 const tasksSlice = createSlice({
@@ -22,6 +24,9 @@ const tasksSlice = createSlice({
   reducers: {
     setNewAddedTask: (state, action: PayloadAction<TaskType | null>) => {
       state.newAddedTask = action.payload;
+    },
+    setTaskInDrag: (state, action: PayloadAction<TaskType | null>) => {
+      state.taskInDrag = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -64,5 +69,5 @@ const tasksSlice = createSlice({
   },
 });
 
-export const { setNewAddedTask } = tasksSlice.actions;
+export const { setNewAddedTask, setTaskInDrag } = tasksSlice.actions;
 export default tasksSlice.reducer;

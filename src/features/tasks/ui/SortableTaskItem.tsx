@@ -24,27 +24,7 @@ export const SortableTaskItem: React.FC<Props> = ({ id, task }) => {
   };
 
   return (
-    // <div
-    //   ref={setNodeRef}
-    //   style={style}
-    //   className="border w-full flex justify-between items-center p-2"
-    //   {...attributes}
-    // >
-    //   {/* Task content */}
-    //   <TaskItem task={task} />
-    //
-    //   {/* Drag handle */}
-    //   <div {...listeners} className="cursor-grab px-2 select-none" title="Drag">
-    //     ⠿
-    //   </div>
-    // </div>
-    <div
-      ref={setNodeRef}
-      style={style}
-      className=" bg-stone-300/30 cursor-grab w-full p-2 hover:bg-amber-300/40 rounded-md"
-      {...attributes}
-      {...listeners}
-    >
+    <div ref={setNodeRef} style={style} className="cursor-grab" {...attributes} {...listeners}>
       {/*<TaskItem task={task} deleteTask={deleteTask} onEditTask={onEditTask} />*/}
       <TaskItem task={task} />
     </div>

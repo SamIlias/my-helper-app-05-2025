@@ -5,7 +5,6 @@ import { AppDispatch } from '@/app/store';
 export const useTask = () => {
   const dispatch = useDispatch<AppDispatch>();
   const onDeleteTask = (id: string) => {
-    console.log('onDeleteTask', id);
     dispatch(deleteTaskThunk(id));
   };
 

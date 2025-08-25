@@ -13,6 +13,9 @@ import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import { TaskType } from '@/features/tasks';
 import { TaskStatus } from '@/features/tasks/model/types';
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/app/store';
+import { setTaskInDrag } from '@/features/tasks/model/tasksSlice';
 
 type ContainerIdType = { [key: string]: TaskStatus };
 export const containersId: ContainerIdType = {
@@ -25,7 +28,8 @@ export const useDnD = (
   tasks: TaskType[],
   updateTaskStatus: (id: string, status: TaskStatus) => Promise<void>,
 ) => {
-  const [activeTask, setActiveTask] = useState<TaskType | null>(null);
+  const dispatch = useDispatch<AppDispatch>();
+
   const [originalContainer, setOriginalContainer] = useState<TaskStatus | null>(null);
   const [queueTasks, setQueueTasks] = useState<TaskType[]>(
     tasks.filter((t) => t.status === containersId.queue),
@@ -112,7 +116,7 @@ export const useDnD = (
   function handleDragStart(event: DragStartEvent) {
     const taskInfo = findTaskById(event.active.id as string);
     if (taskInfo) {
-      setActiveTask(taskInfo.task);
+      dispatch(setTaskInDrag(taskInfo.task));
       setOriginalContainer(taskInfo.container); // Сохраняем исходный контейнер
     }
   }
@@ -176,7 +180,9 @@ export const useDnD = (
     const currentTaskInfo = findTaskById(activeId);
 
     // clear the state
-    setActiveTask(null);
+    setTimeout(() => {
+      dispatch(setTaskInDrag(null));
+    }, 500);
     const originalContainerValue = originalContainer;
     setOriginalContainer(null);
 
@@ -226,7 +232,7 @@ export const useDnD = (
   }
 
   function handleDragCancel() {
-    setActiveTask(null);
+    dispatch(setTaskInDrag(null));
     setOriginalContainer(null);
   }
 
@@ -237,7 +243,6 @@ export const useDnD = (
     handleDragCancel,
     sensors,
     dropAnimation,
-    activeTask,
     queueTasks,
     inProgressTasks,
     completedTasks,
