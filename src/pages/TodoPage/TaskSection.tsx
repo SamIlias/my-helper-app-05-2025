@@ -73,7 +73,7 @@ export const TaskSection: React.FC = () => {
             <div>
               <button
                 onClick={onAddClick}
-                className="px-2  bg-yellow-500 text-black rounded-md hover:bg-amber-700 hover:text-white transition"
+                className="p-2 bg-yellow-500 text-black rounded-md hover:bg-amber-700 hover:text-white transition duration-300"
               >
                 {t('addTaskButtonName')}
               </button>
