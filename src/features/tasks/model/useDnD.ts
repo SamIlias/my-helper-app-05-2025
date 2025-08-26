@@ -16,6 +16,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/app/store';
 import { setTaskInDrag } from '@/features/tasks/model/tasksSlice';
+import { updateTaskThunk } from '@/features/tasks/model/tasksThunks';
 
 type ContainerIdType = { [key: string]: TaskStatus };
 export const containersId: ContainerIdType = {
@@ -24,13 +25,17 @@ export const containersId: ContainerIdType = {
   completed: 'completed',
 };
 
-export const useDnD = (
-  tasks: TaskType[],
-  updateTaskStatus: (id: string, status: TaskStatus) => Promise<void>,
-) => {
+export const useDnD = (tasks: TaskType[]) => {
+  const user = useSelector((state: RootState) => state.auth.user);
+
   const dispatch = useDispatch<AppDispatch>();
 
+  const updateTaskStatus = async (id: string, status: TaskStatus): Promise<void> => {
+    await dispatch(updateTaskThunk({ taskId: id, data: { status }, userId: user!.uid }));
+  };
+
   const [originalContainer, setOriginalContainer] = useState<TaskStatus | null>(null);
+
   const [queueTasks, setQueueTasks] = useState<TaskType[]>(
     tasks.filter((t) => t.status === containersId.queue),
   );

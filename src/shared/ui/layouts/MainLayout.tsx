@@ -15,7 +15,7 @@ export const MainLayout: React.FC<Props> = ({ children }) => {
         <Header />
       </header>
 
-      <main className="w-full overflow-hidden p-2 bg-stone-500/10 dark:bg-stone-100/10">
+      <main className="w-full overflow-hidden p-2 bg-stone-500/10 dark:bg-stone-950">
         {children}
       </main>
       <footer className="w-full text-sm bg-gradient-to-r from-stone-500 from-5% via-stone-600 via-20% to-stone-700 to-90% flex justify-end">

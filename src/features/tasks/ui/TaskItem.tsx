@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { categoryColor, TaskCategoryValue, TaskType } from '../model/types';
 import { textColors } from '@/shared/myStyles/myStyles';
@@ -7,6 +7,7 @@ import { useTask } from '@/features/tasks/model/useTask';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store';
 import { TaskDescription } from './TaskDescription';
+import { EditContext } from '@/pages/TodoPage/TaskSection';
 
 export const TaskItem: React.FC<{ task: TaskType }> = React.memo(({ task }) => {
   const { t } = useTranslation('todopage');
@@ -16,6 +17,7 @@ export const TaskItem: React.FC<{ task: TaskType }> = React.memo(({ task }) => {
   const [position, setPosition] = useState({ top: 0, left: 0 });
   const cardRef = useRef<HTMLDivElement>(null);
   const { taskInDrag } = useSelector((state: RootState) => state.tasks);
+  const onEditClick = useContext(EditContext);
 
   const isDragging = taskInDrag?.id === task.id;
 
@@ -48,7 +50,7 @@ export const TaskItem: React.FC<{ task: TaskType }> = React.memo(({ task }) => {
   return (
     <>
       <div
-        className="flex flex-col space-y-1 bg-stone-800/60 cursor-grab w-full hover:bg-amber-300/40 rounded-md p-2"
+        className="flex flex-col space-y-1 bg-stone-500/40 cursor-grab w-full hover:bg-amber-300/40 rounded-md p-2 transition shadow-lg duration-400 ease-in-out"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         ref={cardRef}
@@ -65,7 +67,7 @@ export const TaskItem: React.FC<{ task: TaskType }> = React.memo(({ task }) => {
           </span>
           <div>
             <button
-              // onClick={() => onEditTask(task)}
+              onClick={() => onEditClick(task)}
               className="px-1 mx-1 pb-0.5 text-sm text-white bg-amber-800 hover:bg-amber-600 rounded transition"
             >
               {t('taskItem.editButtonName')}

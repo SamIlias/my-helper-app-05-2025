@@ -13,7 +13,7 @@ export const buttonStyles = {
   paginationActive: `text-stone-800 font-bold  bg-yellow-600 dark:text-stone-800 px-1 hover:bg-yellow-400 hover:text-amber-900 cursor-pointer`,
   paginationPassive: `text-orange-50 font-bold  bg-stone-900/40 dark:bg-white/70 dark:text-stone-800 px-1 hover:bg-yellow-400 hover:text-amber-900 cursor-pointer`,
   navActive: `${textColors.secondary} flex items-center justify-center font-bold w-full bg-stone-900/20 dark:bg-amber-500/10`,
-  navPassive: `${textColors.secondary} flex items-center justify-center w-full justify-self-center`,
+  navPassive: `${textColors.secondary} flex items-center justify-center w-full justify-self-center hover:bg-stone-200/10 transition duration-800 ease-in-out `,
   close: `border place-self-center rounded-sm px-1 ${textColors.main} hover:bg-orange-800 hover:text-white cursor-pointer`,
 };
 
