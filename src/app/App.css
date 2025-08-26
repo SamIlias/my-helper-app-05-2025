@@ -14,3 +14,45 @@
 :root {
     --font-display: 'Satoshi', sans-serif;
 }
+
+/* The base container of calendar */
+.react-calendar {
+    @apply  dark:bg-stone-500/40 bg-white rounded-md shadow-lg p-4;
+}
+
+/* Navigation */
+.react-calendar__navigation {
+    @apply text-center mb-4;
+}
+
+.react-calendar__navigation button {
+    @apply text-gray-800 dark:text-amber-400 font-medium px-2 py-2 rounded-lg transition hover:bg-gray-100 dark:hover:bg-stone-700;
+}
+
+/* Сетка дней */
+.react-calendar__month-view__weekdays {
+    @apply text-gray-500 dark:text-amber-500 uppercase text-xs font-bold text-center;
+}
+
+/* Day tiles */
+.react-calendar__tile {
+    @apply rounded-lg p-2 transition text-sm;
+}
+
+.react-calendar__tile:enabled:hover {
+    @apply bg-indigo-100 dark:bg-stone-800/60;
+}
+
+.react-calendar__tile--active {
+    @apply bg-amber-800/50 text-white font-semibold;
+}
+
+/* Today */
+.react-calendar__tile--now {
+    @apply border border-amber-500;
+}
+
+/* Weekdays */
+.react-calendar__month-view__days__day--weekend {
+    @apply text-red-500;
+}
