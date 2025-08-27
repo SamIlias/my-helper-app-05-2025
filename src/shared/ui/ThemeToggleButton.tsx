@@ -8,7 +8,7 @@ export const ThemeToggleButton: React.FC = () => {
     //moon
     return (
       <svg
-        className="cursor-pointer fill-stone-500/40 transition duration-500 hover:fill-amber-400"
+        className="cursor-pointer fill-stone-500 transition duration-500 hover:fill-amber-400"
         onClick={toggleTheme}
         width="30"
         height="30"

@@ -7,11 +7,8 @@ import { TaskItem } from '@/features/tasks/ui/TaskItem';
 type Props = {
   id: string;
   task: TaskType;
-  // deleteTask: (id: string) => void;
-  // onEditTask: (task: TaskType) => void;
 };
 
-// export const SortableTaskItem: React.FC<Props> = ({ id, task, deleteTask, onEditTask }) => {
 export const SortableTaskItem: React.FC<Props> = ({ id, task }) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id,
@@ -25,7 +22,6 @@ export const SortableTaskItem: React.FC<Props> = ({ id, task }) => {
 
   return (
     <div ref={setNodeRef} style={style} className="cursor-grab" {...attributes} {...listeners}>
-      {/*<TaskItem task={task} deleteTask={deleteTask} onEditTask={onEditTask} />*/}
       <TaskItem task={task} />
     </div>
   );

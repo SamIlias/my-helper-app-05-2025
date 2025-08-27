@@ -32,7 +32,7 @@ export const AiConversation: React.FC = () => {
         />
       </div>
 
-      <div className="h-24 mb-6">
+      <div className="h-24 mb-6 flex justify-center">
         <PromptForm
           handleSubmit={handleSubmit}
           isSending={isSending}

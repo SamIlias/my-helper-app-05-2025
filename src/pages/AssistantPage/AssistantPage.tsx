@@ -22,7 +22,7 @@ export const AssistantPage: React.FC = () => {
           </section>
 
           <aside className={`flex flex-col gap-2 h-full`}>
-            <section className={`${mainLayoutColors.tilesBackground} h-48`}>
+            <section className={`${mainLayoutColors.tilesBackground} flex-1`}>
               <WeatherWidget />
             </section>
 

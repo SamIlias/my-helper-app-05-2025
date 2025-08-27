@@ -6,6 +6,7 @@ import { DroppableTasksContainer } from '@/features/tasks/ui/DroppableTasksConta
 import { containersId, useDnD } from '@/features/tasks/model/useDnD';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store';
+import { taskContainerStyle } from '@/shared/myStyles/myStyles';
 
 export const TasksList: React.FC<{ tasks: TaskType[] }> = ({ tasks }) => {
   const {
@@ -21,8 +22,6 @@ export const TasksList: React.FC<{ tasks: TaskType[] }> = ({ tasks }) => {
   } = useDnD(tasks);
 
   const { taskInDrag } = useSelector((state: RootState) => state.tasks);
-  const mainContainerStyle =
-    'bg-stone-500/40 transition shadow-lg duration-800 ease-in-out h-full ';
 
   return (
     <DndContext
@@ -38,19 +37,19 @@ export const TasksList: React.FC<{ tasks: TaskType[] }> = ({ tasks }) => {
           id={containersId.queue}
           title="Task queue"
           tasks={queueTasks}
-          className={`hover:bg-red-500/20 ${mainContainerStyle}`}
+          className={`hover:bg-red-800/30 dark:hover:bg-red-500/20 ${taskContainerStyle}`}
         />
         <DroppableTasksContainer
           id={containersId.inProgress}
           title="Tasks in progress"
           tasks={inProgressTasks}
-          className={`hover:bg-yellow-300/20 ${mainContainerStyle}`}
+          className={`hover:bg-amber-700/30 dark:hover:bg-amber-300/20 ${taskContainerStyle}`}
         />
         <DroppableTasksContainer
           id={containersId.completed}
           title="Completed"
           tasks={completedTasks}
-          className={`hover:bg-lime-300/20 ${mainContainerStyle}`}
+          className={`hover:bg-lime-500/30 dark:hover:bg-lime-300/20 ${taskContainerStyle}`}
         />
       </div>
 

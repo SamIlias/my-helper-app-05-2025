@@ -56,7 +56,7 @@ export const BaseTaskForm: React.FC<PropsType> = ({
               },
             })}
             placeholder={t('baseTaskForm.titlePlaceholder')}
-            className={`${textColors.placeholder} ${borderColors.formInput} px-1 mt-1 block w-full`}
+            className={`${textColors.primary} ${borderColors.formInput} bg-white dark:bg-stone-600/60 px-1 mt-1 block w-full`}
           />
           {errors.title && (
             <p className="text-red-500 text-sm mt-1" id="title-error" role="alert">
@@ -74,7 +74,7 @@ export const BaseTaskForm: React.FC<PropsType> = ({
             id="deadline"
             {...register('deadline')}
             type="date"
-            className={`${textColors.placeholder} ${borderColors.formInput} px-1 mt-1 block w-full`}
+            className={`${textColors.primary} ${borderColors.formInput} bg-white dark:bg-stone-600/60 px-1 mt-1 block w-full`}
           />
         </div>
 
@@ -86,11 +86,11 @@ export const BaseTaskForm: React.FC<PropsType> = ({
           <select
             id="category"
             {...register('category')}
-            className={`${textColors.placeholder} ${borderColors.formInput} px-1 mt-1 block w-full`}
+            className={`${textColors.primary} ${borderColors.formInput} bg-white dark:bg-stone-600/60 px-1 mt-1 block w-full`}
           >
             {(Object.keys(taskCategories) as TaskCategoryKey[]).map((key) => (
               <option
-                className={` bg-stone-700 ${categoryColor[taskCategories[key]]}`}
+                className={` dark:bg-stone-700 bg-stone-400/40 ${categoryColor[taskCategories[key]]}`}
                 value={taskCategories[key]}
               >
                 {key}
@@ -103,7 +103,7 @@ export const BaseTaskForm: React.FC<PropsType> = ({
         <div className="col-span-2">
           <label
             htmlFor="description"
-            className={`block text-sm font-medium ${textColors.formLabel}`}
+            className={`block text-sm font-medium ${textColors.formLabel} `}
           >
             {t('baseTaskForm.descriptionLabel')}
           </label>
@@ -112,7 +112,7 @@ export const BaseTaskForm: React.FC<PropsType> = ({
             {...register('description')}
             placeholder={t('baseTaskForm.descriptionPlaceholder')}
             rows={4}
-            className={`${textColors.placeholder} ${borderColors.formInput} px-1 mt-1 block w-full`}
+            className={`${textColors.primary} ${borderColors.formInput} bg-white dark:bg-stone-600/60 px-1 mt-1 block w-full`}
           />
         </div>
 

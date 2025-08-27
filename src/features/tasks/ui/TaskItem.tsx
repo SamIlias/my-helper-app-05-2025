@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useContext, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { categoryColor, TaskCategoryValue, TaskType } from '../model/types';
-import { textColors } from '@/shared/myStyles/myStyles';
+import { taskItemStyle, textColors } from '@/shared/myStyles/myStyles';
 import { useTask } from '@/features/tasks/model/useTask';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store';
@@ -50,7 +50,7 @@ export const TaskItem: React.FC<{ task: TaskType }> = React.memo(({ task }) => {
   return (
     <>
       <div
-        className="flex flex-col space-y-1 bg-stone-500/40 cursor-grab w-full hover:bg-amber-300/40 rounded-md p-2 transition shadow-lg duration-400 ease-in-out"
+        className={`flex flex-col space-y-1 ${taskItemStyle}`}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         ref={cardRef}

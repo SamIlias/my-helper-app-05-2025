@@ -27,11 +27,11 @@ const taskCategories = {
 type TaskCategoryKey = keyof typeof taskCategories;
 
 const categoryColor = {
-  [taskCategories.Work]: 'text-amber-800 dark:text-amber-300',
+  [taskCategories.Work]: 'text-amber-600 dark:text-amber-300',
   [taskCategories.Default]: 'text-lime-700 dark:text-lime-300',
   [taskCategories.Urgent]: 'text-red-500 dark:text-red-400',
-  [taskCategories.Daily]: 'text-cyan-600',
-  [taskCategories.Shopping]: 'text-violet-500',
+  [taskCategories.Daily]: 'text-cyan-600 dark:text-cyan-400',
+  [taskCategories.Shopping]: 'text-violet-500 dark:text-violet-400',
 } as const;
 
 type TaskCategoryValue = keyof typeof categoryColor;

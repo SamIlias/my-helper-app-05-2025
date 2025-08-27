@@ -15,7 +15,7 @@ export const LogoutButton: React.FC = () => {
 
   return (
     <svg
-      className="h-1/3 fill-amber-500/40 hover:fill-amber-500 cursor-pointer transition duration-500"
+      className="h-1/3 dark:fill-amber-500/40 fill-stone-600/40 hover:fill-amber-500 cursor-pointer transition duration-500"
       onClick={handleSignOut}
       width="44"
       height="44"

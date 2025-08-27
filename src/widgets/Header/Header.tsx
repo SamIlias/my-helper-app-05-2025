@@ -5,6 +5,7 @@ import * as React from 'react';
 import MainNav from '@/widgets/MainNavigation/MainNav';
 import { Clock } from '@/shared/ui';
 import { Logo } from '@/shared/ui/Logo';
+import { textColors } from '@/shared/myStyles/myStyles';
 
 export const Header: React.FC = () => {
   return (
@@ -18,7 +19,7 @@ export const Header: React.FC = () => {
         </nav>
       </div>
       <div className="flex gap-2 justify-end items-center  h-full ">
-        <div className="pr-10 text-2xl">
+        <div className={`pr-10 text-2xl ${textColors.main}`}>
           <Clock />
         </div>
         <ThemeToggleButton />

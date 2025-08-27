@@ -5,7 +5,7 @@ import * as React from 'react';
 import { createContext } from 'react';
 import { useTasks } from '@/features/tasks/model/useTasks';
 import { useTranslation } from 'react-i18next';
-import { mainLayoutColors } from '@/shared/myStyles/myStyles';
+import { buttonStyles, mainLayoutColors } from '@/shared/myStyles/myStyles';
 import { EditTaskForm } from '@/features/tasks/ui/EditTaskForm';
 
 export const EditContext = createContext<(task: TaskType) => void>(() => {});
@@ -51,9 +51,11 @@ export const TaskSection: React.FC = () => {
 
   return (
     <EditContext value={onEditClick}>
-      <div className={`h-full gap-2 w-full overflow-hidden ${mainLayoutColors.tilesBackground}`}>
+      <div
+        className={`h-full flex items-center justify-center gap-2 w-full overflow-hidden ${mainLayoutColors.tilesBackground}`}
+      >
         {isLoading ? (
-          <div className="h-1/3 flex items-center pb-15 ">
+          <div className="h-1/6 flex items-center">
             <Preloader preloader={preloader} />
           </div>
         ) : (
@@ -71,10 +73,7 @@ export const TaskSection: React.FC = () => {
             <TasksList tasks={tasks} />
 
             <div>
-              <button
-                onClick={onAddClick}
-                className="p-2 bg-yellow-500 text-black rounded-md hover:bg-amber-700 hover:text-white transition duration-300"
-              >
+              <button onClick={onAddClick} className={`${buttonStyles.addTask}`}>
                 {t('addTaskButtonName')}
               </button>
             </div>

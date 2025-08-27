@@ -24,7 +24,9 @@ export const ConversationHistoryBlock: React.FC<Props> = ({
 
   if (!isConversationStarted)
     return (
-      <p className="text-center m-3">{t('aiConversation.greeting', { userName: userName })}</p>
+      <p className={`text-center m-3 ${textColors.main}`}>
+        {t('aiConversation.greeting', { userName: userName })}
+      </p>
     );
 
   return conversationHistory.map((item: ConversationItem, index: number) => {
