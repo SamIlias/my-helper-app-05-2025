@@ -20,7 +20,7 @@ export const WeatherWidget: React.FC = () => {
         {weatherData ? (
           <WeatherInfo weatherData={weatherData} description={description} />
         ) : (
-          <div className="flex items-center border justify-center">
+          <div className="flex items-center justify-center">
             <Preloader preloader={preloader} />
           </div>
         )}
