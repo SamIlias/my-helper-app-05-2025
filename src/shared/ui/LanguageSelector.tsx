@@ -14,7 +14,7 @@ export const LanguageSelector: React.FC = () => {
     <div className="h-full flex items-center pl-5">
       <img
         className="h-1/3 px-2 dark:filter dark:invert"
-        src={'/public/assets/icons/language.png'}
+        src={'/assets/icons/language.png'}
         alt="Language"
       />
       <select
