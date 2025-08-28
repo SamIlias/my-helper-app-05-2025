@@ -11,7 +11,7 @@ import { getCityFromCoords } from '@/shared/api/coordinates/getCityFromCoordinat
 const INITIAL_CITY: string = import.meta.env.VITE_CURRENT_CITY;
 
 export const useWeather = () => {
-  const { i18n } = useTranslation('weatherpage');
+  const { i18n } = useTranslation();
   const [weatherData, setWeatherData] = useState<WeatherDataType | null>(null);
   const [description, setDescription] = useState<WeatherDescription | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);

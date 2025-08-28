@@ -7,7 +7,7 @@ import { useWeather } from '@/features/weather';
 import { WeatherInfo } from '@/features/weather/ui/WeatherInfo';
 
 export const WeatherWidget: React.FC = () => {
-  const { t } = useTranslation('weatherpage');
+  const { t } = useTranslation('assistantPage');
   const { weatherData, onSubmit, errorMessage, description } = useWeather();
 
   return (
@@ -27,7 +27,7 @@ export const WeatherWidget: React.FC = () => {
       </div>
 
       <div className="w-7/8 mx-auto my-2">
-        <SearchForm onSubmit={onSubmit} placeholder={t('searchFormPlaceholder')} />
+        <SearchForm onSubmit={onSubmit} placeholder={t('weather.searchFormPlaceholder')} />
       </div>
     </div>
   );

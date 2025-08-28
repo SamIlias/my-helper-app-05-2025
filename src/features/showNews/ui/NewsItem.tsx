@@ -36,7 +36,7 @@ export const NewsItem: React.FC<NewsItemType> = ({
             className="text-stone-600 dark:text-stone-400 hover:text-amber-700 cursor-pointer"
             onClick={toggleIsShow}
           >
-            Show more
+            {t('news.showMoreButton', { ns: 'assistantPage' })}
           </button>
         )}
       </div>

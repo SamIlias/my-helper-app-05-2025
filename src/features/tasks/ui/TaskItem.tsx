@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useContext, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { categoryColor, TaskCategoryValue, TaskType } from '../model/types';
-import { taskItemStyle, textColors } from '@/shared/myStyles/myStyles';
+import { TaskCategoryValue, TaskType } from '../model/types';
+import { categoryColor, taskItemStyle, textColors } from '@/shared/myStyles/myStyles';
 import { useTask } from '@/features/tasks/model/useTask';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store';
@@ -10,7 +10,7 @@ import { TaskDescription } from './TaskDescription';
 import { EditContext } from '@/pages/TodoPage/TaskSection';
 
 export const TaskItem: React.FC<{ task: TaskType }> = React.memo(({ task }) => {
-  const { t } = useTranslation('todopage');
+  const { t } = useTranslation('todoPage');
   const { onDeleteTask } = useTask();
 
   const [showDescription, setShowDescription] = useState(false);

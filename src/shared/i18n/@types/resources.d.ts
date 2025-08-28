@@ -1,5 +1,31 @@
 interface Resources {
-  "authpage": {
+  "assistantPage": {
+    "aiConversation": {
+      "form": {
+        "textAreaPlaceholder": "Type your message here...",
+        "buttonTitle": "Send"
+      },
+      "greeting": "Hello, {{userName}}! how can I help you?"
+    },
+    "weather": {
+      "header": "The weather for now",
+      "country": "Country:",
+      "currentCity": "Current city:",
+      "temperature": "Temperature:",
+      "windSpeed": "Wind speed:",
+      "description": "Description:",
+      "searchFormPlaceholder": "Type city..."
+    },
+    "news": {
+      "searchFormPlaceholder": "Find news",
+      "showMoreButton": "Show more"
+    },
+    "quote": {
+      "title": "Quote for you: ",
+      "refreshButtonTitle": "Refresh"
+    }
+  },
+  "authPage": {
     "preloaderText": "Loading...",
     "form": {
       "emailPlaceholder": "Email",
@@ -11,14 +37,10 @@ interface Resources {
   },
   "common": {
     "pageNames": {
-      "todo": "todo",
-      "news": "news",
-      "weather": "weather",
+      "assistant": "Assistant",
+      "myTasks": "My tasks",
       "auth": "authorization"
     },
-    "homeButtonTitle": "Home",
-    "logoutButtonTitle": "Log out",
-    "loginButtonTitle": "Login",
     "closeButtonTitle": "Close",
     "pagination": {
       "prevBtnName": "Prev",
@@ -26,37 +48,14 @@ interface Resources {
     },
     "searchForm": {
       "buttonName": "Search"
-    }
-  },
-  "homepage": {
-    "title": "Home",
-    "aiConversation": {
-      "form": {
-        "textAreaPlaceholder": "Type your message here...",
-        "buttonTitle": "Send"
-      },
-      "greeting": "Hello, {{userName}}! how can I help you?"
     },
-    "quoteBlock": {
-      "title": "Quote for you: ",
-      "refreshButtonTitle": "Refresh"
-    }
+    "loginButtonTitle": "Enter",
+    "developedBy": "Developed by Samovich Ilya. E-mail: Samovichilias19life@gmail.com",
+    "logoSlogan": "Be clear"
   },
-  "newspage": {
-    "title": "News",
-    "searchForm": {
-      "placeholder": "Find news..."
-    }
-  },
-  "todopage": {
+  "todoPage": {
     "title": "My tasks",
     "addTaskButtonName": "Add new",
-    "showHideButton": {
-      "showName": "Show",
-      "hideName": "Hide",
-      "titleOnHoverShow": "Hide completed tasks",
-      "titleOnHoverHide": "Show completed tasks"
-    },
     "addTaskForm": {
       "title": "Task creating",
       "submitButtonName": "Add task"
@@ -75,26 +74,15 @@ interface Resources {
       "cancelButtonName": "Cancel"
     },
     "tasksList": {
-      "listTitle": "List of tasks",
-      "descriptionTitle": "Description",
-      "descriptionPlaceholder": "There is no description...",
-      "emptyListMessage": "The list is empty, add new task.",
-      "emptyDescription": "There is no description..."
+      "emptyListMessage": "Empty",
+      "taskQueueTitle": "In queue",
+      "tasksInProgressTitle": "In progress",
+      "tasksCompletedTitle": "Completed"
     },
     "taskItem": {
       "editButtonName": "Edit",
       "deleteButtonName": "Delete"
     }
-  },
-  "weatherpage": {
-    "title": "Weather",
-    "header": "The weather for now",
-    "country": "Country:",
-    "currentCity": "Current city:",
-    "temperature": "Temperature:",
-    "windSpeed": "Wind speed:",
-    "description": "Description:",
-    "searchFormPlaceholder": "Type city..."
   }
 }
 

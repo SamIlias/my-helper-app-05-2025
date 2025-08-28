@@ -1,3 +1,5 @@
+import { taskCategories } from '@/features/tasks/model/types';
+
 export const textColors = {
   primary: 'text-black dark:text-white',
   main: 'text-stone-600 dark:text-stone-200',
@@ -59,3 +61,11 @@ export const authPage = {
     signInWithGoogleButton: `w-full py-2 bg-yellow-500/40  rounded hover:bg-yellow-500 hover:text-stone-800 cursor-pointer`,
   },
 };
+
+export const categoryColor = {
+  [taskCategories.Work]: 'text-amber-600 dark:text-amber-300',
+  [taskCategories.Default]: 'text-lime-700 dark:text-lime-300',
+  [taskCategories.Urgent]: 'text-red-500 dark:text-red-400',
+  [taskCategories.Daily]: 'text-cyan-600 dark:text-cyan-400',
+  [taskCategories.Shopping]: 'text-violet-500 dark:text-violet-400',
+} as const;

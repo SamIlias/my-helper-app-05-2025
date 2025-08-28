@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { buttonStyles, textColors } from '../myStyles/myStyles';
 
 export const LanguageSelector: React.FC = () => {
-  const { i18n } = useTranslation('common');
+  const { i18n } = useTranslation();
   const currentLanguage = i18n.language;
 
   const handleSelectLng = (e: React.ChangeEvent<HTMLSelectElement>) => {

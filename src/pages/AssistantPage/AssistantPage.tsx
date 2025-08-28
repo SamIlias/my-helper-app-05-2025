@@ -1,7 +1,6 @@
 import '@/index.css';
 import * as React from 'react';
 import { AiConversation } from '@/features/aiConversation';
-import { useTranslation } from 'react-i18next';
 import { MainLayout } from '@/shared/ui/layouts/MainLayout';
 import { mainLayoutColors } from '@/shared/myStyles/myStyles';
 import WeatherWidget from '@/widgets/Weather';
@@ -9,8 +8,6 @@ import NewsWidget from '@/widgets/News';
 import { QuotesWidget } from '@/widgets/Quotes/QuotesWidget';
 
 export const AssistantPage: React.FC = () => {
-  // const { t } = useTranslation('homepage');
-
   return (
     <MainLayout
       children={

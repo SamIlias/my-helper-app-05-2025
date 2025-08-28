@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { categoryColor, taskCategories, TaskCategoryKey, TaskFormValues } from '../model/types';
-import { borderColors, textColors } from '@/shared/myStyles/myStyles';
+import { taskCategories, TaskCategoryKey, TaskFormValues } from '../model/types';
+import { borderColors, categoryColor, textColors } from '@/shared/myStyles/myStyles';
 
 type PropsType = {
   title: string;
@@ -25,7 +25,7 @@ export const BaseTaskForm: React.FC<PropsType> = ({
     formState: { errors },
   } = useForm<TaskFormValues>({ mode: 'onChange', defaultValues });
 
-  const { t } = useTranslation('todopage');
+  const { t } = useTranslation('todoPage');
 
   return (
     <>
@@ -78,7 +78,7 @@ export const BaseTaskForm: React.FC<PropsType> = ({
           />
         </div>
 
-        {/* Type */}
+        {/* Category */}
         <div>
           <label htmlFor="category" className={`block text-sm font-medium ${textColors.formLabel}`}>
             {t('baseTaskForm.categoryLabel')}

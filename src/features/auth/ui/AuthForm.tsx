@@ -4,7 +4,7 @@ import { authPage, textColors } from '@/shared/myStyles/myStyles';
 import { useAuth } from '../model/useAuth';
 
 export const AuthForm: React.FC = () => {
-  const { t } = useTranslation('authpage');
+  const { t } = useTranslation('authPage');
   const {
     email,
     password,

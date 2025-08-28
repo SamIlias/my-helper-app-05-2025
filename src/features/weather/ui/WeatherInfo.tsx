@@ -1,7 +1,6 @@
 import React from 'react';
 import { WeatherDataType } from '../api/wheatherApi';
-import { useTranslation } from 'react-i18next';
-import { textColors } from '../../../shared/myStyles/myStyles';
+import { textColors } from '@/shared/myStyles/myStyles';
 import { WeatherDescription } from '../api/weatherCodes';
 import { getWindDirectionLabel } from '@/features/weather/api/getWindDirectionLabel';
 import i18n from '@/shared/i18n/i18n';
@@ -9,7 +8,6 @@ import i18n from '@/shared/i18n/i18n';
 type Props = { weatherData: WeatherDataType; description: WeatherDescription | null };
 
 export const WeatherInfo: React.FC<Props> = ({ weatherData, description }) => {
-  const { t } = useTranslation('weatherpage');
   const currentLaguage = i18n.language;
 
   return (

@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { useNews } from '@/features/showNews/model/useNews';
 
 export const NewsList: React.FC = () => {
-  const { i18n, t } = useTranslation('newspage');
+  const { i18n, t } = useTranslation('assistantPage');
   const [searchTerm, setSearchTerm] = React.useState('news');
   const language = i18n.language;
 
@@ -69,7 +69,7 @@ export const NewsList: React.FC = () => {
       </main>
 
       <footer className="w-7/8 mx-auto my-2">
-        <SearchForm onSubmit={handleSearchSubmit} placeholder={t('searchForm.placeholder')} />
+        <SearchForm onSubmit={handleSearchSubmit} placeholder={t('news.searchFormPlaceholder')} />
       </footer>
     </div>
   );

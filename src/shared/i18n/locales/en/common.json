@@ -1,19 +1,22 @@
 {
     "pageNames": {
-        "todo": "todo",
-        "news": "news",
-        "weather": "weather",
+        "assistant": "Assistant",
+        "myTasks": "My tasks",
         "auth": "authorization"
     },
-    "homeButtonTitle": "Home",
-    "logoutButtonTitle": "Log out",
-    "loginButtonTitle": "Login",
+
     "closeButtonTitle": "Close",
+
     "pagination": {
         "prevBtnName": "Prev",
         "nextBtnName": "Next"
     },
+
     "searchForm": {
         "buttonName" : "Search"
-    }
+    },
+
+    "loginButtonTitle": "Enter",
+    "developedBy": "Developed by Samovich Ilya. E-mail: Samovichilias19life@gmail.com",
+    "logoSlogan": "Be clear"
 }

@@ -1,29 +1,25 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 import { buttonStyles } from '@/shared/myStyles/myStyles';
-
-const pages = {
-  assistant: {
-    // name: t('pageNames.weather'),
-    name: 'Assistant',
-    pathName: '',
-  },
-  todo: {
-    // name: t('pageNames.todo'),
-    name: 'My tasks',
-    pathName: 'todo',
-  },
-  auth: {
-    // name: t('pageNames.auth'),
-    name: 'Auth',
-    pathName: 'auth',
-  },
-} as const;
-type PageType = { name: string; pathName: (typeof pages)[keyof typeof pages]['pathName'] };
-
-const navList: PageType[] = [pages.assistant, pages.todo];
+import { useTranslation } from 'react-i18next';
 
 const MainNav: React.FC = () => {
+  const { t } = useTranslation('common');
+
+  const pages = {
+    assistant: {
+      name: t('pageNames.assistant'),
+      pathName: '',
+    },
+    todo: {
+      name: t('pageNames.myTasks'),
+      pathName: 'todo',
+    },
+  } as const;
+
+  type PageType = { name: string; pathName: (typeof pages)[keyof typeof pages]['pathName'] };
+  const navList: PageType[] = [pages.assistant, pages.todo];
+
   return (
     <>
       {navList.map((el, index) => (

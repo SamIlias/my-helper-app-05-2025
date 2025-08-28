@@ -1,0 +1,29 @@
+{
+  "aiConversation": {
+    "form": {
+      "textAreaPlaceholder": "Введите Ваше сообщение здесь...",
+      "buttonTitle": "Отправить"
+    },
+    "greeting": "Привет, {{userName}}! Как я могу помочь Вам сегодня?"
+  },
+
+  "weather":{
+    "header": "Погода на сегодня",
+    "country": "Страна:",
+    "currentCity": "Текущий город:",
+    "temperature": "Температура:",
+    "windSpeed": "Скорость ветра:",
+    "description": "Описание:",
+    "searchFormPlaceholder": "Введите город..."
+  },
+
+  "news": {
+    "searchFormPlaceholder": "Искать новости",
+    "showMoreButton": "Подробнее..."
+  },
+
+  "quote": {
+    "title": "Цитата для Вас: ",
+    "refreshButtonTitle": "Обновить"
+  }
+}

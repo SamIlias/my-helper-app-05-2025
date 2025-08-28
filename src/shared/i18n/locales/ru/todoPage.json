@@ -1,12 +1,6 @@
 {
     "title": "Мои задачи",
     "addTaskButtonName": "Добавить новую",
-    "showHideButton": {
-        "showName": "Показать",
-        "hideName": "Скрыть",
-        "titleOnHoverShow": "Скрыть выполненные",
-        "titleOnHoverHide": "Показать выполненные"
-    },
     "addTaskForm": {
         "title": "Создание задачи",
         "submitButtonName": "Добавить"
@@ -26,12 +20,11 @@
         "cancelButtonName": "Отмена"
     },
     "tasksList": {
-        "listTitle": "Список задач",
-        "descriptionTitle": "Описание",
-        "descriptionPlaceholder": "Описание отсутствует...",
-        "emptyListMessage": "Список пуст, создайте новую задачу.",
-        "emptyDescription": "Описание отсутствует..."
-    }, 
+        "emptyListMessage": "Список пуст",
+        "taskQueueTitle": "В очереди",
+        "tasksInProgressTitle": "В процессе",
+        "tasksCompletedTitle": "Завершённые"
+    },
     "taskItem": {
         "editButtonName": "Ред-ть",
         "deleteButtonName": "Удалить"

@@ -1,0 +1,29 @@
+{
+  "aiConversation": {
+    "form": {
+      "textAreaPlaceholder": "Type your message here...",
+      "buttonTitle": "Send"
+    },
+    "greeting": "Hello, {{userName}}! how can I help you?"
+  },
+
+  "weather":{
+    "header": "The weather for now",
+    "country": "Country:",
+    "currentCity": "Current city:",
+    "temperature": "Temperature:",
+    "windSpeed": "Wind speed:",
+    "description": "Description:",
+    "searchFormPlaceholder": "Type city..."
+  },
+
+  "news": {
+    "searchFormPlaceholder": "Find news",
+    "showMoreButton": "Show more"
+  },
+
+  "quote": {
+    "title": "Quote for you: ",
+    "refreshButtonTitle": "Refresh"
+  }
+}

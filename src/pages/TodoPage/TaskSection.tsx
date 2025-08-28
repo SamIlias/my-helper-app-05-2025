@@ -24,7 +24,7 @@ export const TaskSection: React.FC = () => {
     editTaskMode,
   } = useTasks();
 
-  const { t } = useTranslation('todopage');
+  const { t } = useTranslation('todoPage');
 
   const onCloseAddTaskForm = () => setIsAddFormActive(false);
   const onAddClick = () => setIsAddFormActive(true);

@@ -1,12 +1,14 @@
 import { Header } from '@/widgets/Header/Header';
 import React from 'react';
 import { mainLayoutColors, textColors } from '@/shared/myStyles/myStyles';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   children: React.ReactNode;
 };
 
 export const MainLayout: React.FC<Props> = ({ children }) => {
+  const { t } = useTranslation('common');
   return (
     <div
       className={`w-screen h-screen grid grid-rows-[96px_1fr_24px] overflow-hidden  
@@ -20,9 +22,7 @@ export const MainLayout: React.FC<Props> = ({ children }) => {
         {children}
       </main>
       <footer className={`w-full text-sm text-end ${mainLayoutColors.primaryBackground}`}>
-        <span className={`px-4 ${textColors.main}`}>
-          Developed by Samovich Ilya. E-mail: Samovichilias19life@gmail.com
-        </span>
+        <span className={`px-4 ${textColors.main}`}>{t('developedBy')}</span>
       </footer>
     </div>
   );

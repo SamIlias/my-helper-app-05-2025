@@ -6,7 +6,7 @@ import { CustomCalendar } from '@/widgets/Calendar/CustomCalendar';
 import { useTranslation } from 'react-i18next';
 
 export const TodoPage: React.FC = () => {
-  const { i18n } = useTranslation('common');
+  const { i18n } = useTranslation();
 
   return (
     <MainLayout

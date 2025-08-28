@@ -1,19 +1,23 @@
 {
     "pageNames": {
-        "todo": "список дел",
-        "news": "новости",
-        "weather": "погода",
+        "assistant": "Ассистент",
+        "myTasks": "Мои задачи",
         "auth": "авторизация"
     },
-    "homeButtonTitle": "Домой",
-    "logoutButtonTitle": "Выйти",
-    "loginButtonTitle": "Войти",
+
     "closeButtonTitle": "Закрыть",
+
     "pagination": {
         "prevBtnName": "Пред",
         "nextBtnName": "След"
     },
+
     "searchForm": {
         "buttonName": "Найти"
-    }
+    },
+
+    "loginButtonTitle": "Войти",
+
+    "developedBy": "Разработал Самович Илья. E-mail: Samovichilias19life@gmail.com",
+    "logoSlogan": "Сохраняй ясность"
 }

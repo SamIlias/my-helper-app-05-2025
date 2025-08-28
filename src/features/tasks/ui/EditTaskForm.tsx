@@ -18,7 +18,7 @@ export const EditTaskForm: React.FC<PropsType> = ({ closeForm, onSubmit, editedT
     description: editedTask.description,
   };
 
-  const { t } = useTranslation('todopage');
+  const { t } = useTranslation('todoPage');
 
   return (
     <div

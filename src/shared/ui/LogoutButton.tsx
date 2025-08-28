@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { logOut } from '../../features/auth/api/auth';
+import { logOut } from '@/features/auth/api/auth';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../app/store';
-import { setUser } from '../../features/auth/model/authSlice';
+import { AppDispatch } from '@/app/store';
+import { setUser } from '@/features/auth/model/authSlice';
 
 export const LogoutButton: React.FC = () => {
-  // const { t } = useTranslation('common');
   const dispatch = useDispatch<AppDispatch>();
 
   const handleSignOut = async () => {
