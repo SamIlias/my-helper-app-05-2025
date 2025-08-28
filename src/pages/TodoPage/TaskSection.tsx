@@ -7,16 +7,17 @@ import { useTasks } from '@/features/tasks/model/useTasks';
 import { useTranslation } from 'react-i18next';
 import { buttonStyles, mainLayoutColors } from '@/shared/myStyles/myStyles';
 import { EditTaskForm } from '@/features/tasks/ui/EditTaskForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/app/store';
+import { setAddForm } from '@/features/tasks/model/tasksSlice';
 
 export const EditContext = createContext<(task: TaskType) => void>(() => {});
 
 export const TaskSection: React.FC = () => {
   const {
-    isAddFormActive,
     isLoading,
     error,
     tasks,
-    setIsAddFormActive,
     onAddTaskSubmit,
     onEditFormSubmit,
     closeEditForm,
@@ -25,14 +26,20 @@ export const TaskSection: React.FC = () => {
   } = useTasks();
 
   const { t } = useTranslation('todoPage');
+  const dispatch = useDispatch<AppDispatch>();
+  const { addForm } = useSelector((state: RootState) => state.tasks);
 
-  const onCloseAddTaskForm = () => setIsAddFormActive(false);
-  const onAddClick = () => setIsAddFormActive(true);
+  const onCloseAddTaskForm = () => dispatch(setAddForm({ active: false, date: null }));
+  const onAddClick = () => dispatch(setAddForm({ active: true, date: null }));
 
-  if (isAddFormActive) {
+  if (addForm.active) {
     return (
       <div className="flex items-center justify-center h-full pb-15 w-full">
-        <AddTaskForm closeAddForm={onCloseAddTaskForm} onSubmit={onAddTaskSubmit} />
+        <AddTaskForm
+          closeAddForm={onCloseAddTaskForm}
+          onSubmit={onAddTaskSubmit}
+          date={addForm.date}
+        />
       </div>
     );
   }

@@ -16,7 +16,7 @@ type TaskType = {
 type TaskWithoutId = Omit<TaskType, 'id'>;
 type TaskUpdateData = Partial<Omit<TaskType, 'id' | 'userId'>>;
 
-type TaskFormValues = Pick<TaskType, 'title' | 'deadline' | 'category' | 'description'>;
+type TaskFormValues = Partial<Pick<TaskType, 'title' | 'deadline' | 'category' | 'description'>>;
 
 const taskCategories = {
   Default: 'default',

@@ -3,13 +3,12 @@ import { TaskFormValues, TaskType } from '@/features/tasks';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/app/store';
 import { addTaskThunk, fetchTasksThunk, updateTaskThunk } from '@/features/tasks/model/tasksThunks';
+import { setAddForm } from '@/features/tasks/model/tasksSlice';
 
 export const useTasks = () => {
   const { tasks, error, isLoading } = useSelector((state: RootState) => state.tasks);
   const user = useSelector((state: RootState) => state.auth.user);
   const dispatch = useDispatch<AppDispatch>();
-
-  const [isAddFormActive, setIsAddFormActive] = useState<boolean>(false);
 
   const [editTaskMode, setEditTaskMode] = useState<{
     active: boolean;
@@ -24,7 +23,7 @@ export const useTasks = () => {
   }, [dispatch, user]);
 
   const closeAddForm = () => {
-    setIsAddFormActive(false);
+    dispatch(setAddForm({ active: false, date: null }));
   };
 
   const onAddTaskSubmit = async (data: TaskFormValues) => {
@@ -48,11 +47,9 @@ export const useTasks = () => {
   };
 
   return {
-    isAddFormActive,
     isLoading,
     error,
     tasks,
-    setIsAddFormActive,
     onAddTaskSubmit,
     editTaskMode,
     onEditClick,

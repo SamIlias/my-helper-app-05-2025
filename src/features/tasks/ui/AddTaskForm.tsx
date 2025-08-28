@@ -3,7 +3,7 @@ import { BaseTaskForm } from './BaseTaskForm';
 import { useTranslation } from 'react-i18next';
 import { TaskFormValues } from '../model/types';
 
-export const AddTaskForm: React.FC<PropsType> = ({ closeAddForm, onSubmit }) => {
+export const AddTaskForm: React.FC<PropsType> = ({ closeAddForm, onSubmit, date }) => {
   const { t } = useTranslation('todoPage');
 
   return (
@@ -13,6 +13,9 @@ export const AddTaskForm: React.FC<PropsType> = ({ closeAddForm, onSubmit }) => 
         closeAddForm={closeAddForm}
         onSubmit={onSubmit}
         submitButtonText={t('addTaskForm.submitButtonName')}
+        defaultValues={{
+          deadline: date?.toLocaleDateString('en-CA'),
+        }}
       />
     </div>
   );
@@ -21,4 +24,5 @@ export const AddTaskForm: React.FC<PropsType> = ({ closeAddForm, onSubmit }) => 
 type PropsType = {
   closeAddForm: () => void;
   onSubmit: (data: TaskFormValues) => void;
+  date?: Date | null;
 };

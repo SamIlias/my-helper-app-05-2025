@@ -4,6 +4,8 @@ import { mainLayoutColors } from '@/shared/myStyles/myStyles';
 import { TaskSection } from '@/pages/TodoPage/TaskSection';
 import { CustomCalendar } from '@/widgets/Calendar/CustomCalendar';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/app/store';
 
 export const TodoPage: React.FC = () => {
   const { i18n } = useTranslation();
@@ -15,10 +17,17 @@ export const TodoPage: React.FC = () => {
           <TaskSection />
           <aside className={`flex flex-col gap-2 h-full`}>
             <section className={`${mainLayoutColors.tilesBackground} h-fit p-3 `}>
-              <CustomCalendar locale={i18n.language} />
+              <CustomCalendar
+                locale={i18n.language}
+                onDayClick={(day) => {
+                  console.log(day);
+                }}
+              />
             </section>
 
-            <section className={`${mainLayoutColors.tilesBackground} flex-1 `}></section>
+            <section className={`${mainLayoutColors.tilesBackground} flex-1 text-center`}>
+              Your advertisement may be here
+            </section>
           </aside>
         </main>
       }

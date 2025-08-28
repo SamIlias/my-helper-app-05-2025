@@ -8,6 +8,10 @@ export interface TasksState {
   error: string | null;
   newAddedTask: TaskType | undefined | null;
   taskInDrag: TaskType | null;
+  addForm: {
+    active: boolean;
+    date?: Date | null;
+  };
 }
 
 const initialState: TasksState = {
@@ -16,6 +20,10 @@ const initialState: TasksState = {
   error: null,
   newAddedTask: null,
   taskInDrag: null,
+  addForm: {
+    active: false,
+    date: null,
+  },
 };
 
 const tasksSlice = createSlice({
@@ -28,7 +36,11 @@ const tasksSlice = createSlice({
     setTaskInDrag: (state, action: PayloadAction<TaskType | null>) => {
       state.taskInDrag = action.payload;
     },
+    setAddForm: (state, action: PayloadAction<{ active: boolean; date: Date | null }>) => {
+      state.addForm = action.payload;
+    },
   },
+
   extraReducers: (builder) => {
     builder
       .addCase(fetchTasksThunk.pending, (state) => {
@@ -69,5 +81,5 @@ const tasksSlice = createSlice({
   },
 });
 
-export const { setNewAddedTask, setTaskInDrag } = tasksSlice.actions;
+export const { setNewAddedTask, setTaskInDrag, setAddForm } = tasksSlice.actions;
 export default tasksSlice.reducer;
