@@ -19,11 +19,11 @@ type TaskUpdateData = Partial<Omit<TaskType, 'id' | 'userId'>>;
 type TaskFormValues = Partial<Pick<TaskType, 'title' | 'deadline' | 'category' | 'description'>>;
 
 const taskCategories = {
-  Default: 'default',
-  Work: 'work',
-  Daily: 'daily',
-  Urgent: 'urgent',
-  Shopping: 'shopping',
+  Default: 'Default',
+  Work: 'Work',
+  Daily: 'Daily',
+  Urgent: 'Urgent',
+  Shopping: 'Shopping',
 } as const;
 
 type TaskCategoryKey = keyof typeof taskCategories;

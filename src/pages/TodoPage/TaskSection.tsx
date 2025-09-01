@@ -9,28 +9,26 @@ import { buttonStyles, mainLayoutColors } from '@/shared/myStyles/myStyles';
 import { EditTaskForm } from '@/features/tasks/ui/EditTaskForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/app/store';
-import { setAddForm } from '@/features/tasks/model/tasksSlice';
+import { setAddForm, sortTasks } from '@/features/tasks/model/tasksSlice';
+import {
+  compareByCategory,
+  compareByDeadline,
+} from '@/features/tasks/model/taskSortCompareFunctions';
 
 export const EditContext = createContext<(task: TaskType) => void>(() => {});
 
 export const TaskSection: React.FC = () => {
-  const {
-    isLoading,
-    error,
-    tasks,
-    onAddTaskSubmit,
-    onEditFormSubmit,
-    closeEditForm,
-    onEditClick,
-    editTaskMode,
-  } = useTasks();
+  const { onAddTaskSubmit, onEditFormSubmit, closeEditForm, onEditClick, editTaskMode } =
+    useTasks();
 
   const { t } = useTranslation('todoPage');
   const dispatch = useDispatch<AppDispatch>();
-  const { addForm } = useSelector((state: RootState) => state.tasks);
+  const { addForm, tasks, error, isLoading } = useSelector((state: RootState) => state.tasks);
 
   const onCloseAddTaskForm = () => dispatch(setAddForm({ active: false, date: null }));
   const onAddClick = () => dispatch(setAddForm({ active: true, date: null }));
+  const onSortByDateClick = () => dispatch(sortTasks(compareByDeadline));
+  const onSortByCategoryClick = () => dispatch(sortTasks(compareByCategory));
 
   if (addForm.active) {
     return (
@@ -79,9 +77,17 @@ export const TaskSection: React.FC = () => {
 
             <TasksList tasks={tasks} />
 
-            <div>
+            <div className="flex items-center gap-2">
               <button onClick={onAddClick} className={`${buttonStyles.addTask}`}>
                 {t('addTaskButtonName')}
+              </button>
+
+              <button onClick={onSortByDateClick} className={`${buttonStyles.addTask}`}>
+                {'Sort by date'}
+              </button>
+
+              <button onClick={onSortByCategoryClick} className={`${buttonStyles.addTask}`}>
+                {'Sort by category'}
               </button>
             </div>
           </div>

@@ -39,6 +39,9 @@ const tasksSlice = createSlice({
     setAddForm: (state, action: PayloadAction<{ active: boolean; date: Date | null }>) => {
       state.addForm = action.payload;
     },
+    sortTasks: (state, action: PayloadAction<(a: TaskType, b: TaskType) => number>) => {
+      state.tasks = state.tasks.sort(action.payload);
+    },
   },
 
   extraReducers: (builder) => {
@@ -81,5 +84,5 @@ const tasksSlice = createSlice({
   },
 });
 
-export const { setNewAddedTask, setTaskInDrag, setAddForm } = tasksSlice.actions;
+export const { setNewAddedTask, setTaskInDrag, setAddForm, sortTasks } = tasksSlice.actions;
 export default tasksSlice.reducer;

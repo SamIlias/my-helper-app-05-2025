@@ -23,9 +23,11 @@ export const BaseTaskForm: React.FC<PropsType> = ({
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm<TaskFormValues>({ mode: 'onChange', defaultValues });
 
   const { t } = useTranslation('todoPage');
+  const chosenCategory = watch('category');
 
   return (
     <>
@@ -86,7 +88,7 @@ export const BaseTaskForm: React.FC<PropsType> = ({
           <select
             id="category"
             {...register('category')}
-            className={`${textColors.primary} ${borderColors.formInput} bg-white dark:bg-stone-600/60 px-1 mt-1 block w-full`}
+            className={`${borderColors.formInput} ${chosenCategory ? categoryColor[taskCategories[chosenCategory]] : 'text-white'} bg-white dark:bg-stone-600/60 px-1 mt-1 block w-full`}
           >
             {(Object.keys(taskCategories) as TaskCategoryKey[]).map((key) => (
               <option

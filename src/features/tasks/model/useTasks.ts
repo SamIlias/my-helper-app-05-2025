@@ -6,7 +6,6 @@ import { addTaskThunk, fetchTasksThunk, updateTaskThunk } from '@/features/tasks
 import { setAddForm } from '@/features/tasks/model/tasksSlice';
 
 export const useTasks = () => {
-  const { tasks, error, isLoading } = useSelector((state: RootState) => state.tasks);
   const user = useSelector((state: RootState) => state.auth.user);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -47,9 +46,6 @@ export const useTasks = () => {
   };
 
   return {
-    isLoading,
-    error,
-    tasks,
     onAddTaskSubmit,
     editTaskMode,
     onEditClick,

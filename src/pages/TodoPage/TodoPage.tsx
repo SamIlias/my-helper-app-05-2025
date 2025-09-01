@@ -4,8 +4,6 @@ import { mainLayoutColors } from '@/shared/myStyles/myStyles';
 import { TaskSection } from '@/pages/TodoPage/TaskSection';
 import { CustomCalendar } from '@/widgets/Calendar/CustomCalendar';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/app/store';
 
 export const TodoPage: React.FC = () => {
   const { i18n } = useTranslation();
