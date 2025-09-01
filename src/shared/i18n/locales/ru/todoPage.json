@@ -27,6 +27,7 @@
     },
     "taskItem": {
         "editButtonName": "Ред-ть",
-        "deleteButtonName": "Удалить"
-    } 
+        "deleteButtonName": "Удалить",
+        "descriptionPlaceholder": "Описание отсутствует..."
+    }
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   position: { top: number; left: number };
@@ -7,6 +8,7 @@ type Props = {
 
 export const TaskDescription: React.FC<Props> = ({ position, description }) => {
   const [visible, setVisible] = useState(false);
+  const { t } = useTranslation('todoPage');
 
   useEffect(() => {
     // turn on animation after mounting
@@ -23,7 +25,7 @@ export const TaskDescription: React.FC<Props> = ({ position, description }) => {
         left: position.left,
       }}
     >
-      {description ? description : 'there is no description'}
+      {description ? description : `${t('taskItem.descriptionPlaceholder')}`}
     </div>
   );
 };

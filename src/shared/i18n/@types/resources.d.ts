@@ -81,7 +81,8 @@ interface Resources {
     },
     "taskItem": {
       "editButtonName": "Edit",
-      "deleteButtonName": "Delete"
+      "deleteButtonName": "Delete",
+      "descriptionPlaceholder": "There is no description..."
     }
   }
 }
